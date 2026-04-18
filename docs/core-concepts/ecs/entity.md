@@ -1,22 +1,20 @@
-# GameObject (Legacy)
+# Entity
 
-> **⚠️ Migration note:** `GameObject` in `helios.engine.ecs` is the legacy, non-templated entity facade. It has been superseded by [`Entity<THandle, TEntityManager>`](entity.md) in `helios.core.ecs`, which supports domain-specific handle types and entity managers via template parameters. The `helios.engine.ecs.GameObject` module is retained for backward compatibility but will be removed in a future release.
->
-> See [Entity](entity.md) for the current documentation.
+An **Entity** is the primary interface for interacting with entities in the helios ECS. It provides a convenient, type-safe wrapper around an `EntityHandle` and the `EntityManager`, enabling component manipulation without direct access to low-level ECS internals.
 
-A **GameObject** is the primary interface for interacting with entities in the helios ECS. It provides a convenient, type-safe wrapper around an `EntityHandle` and the `EntityManager`, enabling component manipulation without direct access to low-level ECS internals.
+> **Migration note:** `Entity` replaces the former `GameObject` class from `helios.engine.ecs`. It has been generalised with template parameters `THandle` and `TEntityManager` so it can work with any domain-specific handle and manager combination.
 
 ## Overview
 
-`GameObject` acts as a **facade** that combines:
-- An `EntityHandle` identifying the entity
-- A pointer to the `EntityManager` that owns the entity's data
+`Entity` acts as a **facade** that combines:
+- A `THandle` (typically `EntityHandle<TStrongId>`) identifying the entity
+- A pointer to the `TEntityManager` that owns the entity's data
 
 This design keeps the handle lightweight while providing rich functionality through the manager.
 
 ```cpp
-// GameObject is typically obtained from GameWorld
-auto player = gameWorld.addGameObject();
+// Entity is typically obtained from TypedHandleWorld
+auto player = world.addEntity<GameHandle>();
 
 // Add components
 player.add<TransformComponent>(glm::vec3{0.0f});
@@ -34,18 +32,46 @@ player.setActive(false);  // Marks as inactive, calls onDeactivate()
 player.setActive(true);   // Marks as active, calls onActivate()
 ```
 
+## Template Parameters
+
+```cpp
+template<typename THandle, typename TEntityManager>
+class Entity;
+```
+
+| Parameter | Description |
+|-----------|-------------|
+| `THandle` | The concrete `EntityHandle<TStrongId>` specialisation used as the entity identifier. |
+| `TEntityManager` | The concrete `EntityManager<THandle, TEntityRegistry, TCapacity>` specialisation that owns component storage. |
+
+### Type Aliases
+
+Entity exposes the following member type aliases:
+
+| Alias | Resolves To |
+|-------|-------------|
+| `ComponentTypeId_type` | `ComponentTypeId<THandle>` |
+| `ComponentOpsRegistry_type` | `ComponentOpsRegistry<THandle>` |
+| `HierarchyComponent_type` | `components::HierarchyComponent<THandle>` |
+
 ## API Reference
 
 ### Construction
 
-GameObjects are created through `GameWorld`, not directly instantiated:
+Entities are created through `TypedHandleWorld`, not directly instantiated:
 
 ```cpp
-// Correct - obtain from GameWorld
-auto entity = gameWorld.addGameObject();
+// Correct — obtain from TypedHandleWorld
+auto entity = world.addEntity<GameHandle>();
 
-// Correct - lookup existing
-auto entity = gameWorld.gameObject(entityHandle);
+// Correct — lookup existing
+auto entity = world.findEntity(handle);
+```
+
+Or constructed explicitly (advanced use):
+
+```cpp
+Entity<GameHandle, GameEM> entity{handle, &entityManager};
 ```
 
 ### Component Operations
@@ -58,6 +84,7 @@ auto entity = gameWorld.gameObject(entityHandle);
 | `has<T>()` | Checks if component is attached |
 | `has(typeId)` | Checks by runtime type ID |
 | `remove<T>()` | Removes a component, returns true if removed |
+| `raw(typeId)` | Returns void* to component by type ID |
 
 #### Adding Components
 
@@ -96,13 +123,13 @@ bool removed = player.remove<ShieldComponent>();
 
 ### Activation State
 
-GameObjects can be activated or deactivated, which propagates to all attached components:
+Entities can be activated or deactivated, which propagates to all attached components:
 
 ```cpp
-// Deactivate - adds Inactive tag, calls onDeactivate()
+// Deactivate — adds Inactive tag, calls onDeactivate()
 player.setActive(false);
 
-// Activate - adds Active tag, calls onActivate()
+// Activate — adds Active tag, calls onActivate()
 player.setActive(true);
 
 // Query state
@@ -115,17 +142,19 @@ When deactivated:
 - An `Inactive` tag component is added
 - The `Active` tag component is removed
 - `onDeactivate()` is called on components that support it
+- If a `HierarchyComponent` is present, it is marked dirty for propagation
 
 When activated:
 - The `Inactive` tag component is removed
 - An `Active` tag component is added
 - `onActivate()` is called on components that support it
+- If a `HierarchyComponent` is present, it is marked dirty for propagation
 
 > **Note:** `setActive()` does **not** call `enable()`/`disable()`. Use `enableComponent()`/`disableComponent()` for individual component toggling.
 
 ### Lifecycle Hooks
 
-GameObjects provide methods to trigger lifecycle hooks on all attached components:
+Entity provides methods to trigger lifecycle hooks on all attached components:
 
 ```cpp
 // Called when acquired from object pool
@@ -151,7 +180,7 @@ for (auto typeId : player.componentTypeIds()) {
 
 ```cpp
 // Get the underlying handle
-EntityHandle handle = player.entityHandle();
+auto handle = player.handle();
 
 // Handles can be stored and compared
 if (handle == otherHandle) {
@@ -162,45 +191,43 @@ if (handle == otherHandle) {
 ## Internal Structure
 
 ```cpp
-class GameObject {
-    EntityHandle entityHandle_;      // 8 bytes (EntityId + VersionId)
-    EntityManager* entityManager_;   // 8 bytes (pointer)
+template<typename THandle, typename TEntityManager>
+class Entity {
+    THandle entityHandle_;              // EntityHandle<TStrongId>
+    TEntityManager* entityManager_;     // Pointer to owning manager
     
     // ...methods delegate to entityManager_
 };
 ```
 
-The `GameObject` itself is:
-- **Lightweight** (~16 bytes) - smaller than most smart pointers
-- **Copyable** - multiple GameObjects can reference the same entity
-- **Non-owning** - does not manage entity lifetime
-- **Pass-by-value friendly** - should be passed by value, not by reference
+The `Entity` itself is:
+- **Lightweight** (~16 bytes) — smaller than most smart pointers
+- **Copyable** — multiple Entity instances can reference the same entity
+- **Non-owning** — does not manage entity lifetime
+- **Pass-by-value friendly** — should be passed by value, not by reference
 
 ### Pass by Value
 
-Due to its small size, `GameObject` should be passed **by value** rather than by reference or pointer:
+Due to its small size, `Entity` should be passed **by value** rather than by reference or pointer:
 
 ```cpp
-// Correct - pass by value
-void processEntity(GameObject entity) {
+// Correct — pass by value
+void processEntity(Entity<GameHandle, GameEM> entity) {
     entity.get<HealthComponent>()->takeDamage(10.0f);
 }
 
-// Unnecessary - reference adds indirection for no benefit
-void processEntity(GameObject& entity);      // Avoid
-void processEntity(const GameObject& entity); // Avoid
-
-// Wrong - never use pointers for GameObject
-void processEntity(GameObject* entity);       // Never do this
+// Unnecessary — reference adds indirection for no benefit
+void processEntity(Entity<GameHandle, GameEM>& entity);       // Avoid
+void processEntity(const Entity<GameHandle, GameEM>& entity);  // Avoid
 ```
 
-Copying a `GameObject` is essentially copying two integers and a pointer - faster than dereferencing a reference in most cases.
+Copying an `Entity` is essentially copying a handle and a pointer — faster than dereferencing a reference in most cases.
 
 ## Relationship with Other Classes
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        GameWorld                            │
+│                   TypedHandleWorld                           │
 │  ┌──────────────────┐    ┌────────────────────────────┐     │
 │  │  EntityRegistry  │◄───│      EntityManager         │     │
 │  │  (handle alloc)  │    │  (component storage)       │     │
@@ -208,28 +235,29 @@ Copying a `GameObject` is essentially copying two integers and a pointer - faste
 │           │                          ▲                      │
 │           ▼                          │                      │
 │    ┌──────────────┐           ┌──────────────┐              │
-│    │ EntityHandle │◄──────────│  GameObject  │              │
-│    │ (id+version) │           │   (facade)   │              │
-│    └──────────────┘           └──────────────┘              │
+│    │ EntityHandle │◄──────────│    Entity    │              │
+│    │ (id+version  │           │   (facade)   │              │
+│    │  +strongId)  │           └──────────────┘              │
+│    └──────────────┘                                         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 ## Best Practices
 
-1. **Don't store GameObjects long-term** - Store `EntityHandle` instead and resolve via `GameWorld::gameObject()`
+1. **Don't store Entity long-term** — Store `EntityHandle` instead and resolve via `TypedHandleWorld::findEntity()`
 
-2. **Check component existence** - Use `has<T>()` before `get<T>()` or handle nullptr returns
+2. **Check component existence** — Use `has<T>()` before `get<T>()` or handle nullptr returns
 
-3. **Use getOrAdd for optional components** - Simplifies code when components may or may not exist
+3. **Use getOrAdd for optional components** — Simplifies code when components may or may not exist
 
-4. **Prefer type-safe methods** - Use `has<T>()` over `has(typeId)` when possible
+4. **Prefer type-safe methods** — Use `has<T>()` over `has(typeId)` when possible
 
-5. **Leverage setActive for pooling** - Deactivate instead of destroying for pooled objects
+5. **Leverage setActive for pooling** — Deactivate instead of destroying for pooled objects
 
 ## Example: Complete Entity Setup
 
 ```cpp
-auto enemy = gameWorld.addGameObject();
+auto enemy = world.addEntity<GameHandle>();
 
 // Transform
 enemy.add<ComposeTransformComponent>();
@@ -260,8 +288,10 @@ enemy.add<SpawnedByProfileComponent>();
 
 - [EntityManager](entity-manager.md) - Low-level entity and component management
 - [EntityHandle](entity-handle.md) - Versioned entity reference
+- [TypedHandleWorld](typed-handle-world.md) - Multi-domain world
 - [View](view.md) - Component-based entity queries
 - [System](system.md) - Game logic processors
 - [Component Lifecycle](../component-lifecycle.md) - Lifecycle hooks
 - [Component System](../component-system.md) - ECS architecture overview
 - [Sparse Set](../sparse-set.md) - Underlying component storage
+

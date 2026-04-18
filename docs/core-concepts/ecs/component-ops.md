@@ -26,6 +26,8 @@ struct ComponentOps {
 };
 ```
 
+> **Note:** `ComponentOps` itself has no template parameters and is shared across all domains. The domain scoping happens in `ComponentOpsRegistry<THandle>` and `ComponentReflector<THandle, TEntityManager>`.
+
 ## Function Pointers
 
 | Pointer | Signature | Purpose |
@@ -65,21 +67,22 @@ The `clone` function pointer has a special signature for component copying:
 
 ```cpp
 using CloneFn = void*(*)(
-    void* manager,           // EntityManager for emplace
+    void* manager,           // EntityManager (type-erased)
     const void* source,      // Source component data
-    const EntityHandle* target  // Target entity handle
+    const void* target       // Target entity handle (type-erased)
 );
 ```
 
-Implementation in ComponentReflector:
+Implementation in `ComponentReflector<THandle, TEntityManager>`:
 
 ```cpp
-.clone = [](void* managerRaw, const void* sourceRaw, const EntityHandle* target) -> void* {
-    auto* manager = static_cast<EntityManager*>(managerRaw);
+.clone = [](void* managerRaw, const void* sourceRaw, const void* targetRaw) -> void* {
+    auto* manager = static_cast<TEntityManager*>(managerRaw);
     const auto* source = static_cast<const T*>(sourceRaw);
+    const auto* target = static_cast<const THandle*>(targetRaw);
     
     // Copy construct into target entity
-    T* cmp = manager->emplace<T>(*target, *source);
+    T* cmp = manager->template emplace<T>(*target, *source);
     
     // Call onClone if implemented
     if constexpr (traits::HasClone<T>) {
@@ -112,18 +115,36 @@ ops.onRemove ? ops.onRemove(raw) : true;
 
 The **ComponentOpsRegistry** is a global registry that maps `ComponentTypeId` to `ComponentOps`. It provides O(1) lookup for lifecycle function pointers.
 
+> **Migration note:** `ComponentOpsRegistry` has been moved from `helios.engine.ecs` to `helios.core.ecs` and generalised with a `THandle` template parameter. Each domain (identified by its handle type) has its own independent ops registry.
+
 ## Overview
 
 ```cpp
+template<typename THandle>
 class ComponentOpsRegistry {
     inline static std::vector<ComponentOps> operations_;
     inline static constexpr ComponentOps emptyOps_{};
 
 public:
-    static void setOps(ComponentTypeId typeId, const ComponentOps& ops);
-    static const ComponentOps& ops(ComponentTypeId typeId);
+    using ComponentTypeId_type = ComponentTypeId<THandle>;
+
+    static void setOps(ComponentTypeId_type typeId, const ComponentOps& ops);
+    static const ComponentOps& ops(ComponentTypeId_type typeId);
 };
 ```
+
+## Template Parameters
+
+| Parameter | Description |
+|-----------|-------------|
+| `THandle` | The concrete `EntityHandle<TStrongId>` specialisation. Scopes the registry so each domain has independent ops storage. |
+
+### Domain Scoping
+
+Because the `operations_` vector is `inline static` inside a class template,
+each `ComponentOpsRegistry<GameHandle>` and `ComponentOpsRegistry<UiHandle>`
+have **separate** static storage. This ensures that component lifecycle hooks
+registered for the game domain do not interfere with those in the UI domain.
 
 ## API
 
@@ -176,8 +197,8 @@ if (typeId.value() >= operations_.size()) {
 ## Usage Pattern
 
 ```cpp
-// During bootstrap (type registration)
-helios::engine::bootstrap::registerAllComponents();
+// During bootstrap (type registration — called automatically by bootstrapGameWorld)
+// helios::engine::bootstrap::registerAllComponents();
 
 // During gameplay (type-erased invocation)
 for (auto typeId : entity.componentTypeIds()) {

@@ -483,7 +483,7 @@ const auto& history = metrics.getHistory();
 import helios.ext.glfw.app.GLFWFactory;
 import helios.scene.Scene;
 import helios.scene.CameraSceneNode;
-import helios.rendering.Viewport;
+import helios.rendering.viewport.Viewport;
 
 int main() {
     // 1. Create application

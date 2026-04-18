@@ -4,6 +4,8 @@
  */
 module;
 
+
+#include <cstddef>
 export module helios.gameplay.matchstate.components.LivesComponent;
 
 import helios.gameplay.matchstate.types;

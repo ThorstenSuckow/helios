@@ -6,6 +6,7 @@ module;
 
 #include <span>
 #include <array>
+#include <cstddef>
 
 export module helios.gameplay.gamestate.rules.DefaultGameStateTransitionRules;
 

@@ -5,6 +5,7 @@
 module;
 
 #include <memory>
+#include <cstddef>
 
 export module helios.gameplay.spawn.policy.SpawnRule;
 

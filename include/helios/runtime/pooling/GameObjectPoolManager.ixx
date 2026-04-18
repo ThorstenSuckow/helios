@@ -9,6 +9,7 @@ module;
 #include <optional>
 #include <stdexcept>
 #include <unordered_map>
+#include <cstddef>
 
 
 export module helios.runtime.pooling.GameObjectPoolManager;

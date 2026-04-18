@@ -5,6 +5,7 @@
 module;
 
 #include <memory>
+#include <cstddef>
 
 export module helios.runtime.pooling.GameObjectPoolConfig;
 

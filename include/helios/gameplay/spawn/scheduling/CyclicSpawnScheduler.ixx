@@ -11,6 +11,7 @@ module;
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
+#include <cstddef>
 
 export module helios.gameplay.spawn.scheduling.CyclicSpawnScheduler;
 

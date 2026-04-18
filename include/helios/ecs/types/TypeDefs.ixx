@@ -6,6 +6,7 @@ module;
 
 #include <cstdint>
 #include <limits>
+#include <cstddef>
 
 export module helios.ecs.types.TypeDefs;
 

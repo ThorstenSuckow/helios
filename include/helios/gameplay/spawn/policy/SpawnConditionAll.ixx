@@ -6,6 +6,7 @@ module;
 
 #include <memory>
 #include <vector>
+#include <cstddef>
 
 
 export module helios.gameplay.spawn.policy.SpawnConditionAll;

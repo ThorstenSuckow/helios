@@ -11,6 +11,7 @@ module;
 #include <helios/helios_config.h>
 #include <unordered_set>
 #include <vector>
+#include <cstddef>
 
 
 export module helios.physics.collision.systems.GridCollisionDetectionSystem;

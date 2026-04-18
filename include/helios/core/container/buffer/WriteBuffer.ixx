@@ -5,6 +5,7 @@
 module;
 
 #include <vector>
+#include <cstddef>
 
 export module helios.core.container.buffer.WriteBuffer;
 

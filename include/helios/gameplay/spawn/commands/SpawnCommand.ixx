@@ -7,6 +7,7 @@ module;
 #include <cassert>
 #include <cinttypes>
 #include <expected>
+#include <cstddef>
 
 export module helios.gameplay.spawn.commands.SpawnCommand;
 

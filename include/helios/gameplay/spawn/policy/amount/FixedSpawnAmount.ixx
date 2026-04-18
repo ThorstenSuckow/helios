@@ -4,6 +4,8 @@
  */
 module;
 
+
+#include <cstddef>
 export module helios.gameplay.spawn.policy.amount.FixedSpawnAmount;
 
 import helios.runtime.pooling.types.GameObjectPoolId;

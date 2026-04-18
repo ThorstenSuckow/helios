@@ -4,6 +4,8 @@
  */
 module;
 
+
+#include <cstddef>
 export module helios.runtime.pooling.GameObjectPoolSnapshot;
 
 export namespace helios::runtime::pooling {

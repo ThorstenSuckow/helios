@@ -4,6 +4,8 @@
  */
 module;
 
+
+#include <cstddef>
 export module helios.gameplay.spawn.types.SpawnPlanCursor;
 
 export namespace helios::gameplay::spawn::types {

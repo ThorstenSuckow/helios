@@ -2,6 +2,7 @@
 module;
 
 #include <functional>
+#include <cstddef>
 
 export module helios.state.types.StateTypeId;
 

@@ -4,6 +4,8 @@
  */
 module;
 
+
+#include <cstddef>
 export module helios.gameplay.spawn.events.SpawnPlanCommandExecutedEvent;
 
 import helios.gameplay.spawn.types.SpawnRuleId;

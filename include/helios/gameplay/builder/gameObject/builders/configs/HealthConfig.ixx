@@ -4,6 +4,8 @@
  */
 module;
 
+
+#include <cstddef>
 export module helios.gameplay.builder.gameObject.builders.configs.HealthConfig;
 
 

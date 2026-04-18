@@ -6,6 +6,7 @@ module;
 
 #include <span>
 #include <vector>
+#include <cstddef>
 #include "helios/helios_config.h"
 
 export module helios.rendering.shader.systems.ShaderCompileSystem;

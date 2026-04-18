@@ -5,6 +5,7 @@
 module;
 
 #include <atomic>
+#include <cstddef>
 
 export module helios.core.TypeIndexer;
 

@@ -6,6 +6,7 @@ module;
 
 #include <cassert>
 #include <functional>
+#include <cstddef>
 
 export module helios.math.types:mat4;
 

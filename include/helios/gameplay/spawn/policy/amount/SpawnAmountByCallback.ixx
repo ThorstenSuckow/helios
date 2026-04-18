@@ -5,6 +5,7 @@
 module;
 
 #include <functional>
+#include <cstddef>
 
 export module helios.gameplay.spawn.policy.amount.SpawnAmountByCallback;
 

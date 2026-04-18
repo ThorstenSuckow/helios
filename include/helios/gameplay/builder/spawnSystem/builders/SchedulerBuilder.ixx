@@ -7,6 +7,7 @@ module;
 #include <memory>
 #include <array>
 #include <utility>
+#include <cstddef>
 
 export module helios.gameplay.builder.spawnSystem.builders.SchedulerBuilder;
 

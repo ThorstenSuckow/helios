@@ -7,6 +7,7 @@ module;
 #include <cassert>
 #include <typeindex>
 #include <vector>
+#include <cstddef>
 
 export module helios.gameplay.spawn.behavior.initializers.DelayedComponentEnablerInitializer;
 

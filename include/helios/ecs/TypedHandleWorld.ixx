@@ -11,6 +11,7 @@ module;
 #include <vector>
 #include <type_traits>
 #include <optional>
+#include <cstddef>
 
 export module helios.ecs.TypedHandleWorld;
 

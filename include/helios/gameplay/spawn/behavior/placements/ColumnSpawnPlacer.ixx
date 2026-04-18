@@ -5,6 +5,7 @@
 module;
 
 #include <cmath>
+#include <cstddef>
 
 export module helios.gameplay.spawn.behavior.placements.ColumnSpawnPlacer;
 

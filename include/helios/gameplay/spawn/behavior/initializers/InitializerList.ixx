@@ -6,6 +6,7 @@ module;
 
 #include <array>
 #include <memory>
+#include <cstddef>
 
 export module helios.gameplay.spawn.behavior.initializers.InitializerList;
 

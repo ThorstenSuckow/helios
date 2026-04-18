@@ -5,6 +5,7 @@
 module;
 
 #include <concepts>
+#include <cstddef>
 
 export module helios.core.container.buffer.concepts.IsTypeIndexerLike;
 

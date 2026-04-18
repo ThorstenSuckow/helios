@@ -5,6 +5,7 @@ module;
 
 #include <cstdint>
 #include <string_view>
+#include <cstddef>
 
 export module helios.runtime.pooling.types.GameObjectPoolId;
 

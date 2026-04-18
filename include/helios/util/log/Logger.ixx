@@ -9,6 +9,7 @@ module;
 #include <memory>
 #include <mutex>
 #include <iostream>
+#include <cstddef>
 
 export module helios.util.log.Logger;
 

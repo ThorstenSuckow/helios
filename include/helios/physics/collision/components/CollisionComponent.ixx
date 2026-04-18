@@ -6,6 +6,7 @@ module;
 
 #include <array>
 #include <format>
+#include <cstddef>
 
 export module helios.physics.collision.components.CollisionComponent;
 

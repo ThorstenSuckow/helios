@@ -6,6 +6,7 @@ module;
 
 #include <cstdint>
 #include <string_view>
+#include <cstddef>
 
 export module helios.ui.widgets.types.FontId;
 

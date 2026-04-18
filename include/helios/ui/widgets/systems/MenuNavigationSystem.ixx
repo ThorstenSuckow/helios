@@ -7,6 +7,7 @@ module;
 #include <iostream>
 #include <algorithm>
 #include <cassert>
+#include <cstddef>
 
 export module helios.ui.widgets.systems.MenuNavigationSystem;
 import helios.ecs;

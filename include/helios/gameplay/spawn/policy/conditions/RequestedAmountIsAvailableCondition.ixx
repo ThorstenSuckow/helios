@@ -5,6 +5,7 @@
 module;
 
 #include <cassert>
+#include <cstddef>
 
 export module helios.gameplay.spawn.policy.conditions.RequestedAmountIsAvailableCondition;
 

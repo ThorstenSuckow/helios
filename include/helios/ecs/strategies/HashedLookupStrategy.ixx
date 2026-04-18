@@ -5,6 +5,7 @@
 module;
 
 #include <unordered_set>
+#include <cstddef>
 
 export module helios.ecs.strategies.HashedLookupStrategy;
 

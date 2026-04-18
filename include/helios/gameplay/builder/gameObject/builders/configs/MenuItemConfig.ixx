@@ -6,6 +6,7 @@ module;
 
 #include <cassert>
 #include <optional>
+#include <cstddef>
 
 export module helios.gameplay.builder.gameObject.builders.configs.MenuItemConfig;
 

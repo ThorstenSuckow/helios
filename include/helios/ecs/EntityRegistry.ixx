@@ -7,6 +7,7 @@ module;
 #include "helios/helios_config.h"
 #include <vector>
 #include <cassert>
+#include <cstddef>
 
 export module helios.ecs.EntityRegistry;
 

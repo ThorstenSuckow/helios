@@ -8,6 +8,7 @@ module;
 #include <memory>
 #include <span>
 #include <vector>
+#include <cstddef>
 
 
 export module helios.core.container.ConceptModelRegistry;

@@ -14,6 +14,7 @@ module;
 #include <cassert>
 #include <limits>
 #include <span>
+#include <cstddef>
 
 
 export module helios.runtime.pooling.GameObjectPool;

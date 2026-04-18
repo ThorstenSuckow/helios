@@ -5,6 +5,7 @@
 module;
 
 #include <functional>
+#include <cstddef>
 
 export module helios.runtime.messaging.command.types.CommandTypeId;
 

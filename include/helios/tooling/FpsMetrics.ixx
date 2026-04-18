@@ -6,6 +6,7 @@ module;
 
 #include <deque>
 #include <numeric>
+#include <cstddef>
 
 export module helios.tooling.FpsMetrics;
 

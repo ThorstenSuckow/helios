@@ -9,6 +9,7 @@ module;
 #include <span>
 #include <unordered_map>
 #include <vector>
+#include <cstddef>
 
 export module helios.gameplay.spawn.SpawnManager;
 

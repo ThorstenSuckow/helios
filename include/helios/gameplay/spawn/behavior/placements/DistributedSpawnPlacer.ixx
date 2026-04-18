@@ -8,6 +8,7 @@ module;
 #include <cmath>
 #include <algorithm>
 #include <array>
+#include <cstddef>
 
 export module helios.gameplay.spawn.behavior.placements.DistributedSpawnPlacer;
 

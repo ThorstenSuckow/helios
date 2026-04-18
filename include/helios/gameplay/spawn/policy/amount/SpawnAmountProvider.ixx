@@ -4,6 +4,8 @@
  */
 module;
 
+
+#include <cstddef>
 export module helios.gameplay.spawn.policy.amount.SpawnAmountProvider;
 
 import helios.gameplay.spawn.policy.SpawnRuleState;

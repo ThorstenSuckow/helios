@@ -7,6 +7,7 @@ module;
 #include <span>
 #include <vector>
 #include <algorithm>
+#include <cstddef>
 
 export module helios.gameplay.spawn.scheduling.SpawnScheduler;
 

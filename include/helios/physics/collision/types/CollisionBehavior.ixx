@@ -5,6 +5,7 @@
 module;
 
 #include <cstdint>
+#include <cstddef>
 
 export module helios.physics.collision.types.CollisionBehavior;
 

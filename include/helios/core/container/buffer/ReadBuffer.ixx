@@ -6,6 +6,7 @@ module;
 
 #include <span>
 #include <vector>
+#include <cstddef>
 
 export module helios.core.container.buffer.ReadBuffer;
 

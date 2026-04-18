@@ -10,6 +10,7 @@ module;
 #include <cassert>
 #include <bit>
 #include <algorithm>
+#include <cstddef>
 
 export module helios.state.StateToIdMap;
 

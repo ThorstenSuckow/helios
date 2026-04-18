@@ -17,8 +17,8 @@ The system is built around **compile-time type safety**: command types are decla
 │                                                                      │
 │  SYSTEMS (producers)                                                 │
 │  ┌────────────────────────────────────────────────────────────┐      │
-│  │  ctx.queueCommand<MoveCommand>(entityHandle, dir);         │      │
-│  │  ctx.queueCommand<DespawnCommand>(eh, profileId);          │      │
+│  │  ctx.queueCommand<EngineCommandBuffer, MoveCommand>();     │      │
+│  │  ctx.queueCommand<EngineCommandBuffer, DespawnCommand> (); │      │
 │  └───────────────────────────┬────────────────────────────────┘      │
 │                              │                                       │
 │                              ▼                                       │
@@ -69,7 +69,7 @@ During `TypedCommandBuffer::flush()`, each command type is processed in template
 ```cpp
 // Systems enqueue commands via UpdateContext
 void update(UpdateContext& ctx) noexcept {
-    ctx.queueCommand<DespawnCommand>(entityHandle, profileId);
+    ctx.queueCommand<EngineCommandBuffer, DespawnCommand>(entityHandle, profileId);
 }
 
 // Managers provide submit() methods for commands they process

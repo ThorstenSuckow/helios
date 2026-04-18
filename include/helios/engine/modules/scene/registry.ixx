@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.scene.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.modules.scene.components;
 
 export namespace helios::engine::modules::scene {
@@ -14,10 +14,16 @@ export namespace helios::engine::modules::scene {
     /**
      * @brief Registers all scene components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::SceneNodeComponent>();
+        R::template registerType<components::SceneNodeComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::LookAtComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::PerspectiveCameraComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::SceneMemberComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::SceneNodeComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::ViewportComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

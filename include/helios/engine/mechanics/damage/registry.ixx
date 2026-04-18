@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.mechanics.damage.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.mechanics.damage.components;
 
 export namespace helios::engine::mechanics::damage {
@@ -14,11 +14,12 @@ export namespace helios::engine::mechanics::damage {
     /**
      * @brief Registers all damage components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::DamageDealerComponent>();
-        R::registerType<components::LastDamageComponent>();
+        R::template registerType<components::DamageDealerComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::LastDamageComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

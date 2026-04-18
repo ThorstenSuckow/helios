@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.rendering.model.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.modules.rendering.model.components;
 
 export namespace helios::engine::modules::rendering::model {
@@ -14,10 +14,11 @@ export namespace helios::engine::modules::rendering::model {
     /**
      * @brief Registers all model components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::ModelAabbComponent>();
+        R::template registerType<components::ModelAabbComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

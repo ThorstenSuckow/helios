@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.effects.gfx.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.modules.effects.gfx.components;
 
 export namespace helios::engine::modules::effects::gfx {
@@ -14,10 +14,11 @@ export namespace helios::engine::modules::effects::gfx {
     /**
      * @brief Registers all effects GFX components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::SpinComponent>();
+        R::template registerType<components::SpinComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

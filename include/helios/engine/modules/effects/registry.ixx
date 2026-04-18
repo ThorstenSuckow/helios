@@ -13,8 +13,9 @@ export namespace helios::engine::modules::effects {
     /**
      * @brief Registers all effects components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::modules::effects::gfx::registerComponents();
+        helios::engine::modules::effects::gfx::registerComponents<TEntityManager>();
     }
 
 }

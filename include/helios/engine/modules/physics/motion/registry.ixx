@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.physics.motion.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.modules.physics.motion.components;
 
 export namespace helios::engine::modules::physics::motion {
@@ -14,12 +14,13 @@ export namespace helios::engine::modules::physics::motion {
     /**
      * @brief Registers all motion components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::DirectionComponent>();
-        R::registerType<components::Move2DComponent>();
-        R::registerType<components::SteeringComponent>();
+        R::template registerType<components::DirectionComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::Move2DComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::SteeringComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

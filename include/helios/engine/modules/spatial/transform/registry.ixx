@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.spatial.transform.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.modules.spatial.transform.components;
 
 export namespace helios::engine::modules::spatial::transform {
@@ -14,13 +14,17 @@ export namespace helios::engine::modules::spatial::transform {
     /**
      * @brief Registers all spatial transform components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::ComposeTransformComponent>();
-        R::registerType<components::TranslationStateComponent>();
-        R::registerType<components::ScaleStateComponent>();
-        R::registerType<components::RotationStateComponent>();
+        R::template registerType<components::ComposeTransformComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::WorldTransformStateComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::LocalTransformComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::TranslationStateComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::ScaleStateComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::DimensionComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::RotationStateComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

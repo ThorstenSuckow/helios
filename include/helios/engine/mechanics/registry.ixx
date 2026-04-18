@@ -19,14 +19,15 @@ export namespace helios::engine::mechanics {
     /**
      * @brief Registers all mechanics components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::mechanics::scoring::registerComponents();
-        helios::engine::mechanics::health::registerComponents();
-        helios::engine::mechanics::spawn::registerComponents();
-        helios::engine::mechanics::bounds::registerComponents();
-        helios::engine::mechanics::combat::registerComponents();
-        helios::engine::mechanics::damage::registerComponents();
-        helios::engine::mechanics::lifecycle::registerComponents();
+        helios::engine::mechanics::scoring::registerComponents<TEntityManager>();
+        helios::engine::mechanics::health::registerComponents<TEntityManager>();
+        helios::engine::mechanics::spawn::registerComponents<TEntityManager>();
+        helios::engine::mechanics::bounds::registerComponents<TEntityManager>();
+        helios::engine::mechanics::combat::registerComponents<TEntityManager>();
+        helios::engine::mechanics::damage::registerComponents<TEntityManager>();
+        helios::engine::mechanics::lifecycle::registerComponents<TEntityManager>();
     }
 
 }

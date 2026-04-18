@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.ui.transform.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.modules.ui.transform.components;
 
 export namespace helios::engine::modules::ui::transform {
@@ -14,10 +14,11 @@ export namespace helios::engine::modules::ui::transform {
     /**
      * @brief Registers all UI transform components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::UiTransformComponent>();
+        R::template registerType<components::UiTransformComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

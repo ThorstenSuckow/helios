@@ -14,9 +14,10 @@ export namespace helios::engine::modules::physics {
     /**
      * @brief Registers all physics components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::modules::physics::collision::registerComponents();
-        helios::engine::modules::physics::motion::registerComponents();
+        helios::engine::modules::physics::collision::registerComponents<TEntityManager>();
+        helios::engine::modules::physics::motion::registerComponents<TEntityManager>();
     }
 
 }

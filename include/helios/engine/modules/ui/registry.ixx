@@ -14,9 +14,10 @@ export namespace helios::engine::modules::ui {
     /**
      * @brief Registers all UI components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::modules::ui::widgets::registerComponents();
-        helios::engine::modules::ui::transform::registerComponents();
+        helios::engine::modules::ui::widgets::registerComponents<TEntityManager>();
+        helios::engine::modules::ui::transform::registerComponents<TEntityManager>();
     }
 
 }

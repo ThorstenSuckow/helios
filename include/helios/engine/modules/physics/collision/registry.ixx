@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.modules.physics.collision.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.modules.physics.collision.components;
 
 export namespace helios::engine::modules::physics::collision {
@@ -14,12 +14,13 @@ export namespace helios::engine::modules::physics::collision {
     /**
      * @brief Registers all collision components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::CollisionStateComponent>();
-        R::registerType<components::CollisionComponent>();
-        R::registerType<components::AabbColliderComponent>();
+        R::template registerType<components::CollisionStateComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::CollisionComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::AabbColliderComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

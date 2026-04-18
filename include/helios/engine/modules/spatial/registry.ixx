@@ -13,8 +13,9 @@ export namespace helios::engine::modules::spatial {
     /**
      * @brief Registers all spatial components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::modules::spatial::transform::registerComponents();
+        helios::engine::modules::spatial::transform::registerComponents<TEntityManager>();
     }
 
 }

@@ -19,14 +19,15 @@ export namespace helios::engine::modules {
     /**
      * @brief Registers all module components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::modules::ai::registerComponents();
-        helios::engine::modules::rendering::registerComponents();
-        helios::engine::modules::spatial::registerComponents();
-        helios::engine::modules::ui::registerComponents();
-        helios::engine::modules::scene::registerComponents();
-        helios::engine::modules::physics::registerComponents();
-        helios::engine::modules::effects::registerComponents();
+        helios::engine::modules::ai::registerComponents<TEntityManager>();
+        helios::engine::modules::rendering::registerComponents<TEntityManager>();
+        helios::engine::modules::spatial::registerComponents<TEntityManager>();
+        helios::engine::modules::ui::registerComponents<TEntityManager>();
+        helios::engine::modules::scene::registerComponents<TEntityManager>();
+        helios::engine::modules::physics::registerComponents<TEntityManager>();
+        helios::engine::modules::effects::registerComponents<TEntityManager>();
     }
 
 }

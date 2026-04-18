@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.mechanics.spawn.registry;
 
-import helios.engine.ecs.ComponentReflector;
+import helios.ecs.ComponentReflector;
 import helios.engine.mechanics.spawn.components;
 
 export namespace helios::engine::mechanics::spawn {
@@ -14,11 +14,12 @@ export namespace helios::engine::mechanics::spawn {
     /**
      * @brief Registers all spawn components with the ComponentReflector.
      */
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::SpawnedByProfileComponent>();
-        R::registerType<components::EmittedByComponent>();
+        R::template registerType<components::SpawnedByProfileComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::EmittedByComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

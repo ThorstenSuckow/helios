@@ -9,9 +9,9 @@ module;
 
 export module helios.engine.modules.ui.widgets.types.MenuId;
 
-import helios.core.algorithms;
+import helios.core.types.FuncDefs;
 import helios.core.types;
-import helios.core.data;
+import helios.core.types.StrongId;
 
 export namespace helios::engine::modules::ui::widgets::types {
 
@@ -27,8 +27,8 @@ export namespace helios::engine::modules::ui::widgets::types {
      * system. Supports compile-time string-based construction via FNV-1a
      * hashing.
      *
-     * @see helios::core::data::StrongId
+     * @see helios::core::types::StrongId
      */
-    using MenuId = helios::core::data::StrongId<MenuIdTag, uint32_t>;
+    using MenuId = helios::core::types::StrongId<MenuIdTag>;
 
 }

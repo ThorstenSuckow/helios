@@ -8,7 +8,7 @@ module;
 
 export module helios.engine.mechanics.scoring.types.ScoreTypeId;
 
-import helios.core.data.TypeIndexer;
+import helios.core.TypeIndexer;
 import helios.core.types;
 
 export namespace helios::engine::mechanics::scoring::types {
@@ -70,7 +70,7 @@ export namespace helios::engine::mechanics::scoring::types {
          */
         template <typename T>
         [[nodiscard]] static ScoreTypeId id() {
-            static const size_t tid = helios::core::data::TypeIndexer<ScoreType>::typeIndex<T>();
+            static const size_t tid = helios::core::TypeIndexer<ScoreType>::typeIndex<T>();
             return ScoreTypeId(tid);
         }
 

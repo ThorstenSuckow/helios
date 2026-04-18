@@ -9,9 +9,9 @@ module;
 
 export module helios.engine.modules.ui.widgets.types.ActionId;
 
-import helios.core.algorithms;
+import helios.core.types.FuncDefs;
 import helios.core.types;
-import helios.core.data;
+import helios.ecs.types;
 
 export namespace helios::engine::modules::ui::widgets::types {
 
@@ -26,9 +26,9 @@ export namespace helios::engine::modules::ui::widgets::types {
      * @details Uses FNV-1a hashing to convert string literals to unique IDs
      * at compile time. Supports comparison and hashing for use in containers.
      *
-     * @see helios::core::data::StrongId
+     * @see helios::core::types::StrongId
      */
-    using ActionId = helios::core::data::StrongId<ActionIdTag, uint32_t>;
+    using ActionId = helios::core::types::StrongId<ActionIdTag>;
 
 }
 

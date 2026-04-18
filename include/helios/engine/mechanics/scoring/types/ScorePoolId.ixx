@@ -9,9 +9,7 @@ module;
 
 export module helios.engine.mechanics.scoring.types.ScorePoolId;
 
-import helios.core.algorithms;
-import helios.core.types;
-import helios.core.data;
+import helios.core.types.StrongId;
 
 export namespace helios::engine::mechanics::scoring::types {
 
@@ -25,8 +23,8 @@ export namespace helios::engine::mechanics::scoring::types {
      *
      * @details Used to uniquely identify score pools.
      *
-     * @see helios::core::data::StrongId
+     * @see helios::core::types::StrongId
      */
-    using ScorePoolId = helios::core::data::StrongId<ScorePoolIdTag, uint32_t>;
+    using ScorePoolId = helios::core::types::StrongId<ScorePoolIdTag>;
 
 }

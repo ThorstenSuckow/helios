@@ -22,12 +22,13 @@ export namespace helios::engine::mechanics::health::types {
      * @see InteractionContext
      * @see HealthManager
      */
+    template<typename THandle>
     struct HealthChangeContext {
 
         /**
          * @brief The interaction that caused the health change.
          */
-        InteractionContext interactionContext{};
+        InteractionContext<THandle> interactionContext{};
 
         /**
          * @brief Signed health delta (negative = damage, positive = healing).

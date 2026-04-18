@@ -9,9 +9,9 @@ module;
 
 export module helios.engine.modules.ui.widgets.types.FontId;
 
-import helios.core.algorithms;
+import helios.core.types.FuncDefs;
 import helios.core.types;
-import helios.core.data;
+import helios.core.types.StrongId;
 
 export namespace helios::engine::modules::ui::widgets::types {
 
@@ -26,9 +26,9 @@ export namespace helios::engine::modules::ui::widgets::types {
      * @details Uses FNV-1a hashing to convert font family names to unique
      * 32-bit identifiers at compile time.
      *
-     * @see helios::core::data::StrongId
+     * @see helios::core::types::StrongId
      */
-    using FontId = helios::core::data::StrongId<FontIdTag, uint32_t>;
+    using FontId = helios::core::types::StrongId<FontIdTag>;
 
 }
 

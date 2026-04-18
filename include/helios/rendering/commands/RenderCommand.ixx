@@ -2,12 +2,12 @@ module;
 
 
 
-export module helios.engine.modules.rendering.commands.RenderCommand;
+export module helios.rendering.commands.RenderCommand;
 
 import helios.scene.types.SceneMemberRenderContext;
 
 using namespace helios::scene::types;
-export namespace helios::engine::modules::rendering::commands {
+export namespace helios::rendering::commands {
 
 
     template<typename THandle>

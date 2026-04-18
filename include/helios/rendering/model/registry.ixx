@@ -4,12 +4,12 @@
  */
 module;
 
-export module helios.engine.modules.rendering.model.registry;
+export module helios.rendering.model.registry;
 
 import helios.ecs.ComponentReflector;
-import helios.engine.modules.rendering.model.components;
+import helios.rendering.model.components;
 
-export namespace helios::engine::modules::rendering::model {
+export namespace helios::rendering::model {
 
     /**
      * @brief Registers all model components with the ComponentReflector.

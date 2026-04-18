@@ -26,7 +26,7 @@ import helios.state.CombinedStateToIdMapPair;
 import helios.gameplay.gamestate.types;
 import helios.gameplay.matchstate.types;
 
-import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.rendering.model.components.ModelAabbComponent;
 import helios.math;
 
 import helios.engine.common.tags.SystemRole;

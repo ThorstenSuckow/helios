@@ -17,8 +17,8 @@ import helios.runtime.world.Session;
 import helios.ecs.types.EntityHandle;
 
 
-import helios.engine.modules.rendering.components;
-import helios.engine.modules.rendering.commands;
+import helios.rendering.components;
+import helios.rendering.commands;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
@@ -33,7 +33,7 @@ import helios.engine.common.tags.SystemRole;
 
 import helios.engine.common.concepts.IsFrustumCullerLike;
 
-import helios.engine.modules.rendering.commands.RenderCommand;
+import helios.rendering.commands.RenderCommand;
 
 using namespace helios::ecs::types;
 
@@ -41,11 +41,11 @@ using namespace helios::scene;
 using namespace helios::scene::types;
 using namespace helios::scene::components;
 using namespace helios::ecs::components;
-using namespace helios::engine::modules::rendering::components;
+using namespace helios::rendering::components;
 using namespace helios::scene::types;
 using namespace helios::engine::common::concepts;
 using namespace helios::engine::modules::spatial::transform::components;
-using namespace helios::engine::modules::rendering::commands;
+using namespace helios::rendering::commands;
 using namespace helios::runtime::messaging::command;
 
 export namespace helios::scene::systems {

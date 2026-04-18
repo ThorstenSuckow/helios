@@ -10,7 +10,7 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.SceneNodeConfig;
 
 import helios.scene;
-import helios.engine.modules.rendering;
+import helios.rendering;
 import helios.ecs.components;
 import helios.scene;
 
@@ -52,7 +52,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @brief Validates that a RenderableComponent exists.
          */
         void ensureRenderableComponent() {
-            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = gameObject_.get<helios::rendering::components::RenderableComponent<Handle_type>>();
             assert(renderableComponent && "Unexpected nullptr for RenderableComponent.");
         }
 
@@ -92,7 +92,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             ensureSceneNode(false);
             ensureRenderableComponent();
 
-            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = gameObject_.get<helios::rendering::components::RenderableComponent<Handle_type>>();
 
             auto renderable = renderableComponent->shareRenderable();
 
@@ -124,7 +124,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             parent.template getOrAdd<helios::ecs::components::HierarchyComponent<Handle_type>>().addChild(gameObject_.handle());
             gameObject_.template getOrAdd<helios::ecs::components::HierarchyComponent<Handle_type>>().setParent(parent.handle());
 
-            const auto* renderableComponent = gameObject_.get<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = gameObject_.get<helios::rendering::components::RenderableComponent<Handle_type>>();
 
             auto renderable = renderableComponent->shareRenderable();
 

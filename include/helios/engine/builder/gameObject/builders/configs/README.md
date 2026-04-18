@@ -85,7 +85,7 @@ Example: Both `Move2DConfig` and `SteeringConfig` require `ComposeTransformCompo
 |--------|---------|
 | `helios.engine.modules.physics` | Motion and collision components |
 | `helios.engine.modules.spatial` | Transform components |
-| `helios.engine.modules.rendering` | Rendering components |
+| `helios.rendering` | Rendering components |
 | `helios.gameplay` | Gameplay components |
 | `helios.gameplay.lifecycle` | Lifecycle and delayed activation |
 

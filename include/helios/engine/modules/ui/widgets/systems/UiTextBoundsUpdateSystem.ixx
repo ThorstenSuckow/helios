@@ -15,7 +15,7 @@ import helios.runtime.world.UpdateContext;
 
 import helios.ecs.components.Active;
 
-import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.rendering.model.components.ModelAabbComponent;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -47,7 +47,7 @@ export namespace helios::engine::modules::ui::widgets::systems {
             for (auto [entity, txt, mac, active] : updateContext.view<
                 THandle,
                 helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::rendering::model::components::ModelAabbComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 

@@ -4,13 +4,13 @@
  */
 module;
 
-export module helios.engine.modules.rendering.model.components.ModelAabbComponent;
+export module helios.rendering.model.components.ModelAabbComponent;
 
 import helios.math.types;
 
 import helios.core.spatial.Transform;
 
-export namespace helios::engine::modules::rendering::model::components {
+export namespace helios::rendering::model::components {
 
     /**
      * @brief Component that stores the canonical Axis-Aligned Bounding Box (AABB) of a model.

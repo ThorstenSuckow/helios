@@ -27,7 +27,7 @@ import helios.gameplay.lifecycle.components;
 
 import helios.rendering.viewport.types.ViewportHandle;
 
-import helios.engine.modules.rendering.viewport.components.ActiveViewportHandlesStateComponent;
+import helios.rendering.viewport.components.ActiveViewportHandlesStateComponent;
 
 using namespace helios::gameplay::matchstate::types;
 using namespace helios::gameplay::gamestate::types;
@@ -36,7 +36,7 @@ using namespace helios::gameplay::gamestate::types;
 using namespace helios::state::types;
 using namespace helios::state::components;
 
-using namespace helios::engine::modules::rendering::viewport::components;
+using namespace helios::rendering::viewport::components;
 
 using namespace helios::rendering::viewport::types;
 using namespace helios::gameplay::lifecycle::components;

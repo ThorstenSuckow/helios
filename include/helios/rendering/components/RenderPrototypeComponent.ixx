@@ -1,6 +1,6 @@
 module;
 
-export module helios.engine.modules.rendering.components.RenderPrototypeComponent;
+export module helios.rendering.components.RenderPrototypeComponent;
 
 import helios.rendering.mesh;
 import helios.rendering.shader;
@@ -10,7 +10,7 @@ using namespace helios::rendering::mesh::types;
 using namespace helios::rendering::shader::types;
 using namespace helios::rendering::material::types;
 
-export namespace helios::engine::modules::rendering::components {
+export namespace helios::rendering::components {
 
     template<typename THandle>
     class RenderPrototypeComponent {

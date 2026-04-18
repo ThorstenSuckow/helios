@@ -36,7 +36,7 @@ import helios.input.gamepad.GamepadState;
 
 import helios.ecs.components.HierarchyComponent;
 
-import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.rendering.model.components.ModelAabbComponent;
 
 using namespace helios::input::types;
 using namespace helios::ecs::components;

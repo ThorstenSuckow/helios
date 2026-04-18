@@ -19,7 +19,7 @@ import helios.core.units.Unit;
 
 import helios.runtime.world.GameObject;
 
-import helios.engine.modules.rendering.renderable.components.RenderableComponent;
+import helios.rendering.components.RenderableComponent;
 
 
 export namespace helios::engine::modules::ui::widgets::components {

@@ -1,4 +1,4 @@
-# helios::engine::modules::rendering::viewport::systems
+# helios::rendering::viewport::systems
 
 Systems for viewport state updates.
 
@@ -23,7 +23,7 @@ systemRegistry.add<StateToViewportPolicyUpdateSystem>(
 ---
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::engine::modules::rendering::viewport::systems
+@namespace helios::rendering::viewport::systems
 @brief Systems for viewport state updates.
 @details Provides systems that manage viewport visibility based on game state, updating the session's active viewport list each frame.
 </p></details>

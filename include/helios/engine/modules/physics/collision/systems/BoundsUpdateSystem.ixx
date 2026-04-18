@@ -25,7 +25,7 @@ import helios.engine.modules.spatial.transform.components.TranslationStateCompon
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
-import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.rendering.model.components.ModelAabbComponent;
 
 import helios.ecs.components.Active;
 
@@ -72,7 +72,7 @@ export namespace helios::engine::modules::physics::collision::systems {
 
             for (auto [entity, mab, sc, tsc, sca, rsc, bc, active] : updateContext.view<
                 THandle,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::rendering::model::components::ModelAabbComponent<THandle>,
                 helios::scene::components::SceneNodeComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::ScaleStateComponent<THandle>,

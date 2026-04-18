@@ -22,7 +22,7 @@ import helios.runtime.world.UpdateContext;
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 
-import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.rendering.model.components.ModelAabbComponent;
 
 import helios.ecs.components.Active;
 
@@ -69,7 +69,7 @@ export namespace helios::engine::modules::spatial::transform::systems {
 
             for (auto [entity, mab, sc, tc, active] : updateContext.view<
                 THandle,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::rendering::model::components::ModelAabbComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::ScaleStateComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
                 helios::ecs::components::Active<THandle>

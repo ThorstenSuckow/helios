@@ -14,7 +14,7 @@ import helios.rendering;
 import helios.engine.modules.ui.widgets.types.FontId;
 import helios.core.types;
 import helios.ext.opengl;
-import helios.engine.modules.rendering;
+import helios.rendering;
 import helios.math.types;
 import helios.scene.SceneNode;
 import helios.engine.modules.ui;
@@ -347,9 +347,9 @@ export namespace helios::engine::builder::gameObject::builders::configs {
                     textPrototype
             );
 
-            gameObject_.template add<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>(renderable);
+            gameObject_.template add<helios::rendering::components::RenderableComponent<Handle_type>>(renderable);
 
-            auto& msc = gameObject_.template getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent<Handle_type>>();
+            auto& msc = gameObject_.template getOrAdd<helios::rendering::model::components::ModelAabbComponent<Handle_type>>();
             msc.setAabb(renderable->localAABB());
 
             if (isUiText_ || usesNumberFormatter_ || usesTimeFormatter_) {

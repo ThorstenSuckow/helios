@@ -1,12 +1,12 @@
 module;
 
-export module helios.engine.modules.rendering.components.MaterialOverrideComponent;
+export module helios.rendering.components.MaterialOverrideComponent;
 
 import helios.rendering.material;
 
 using namespace helios::rendering::material;
 using namespace helios::rendering::material::types;
-export namespace helios::engine::modules::rendering::components {
+export namespace helios::rendering::components {
 
     template<typename THandle>
     class MaterialOverrideComponent {

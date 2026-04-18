@@ -26,7 +26,7 @@ import helios.gameplay.spawn.commands.SpawnCommand;
 import helios.gameplay.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.gameplay.spawn.commands.DespawnCommand;
 
-import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.rendering.model.components.ModelAabbComponent;
 import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 
@@ -131,7 +131,7 @@ export namespace helios::gameplay::spawn {
          */
         void ensureBounds(helios::runtime::world::GameObject go, helios::math::aabbf& bounds) {
             if (bounds.min()[0] > bounds.max()[0]) {
-                const auto* mab   = go.get<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
+                const auto* mab   = go.get<helios::rendering::model::components::ModelAabbComponent>();
                 const auto* sca    = go.get<helios::engine::modules::spatial::transform::components::ScaleStateComponent>();
                 auto* rsc = go.get<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
                 const auto* scn   = go.get<helios::scene::components::SceneNodeComponent>();

@@ -21,7 +21,7 @@ import helios.runtime.world.GameWorld;
 
 import helios.scene.components.SceneNodeComponent;
 
-import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.rendering.model.components.ModelAabbComponent;
 
 import helios.ecs.components.Active;
 
@@ -133,7 +133,7 @@ export namespace helios::engine::modules::ui::transform::systems {
                 helios::engine::modules::ui::transform::components::UiTransformComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
                 helios::engine::modules::spatial::transform::components::ComposeTransformComponent<THandle>,
-                helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>,
+                helios::rendering::model::components::ModelAabbComponent<THandle>,
                 helios::scene::components::SceneNodeComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {

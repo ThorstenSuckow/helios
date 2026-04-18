@@ -8,7 +8,7 @@ module;
 #include <cassert>
 #include <vector>
 
-export module helios.engine.modules.rendering.viewport.systems.StateToViewportPolicyUpdateSystem;
+export module helios.rendering.viewport.systems.StateToViewportPolicyUpdateSystem;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.Session;
@@ -21,7 +21,7 @@ import helios.engine.common.tags.SystemRole;
 
 using namespace helios::state;
 using namespace helios::rendering::viewport::types;
-export namespace helios::engine::modules::rendering::viewport::systems {
+export namespace helios::rendering::viewport::systems {
 
     /**
      * @brief Updates the session's active viewport list based on state policy.

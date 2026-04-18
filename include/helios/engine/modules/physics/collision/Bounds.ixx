@@ -14,7 +14,7 @@ import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 
-import helios.engine.modules.rendering.model.components.ModelAabbComponent;
+import helios.rendering.model.components.ModelAabbComponent;
 
 export namespace helios::engine::modules::physics::collision::Bounds {
 
@@ -36,7 +36,7 @@ export namespace helios::engine::modules::physics::collision::Bounds {
      */
     template<typename THandle>
     inline helios::math::aabbf computeWorldAabb(
-        const helios::engine::modules::rendering::model::components::ModelAabbComponent<THandle>& mab,
+        const helios::rendering::model::components::ModelAabbComponent<THandle>& mab,
         const helios::scene::components::SceneNodeComponent<THandle>& sc,
         const helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>& tsc,
         const helios::engine::modules::spatial::transform::components::ScaleStateComponent<THandle>& sca,

@@ -12,7 +12,7 @@ export module helios.engine.builder.gameObject.builders.configs.MeshRenderableCo
 
 import helios.rendering;
 import helios.ext.opengl;
-import helios.engine.modules.rendering;
+import helios.rendering;
 import helios.math.types;
 import helios.rendering.mesh;
 import helios.scene.SceneNode;
@@ -169,11 +169,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             const auto renderPrototype = std::make_shared<helios::rendering::RenderPrototype>(material, mesh);
 
-            auto& rc = gameObject_.template add<helios::engine::modules::rendering::renderable::components::RenderableComponent<Handle_type>>(
+            auto& rc = gameObject_.template add<helios::rendering::components::RenderableComponent<Handle_type>>(
                 std::make_shared<helios::rendering::mesh::MeshRenderable>(renderPrototype)
             );
 
-            auto& msc = gameObject_.template getOrAdd<helios::engine::modules::rendering::model::components::ModelAabbComponent<Handle_type>>();
+            auto& msc = gameObject_.template getOrAdd<helios::rendering::model::components::ModelAabbComponent<Handle_type>>();
             msc.setAabb(rc.renderable().localAABB());
 
             return *this;

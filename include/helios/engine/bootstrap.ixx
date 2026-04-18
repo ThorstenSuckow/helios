@@ -8,6 +8,7 @@ module;
 #include <helios/helios_config.h>
 #include <memory>
 #include <utility>
+#include <cassert>
 
 export module helios.engine.bootstrap;
 
@@ -17,6 +18,8 @@ import helios.engine.runtime.world;
 import helios.engine.state.Bindings;
 import helios.engine.runtime.messaging.command;
 
+import helios.platform;
+
 import helios.engine.mechanics.lifecycle;
 import helios.engine.mechanics.timing;
 import helios.engine.mechanics.gamestate;
@@ -24,14 +27,31 @@ import helios.engine.mechanics.match;
 
 import helios.engine.mechanics.registry;
 import helios.engine.modules.registry;
-import helios.engine.ecs.registry;
 
+import helios.ecs.registry;
 
-
+using namespace helios::engine::state::types;
+using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::platform::environment;
+using namespace helios::platform::window;
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::runtime::gameloop;
+using namespace helios::engine::runtime::messaging::command;
 export namespace helios::engine::bootstrap {
 
-    using namespace helios::engine::runtime::world;
-    using namespace helios::engine::runtime::gameloop;
+    template<typename... Tuple>
+    struct ComponentRegistrar;
+
+    template<typename... TEntityManagers>
+    struct ComponentRegistrar<std::tuple<TEntityManagers...>> {
+        static void registerComponents() {
+            (helios::engine::mechanics::registerComponents<TEntityManagers>(), ...);
+            (helios::engine::modules::registerComponents<TEntityManagers>(), ...);
+            (helios::ecs::registerComponents<TEntityManagers>(), ...);
+        }
+
+    };
+
 
     /**
      * @brief Registers all component types with the ComponentReflector.
@@ -56,12 +76,12 @@ export namespace helios::engine::bootstrap {
     inline void registerAllComponents() {
 
         static bool done = false;
-        if (done) return;
+        if (done) {
+            return;
+        }
         done = true;
 
-        helios::engine::mechanics::registerComponents();
-        helios::engine::modules::registerComponents();
-        helios::engine::ecs::registerComponents();
+        ComponentRegistrar<RegisteredEntityManagers>::registerComponents();
 
     }
 
@@ -71,10 +91,13 @@ export namespace helios::engine::bootstrap {
      * @details The factory heap-allocates both objects and performs the
      * minimal setup required before application-specific configuration:
      *
-     * - Registers the `EngineCommandBuffer` with the GameWorld's
-     *   ResourceRegistry.
-     * - Tracks `GameState` and `MatchState` in the Session so that
-     *   TypedPass state filtering works out of the box.
+     * - Calls `registerAllComponents()` via `ComponentRegistrar`
+     * - Registers `WorldLifecycleManager`, `GameStateManager`,
+     *   `MatchStateManager`, and `TimerManager`
+     * - Tracks `GameState` and `MatchState` in the Session
+     * - Registers `RenderCommandBuffer`, `EngineCommandBuffer`,
+     *   and `StateCommandBuffer`
+     * - Sets initial `GameState` to `Booting`
      *
      * The caller receives ownership via `unique_ptr` and is responsible
      * for registering Managers, configuring phases/passes, calling
@@ -84,14 +107,12 @@ export namespace helios::engine::bootstrap {
      * ## Usage
      *
      * ```cpp
-     * helios::engine::bootstrap::registerAllComponents();
-     *
-     * auto [gameWorldPtr, gameLoopPtr] = helios::engine::bootstrap::makeGameWorld();
+     * auto [gameWorldPtr, gameLoopPtr] = helios::engine::bootstrap::bootstrapGameWorld();
      * auto& gameWorld = *gameWorldPtr;
      * auto& gameLoop  = *gameLoopPtr;
      *
      * // Application-specific setup
-     * gameWorld.registerResource<SpawnManager>();
+     * gameWorld.registerManager<SpawnManager<GameObjectHandle>>();
      * gameLoop.phase(PhaseType::Pre)
      *     .addPass<GameState>(GameState::Any)
      *         .addSystem<InputSystem>();
@@ -99,6 +120,9 @@ export namespace helios::engine::bootstrap {
      * gameWorld.init();
      * gameLoop.init(gameWorld);
      * ```
+     *
+     * @note `registerAllComponents()` is called automatically — no separate
+     *       call is required.
      *
      * @param capacity Initial capacity for the EntityManager's SparseSets.
      *                 Must be large enough to accommodate all entities including
@@ -112,15 +136,19 @@ export namespace helios::engine::bootstrap {
      * @see EngineCommandBuffer
      * @see Session::trackState
      */
-    inline std::pair<std::unique_ptr<GameWorld>, std::unique_ptr<GameLoop>> makeGameWorld(
+    inline std::pair<std::unique_ptr<GameWorld>, std::unique_ptr<GameLoop>> bootstrapGameWorld(
         const size_t capacity = ENTITY_MANAGER_DEFAULT_CAPACITY
     ) {
         auto gameLoop = std::make_unique<helios::engine::runtime::gameloop::GameLoop>();
+
         auto gameWorld = std::make_unique<helios::engine::runtime::world::GameWorld>(capacity);
+
+        registerAllComponents();
 
         gameWorld->registerManager<helios::engine::mechanics::lifecycle::WorldLifecycleManager>();
         gameWorld->registerManager<helios::engine::mechanics::gamestate::GameStateManager>(
         helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules());
+
         gameWorld->registerManager<helios::engine::mechanics::match::MatchStateManager>(
             helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules());
         gameWorld->registerManager<helios::engine::mechanics::timing::TimerManager>();
@@ -128,7 +156,18 @@ export namespace helios::engine::bootstrap {
         gameWorld->session().trackState<helios::engine::mechanics::gamestate::types::GameState>();
         gameWorld->session().trackState<helios::engine::mechanics::match::types::MatchState>();
 
-        gameWorld->registerCommandBuffer<helios::engine::runtime::messaging::command::EngineCommandBuffer>();
+        gameWorld->registerCommandBuffer<RenderCommandBuffer>();
+        gameWorld->registerCommandBuffer<EngineCommandBuffer>();
+        gameWorld->registerCommandBuffer<StateCommandBuffer>();
+
+
+        gameWorld->session().setStateFrom<GameState>(
+            StateTransitionContext<GameState>(
+            GameState::Undefined,
+            GameState::Booting,
+            GameStateTransitionId::BootRequest
+        ));
+
 
         return std::make_pair(std::move(gameWorld), std::move(gameLoop));
     }

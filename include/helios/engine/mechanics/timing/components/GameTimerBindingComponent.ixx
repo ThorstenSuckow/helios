@@ -26,6 +26,7 @@ export namespace helios::engine::mechanics::timing::components {
      * @see GameTimer
      * @see GameTimerUpdateSystem
      */
+    template<typename THandle>
     class GameTimerBindingComponent {
 
     private:

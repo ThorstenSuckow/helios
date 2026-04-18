@@ -20,18 +20,18 @@ import helios.runtime.messaging.command;
 
 import helios.platform;
 
-import helios.engine.mechanics.lifecycle;
-import helios.engine.mechanics.timing;
-import helios.engine.mechanics.gamestate;
-import helios.engine.mechanics.match;
+import helios.gameplay.lifecycle;
+import helios.gameplay.timing;
+import helios.gameplay.gamestate;
+import helios.gameplay.match;
 
-import helios.engine.mechanics.registry;
+import helios.gameplay.registry;
 import helios.engine.modules.registry;
 
 import helios.ecs.registry;
 
 using namespace helios::engine::state::types;
-using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::gameplay::gamestate::types;
 using namespace helios::platform::environment;
 using namespace helios::platform::window;
 using namespace helios::runtime::world;
@@ -45,7 +45,7 @@ export namespace helios::engine::bootstrap {
     template<typename... TEntityManagers>
     struct ComponentRegistrar<std::tuple<TEntityManagers...>> {
         static void registerComponents() {
-            (helios::engine::mechanics::registerComponents<TEntityManagers>(), ...);
+            (helios::gameplay::registerComponents<TEntityManagers>(), ...);
             (helios::engine::modules::registerComponents<TEntityManagers>(), ...);
             (helios::ecs::registerComponents<TEntityManagers>(), ...);
         }
@@ -145,16 +145,16 @@ export namespace helios::engine::bootstrap {
 
         registerAllComponents();
 
-        gameWorld->registerManager<helios::engine::mechanics::lifecycle::WorldLifecycleManager>();
-        gameWorld->registerManager<helios::engine::mechanics::gamestate::GameStateManager>(
-        helios::engine::mechanics::gamestate::rules::DefaultGameStateTransitionRules::rules());
+        gameWorld->registerManager<helios::gameplay::lifecycle::WorldLifecycleManager>();
+        gameWorld->registerManager<helios::gameplay::gamestate::GameStateManager>(
+        helios::gameplay::gamestate::rules::DefaultGameStateTransitionRules::rules());
 
-        gameWorld->registerManager<helios::engine::mechanics::match::MatchStateManager>(
-            helios::engine::mechanics::match::rules::DefaultMatchStateTransitionRules::rules());
-        gameWorld->registerManager<helios::engine::mechanics::timing::TimerManager>();
+        gameWorld->registerManager<helios::gameplay::match::MatchStateManager>(
+            helios::gameplay::match::rules::DefaultMatchStateTransitionRules::rules());
+        gameWorld->registerManager<helios::gameplay::timing::TimerManager>();
 
-        gameWorld->session().trackState<helios::engine::mechanics::gamestate::types::GameState>();
-        gameWorld->session().trackState<helios::engine::mechanics::match::types::MatchState>();
+        gameWorld->session().trackState<helios::gameplay::gamestate::types::GameState>();
+        gameWorld->session().trackState<helios::gameplay::match::types::MatchState>();
 
         gameWorld->registerCommandBuffer<RenderCommandBuffer>();
         gameWorld->registerCommandBuffer<EngineCommandBuffer>();

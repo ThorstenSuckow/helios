@@ -7,8 +7,8 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.ScorePoolConfig;
 
 
-import helios.engine.mechanics.scoring.types;
-import helios.engine.mechanics.scoring.components.ScorePoolComponent;
+import helios.gameplay.scoring.types;
+import helios.gameplay.scoring.components.ScorePoolComponent;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -39,7 +39,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param gameObject Target entity to configure.
          */
         explicit ScorePoolConfig(Entity gameObject) : gameObject_(gameObject) {
-            gameObject_.template getOrAdd<helios::engine::mechanics::scoring::components::ScorePoolComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::gameplay::scoring::components::ScorePoolComponent<Handle_type>>();
         }
 
         /**
@@ -49,8 +49,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        ScorePoolConfig& poolId(const helios::engine::mechanics::scoring::types::ScorePoolId scorePoolId) {
-            gameObject_.template get<helios::engine::mechanics::scoring::components::ScorePoolComponent<Handle_type>>()
+        ScorePoolConfig& poolId(const helios::gameplay::scoring::types::ScorePoolId scorePoolId) {
+            gameObject_.template get<helios::gameplay::scoring::components::ScorePoolComponent<Handle_type>>()
                        ->setScorePoolId(scorePoolId);
             return *this;
         }

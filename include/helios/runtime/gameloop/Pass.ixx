@@ -19,7 +19,7 @@ import helios.engine.common.concepts;
 
 import helios.runtime.world.UpdateContext;
 
-import helios.engine.mechanics.gamestate.types;
+import helios.gameplay.gamestate.types;
 
 export namespace helios::runtime::world {
     class GameWorld;

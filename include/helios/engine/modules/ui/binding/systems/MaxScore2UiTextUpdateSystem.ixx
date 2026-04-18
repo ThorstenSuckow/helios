@@ -11,7 +11,7 @@ module;
 
 export module helios.engine.modules.ui.binding.systems.MaxScore2UiTextUpdateSystem;
 
-import helios.engine.mechanics.scoring.components;
+import helios.gameplay.scoring.components;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
@@ -23,7 +23,7 @@ import helios.engine.modules.ui.widgets.components.UiTextComponent;
 
 import helios.ecs.components.Active;
 
-using namespace helios::engine::mechanics::scoring;
+using namespace helios::gameplay::scoring;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -59,7 +59,7 @@ export namespace helios::engine::modules::ui::binding::systems {
 
             for (auto [entity, soc, nfc, txt, active] : updateContext.view<
                 THandle,
-                helios::engine::mechanics::scoring::components::MaxScoreObserverComponent<THandle>,
+                helios::gameplay::scoring::components::MaxScoreObserverComponent<THandle>,
                 helios::engine::modules::ui::layout::components::NumberFormatterComponent<THandle>,
                 helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
                 helios::ecs::components::Active<THandle>

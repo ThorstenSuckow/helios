@@ -321,7 +321,7 @@ Systems query entities via `UpdateContext::view<>()`, which returns a `View` ove
 
 ```cpp
 import helios.runtime.world.UpdateContext;
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.gameplay.lifecycle.components.Active;
 
 // In a system's update():
 void update(UpdateContext& ctx) noexcept {

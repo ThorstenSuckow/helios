@@ -20,9 +20,9 @@ import helios.runtime.world.Session;
 
 import helios.runtime.gameloop.CommitPoint;
 
-import helios.engine.mechanics.gamestate.types;
+import helios.gameplay.gamestate.types;
 
-using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::gameplay::gamestate::types;
 using namespace helios::runtime::world;
 
 export namespace helios::runtime::gameloop {
@@ -228,7 +228,7 @@ export namespace helios::runtime::gameloop {
          * @see Session::state()
          */
         template<typename StateType>
-        Pass& addPass(const StateType t) {//    const helios::engine::mechanics::gamestate::types::GameState gameState = helios::engine::mechanics::gamestate::types::GameState::Any) {
+        Pass& addPass(const StateType t) {//    const helios::gameplay::gamestate::types::GameState gameState = helios::gameplay::gamestate::types::GameState::Any) {
 
             auto entry = std::make_unique<TypedPass<StateType>>(*this, t);
             auto* raw = entry.get();

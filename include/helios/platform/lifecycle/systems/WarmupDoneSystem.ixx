@@ -25,7 +25,7 @@ import helios.rendering.shader.components;
 
 import helios.engine.state.commands;
 import helios.engine.state.types;
-import helios.engine.mechanics.gamestate.types;
+import helios.gameplay.gamestate.types;
 
 using namespace helios::rendering::shader::concepts;
 using namespace helios::engine::common::concepts;
@@ -36,7 +36,7 @@ using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::engine::state::types;
 using namespace helios::engine::state::commands;
-using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::gameplay::gamestate::types;
 export namespace helios::platform::lifecycle::systems {
 
     /**

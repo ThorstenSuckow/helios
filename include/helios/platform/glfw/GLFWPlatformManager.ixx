@@ -22,7 +22,7 @@ import helios.engine.state.Bindings;
 
 import helios.engine.state.commands;
 import helios.engine.state.types;
-import helios.engine.mechanics.gamestate.types;
+import helios.gameplay.gamestate.types;
 
 import helios.engine.common.tags.ManagerRole;
 
@@ -55,7 +55,7 @@ using namespace helios::platform::window::types;
 using namespace helios::platform::window::components;
 using namespace helios::platform::glfw::components;
 using namespace helios::platform::glfw::types;
-using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::gameplay::gamestate::types;
 using namespace helios::engine::state::commands;
 using namespace helios::engine::state::types;
 using namespace helios::ecs;

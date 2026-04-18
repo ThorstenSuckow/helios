@@ -10,7 +10,7 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.LifecycleConfig;
 
 
-import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
+import helios.gameplay.lifecycle.components.DelayedComponentEnabler;
 
 
 export namespace helios::engine::builder::gameObject::builders::configs {
@@ -77,7 +77,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         LifecycleConfig& useDelayedComponentEnabler() {
 
-            gameObject_.template getOrAdd<helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler<Handle_type>>();
+            gameObject_.template getOrAdd<helios::gameplay::lifecycle::components::DelayedComponentEnabler<Handle_type>>();
 
             return *this;
         }

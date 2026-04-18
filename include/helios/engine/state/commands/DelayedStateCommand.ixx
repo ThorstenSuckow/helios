@@ -9,14 +9,14 @@ module;
 
 export module helios.engine.state.commands.DelayedStateCommand;
 
-import helios.engine.mechanics.timing.types.GameTimerId;
+import helios.gameplay.timing.types.GameTimerId;
 
 import helios.engine.state.Bindings;
 
 import helios.engine.state.types.StateTransitionRequest;
 
 using namespace helios::engine::state::types;
-using namespace helios::engine::mechanics::timing::types;
+using namespace helios::gameplay::timing::types;
 
 
 export namespace helios::engine::state::commands {

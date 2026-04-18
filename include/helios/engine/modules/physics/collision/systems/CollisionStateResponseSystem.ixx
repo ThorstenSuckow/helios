@@ -31,7 +31,7 @@ import helios.engine.modules.physics.collision.components.CollisionStateComponen
 import helios.runtime.spawn.commands.DespawnCommand;
 import helios.engine.modules.physics.collision.events;
 
-import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
+import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
 import helios.ecs.components.Active;
 
@@ -84,7 +84,7 @@ export namespace helios::engine::modules::physics::collision::systems {
             for (auto [entity, csc, sbp, active] : updateContext.view<
                 THandle,
                 CollisionStateComponent<THandle>,
-                helios::engine::mechanics::spawn::components::SpawnedByProfileComponent<THandle>,
+                helios::gameplay::spawn::components::SpawnedByProfileComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 

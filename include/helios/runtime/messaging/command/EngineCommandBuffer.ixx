@@ -20,12 +20,12 @@ import helios.platform.lifecycle.commands;
 import helios.runtime.messaging.command.TypedCommandBuffer;
 
 import helios.engine.modules.ui.widgets.commands;
-import helios.engine.mechanics.timing.commands;
-import helios.engine.mechanics.combat.commands;
-import helios.engine.mechanics.damage.commands;
-import helios.engine.mechanics.scoring.commands;
+import helios.gameplay.timing.commands;
+import helios.gameplay.combat.commands;
+import helios.gameplay.damage.commands;
+import helios.gameplay.scoring.commands;
 import helios.engine.modules.physics.motion.commands;
-import helios.engine.mechanics.lifecycle.commands.WorldLifecycleCommand;
+import helios.gameplay.lifecycle.commands.WorldLifecycleCommand;
 
 import helios.rendering.shader.commands;
 import helios.platform.window.types.WindowHandle;
@@ -44,12 +44,12 @@ export namespace helios::runtime::messaging::command {
             helios::engine::modules::physics::motion::commands::SteeringCommand<GameObjectHandle>,
             helios::engine::modules::ui::widgets::commands::UiActionCommand<GameObjectHandle>,
 
-            helios::engine::mechanics::scoring::commands::UpdateScoreCommand,
-            helios::engine::mechanics::timing::commands::TimerControlCommand,
-            helios::engine::mechanics::lifecycle::commands::WorldLifecycleCommand,
-            helios::engine::mechanics::combat::commands::Aim2DCommand<GameObjectHandle>,
-            helios::engine::mechanics::combat::commands::ShootCommand<GameObjectHandle>,
-            helios::engine::mechanics::damage::commands::ApplyDamageCommand<GameObjectHandle>,
+            helios::gameplay::scoring::commands::UpdateScoreCommand,
+            helios::gameplay::timing::commands::TimerControlCommand,
+            helios::gameplay::lifecycle::commands::WorldLifecycleCommand,
+            helios::gameplay::combat::commands::Aim2DCommand<GameObjectHandle>,
+            helios::gameplay::combat::commands::ShootCommand<GameObjectHandle>,
+            helios::gameplay::damage::commands::ApplyDamageCommand<GameObjectHandle>,
 
             helios::runtime::spawn::commands::ScheduledSpawnPlanCommand<GameObjectHandle>,
             helios::runtime::spawn::commands::SpawnCommand<GameObjectHandle>,

@@ -17,7 +17,7 @@ import helios.runtime.spawn.types.SpawnPlanCursor;
 import helios.runtime.spawn.types.SpawnContext;
 import helios.runtime.world.GameObject;
 
-import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
+import helios.gameplay.lifecycle.components.DelayedComponentEnabler;
 import helios.ecs.types.ComponentTypeId;
 
 using namespace helios::runtime::spawn::types;
@@ -115,7 +115,7 @@ export namespace helios::runtime::spawn::behavior::initializers {
 
                 if (deferThisComponent) {
                     deferFound = true;
-                    auto* dec = gameObject.get<helios::engine::mechanics::lifecycle::components::DelayedComponentEnabler>();
+                    auto* dec = gameObject.get<helios::gameplay::lifecycle::components::DelayedComponentEnabler>();
                     assert(dec && "Missing DelayedComponentEnabler");
 
                     dec->defer(gameObject, typeId, (position + 1) * delay_);

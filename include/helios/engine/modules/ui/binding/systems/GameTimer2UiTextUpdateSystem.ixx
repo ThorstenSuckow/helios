@@ -11,8 +11,8 @@ module;
 
 export module helios.engine.modules.ui.binding.systems.GameTimer2UiTextUpdateSystem;
 
-import helios.engine.mechanics.timing.TimerManager;
-import helios.engine.mechanics.timing.components;
+import helios.gameplay.timing.TimerManager;
+import helios.gameplay.timing.components;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
@@ -23,7 +23,7 @@ import helios.engine.modules.ui.layout;
 
 import helios.ecs.components.Active;
 
-using namespace helios::engine::mechanics::timing;
+using namespace helios::gameplay::timing;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -74,7 +74,7 @@ export namespace helios::engine::modules::ui::binding::systems {
 
             for (auto [entity, gtc, dfc, txt, active] : updateContext.view<
                 THandle,
-                helios::engine::mechanics::timing::components::GameTimerBindingComponent<THandle>,
+                helios::gameplay::timing::components::GameTimerBindingComponent<THandle>,
                 helios::engine::modules::ui::layout::components::TimeFormatterComponent<THandle>,
                 helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
                 helios::ecs::components::Active<THandle>

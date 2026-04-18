@@ -10,7 +10,7 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.ScoreValueConfig;
 
 
-import helios.engine.mechanics.scoring.components.ScoreValueComponent;
+import helios.gameplay.scoring.components.ScoreValueComponent;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -55,11 +55,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         template<typename T, typename... Args>
         ScoreValueConfig& score(Args&&... args) {
 
-            auto* svc = gameObject_.template get<helios::engine::mechanics::scoring::components::ScoreValueComponent<Handle_type, T>>();
+            auto* svc = gameObject_.template get<helios::gameplay::scoring::components::ScoreValueComponent<Handle_type, T>>();
 
             assert(!svc && "Component already available.");
 
-            gameObject_.template add<helios::engine::mechanics::scoring::components::ScoreValueComponent<Handle_type, T>>(std::forward<Args>(args)...);
+            gameObject_.template add<helios::gameplay::scoring::components::ScoreValueComponent<Handle_type, T>>(std::forward<Args>(args)...);
 
             return *this;
         }

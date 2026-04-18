@@ -20,17 +20,17 @@ import helios.runtime.world.UpdateContext;
 import helios.engine.modules.ai.components.ChaseComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
 
-import helios.engine.mechanics.lifecycle.components.DeadTagComponent;
+import helios.gameplay.lifecycle.components.DeadTagComponent;
 
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 
 import helios.ecs.components.Active;
 
-import helios.engine.mechanics.lifecycle.components;
+import helios.gameplay.lifecycle.components;
 
 import helios.engine.common.tags.SystemRole;
 
-using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::gameplay::lifecycle::components;
 using namespace helios::ecs::components;
 export namespace helios::engine::modules::ai::systems {
 

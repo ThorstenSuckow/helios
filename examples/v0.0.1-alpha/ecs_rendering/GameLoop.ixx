@@ -3,9 +3,9 @@ module;
 export module helios.examples.ecs_rendering.GameLoop;
 
 import helios.runtime.gameloop;
-import helios.engine.mechanics.gamestate.types.GameState;
-import helios.engine.mechanics.gamestate.systems;
-import helios.engine.mechanics.lifecycle.systems;
+import helios.gameplay.gamestate.types.GameState;
+import helios.gameplay.gamestate.systems;
+import helios.gameplay.lifecycle.systems;
 import helios.engine.modules.spatial.transform.systems;
 import helios.engine.common.types;
 import helios.platform.environment.systems;
@@ -18,9 +18,9 @@ import helios.runtime.world.types;
 import helios.engine.state.Bindings;
 
 using namespace helios::runtime::gameloop;
-using namespace helios::engine::mechanics::gamestate::types;
-using namespace helios::engine::mechanics::gamestate::systems;
-using namespace helios::engine::mechanics::lifecycle::systems;
+using namespace helios::gameplay::gamestate::types;
+using namespace helios::gameplay::gamestate::systems;
+using namespace helios::gameplay::lifecycle::systems;
 using namespace helios::engine::modules::spatial::transform::systems;
 using namespace helios::engine::common::types;
 using namespace helios::platform::environment::systems;

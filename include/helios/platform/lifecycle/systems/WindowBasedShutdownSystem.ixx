@@ -26,7 +26,7 @@ import helios.platform.environment.components;
 import helios.platform.environment.concepts;
 
 import helios.engine.state.Bindings;
-import helios.engine.mechanics.gamestate.types;
+import helios.gameplay.gamestate.types;
 
 using namespace helios::engine::common::tags;
 using namespace helios::runtime::world;
@@ -38,7 +38,7 @@ using namespace helios::platform::window::concepts;
 using namespace helios::platform::environment::concepts;
 using namespace helios::platform::lifecycle::commands;
 using namespace helios::ecs::components;
-using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::gameplay::gamestate::types;
 export namespace helios::platform::lifecycle::systems {
 
     /**

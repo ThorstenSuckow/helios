@@ -38,10 +38,10 @@ import helios.util.log;
 
 import helios.engine.common.tags.SystemRole;
 
-import helios.engine.mechanics.lifecycle.components;
+import helios.gameplay.lifecycle.components;
 
 using namespace helios::engine::modules::physics::collision::components;
-using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::gameplay::lifecycle::components;
 using namespace helios::ecs::components;
 #define HELIOS_LOG_SCOPE "helios::engine::modules::physics::systems::GridCollisionDetectionSystem"
 export namespace helios::engine::modules::physics::collision::systems {

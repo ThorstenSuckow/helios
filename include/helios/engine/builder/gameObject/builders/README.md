@@ -60,7 +60,7 @@ prototype.withMotion([](MotionBuilder& builder) {
 |--------|---------|
 | `helios.engine.builder.gameObject.builders.configs` | Config classes |
 | `helios.engine.modules` | Component implementations |
-| `helios.engine.mechanics` | Gameplay components |
+| `helios.gameplay` | Gameplay components |
 
 ---
 

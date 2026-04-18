@@ -7,12 +7,12 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.HealthConfig;
 
 
-import helios.engine.mechanics.health;
-import helios.engine.mechanics.match.components;
+import helios.gameplay.health;
+import helios.gameplay.match.components;
 
-using namespace helios::engine::mechanics::health::components;
-using namespace helios::engine::mechanics::match::components;
-using namespace helios::engine::mechanics::health::types;
+using namespace helios::gameplay::health::components;
+using namespace helios::gameplay::match::components;
+using namespace helios::gameplay::health::types;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 

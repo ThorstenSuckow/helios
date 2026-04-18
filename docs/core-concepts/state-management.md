@@ -250,7 +250,7 @@ stateManager->addStateListener(std::move(listener));
 
 ```cpp
 using namespace helios::engine::state::commands;
-using namespace helios::engine::mechanics::timing::types;
+using namespace helios::gameplay::timing::types;
 
 // Schedule a transition when a timer expires
 updateContext.queueCommand<DelayedStateCommand<MatchState>>(

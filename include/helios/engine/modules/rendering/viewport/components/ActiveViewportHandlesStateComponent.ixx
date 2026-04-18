@@ -12,11 +12,11 @@ export module helios.engine.modules.rendering.viewport.components.ActiveViewport
 import helios.ecs.types.EntityHandle;
 import helios.rendering.viewport.types.ViewportHandle;
 
-import helios.engine.mechanics.gamestate.types;
-import helios.engine.mechanics.match.types;
+import helios.gameplay.gamestate.types;
+import helios.gameplay.match.types;
 
-using namespace helios::engine::mechanics::gamestate::types;
-using namespace helios::engine::mechanics::match::types;
+using namespace helios::gameplay::gamestate::types;
+using namespace helios::gameplay::match::types;
 using namespace helios::rendering::viewport::types;
 export namespace helios::engine::modules::rendering::viewport::components {
 

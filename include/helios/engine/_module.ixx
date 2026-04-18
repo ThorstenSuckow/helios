@@ -9,7 +9,7 @@ export import helios.engine.core;
 export import helios.ecs;
 export import helios.runtime;
 export import helios.engine.modules;
-export import helios.engine.mechanics;
+export import helios.gameplay;
 export import helios.engine.tooling;
 export import helios.engine.builder;
 export import helios.engine.state;

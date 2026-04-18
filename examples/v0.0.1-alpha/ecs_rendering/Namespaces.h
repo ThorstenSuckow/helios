@@ -89,28 +89,28 @@ using namespace helios::platform::glfw::systems;
 using namespace helios::platform::opengl;
 
 // Mechanics: scoring, timing, combat
-using namespace helios::engine::mechanics::scoring;
-using namespace helios::engine::mechanics::scoring::systems;
-using namespace helios::engine::mechanics::scoring::types;
-using namespace helios::engine::mechanics::timing;
-using namespace helios::engine::mechanics::timing::systems;
-using namespace helios::engine::mechanics::combat::components;
-using namespace helios::engine::mechanics::combat::systems;
+using namespace helios::gameplay::scoring;
+using namespace helios::gameplay::scoring::systems;
+using namespace helios::gameplay::scoring::types;
+using namespace helios::gameplay::timing;
+using namespace helios::gameplay::timing::systems;
+using namespace helios::gameplay::combat::components;
+using namespace helios::gameplay::combat::systems;
 
 // Mechanics: spawn, bounds, damage, health, input, lifecycle
-using namespace helios::engine::mechanics::spawn::systems;
+using namespace helios::gameplay::spawn::systems;
 using namespace helios::runtime::spawn::types;
-using namespace helios::engine::mechanics::bounds::systems;
-using namespace helios::engine::mechanics::damage::systems;
-using namespace helios::engine::mechanics::health::systems;
-using namespace helios::engine::mechanics::health::types;
-using namespace helios::engine::mechanics::input::systems;
-using namespace helios::engine::mechanics::lifecycle::systems;
-using namespace helios::engine::mechanics::lifecycle::components;
-using namespace helios::engine::mechanics::health;
-using namespace helios::engine::mechanics::gamestate::types;
-using namespace helios::engine::mechanics::gamestate::systems;
-using namespace helios::engine::mechanics::match::types;
+using namespace helios::gameplay::bounds::systems;
+using namespace helios::gameplay::damage::systems;
+using namespace helios::gameplay::health::systems;
+using namespace helios::gameplay::health::types;
+using namespace helios::gameplay::input::systems;
+using namespace helios::gameplay::lifecycle::systems;
+using namespace helios::gameplay::lifecycle::components;
+using namespace helios::gameplay::health;
+using namespace helios::gameplay::gamestate::types;
+using namespace helios::gameplay::gamestate::systems;
+using namespace helios::gameplay::match::types;
 
 
 // Modules: physics

@@ -13,7 +13,7 @@ export module helios.engine.builder.gameObject.builders.configs.CollisionConfig;
 import helios.engine.modules.physics.collision.components;
 import helios.engine.modules.physics.collision.types;
 
-import helios.engine.mechanics.damage.components.DamageDealerComponent;
+import helios.gameplay.damage.components.DamageDealerComponent;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -182,7 +182,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
                 ) {
             ensureCollisionComponent(true);
 
-            gameObject_.template getOrAdd<helios::engine::mechanics::damage::components::DamageDealerComponent<Handle_type>>()
+            gameObject_.template getOrAdd<helios::gameplay::damage::components::DamageDealerComponent<Handle_type>>()
                         .setDamage(damageAmount, otherLayerId);
 
             return *this;

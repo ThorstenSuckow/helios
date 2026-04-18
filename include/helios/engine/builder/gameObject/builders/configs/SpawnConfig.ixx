@@ -7,7 +7,7 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.SpawnConfig;
 
 
-import helios.engine.mechanics.spawn.components;
+import helios.gameplay.spawn.components;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -45,7 +45,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnConfig& useSpawnProfile() {
-            gameObject_.template add<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent<Handle_type>>();
+            gameObject_.template add<helios::gameplay::spawn::components::SpawnedByProfileComponent<Handle_type>>();
 
             return *this;
         }
@@ -59,7 +59,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         SpawnConfig& trackEmitter() {
-            gameObject_.template add<helios::engine::mechanics::spawn::components::EmittedByComponent<Handle_type>>();
+            gameObject_.template add<helios::gameplay::spawn::components::EmittedByComponent<Handle_type>>();
 
             return *this;
         }

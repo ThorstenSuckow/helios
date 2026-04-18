@@ -20,7 +20,7 @@ import helios.runtime.world.GameWorldFwd;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.Session;
 
-import helios.engine.mechanics.gamestate.types;
+import helios.gameplay.gamestate.types;
 
 export namespace helios::runtime::gameloop {
 

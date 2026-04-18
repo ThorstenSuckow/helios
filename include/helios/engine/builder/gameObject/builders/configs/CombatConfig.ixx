@@ -8,9 +8,9 @@ export module helios.engine.builder.gameObject.builders.configs.CombatConfig;
 
 import helios.engine.modules.spatial.transform.components;
 
-import helios.engine.mechanics.damage.components;
+import helios.gameplay.damage.components;
 
-using namespace helios::engine::mechanics::damage::components;
+using namespace helios::gameplay::damage::components;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 

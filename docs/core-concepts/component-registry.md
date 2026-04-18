@@ -16,7 +16,7 @@ The registry structure is organized hierarchically:
 
 ```
 helios.engine.bootstrap
-├── helios.engine.mechanics.registry
+├── helios.gameplay.registry
 │   ├── scoring.registry
 │   ├── health.registry
 │   ├── spawn.registry

@@ -19,7 +19,7 @@ import helios.runtime.world.GameWorld;
 import helios.runtime.pooling.components.PrefabIdComponent;
 
 import helios.engine.modules;
-import helios.engine.mechanics;
+import helios.gameplay;
 import helios.util.Guid;
 import helios.engine.core.units;
 import helios.engine.common.types.PrefabId;
@@ -419,7 +419,7 @@ export namespace helios::engine::builder::gameObject {
              * @return Reference to this prototype for chaining.
              */
             GameObjectPrototype& asPlayerEntity() noexcept {
-                gameObject_.template getOrAdd<helios::engine::mechanics::match::components::PlayerComponent<Handle_type>>();
+                gameObject_.template getOrAdd<helios::gameplay::match::components::PlayerComponent<Handle_type>>();
                 gameWorld_.session().setPlayerEntityHandle(gameObject_.handle());
                 return *this;
             }

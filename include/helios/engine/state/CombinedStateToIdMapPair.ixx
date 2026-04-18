@@ -18,12 +18,12 @@ export module helios.engine.state.CombinedStateToIdMapPair;
 import helios.engine.state.StateToIdMap;
 
 import helios.engine.state.types;
-import helios.engine.mechanics.match.types;
+import helios.gameplay.match.types;
 
 import helios.core.types;
 
 using namespace helios::engine::state::types;
-using namespace helios::engine::mechanics::match::types;
+using namespace helios::gameplay::match::types;
 
 export namespace helios::engine::state {
 

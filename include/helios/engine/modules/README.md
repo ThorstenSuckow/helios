@@ -6,7 +6,7 @@ Domain-specific components and systems built on top of the ECS architecture.
 
 This module provides concrete game logic implementations using the composition-based component model. Components are stored in SparseSets and manipulated through the ECS View system.
 
-For gameplay mechanics (bounds, combat, spawn, input, health, scoring), see `helios.engine.mechanics`.
+For gameplay mechanics (bounds, combat, spawn, input, health, scoring), see `helios.gameplay`.
 
 ## Submodules
 
@@ -87,5 +87,5 @@ for (auto [go, move, collision, active] : gameWorld->view<
 <summary>Doxygen</summary><p>
 @namespace helios::engine::modules
 @brief Domain-specific components and systems.
-@details This namespace provides concrete game logic implementations built on top of the ECS architecture. It includes AI behavior, visual effects, physics systems (collision, motion), spatial transform components, scene graph integration, rendering components, and UI systems. For gameplay mechanics (combat, spawn, bounds, health, scoring), see `helios::engine::mechanics`.
+@details This namespace provides concrete game logic implementations built on top of the ECS architecture. It includes AI behavior, visual effects, physics systems (collision, motion), spatial transform components, scene graph integration, rendering components, and UI systems. For gameplay mechanics (combat, spawn, bounds, health, scoring), see `helios::gameplay`.
 </p></details>

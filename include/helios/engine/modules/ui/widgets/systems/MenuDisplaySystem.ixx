@@ -23,8 +23,8 @@ import helios.engine.modules.ui.widgets.components.MenuComponent;
 
 import helios.engine.state.CombinedStateToIdMapPair;
 
-import helios.engine.mechanics.gamestate.types;
-import helios.engine.mechanics.match.types;
+import helios.gameplay.gamestate.types;
+import helios.gameplay.match.types;
 
 import helios.engine.modules.rendering.model.components.ModelAabbComponent;
 import helios.math;
@@ -33,8 +33,8 @@ import helios.engine.common.tags.SystemRole;
 
 using namespace helios::engine::modules::ui::widgets::types;
 using namespace helios::engine::state;
-using namespace helios::engine::mechanics::gamestate::types;
-using namespace helios::engine::mechanics::match::types;
+using namespace helios::gameplay::gamestate::types;
+using namespace helios::gameplay::match::types;
 using namespace helios::ecs::types;
 using namespace helios::engine::modules::ui::widgets::components;
 using namespace helios::runtime::world;

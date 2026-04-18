@@ -12,9 +12,9 @@ module;
 export module helios.runtime.world.Session;
 
 
-import helios.engine.mechanics.lifecycle.components;
-import helios.engine.mechanics.gamestate.types;
-import helios.engine.mechanics.match.types;
+import helios.gameplay.lifecycle.components;
+import helios.gameplay.gamestate.types;
+import helios.gameplay.match.types;
 
 import helios.engine.state.types;
 import helios.engine.state.components;
@@ -23,14 +23,14 @@ import helios.engine.state.types.StateTransitionId;
 import helios.runtime.world.GameObject;
 import helios.ecs.types.EntityHandle;
 
-import helios.engine.mechanics.lifecycle.components;
+import helios.gameplay.lifecycle.components;
 
 import helios.rendering.viewport.types.ViewportHandle;
 
 import helios.engine.modules.rendering.viewport.components.ActiveViewportHandlesStateComponent;
 
-using namespace helios::engine::mechanics::match::types;
-using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::gameplay::match::types;
+using namespace helios::gameplay::gamestate::types;
 
 
 using namespace helios::engine::state::types;
@@ -39,7 +39,7 @@ using namespace helios::engine::state::components;
 using namespace helios::engine::modules::rendering::viewport::components;
 
 using namespace helios::rendering::viewport::types;
-using namespace helios::engine::mechanics::lifecycle::components;
+using namespace helios::gameplay::lifecycle::components;
 using namespace helios::runtime::world;
 export namespace helios::runtime::world {
 

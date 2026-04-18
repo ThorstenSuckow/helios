@@ -21,13 +21,13 @@ import helios.runtime.world.UpdateContext;
 
 import helios.engine.state.commands.DelayedStateCommand;
 
-import helios.engine.mechanics.timing.TimerManager;
-import helios.engine.mechanics.timing.types;
+import helios.gameplay.timing.TimerManager;
+import helios.gameplay.timing.types;
 
 using namespace helios::runtime::world;
 using namespace helios::engine::state::commands;
-using namespace helios::engine::mechanics::timing;
-using namespace helios::engine::mechanics::timing::types;
+using namespace helios::gameplay::timing;
+using namespace helios::gameplay::timing::types;
 
 import helios.engine.common.tags.CommandBufferRole;
 export namespace helios::runtime::messaging::command {

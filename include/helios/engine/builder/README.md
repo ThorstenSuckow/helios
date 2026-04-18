@@ -149,7 +149,7 @@ The builder module follows these principles:
 |--------|---------|
 | `helios.ecs` | GameObject, Component base classes |
 | `helios.engine.modules` | Component implementations used by configs |
-| `helios.engine.mechanics` | Gameplay-specific components |
+| `helios.gameplay` | Gameplay-specific components |
 
 ---
 

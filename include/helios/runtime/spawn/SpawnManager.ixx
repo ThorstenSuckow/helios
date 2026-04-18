@@ -20,7 +20,7 @@ import helios.runtime.spawn.events.SpawnPlanCommandExecutedEvent;
 
 import helios.runtime.spawn.scheduling.SpawnScheduler;
 
-import helios.engine.mechanics.spawn.components.EmittedByComponent;
+import helios.gameplay.spawn.components.EmittedByComponent;
 
 import helios.runtime.spawn.commands.SpawnCommand;
 import helios.runtime.spawn.commands.ScheduledSpawnPlanCommand;
@@ -42,7 +42,7 @@ import helios.runtime.spawn.types;
 import helios.runtime.world.GameObject;
 
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
-import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
+import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
 import helios.engine.modules.physics.collision.components.AabbColliderComponent;
 
@@ -195,7 +195,7 @@ export namespace helios::runtime::spawn {
 
                     auto* tsc = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
 
-                    auto* sbp = go->get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
+                    auto* sbp = go->get<helios::gameplay::spawn::components::SpawnedByProfileComponent>();
                     assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
                     auto* aabb = go->get<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
@@ -205,7 +205,7 @@ export namespace helios::runtime::spawn {
                     const auto& spawnContext =  scheduledSpawnPlanCommand.spawnContext();
 
                     const auto& emitter = spawnContext.emitterContext;
-                    auto* ebc = go->get<helios::engine::mechanics::spawn::components::EmittedByComponent>();
+                    auto* ebc = go->get<helios::gameplay::spawn::components::EmittedByComponent>();
                     if (emitter.has_value() && ebc) {
                         ebc->setSource(emitter.value().source);
                     }
@@ -271,14 +271,14 @@ export namespace helios::runtime::spawn {
                 assert(go && "Failed to acquire GameObject");
 
                 auto* tsc = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
-                auto* sbp = go->get<helios::engine::mechanics::spawn::components::SpawnedByProfileComponent>();
+                auto* sbp = go->get<helios::gameplay::spawn::components::SpawnedByProfileComponent>();
                 assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
                 auto* aabb = go->get<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
                 assert(aabb && "unexpected missing AabbColliderComponent");
 
                 const auto& emitter = spawnContext.emitterContext;
-                auto* ebc = go->get<helios::engine::mechanics::spawn::components::EmittedByComponent>();
+                auto* ebc = go->get<helios::gameplay::spawn::components::EmittedByComponent>();
                 if (emitter.has_value() && ebc) {
                     ebc->setSource(emitter.value().source);
                 }

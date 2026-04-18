@@ -11,9 +11,11 @@ import helios.engine.mechanics.timing.GameTimer;
 import helios.engine.mechanics.timing.TimerManager;
 
 import helios.engine.state.Bindings;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+
 
 import helios.engine.runtime.world.UpdateContext;
+import helios.engine.runtime.messaging.command.NullCommandBuffer;
+import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -24,6 +26,9 @@ using namespace helios::engine::mechanics::timing;
 
 using namespace helios::engine::mechanics::timing::types;
 using namespace helios::engine::mechanics::timing::commands;
+using namespace helios::engine::runtime::world;
+using namespace helios::engine::runtime::messaging::command;
+using namespace helios::engine::common::concepts;
 
 export namespace helios::engine::mechanics::timing::systems {
 
@@ -36,6 +41,8 @@ export namespace helios::engine::mechanics::timing::systems {
      * @see TimerManager
      * @see GameTimer
      */
+    template<typename TCommandBuffer = NullCommandBuffer>
+    requires IsCommandBufferLike<TCommandBuffer>
     class GameTimerUpdateSystem {
 
         /**
@@ -71,7 +78,7 @@ export namespace helios::engine::mechanics::timing::systems {
 
                     if (gameTimer.duration() != 0.0f && gameTimer.elapsed() >= gameTimer.duration()) {
                         auto context = TimerControlContext{gameTimer.gameTimerId(), TimerState::Finished};
-                        updateContext.queueCommand<TimerControlCommand>(context);
+                        updateContext.queueCommand<TCommandBuffer, TimerControlCommand>(context);
                     }
                 }
             }

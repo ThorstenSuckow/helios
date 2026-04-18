@@ -4,10 +4,13 @@
  */
 module;
 
+
 #include <cassert>
+#include <iostream>
+#include <ostream>
 #include <tuple>
-#include <vector>
 #include <utility>
+#include <vector>
 
 export module helios.engine.runtime.messaging.command.TypedCommandBuffer;
 
@@ -15,8 +18,6 @@ import helios.engine.state.components;
 
 import helios.engine.runtime.world.GameWorld;
 import helios.engine.runtime.world.UpdateContext;
-
-import helios.engine.runtime.messaging.command.CommandBuffer;
 
 import helios.engine.state.commands.DelayedStateCommand;
 
@@ -28,6 +29,7 @@ using namespace helios::engine::state::commands;
 using namespace helios::engine::mechanics::timing;
 using namespace helios::engine::mechanics::timing::types;
 
+import helios.engine.common.tags.CommandBufferRole;
 export namespace helios::engine::runtime::messaging::command {
 
     /**
@@ -268,6 +270,7 @@ export namespace helios::engine::runtime::messaging::command {
                    }
 
                } else {
+                   std::cerr << "Command type is not executable" << __FUNCSIG__ << std::endl;
                    assert(false &&  "Command type is not executable");
                }
 
@@ -279,6 +282,8 @@ export namespace helios::engine::runtime::messaging::command {
         }
 
     public:
+
+        using EngineRoleTag = helios::engine::common::tags::CommandBufferRole;
 
         /**
          * @brief Enqueues a command of the specified type.

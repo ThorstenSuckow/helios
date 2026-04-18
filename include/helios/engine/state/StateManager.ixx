@@ -20,9 +20,8 @@ import helios.engine.state.components;
 import helios.engine.state.commands;
 import helios.engine.state.types;
 
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
-import helios.engine.runtime.messaging.command;
 
 import helios.engine.runtime.world.UpdateContext;
 
@@ -35,9 +34,11 @@ import helios.core.types;
 import helios.util.Guid;
 import helios.engine.common;
 
-using namespace helios::engine::state::types;
-using namespace helios::engine::state::commands;
-using namespace helios::engine::runtime::messaging::command;
+using helios::engine::state::types::StateTransitionIdType;
+using helios::engine::state::types::StateTransitionContext;
+using helios::engine::state::types::StateTransitionRule;
+using helios::engine::state::commands::StateCommand;
+using helios::engine::state::commands::DelayedStateCommand;
 
 export namespace helios::engine::state {
 

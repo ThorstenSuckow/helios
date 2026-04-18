@@ -88,7 +88,7 @@ gameStateManager.addStateListener(
 ### Requesting Transitions
 
 ```cpp
-updateContext.queueCommand<StateCommand<GameState>>(
+updateContext.queueCommand<EngineCommandBuffer, StateCommand<GameState>>(
     StateTransitionRequest<GameState>{
         GameState::Running,
         GameStateTransitionId::Pause
@@ -114,7 +114,7 @@ updateContext.queueCommand<StateCommand<GameState>>(
 `DelayedStateCommand<StateType>` pairs a `StateTransitionRequest` with a `GameTimerId`. On submission, the manager extracts the request and processes it as a regular `StateCommand`:
 
 ```cpp
-updateContext.queueCommand<DelayedStateCommand<MatchState>>(
+updateContext.queueCommand<EngineCommandBuffer, DelayedStateCommand<MatchState>>(
     StateTransitionRequest<MatchState>{
         MatchState::Countdown,
         MatchStateTransitionId::PlayerSpawnRequest

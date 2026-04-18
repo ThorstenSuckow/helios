@@ -70,6 +70,12 @@ export namespace helios::engine::state::types {
 
     public:
 
+        constexpr StateTransitionRule() :
+            from_(static_cast<StateType>(0)),
+            transitionId_(static_cast<StateTransitionIdType>(0)),
+            to_(static_cast<StateType>(0))
+        {}
+
         /**
          * @brief Constructs a transition rule.
          *

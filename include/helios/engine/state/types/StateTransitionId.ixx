@@ -10,7 +10,6 @@ module;
 export module helios.engine.state.types.StateTransitionId;
 
 
-
 export namespace helios::engine::state::types {
 
     /**

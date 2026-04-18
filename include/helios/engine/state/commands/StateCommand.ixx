@@ -12,7 +12,7 @@ export module helios.engine.state.commands.StateCommand;
 
 import helios.engine.state.Bindings;
 
-import helios.engine.state.types;
+import helios.engine.state.types.StateTransitionRequest;
 
 using namespace helios::engine::state::types;
 

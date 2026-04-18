@@ -13,7 +13,7 @@ import helios.engine.mechanics.timing.types.GameTimerId;
 
 import helios.engine.state.Bindings;
 
-import helios.engine.state.types;
+import helios.engine.state.types.StateTransitionRequest;
 
 using namespace helios::engine::state::types;
 using namespace helios::engine::mechanics::timing::types;

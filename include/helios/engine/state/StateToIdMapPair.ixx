@@ -19,10 +19,8 @@ import helios.engine.state.StateToIdMap;
 import helios.engine.state.types;
 import helios.engine.mechanics.match.types;
 
-import helios.engine.common.types.ViewportId;
 import helios.core.types;
 
-using namespace helios::engine::common::types;
 using namespace helios::engine::state::types;
 using namespace helios::engine::mechanics::match::types;
 

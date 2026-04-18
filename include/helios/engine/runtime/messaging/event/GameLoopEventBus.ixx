@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.runtime.messaging.event.GameLoopEventBus;
 
-import helios.core.data.TypeIndexer;
+import helios.core.TypeIndexer;
 import helios.core.container.buffer.TypeIndexedDoubleBuffer;
 
 
@@ -98,7 +98,7 @@ export namespace helios::engine::runtime::messaging::event {
      * @see GameLoop - Manages event bus lifecycle and commit points
      */
     using GameLoopEventBus = helios::core::container::buffer::TypeIndexedDoubleBuffer<
-        helios::core::data::TypeIndexer<GameLoopEventBusGroup>
+        helios::core::TypeIndexer<GameLoopEventBusGroup>
     >;
 
 

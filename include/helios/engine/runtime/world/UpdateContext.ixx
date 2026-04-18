@@ -5,29 +5,27 @@
 module;
 
 #include <span>
-#include <optional>
+#include <cassert>
 
 export module helios.engine.runtime.world.UpdateContext;
 
 import helios.input.InputSnapshot;
-import helios.rendering.ViewportSnapshot;
+import helios.rendering.viewport.ViewportSnapshot;
 
 import helios.engine.runtime.world.Level;
 import helios.engine.runtime.messaging.event.GameLoopEventBus;
 
 import helios.engine.runtime.world.ResourceRegistry;
 
-import helios.engine.ecs.EntityResolver;
-import helios.engine.ecs.GameObject;
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.EntityResolver;
+import helios.engine.runtime.world.RuntimeEnvironment;
+import helios.ecs.types.EntityHandle;
 
-import helios.engine.ecs.View;
+import helios.ecs.View;
 
-export namespace helios::engine::runtime::messaging::command  {
-    class EngineCommandBuffer;
-}
+import helios.engine.common.concepts.IsResourceHandle;
 
-using namespace helios::engine::runtime::messaging::command;
+import helios.engine.runtime.world.EngineWorld;
 
 export namespace helios::engine::runtime::world {
 
@@ -37,37 +35,19 @@ export namespace helios::engine::runtime::world {
     /**
      * @brief Per-frame context passed to systems during game loop updates.
      *
-     * @details UpdateContext bundles all state that systems need for a single
-     * frame update: timing, input, resource access, entity resolution, event
-     * buses, and the active level. It is constructed by the GameLoop each
-     * frame and passed to every System::update() call.
+     * @details UpdateContext bundles frame-scoped data and services used by
+     * system updates: timing values, immutable input/viewport snapshots,
+     * session/runtime environment access, typed entity access via `EngineWorld`,
+     * event-bus read/write channels, and command-buffer submission.
      *
-     * ## Resource Access
-     *
-     * - `queueCommand<T>(args...)` — submits a command to the EngineCommandBuffer
-     * - `session()` — cross-frame state (tracked game/match states)
-     * - `level()` — current Level with arena bounds
-     *
-     * ## Entity Access
-     *
-     * - `find(handle)` — resolves an EntityHandle to a GameObject (validates
-     *   the handle's version via the EntityResolver)
-     * - `entityResolver()` — direct access to the callable resolver
-     *
-     * ## Event Propagation
-     *
-     * | Level | Push | Read | Scope |
-     * |-------|------|------|-------|
-     * | Pass  | `pushPass()` | `readPass()` | Within same phase, after commit point |
-     * | Phase | `pushPhase()` | `readPhase()` | Across phases within same frame |
-     * | Frame | `pushFrame()` | `readFrame()` | Across frames |
+     * Commands are submitted with `queueCommand<TCmdBuffer, TCommand>(...)`
+     * and are flushed at configured game-loop commit points.
      *
      * @see GameLoop
-     * @see ResourceRegistry
-     * @see EngineCommandBuffer
      * @see Session
-     * @see EntityResolver
-     * @see InputSnapshot
+     * @see RuntimeEnvironment
+     * @see EngineWorld
+     * @see ResourceRegistry
      */
     class UpdateContext {
 
@@ -91,6 +71,11 @@ export namespace helios::engine::runtime::world {
          * @brief Reference to the current game session for state tracking.
          */
         helios::engine::runtime::world::Session& session_;
+
+        /**
+         * @brief Reference to the current platform entity.
+         */
+        helios::engine::runtime::world::RuntimeEnvironment& runtimeEnvironment_;
 
         /**
          * @brief Sink for pushing phase-level events during update.
@@ -135,57 +120,59 @@ export namespace helios::engine::runtime::world {
         /**
          * @brief Immutable snapshot of all viewport states for this frame.
          */
-        std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots_;
+        std::span<const helios::rendering::viewport::ViewportSnapshot> viewportSnapshots_;
 
         /**
-         * @brief Reference to the ResourceRegistry for O(1) resource lookup.
+         * @brief Reference to the ResourceRegistry used for command-buffer lookup.
          */
         helios::engine::runtime::world::ResourceRegistry& resourceRegistry_;
 
-        /**
-         * @brief Callable for resolving EntityHandles to GameObjects.
-         */
-        helios::engine::ecs::EntityResolver entityResolver_;
 
         /**
          * @brief Pointer to the active Level, or nullptr if no level is loaded.
          */
         const Level* level_;
 
+        /**
+         * @brief Aggregate typed world used for domain-routed ECS operations.
+         */
+        helios::engine::runtime::world::EngineWorld& engineWorld_;
     public:
 
 
         /**
          * @brief Constructs an UpdateContext with all per-frame dependencies.
          *
-         * @param resourceRegistry Reference to the ResourceRegistry for resource lookup.
-         * @param entityResolver Callable for resolving EntityHandles to GameObjects.
-         * @param session Reference to the current game session.
+         * @param resourceRegistry Reference to the resource registry.
+         * @param session Reference to current session state.
+         * @param runtimeEnvironment Reference to runtime-environment state.
          * @param deltaTime Time since last frame in seconds.
-         * @param totalTime Accumulated time since the first frame in seconds.
-         * @param phaseEventBus Reference to the phase-level event bus.
-         * @param passEventBus Reference to the pass-level event bus.
-         * @param frameEventBus Reference to the frame-level event bus.
-         * @param inputSnapshot Immutable input state for this frame.
-         * @param viewportSnapshots Immutable snapshot of viewport states.
-         * @param level Pointer to the active Level, or nullptr.
+         * @param totalTime Accumulated time in seconds.
+         * @param phaseEventBus Phase-level event bus.
+         * @param passEventBus Pass-level event bus.
+         * @param frameEventBus Frame-level event bus.
+         * @param inputSnapshot Immutable frame input snapshot.
+         * @param viewportSnapshots Immutable frame viewport snapshot set.
+         * @param level Active level pointer, or nullptr.
+         * @param engineWorld Aggregate typed world for entity operations.
          */
         UpdateContext(
             helios::engine::runtime::world::ResourceRegistry& resourceRegistry,
-            helios::engine::ecs::EntityResolver entityResolver,
             helios::engine::runtime::world::Session& session,
+            helios::engine::runtime::world::RuntimeEnvironment& runtimeEnvironment,
             const float deltaTime,
             const float totalTime,
             helios::engine::runtime::messaging::event::GameLoopEventBus& phaseEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& passEventBus,
             helios::engine::runtime::messaging::event::GameLoopEventBus& frameEventBus,
             const helios::input::InputSnapshot& inputSnapshot,
-            std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots,
-            const Level* level
+            std::span<const helios::rendering::viewport::ViewportSnapshot> viewportSnapshots,
+            const Level* level,
+            EngineWorld& engineWorld
         ) :
         resourceRegistry_(resourceRegistry),
-        entityResolver_(entityResolver),
         session_(session),
+        runtimeEnvironment_(runtimeEnvironment),
         deltaTime_(deltaTime),
         totalTime_(totalTime),
         phaseEventSink_(phaseEventBus.writeSink()),
@@ -196,7 +183,8 @@ export namespace helios::engine::runtime::world {
         frameEventSource_(frameEventBus.readSource()),
         inputSnapshot_(inputSnapshot),
         viewportSnapshots_(viewportSnapshots),
-        level_(level)
+        level_(level),
+        engineWorld_(engineWorld)
         {
 
         }
@@ -206,7 +194,7 @@ export namespace helios::engine::runtime::world {
          *
          * @return A span of const ViewportSnapshot objects.
          */
-        [[nodiscard]] std::span<const helios::rendering::ViewportSnapshot> viewportSnapshots() const noexcept {
+        [[nodiscard]] std::span<const helios::rendering::viewport::ViewportSnapshot> viewportSnapshots() const noexcept {
             return viewportSnapshots_;
         }
 
@@ -239,28 +227,19 @@ export namespace helios::engine::runtime::world {
         }
 
         /**
-         * @brief Resolves an EntityHandle to a GameObject.
+         * @brief Resolves an entity facade by typed handle.
          *
-         * @details Validates the handle via the EntityResolver and returns
-         * a lightweight GameObject wrapper if the entity is still alive.
+         * @tparam THandle Handle type.
          *
-         * @param handle The entity handle to resolve.
+         * @param handle Entity handle to resolve.
          *
-         * @return A GameObject if the handle is valid, std::nullopt otherwise.
+         * @return Domain-specific entity facade.
          */
-        [[nodiscard]] std::optional<helios::engine::ecs::GameObject> find(helios::engine::ecs::EntityHandle handle) const noexcept {
-            return entityResolver_(handle);
+        template<typename THandle>
+        [[nodiscard]] auto find(const THandle handle) noexcept {
+            return engineWorld_.template find<THandle>(handle);
         }
 
-
-        /**
-         * @brief Returns the EntityResolver for direct handle validation.
-         *
-         * @return Reference to the EntityResolver.
-         */
-        [[nodiscard]] helios::engine::ecs::EntityResolver& entityResolver() noexcept {
-            return entityResolver_;
-        }
 
         /**
          * @brief Returns the active Level.
@@ -273,19 +252,19 @@ export namespace helios::engine::runtime::world {
 
 
         /**
-         * @brief Submits a command to the EngineCommandBuffer.
+         * @brief Submits a command to a typed command buffer.
          *
-         * @details Constructs and enqueues a command of type T. The command
-         * will be executed during the next commit point (phase or pass boundary).
-         *
-         * @tparam T The command type to submit.
-         * @tparam Args Constructor argument types for T.
+         * @tparam TCmdBuffer Target command-buffer type.
+         * @tparam T Command type to enqueue.
+         * @tparam Args Command constructor argument types.
          *
          * @param args Arguments forwarded to the command constructor.
          */
-        template<typename T, typename ...Args>
+        template<typename TCmdBuffer, typename T, typename ...Args>
         void queueCommand(Args&&...args) const noexcept {
-            resourceRegistry_.tryGet<EngineCommandBuffer>()->add<T>(std::forward<Args>(args)...);
+            auto* cmdBuffer = resourceRegistry_.tryGet<TCmdBuffer>();
+            assert(cmdBuffer && "Command buffer not found in registry");
+            cmdBuffer->template add<T>(std::forward<Args>(args)...);
         }
 
         /**
@@ -297,6 +276,14 @@ export namespace helios::engine::runtime::world {
             return session_;
         }
 
+        /**
+         * @brief Returns the runtime environment for platform/runtime readiness state.
+         *
+         * @return Reference to runtime environment.
+         */
+        [[nodiscard]] helios::engine::runtime::world::RuntimeEnvironment& runtimeEnvironment() const noexcept {
+            return runtimeEnvironment_;
+        }
 
         /**
          * @brief Pushes an event to the pass-level event bus.
@@ -423,30 +410,20 @@ export namespace helios::engine::runtime::world {
 
 
         /**
-         * @brief Creates a View for querying entities with the given component types.
+         * @brief Builds a typed ECS view for a handle domain and component set.
          *
-         * @details Convenience shortcut that avoids accessing the GameWorld
-         * directly. Delegates to the EntityManager owned by the
-         * EntityResolver.
+         * @tparam THandle Handle domain type.
+         * @tparam Components Component types to include.
          *
-         * @tparam Components The component types to query.
-         *
-         * @return A View over all entities possessing every requested component.
-         *
-         * @see helios::engine::ecs::View
+         * @return Domain-specific view.
          */
-        template <typename... Components>
+        template <typename THandle, typename... Components>
         [[nodiscard]] auto view() {
-            return helios::engine::ecs::View<Components...>(entityResolver_.em);
+            return engineWorld_.view<THandle, Components...>();
         }
 
-        /**
-         * @copydoc view()
-         */
-        template <typename... Components>
-        [[nodiscard]] auto view() const {
-            return helios::engine::ecs::View<const Components...>(entityResolver_.em);
-        }
+
 
     };
 }
+

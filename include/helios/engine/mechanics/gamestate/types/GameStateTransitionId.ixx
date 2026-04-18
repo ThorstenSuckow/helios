@@ -26,6 +26,8 @@ export namespace helios::engine::mechanics::gamestate::types {
 
         WarmupRequest,
 
+        WarmupDoneSignal,
+
         ReadyMatchRequest,
 
         StartMatchRequest,

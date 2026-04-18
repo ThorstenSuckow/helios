@@ -17,11 +17,11 @@ import helios.math.types;
 import helios.rendering.RenderingDevice;
 import helios.rendering.RenderQueue;
 import helios.rendering.LegacyRenderPass;
-import helios.rendering.mesh.PrimitiveType;
-import helios.rendering.mesh.MeshConfig;
+import helios.rendering.mesh.types.PrimitiveType;
+import helios.rendering.mesh.types.MeshConfig;
 import helios.rendering.ClearFlags;
-import helios.rendering.RenderTarget;
-import helios.rendering.Viewport;
+import helios.rendering.framebuffer.Framebuffer;
+import helios.rendering.viewport.Viewport;
 
 import helios.rendering.text.TextRenderer;
 import helios.rendering.text.FontResourceProvider;
@@ -150,15 +150,15 @@ export namespace helios::ext::opengl::rendering {
 
             const auto& viewport = renderPass.viewport();
 
-            assert(viewport.renderTarget() && "Unexpected missing render target for viewport");
+            assert(viewport.framebuffer() && "Unexpected missing render target for viewport");
 
-            const helios::rendering::RenderTarget& renderTarget = *(viewport.renderTarget());
+            const helios::rendering::framebuffer::Framebuffer& framebuffer = *(viewport.framebuffer());
             const auto viewportBounds = viewport.bounds();
             const auto col = viewport.clearColor();
-            glViewport(static_cast<int>(renderTarget.width() * viewportBounds[0]),
-                       static_cast<int>(renderTarget.height() * viewportBounds[1]),
-                       static_cast<int>(renderTarget.width() * viewportBounds[2]),
-                       static_cast<int>(renderTarget.height() * viewportBounds[3]));
+            glViewport(static_cast<int>(framebuffer.width() * viewportBounds[0]),
+                       static_cast<int>(framebuffer.height() * viewportBounds[1]),
+                       static_cast<int>(framebuffer.width() * viewportBounds[2]),
+                       static_cast<int>(framebuffer.height() * viewportBounds[3]));
 
 
             // this is equally important for the GlpyhTextRenderer

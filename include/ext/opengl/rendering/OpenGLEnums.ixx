@@ -5,8 +5,9 @@ module;
 
 export module helios.ext.opengl.rendering.OpenGLEnumMapper;
 
-import helios.rendering.mesh.PrimitiveType;
+import helios.rendering.mesh.types.PrimitiveType;
 
+using namespace helios::rendering::mesh::types;
 export namespace helios::ext::opengl::rendering::OpenGLEnumMapper {
 
     /**
@@ -38,21 +39,21 @@ export namespace helios::ext::opengl::rendering::OpenGLEnumMapper {
      *
      * @note This function is marked `[[nodiscard]]` to encourage proper usage of the return value.
      */
-    [[nodiscard]] GLenum toOpenGL(helios::rendering::mesh::PrimitiveType primitiveType) noexcept {
+    [[nodiscard]] GLenum toOpenGL(PrimitiveType primitiveType) noexcept {
         switch (primitiveType) {
-            case helios::rendering::mesh::PrimitiveType::Points:
+            case PrimitiveType::Points:
                 return GL_POINTS;
-            case helios::rendering::mesh::PrimitiveType::Lines:
+            case PrimitiveType::Lines:
                 return GL_LINES;
-            case helios::rendering::mesh::PrimitiveType::LineLoop:
+            case PrimitiveType::LineLoop:
                 return GL_LINE_LOOP;
-            case helios::rendering::mesh::PrimitiveType::LineStrip:
+            case PrimitiveType::LineStrip:
                 return GL_LINE_STRIP;
-            case helios::rendering::mesh::PrimitiveType::Triangles:
+            case PrimitiveType::Triangles:
                 return GL_TRIANGLES;
-            case helios::rendering::mesh::PrimitiveType::TriangleStrip:
+            case PrimitiveType::TriangleStrip:
                 return GL_TRIANGLE_STRIP;
-            case helios::rendering::mesh::PrimitiveType::TriangleFan:
+            case PrimitiveType::TriangleFan:
                 return GL_TRIANGLE_FAN;
             default:
                 return GL_TRIANGLES;

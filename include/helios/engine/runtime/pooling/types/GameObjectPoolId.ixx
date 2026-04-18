@@ -8,9 +8,9 @@ module;
 
 export module helios.engine.runtime.pooling.types.GameObjectPoolId;
 
-import helios.core.algorithms;
+import helios.core.types.FuncDefs;
 import helios.core.types;
-import helios.core.data;
+import helios.core.types.StrongId;
 
 export namespace helios::engine::runtime::pooling::types {
 
@@ -25,11 +25,11 @@ export namespace helios::engine::runtime::pooling::types {
      * @details Provides type-safety when working with multiple object pools.
      * Uses FNV-1a hashing for compile-time string-based construction.
      *
-     * @see helios::core::data::StrongId
+     * @see helios::core::types::StrongId
      * @see SpawnProfileId
      * @see SpawnRuleId
      */
-    using GameObjectPoolId = helios::core::data::StrongId<GameObjectPoolIdTag, uint32_t>;
+    using GameObjectPoolId = helios::core::types::StrongId<GameObjectPoolIdTag>;
 
 }
 

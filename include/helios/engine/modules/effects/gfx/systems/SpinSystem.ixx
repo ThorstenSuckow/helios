@@ -19,7 +19,7 @@ import helios.engine.modules.effects.gfx.components.SpinComponent;
 import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
 import helios.engine.modules.spatial.transform.components.RotationStateComponent;
 
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -33,6 +33,7 @@ export namespace helios::engine::modules::physics::motion::systems {
      * accumulated rotation angle based on the spin speed and delta time.
      * The updated rotation state is then written to the RotationStateComponent.
      */
+    template<typename THandle>
     class SpinSystem {
 
         /**
@@ -53,9 +54,10 @@ export namespace helios::engine::modules::physics::motion::systems {
 
 
             for (auto [entity, sc, rsc, active] : updateContext.view<
-                helios::engine::modules::effects::gfx::components::SpinComponent,
-                helios::engine::modules::spatial::transform::components::RotationStateComponent,
-                helios::engine::mechanics::lifecycle::components::Active
+                THandle,
+                helios::engine::modules::effects::gfx::components::SpinComponent<THandle>,
+                helios::engine::modules::spatial::transform::components::RotationStateComponent<THandle>,
+                helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
                 float delta = updateContext.deltaTime();

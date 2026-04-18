@@ -15,14 +15,12 @@ import helios.engine.runtime.gameloop.Pass;
 
 import helios.engine.runtime.world.SystemRegistry;
 
+
+import helios.engine.runtime.world.GameWorldFwd;
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.Session;
 
 import helios.engine.mechanics.gamestate.types;
-
-export namespace helios::engine::modules {
-    class GameWorld;
-}
 
 export namespace helios::engine::runtime::gameloop {
 

@@ -68,7 +68,7 @@ systemRegistry.add<StateToViewportPolicyUpdateSystem>(
 |--------|---------|
 | `helios.rendering.viewport.Viewport` | Low-level viewport definition |
 | `helios.gameplay.gamestate` | Game state management |
-| `helios.gameplay.match` | Match state management |
+| `helios.gameplay.matchstate` | Match state management |
 | `helios.runtime.world.Session` | Session state storage |
 
 ---

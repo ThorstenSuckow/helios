@@ -11,8 +11,8 @@ module;
 
 export module helios.engine.modules.ui.binding.systems.Lives2UiTextUpdateSystem;
 
-import helios.gameplay.match.components;
-import helios.gameplay.match.types;
+import helios.gameplay.matchstate.components;
+import helios.gameplay.matchstate.types;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
@@ -23,8 +23,8 @@ import helios.engine.modules.ui.layout;
 
 import helios.ecs.components.Active;
 
-using namespace helios::gameplay::match::components;
-using namespace helios::gameplay::match::types;
+using namespace helios::gameplay::matchstate::components;
+using namespace helios::gameplay::matchstate::types;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -53,7 +53,7 @@ export namespace helios::engine::modules::ui::binding::systems {
 
             for (auto [entity, lbc, dfc, txt, active] : updateContext.view<
                 THandle,
-                helios::gameplay::match::components::LivesBindingComponent<THandle>,
+                helios::gameplay::matchstate::components::LivesBindingComponent<THandle>,
                 helios::engine::modules::ui::layout::components::NumberFormatterComponent<THandle>,
                 helios::engine::modules::ui::widgets::components::UiTextComponent<THandle>,
                 helios::ecs::components::Active<THandle>

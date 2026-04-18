@@ -10,7 +10,7 @@ export module helios.engine.builder.gameObject.builders.configs.ObserverConfig;
 
 
 
-import helios.gameplay.match.components;
+import helios.gameplay.matchstate.components;
 
 import helios.gameplay.scoring.components;
 import helios.gameplay.scoring.types;
@@ -90,12 +90,12 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         ObserverConfig& lives(const Entity gameObject) {
 
             auto* loc = gameObject_.get<
-                helios::gameplay::match::components::LivesBindingComponent<Handle_type>
+                helios::gameplay::matchstate::components::LivesBindingComponent<Handle_type>
             >();
 
             assert(!loc && "LivesBindingComponent already available.");
 
-            gameObject_.template add<helios::gameplay::match::components::LivesBindingComponent<Handle_type>>(
+            gameObject_.template add<helios::gameplay::matchstate::components::LivesBindingComponent<Handle_type>>(
                 gameObject.handle()
             );
             return *this;

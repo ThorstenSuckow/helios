@@ -27,7 +27,7 @@ import helios.runtime.messaging.event.GameLoopEventBus;
 import helios.engine.state.Bindings;
 
 import helios.gameplay.gamestate.types;
-import helios.gameplay.match.types;
+import helios.gameplay.matchstate.types;
 
 import helios.runtime.gameloop.CommitPoint;
 import helios.runtime.gameloop.Phase;

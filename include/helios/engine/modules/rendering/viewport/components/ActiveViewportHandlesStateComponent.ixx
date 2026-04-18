@@ -13,10 +13,10 @@ import helios.ecs.types.EntityHandle;
 import helios.rendering.viewport.types.ViewportHandle;
 
 import helios.gameplay.gamestate.types;
-import helios.gameplay.match.types;
+import helios.gameplay.matchstate.types;
 
 using namespace helios::gameplay::gamestate::types;
-using namespace helios::gameplay::match::types;
+using namespace helios::gameplay::matchstate::types;
 using namespace helios::rendering::viewport::types;
 export namespace helios::engine::modules::rendering::viewport::components {
 

@@ -17,5 +17,5 @@ export import helios.gameplay.damage;
 export import helios.gameplay.health;
 export import helios.gameplay.scoring;
 export import helios.gameplay.gamestate;
-export import helios.gameplay.match;
+export import helios.gameplay.matchstate;
 export import helios.gameplay.timing;

@@ -15,12 +15,12 @@ export module helios.engine.state.StateToIdMap;
 
 
 import helios.engine.state.types;
-import helios.gameplay.match.types;
+import helios.gameplay.matchstate.types;
 
 import helios.core.types;
 
 using namespace helios::engine::state::types;
-using namespace helios::gameplay::match::types;
+using namespace helios::gameplay::matchstate::types;
 
 export namespace helios::engine::state {
 

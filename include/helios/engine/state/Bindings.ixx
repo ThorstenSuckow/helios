@@ -9,10 +9,10 @@ export module helios.engine.state.Bindings;
 export import helios.engine.state.types.StateTransitionId;
 
 export import helios.gameplay.gamestate.types.GameState;
-export import helios.gameplay.match.types.MatchState;
+export import helios.gameplay.matchstate.types.MatchState;
 
 export import helios.gameplay.gamestate.types.GameStateTransitionId;
-export import helios.gameplay.match.types.MatchStateTransitionId;
+export import helios.gameplay.matchstate.types.MatchStateTransitionId;
 
 export namespace helios::engine::state::types {
 
@@ -42,8 +42,8 @@ export namespace helios::engine::state::types {
      * @see MatchStateTransitionId
      */
     template<>
-    struct StateTransitionId<helios::gameplay::match::types::MatchState> {
-        using Type = helios::gameplay::match::types::MatchStateTransitionId;
+    struct StateTransitionId<helios::gameplay::matchstate::types::MatchState> {
+        using Type = helios::gameplay::matchstate::types::MatchStateTransitionId;
     };
 
 }

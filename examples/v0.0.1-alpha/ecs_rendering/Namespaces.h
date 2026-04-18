@@ -110,7 +110,7 @@ using namespace helios::gameplay::lifecycle::components;
 using namespace helios::gameplay::health;
 using namespace helios::gameplay::gamestate::types;
 using namespace helios::gameplay::gamestate::systems;
-using namespace helios::gameplay::match::types;
+using namespace helios::gameplay::matchstate::types;
 
 
 // Modules: physics

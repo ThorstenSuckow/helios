@@ -23,7 +23,7 @@ import helios.platform;
 import helios.gameplay.lifecycle;
 import helios.gameplay.timing;
 import helios.gameplay.gamestate;
-import helios.gameplay.match;
+import helios.gameplay.matchstate;
 
 import helios.gameplay.registry;
 import helios.engine.modules.registry;
@@ -149,12 +149,12 @@ export namespace helios::engine::bootstrap {
         gameWorld->registerManager<helios::gameplay::gamestate::GameStateManager>(
         helios::gameplay::gamestate::rules::DefaultGameStateTransitionRules::rules());
 
-        gameWorld->registerManager<helios::gameplay::match::MatchStateManager>(
-            helios::gameplay::match::rules::DefaultMatchStateTransitionRules::rules());
+        gameWorld->registerManager<helios::gameplay::matchstate::MatchStateManager>(
+            helios::gameplay::matchstate::rules::DefaultMatchStateTransitionRules::rules());
         gameWorld->registerManager<helios::gameplay::timing::TimerManager>();
 
         gameWorld->session().trackState<helios::gameplay::gamestate::types::GameState>();
-        gameWorld->session().trackState<helios::gameplay::match::types::MatchState>();
+        gameWorld->session().trackState<helios::gameplay::matchstate::types::MatchState>();
 
         gameWorld->registerCommandBuffer<RenderCommandBuffer>();
         gameWorld->registerCommandBuffer<EngineCommandBuffer>();

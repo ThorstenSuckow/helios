@@ -26,8 +26,8 @@ import helios.runtime.spawn;
 import helios.gameplay.health.events;
 import helios.gameplay.health.types;
 
-import helios.gameplay.match.components;
-import helios.gameplay.match.events;
+import helios.gameplay.matchstate.components;
+import helios.gameplay.matchstate.events;
 
 import helios.gameplay.health;
 
@@ -37,8 +37,8 @@ using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::engine::common::concepts;
 
-using namespace helios::gameplay::match::components;
-using namespace helios::gameplay::match::events;
+using namespace helios::gameplay::matchstate::components;
+using namespace helios::gameplay::matchstate::events;
 using namespace helios::gameplay::health::types;
 using namespace helios::gameplay::health::events;
 using namespace helios::gameplay::spawn::components;

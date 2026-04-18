@@ -8,10 +8,10 @@ export module helios.engine.builder.gameObject.builders.configs.HealthConfig;
 
 
 import helios.gameplay.health;
-import helios.gameplay.match.components;
+import helios.gameplay.matchstate.components;
 
 using namespace helios::gameplay::health::components;
-using namespace helios::gameplay::match::components;
+using namespace helios::gameplay::matchstate::components;
 using namespace helios::gameplay::health::types;
 
 export namespace helios::engine::builder::gameObject::builders::configs {

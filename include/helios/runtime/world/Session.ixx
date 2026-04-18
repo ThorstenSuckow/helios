@@ -14,7 +14,7 @@ export module helios.runtime.world.Session;
 
 import helios.gameplay.lifecycle.components;
 import helios.gameplay.gamestate.types;
-import helios.gameplay.match.types;
+import helios.gameplay.matchstate.types;
 
 import helios.engine.state.types;
 import helios.engine.state.components;
@@ -29,7 +29,7 @@ import helios.rendering.viewport.types.ViewportHandle;
 
 import helios.engine.modules.rendering.viewport.components.ActiveViewportHandlesStateComponent;
 
-using namespace helios::gameplay::match::types;
+using namespace helios::gameplay::matchstate::types;
 using namespace helios::gameplay::gamestate::types;
 
 

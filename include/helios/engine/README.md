@@ -10,11 +10,15 @@ This module provides access to the complete helios engine functionality, includi
 
 | Module | Purpose |
 |--------|---------|
+| `helios.engine.bootstrap` | Component registration and GameWorld/GameLoop factory |
 | `helios.engine.core` | Data structures, messaging re-exports, units |
 | `helios.ecs` | ECS base classes (GameObject, Component, System) and query system |
 | `helios.engine.runtime` | Runtime infrastructure (world, gameloop, pooling, messaging, factory) |
 | `helios.engine.modules` | Domain-specific components and systems (physics, spatial, scene) |
 | `helios.engine.mechanics` | Gameplay mechanics (bounds, combat, spawn, input) |
+| `helios.engine.state` | State bindings and transition types |
+| `helios.engine.builder` | Builder utilities for entity construction |
+| `helios.engine.common` | Shared tags and common types |
 | `helios.engine.tooling` | Frame pacing and performance metrics |
 
 ## Architecture
@@ -54,19 +58,19 @@ helios.engine
 ```cpp
 import helios.engine;
 
-// Access ECS classes
-helios::engine::runtime::world::GameWorld world;
-auto entity = std::make_unique<helios::engine::runtime::world::GameObject>();
-world.addGameObject(std::move(entity));
+// Bootstrap creates a pre-configured GameWorld + GameLoop pair
+auto [gameWorldPtr, gameLoopPtr] = helios::engine::bootstrap::bootstrapGameWorld();
+auto& gameWorld = *gameWorldPtr;
+auto& gameLoop  = *gameLoopPtr;
 
-// Access game loop - systems are registered with phases/passes
-helios::engine::runtime::gameloop::GameLoop gameLoop;
+// Register application-specific systems
 gameLoop.phase(PhaseType::Main)
     .addPass()
-    .addSystem<Move2DSystem>(&world);
+    .addSystem<Move2DSystem>();
 
-// Access tooling
-helios::engine::tooling::FramePacer pacer;
+// Initialize and run
+gameWorld.init();
+gameLoop.init(gameWorld);
 ```
 
 ---

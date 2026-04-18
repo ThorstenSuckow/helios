@@ -78,7 +78,7 @@ The `WorldLifecycleManager` enables deferred world-level operations through the 
 updateContext.queueCommand<EngineCommandBuffer, WorldLifecycleCommand>(WorldLifecycleAction::Reset);
 ```
 
-The manager is auto-registered by `bootstrap::makeGameWorld()` and processes pending commands during its flush cycle. A `Reset` action calls `GameWorld::reset()`, which reinitializes all managers and the session.
+The manager is auto-registered by `bootstrap::bootstrapGameWorld()` and processes pending commands during its flush cycle. A `Reset` action calls `GameWorld::reset()`, which reinitializes all managers and the session.
 
 ---
 <details>

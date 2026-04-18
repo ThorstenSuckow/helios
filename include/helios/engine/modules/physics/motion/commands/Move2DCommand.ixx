@@ -6,10 +6,9 @@ module;
 
 export module helios.engine.modules.physics.motion.commands.Move2DCommand;
 
-import helios.engine.ecs;
+import helios.ecs;
 
 import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.GameWorld;
 
 
 import helios.math.types;
@@ -32,6 +31,7 @@ export namespace helios::engine::modules::physics::motion::commands {
      * @see helios::engine::runtime::messaging::command::Command
      * @see helios::engine::modules::physics::motion::components::Move2DComponent
      */
+    template<typename THandle>
     class Move2DCommand {
 
         /**
@@ -44,7 +44,7 @@ export namespace helios::engine::modules::physics::motion::commands {
          */
         const helios::math::vec2f direction_;
 
-        const helios::engine::ecs::EntityHandle entityHandle_;
+        const THandle entityHandle_;
 
     public:
 
@@ -55,7 +55,7 @@ export namespace helios::engine::modules::physics::motion::commands {
          * @param speedFactor Magnitude of the stick input (0.0 to 1.0).
          */
         explicit Move2DCommand(
-            const helios::engine::ecs::EntityHandle entityHandle,
+            const THandle entityHandle,
             const helios::math::vec2f direction,
             const float speedFactor
         ) :
@@ -77,7 +77,7 @@ export namespace helios::engine::modules::physics::motion::commands {
                 return;
             }
 
-            auto* moveComponent2D = gameObject->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+            auto* moveComponent2D = gameObject->template get<helios::engine::modules::physics::motion::components::Move2DComponent<THandle>>();
 
             if (moveComponent2D) {
                 moveComponent2D->move(direction_.toVec3(), speedFactor_);

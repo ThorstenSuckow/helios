@@ -22,8 +22,8 @@ Commands are routed through the `CommandHandlerRegistry` to the registered `UiAc
 
 ```cpp
 // Issue a UI action command when menu item is activated
-updateContext.queueCommand<UiActionCommand>(
-    menuItemEntity.entityHandle(),
+updateContext.queueCommand<EngineCommandBuffer, UiActionCommand>(
+    menuItementity.handle(),
     ActionId::StartGame
 );
 ```

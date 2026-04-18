@@ -8,8 +8,8 @@ export module helios.engine.mechanics.damage.commands.ApplyDamageCommand;
 
 import helios.engine.common.types;
 
-using namespace helios::engine::common::types;
 
+using namespace helios::engine::common::types;
 export namespace helios::engine::mechanics::damage::commands {
 
     /**
@@ -22,12 +22,13 @@ export namespace helios::engine::mechanics::damage::commands {
      * @see DamageContext
      * @see HealthManager
      */
+    template<typename THandle>
     class ApplyDamageCommand {
 
         /**
          * @brief The damage context describing target, instigator, and amount.
          */
-        DamageContext damageContext_;
+        DamageContext<THandle> damageContext_;
 
     public:
 
@@ -36,7 +37,7 @@ export namespace helios::engine::mechanics::damage::commands {
          *
          * @param damageContext The context describing the damage to apply.
          */
-        explicit ApplyDamageCommand(const DamageContext& damageContext)
+        explicit ApplyDamageCommand(const DamageContext<THandle>& damageContext)
         : damageContext_(damageContext) {}
 
         /**

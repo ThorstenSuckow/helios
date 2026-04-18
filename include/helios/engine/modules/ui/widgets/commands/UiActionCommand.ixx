@@ -11,7 +11,7 @@ export module helios.engine.modules.ui.widgets.commands.UiActionCommand;
 
 import helios.engine.modules.ui.widgets.types;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 import helios.engine.modules.ui.widgets.types.ActionId;
 
@@ -28,12 +28,13 @@ export namespace helios::engine::modules::ui::widgets::commands {
      * @see UiActionCommandManager
      * @see UiActionComponent
      */
+    template<typename THandle>
     class UiActionCommand  {
 
         /**
          * @brief Handle of the entity that triggered the action.
          */
-        helios::engine::ecs::EntityHandle source_;
+        THandle source_;
 
         /**
          * @brief Identifier of the action to execute.
@@ -50,7 +51,7 @@ export namespace helios::engine::modules::ui::widgets::commands {
          * @param actionId The identifier of the action to execute.
          */
         explicit UiActionCommand(
-            const helios::engine::ecs::EntityHandle source,
+            const THandle source,
             const helios::engine::modules::ui::widgets::types::ActionId actionId) :
             source_(source), actionId_(actionId) {}
 
@@ -60,7 +61,7 @@ export namespace helios::engine::modules::ui::widgets::commands {
          *
          * @return The entity handle.
          */
-        [[nodiscard]] helios::engine::ecs::EntityHandle source() const noexcept {
+        [[nodiscard]] THandle source() const noexcept {
             return source_;
         }
 

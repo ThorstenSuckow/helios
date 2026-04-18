@@ -4,15 +4,19 @@
  */
 module;
 
+#include <cassert>
+
 export module helios.engine.mechanics.combat.commands.Aim2DCommand;
 
-import helios.engine.ecs;
+import helios.ecs;
 import helios.math.types;
 import helios.engine.mechanics.combat.components.Aim2DComponent;
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
+import helios.engine.runtime.world.types;
 
+using namespace helios::engine::runtime::world::types;
 export namespace helios::engine::mechanics::combat::commands {
 
     /**
@@ -29,6 +33,7 @@ export namespace helios::engine::mechanics::combat::commands {
      * @see helios::engine::runtime::messaging::command::Command
      * @see helios::engine::mechanics::components::Aim2DComponent
      */
+    template<typename THandle>
     class Aim2DCommand {
 
         /**
@@ -41,7 +46,7 @@ export namespace helios::engine::mechanics::combat::commands {
          */
         const helios::math::vec2f direction_;
 
-        const helios::engine::ecs::EntityHandle entityHandle_;
+        const THandle entityHandle_;
     public:
 
         /**
@@ -51,7 +56,7 @@ export namespace helios::engine::mechanics::combat::commands {
          * @param freqFactor Magnitude of the stick input (0.0 to 1.0).
          */
         explicit Aim2DCommand(
-            const helios::engine::ecs::EntityHandle entityHandle,
+            const THandle entityHandle,
             const helios::math::vec2f direction,
             const float freqFactor
         ) :
@@ -64,17 +69,18 @@ export namespace helios::engine::mechanics::combat::commands {
         /**
          * @brief Executes the aim command on a GameObject.
          *
-         * @param gameObject The target entity with an Aim2DComponent.
+         * @param entity The target entity with an Aim2DComponent.
          */
         void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
 
-            auto gameObject = updateContext.find(entityHandle_);
+            auto entity = updateContext.find<THandle>(entityHandle_);
 
-            if (!gameObject) {
+            if (!entity) {
+                assert(false && "GameObject not found in the world.");
                 return;
             }
 
-            auto* aimComponent = gameObject->get<helios::engine::mechanics::combat::components::Aim2DComponent>();
+            auto* aimComponent = entity->get<helios::engine::mechanics::combat::components::Aim2DComponent<THandle>>();
 
             if (aimComponent) {
                 aimComponent->aim(direction_, freqFactor_);

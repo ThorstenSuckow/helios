@@ -6,7 +6,7 @@ module;
 
 export module helios.engine.mechanics.combat.commands.ShootCommand;
 
-import helios.engine.ecs;
+import helios.ecs;
 import helios.math.types;
 import helios.engine.mechanics.combat.components.ShootComponent;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
@@ -14,7 +14,6 @@ import helios.engine.modules.physics.motion.components.Move2DComponent;
 
 import helios.engine.runtime.world.UpdateContext;
 import helios.engine.runtime.world.GameWorld;
-
 
 export namespace helios::engine::mechanics::combat::commands {
 
@@ -49,6 +48,7 @@ export namespace helios::engine::mechanics::combat::commands {
      * @see TargetedCommand
      * @see TwinStickInputSystem
      */
+    template<typename THandle>
     class ShootCommand {
 
         /**
@@ -60,7 +60,7 @@ export namespace helios::engine::mechanics::combat::commands {
         const float intensity_;
 
 
-        const helios::engine::ecs::EntityHandle entityHandle_;
+        const THandle entityHandle_;
 
     public:
 
@@ -71,10 +71,10 @@ export namespace helios::engine::mechanics::combat::commands {
          *                  Typically from gamepad trigger pressure.
          */
         explicit ShootCommand(
-            const helios::engine::ecs::EntityHandle entityHandle,
+            const THandle entityHandle,
             float intensity
         ) :
-           entityHandle_(entityHandle),
+            entityHandle_(entityHandle),
             intensity_(intensity)
         {}
 
@@ -98,16 +98,16 @@ export namespace helios::engine::mechanics::combat::commands {
          */
         void execute(helios::engine::runtime::world::UpdateContext& updateContext) const noexcept {
 
-            auto gameObject = updateContext.find(entityHandle_);
+            auto entity = updateContext.find<THandle>(entityHandle_);
 
-            if (!gameObject) {
+            if (!entity) {
                 return;
             }
 
-            auto* shootComponent = gameObject->get<helios::engine::mechanics::combat::components::ShootComponent>();
+            auto* shootComponent = entity->template get<helios::engine::mechanics::combat::components::ShootComponent<THandle>>();
 
             if (shootComponent) {
-                auto* m2d = gameObject->get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+                auto* m2d = entity->template get<helios::engine::modules::physics::motion::components::Move2DComponent<THandle>>();
 
                 shootComponent->shoot(
                     intensity_,

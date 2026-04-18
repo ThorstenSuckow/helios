@@ -1,61 +1,66 @@
 # helios::engine::runtime::spawn::behavior::initializers
 
-Concrete SpawnInitializer implementations.
+Concrete `SpawnInitializer<THandle>` implementations.
 
 ## Overview
 
-This module provides ready-to-use SpawnInitializer implementations for configuring spawned entities.
+This module provides ready-to-use `SpawnInitializer<THandle>` implementations
+for configuring spawned entities after placement.
 
 ## Key Classes
 
 | Class | Purpose |
 |-------|---------|
-| `EmitterInitializer` | Configures entity direction/velocity based on emitter state |
-| `MoveInitializer` | Sets movement direction using various strategies (random, axis, point) |
-| `DelayedComponentEnablerInitializer` | Defers component activation with configurable delay |
+| `EmitterInitializer<THandle>` | Configures entity direction/velocity based on emitter state |
+| `MoveInitializer<THandle>` | Sets movement direction using various strategies (random, axis, point) |
+| `RandomDirectionInitializer<THandle>` | Assigns a random movement direction |
+| `DelayedComponentEnablerInitializer<THandle, ...ComponentTypes>` | Defers component activation with configurable delay |
+| `InitializerList<THandle, N>` | Composite: chains `N` initializers in sequence |
 
 ## Usage
 
 ```cpp
+using Handle = GameObjectHandle;
+
 // Projectiles inherit direction from firing entity
-auto profile = SpawnProfile{
+auto profile = SpawnProfile<Handle>{
     .gameObjectPoolId = bulletPoolId,
-    .spawnPlacer = std::make_unique<EmitterSpawnPlacer>(),
-    .spawnInitializer = std::make_unique<EmitterInitializer>()
+    .spawnPlacer = std::make_unique<EmitterSpawnPlacer<Handle>>(),
+    .spawnInitializer = std::make_unique<EmitterInitializer<Handle>>()
 };
 
 // Enemies spawn with random movement directions
-auto enemyProfile = SpawnProfile{
+auto enemyProfile = SpawnProfile<Handle>{
     .gameObjectPoolId = enemyPoolId,
-    .spawnPlacer = std::make_unique<RandomSpawnPlacer>(),
-    .spawnInitializer = std::make_unique<MoveInitializer>(DirectionType::Random)
+    .spawnPlacer = std::make_unique<RandomSpawnPlacer<Handle>>(),
+    .spawnInitializer = std::make_unique<RandomDirectionInitializer<Handle>>()
 };
+```
 
-// Spawn with collision immunity for 0.5 seconds
-auto immuneProfile = SpawnProfile{
-    .gameObjectPoolId = enemyPoolId,
-    .spawnInitializer = std::make_unique<DelayedComponentEnablerInitializer>(
-        0.5f,  // delay in seconds
-        std::vector<ComponentTypeId>{
-            ComponentTypeId::of<CollisionComponent>()
-        }
-    )
-};
+## Composite Initialization
+
+`InitializerList<THandle, N>` executes multiple initializers in sequence:
+
+```cpp
+auto initializer = std::make_unique<InitializerList<Handle, 2>>(
+    std::make_unique<MoveInitializer<Handle>>(...),
+    std::make_unique<DelayedComponentEnablerInitializer<Handle, CollisionComponent>>(0.5f)
+);
 ```
 
 ## Delayed Component Activation
 
-The `DelayedComponentEnablerInitializer` works with entities that have a `DelayedComponentEnabler` component attached (via `LifecycleBuilder`). It supports:
+`DelayedComponentEnablerInitializer<THandle, ...ComponentTypes>` works with
+entities that have a `DelayedComponentEnabler` component attached. It supports:
 
 - **Fixed delay:** All spawned entities activate after the same duration
 - **Staggered delay:** Sequential entities in a wave activate progressively
 
 ```cpp
-// Staggered activation: each entity in wave activates 0.1s after previous
-auto staggeredInit = std::make_unique<DelayedComponentEnablerInitializer<CollisionComponent>>(
-    0.1f,  // base delay per entity
-    5      // cycle length (resets after 5 entities)
-);
+// Staggered activation: each entity in wave activates progressively
+auto staggeredInit = std::make_unique<
+    DelayedComponentEnablerInitializer<Handle, CollisionComponent>
+>(0.1f, 5);  // base delay per entity, cycle length
 ```
 
 ---

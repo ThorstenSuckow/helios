@@ -4,43 +4,45 @@ Spawn behavior strategies for positioning and initializing entities.
 
 ## Overview
 
-This module provides the behavior layer for the spawn system. It defines abstract interfaces and concrete implementations for determining where entities spawn and how they are initialized.
+This module provides the behavior layer for spawn execution. Behavior is split
+into two responsibilities:
 
-## Key Classes
+- `SpawnPlacer<THandle>` computes spawn positions.
+- `SpawnInitializer<THandle>` writes initial state to acquired entities.
 
-| Class | Purpose |
-|-------|---------|
-| `SpawnPlacer` | Abstract interface for calculating spawn positions |
-| `SpawnInitializer` | Abstract interface for configuring spawned entity state |
+Both interfaces are template-based on `THandle`.
+
+## Key Types
+
+| Type | Purpose |
+|------|---------|
+| `SpawnPlacer<THandle>` | Strategy interface for spawn-position computation |
+| `SpawnInitializer<THandle>` | Strategy interface for initialization logic |
 
 ## Submodules
 
 | Directory | Purpose |
 |-----------|---------|
-| `placements/` | Concrete SpawnPlacer implementations |
-| `initializers/` | Concrete SpawnInitializer implementations |
+| `placements/` | Concrete placers (random, emitter-relative, axis-distributed) |
+| `initializers/` | Concrete initializers (emitter, random direction, move, delayed activation, composite) |
 
-## Available Placers
+## Behavior Flow
 
-| Placer | Description |
-|--------|-------------|
-| `RandomSpawnPlacer` | Places entities at random positions within level bounds |
-| `EmitterSpawnPlacer` | Places entities relative to an emitter position |
-
-## Available Initializers
-
-| Initializer | Description |
-|-------------|-------------|
-| `EmitterInitializer` | Inherits velocity/direction from emitter |
-| `RandomDirectionInitializer` | Applies random velocity within constraints |
+1. `SpawnManager<THandle>` acquires entity from pool.
+2. `SpawnPlacer<THandle>` computes spawn position.
+3. Position/transform components are updated.
+4. `SpawnInitializer<THandle>` applies initial velocity/state.
+5. Entity is activated.
 
 ## Usage
 
 ```cpp
-auto profile = std::make_unique<SpawnProfile>(SpawnProfile{
+using Handle = GameObjectHandle;
+
+auto profile = std::make_unique<SpawnProfile<Handle>>(SpawnProfile<Handle>{
     .gameObjectPoolId = enemyPoolId,
-    .spawnPlacer = std::make_unique<RandomSpawnPlacer>(),
-    .spawnInitializer = std::make_unique<RandomDirectionInitializer>(minSpeed, maxSpeed)
+    .spawnPlacer = std::make_unique<RandomSpawnPlacer<Handle>>(),
+    .spawnInitializer = std::make_unique<RandomDirectionInitializer<Handle>>(minSpeed, maxSpeed)
 });
 ```
 
@@ -49,5 +51,5 @@ auto profile = std::make_unique<SpawnProfile>(SpawnProfile{
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::spawn::behavior
 @brief Spawn behavior strategies for positioning and initializing entities.
-@details Provides SpawnPlacer and SpawnInitializer interfaces with concrete implementations for common spawn patterns.
+@details Template-based placement/initialization interfaces used by spawn profiles.
 </p></details>

@@ -4,6 +4,7 @@
  */
 module;
 
+#include <coroutine>
 #include <cassert>
 #include <typeindex>
 #include <vector>
@@ -14,10 +15,10 @@ export module helios.engine.runtime.spawn.behavior.initializers.DelayedComponent
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
 import helios.engine.runtime.spawn.types.SpawnPlanCursor;
 import helios.engine.runtime.spawn.types.SpawnContext;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.engine.mechanics.lifecycle.components.DelayedComponentEnabler;
-import helios.engine.ecs.types.ComponentTypeId;
+import helios.ecs.types.ComponentTypeId;
 
 using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::behavior::initializers {
@@ -47,8 +48,8 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      * @see SpawnInitializer
      * @see DelayedComponentEnabler
      */
-    template<typename... ComponentTypes>
-    class DelayedComponentEnablerInitializer final : public SpawnInitializer {
+    template<typename THandle, typename ... ComponentTypes>
+    class DelayedComponentEnablerInitializer final : public SpawnInitializer<THandle> {
 
         /**
          * @brief Base delay in seconds between activations.
@@ -66,7 +67,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
         /**
          * @brief Type IDs of components whose activation should be deferred.
          */
-        std::vector<helios::engine::ecs::types::ComponentTypeId> deferredComponents_;
+        std::vector<helios::ecs::types::ComponentTypeId<THandle>> deferredComponents_;
 
     public:
 
@@ -80,7 +81,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
         DelayedComponentEnablerInitializer(const float delay, const size_t cycleLength = 0) :
             delay_(delay),
             cycleLength_(cycleLength),
-            deferredComponents_{helios::engine::ecs::types::ComponentTypeId::id<ComponentTypes>() ...}
+            deferredComponents_{helios::ecs::types::ComponentTypeId<THandle>::template id<ComponentTypes>() ...}
         {}
 
         /**
@@ -96,9 +97,9 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @param spawnContext Context data (unused).
          */
         void initialize(
-            helios::engine::ecs::GameObject gameObject,
+            helios::engine::runtime::world::GameObject gameObject,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) override {
 
             bool deferFound = false;

@@ -11,7 +11,7 @@ import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.util.Random;
 import helios.math;
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::behavior::placements {
@@ -27,7 +27,8 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
      *
      * @see SpawnPlacer
      */
-    class RandomSpawnPlacer final : public SpawnPlacer {
+    template<typename THandle>
+    class RandomSpawnPlacer final : public SpawnPlacer<THandle> {
 
         helios::util::Random rGen_{12345};
 
@@ -45,11 +46,11 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @return A random vec3f with Z = 0.
          */
         helios::math::vec3f getPosition(
-            const helios::engine::ecs::EntityHandle& entityHandle,
+            const THandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) override {
 
 

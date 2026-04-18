@@ -27,6 +27,7 @@ export namespace helios::engine::runtime::spawn::policy::amount {
      * @see SpawnAmountByCallback
      * @see SpawnRule
      */
+    template<typename THandle>
     class SpawnAmountProvider {
 
     public:

@@ -9,9 +9,9 @@ module;
 
 export module helios.engine.runtime.spawn.types.SpawnRuleId;
 
-import helios.core.algorithms;
+import helios.core.types.FuncDefs;
 import helios.core.types;
-import helios.core.data;
+import helios.core.types.StrongId;
 
 export namespace helios::engine::runtime::spawn::types {
 
@@ -28,11 +28,11 @@ export namespace helios::engine::runtime::spawn::types {
      * (timing, pool limits, etc.). Uses FNV-1a hashing for compile-time
      * string-based construction.
      *
-     * @see helios::core::data::StrongId
+     * @see helios::core::types::StrongId
      * @see SpawnProfileId
      * @see GameObjectPoolId
      */
-    using SpawnRuleId = helios::core::data::StrongId<SpawnRuleIdTag, uint32_t>;
+    using SpawnRuleId = helios::core::types::StrongId<SpawnRuleIdTag>;
 
 }
 

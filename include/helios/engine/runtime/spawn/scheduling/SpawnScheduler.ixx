@@ -51,6 +51,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
      * @see CyclicSpawnScheduler
      * @see ScheduledSpawnPlan
      */
+    template<typename THandle>
     class SpawnScheduler {
 
     protected:
@@ -58,7 +59,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         /**
          * @brief Buffer for scheduled spawn plans awaiting processing.
          */
-        std::vector<ScheduledSpawnPlan> scheduledSpawnPlans_;
+        std::vector<ScheduledSpawnPlan<THandle>> scheduledSpawnPlans_;
 
     public:
 
@@ -86,7 +87,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         virtual void evaluate(
             const GameWorld& gameWorld,
             const UpdateContext& updateContext,
-            const SpawnContext& spawnContext = {})  noexcept = 0;
+            const SpawnContext<THandle>& spawnContext = {})  noexcept = 0;
 
 
         /**
@@ -94,7 +95,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          *
          * @return Span of currently scheduled plans.
          */
-        [[nodiscard]] std::span<const ScheduledSpawnPlan> scheduledPlans() {
+        [[nodiscard]] std::span<const ScheduledSpawnPlan<THandle>> scheduledPlans() {
             return scheduledSpawnPlans_;
         }
 
@@ -106,8 +107,8 @@ export namespace helios::engine::runtime::spawn::scheduling {
          *
          * @return Vector of scheduled spawn plans.
          */
-        [[nodiscard]] std::vector<ScheduledSpawnPlan> drainScheduledPlans() {
-            std::vector<ScheduledSpawnPlan> plans{};
+        [[nodiscard]] std::vector<ScheduledSpawnPlan<THandle>> drainScheduledPlans() {
+            std::vector<ScheduledSpawnPlan<THandle>> plans{};
             plans.swap(scheduledSpawnPlans_);
             return plans;
         }

@@ -8,7 +8,7 @@ export module helios.engine.runtime.spawn.behavior.SpawnInitializer;
 
 import helios.engine.runtime.spawn.types.SpawnPlanCursor;
 import helios.engine.runtime.spawn.types.SpawnContext;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::behavior {
@@ -49,6 +49,7 @@ export namespace helios::engine::runtime::spawn::behavior {
      * @see SpawnPlacer
      * @see SpawnContext
      */
+    template<typename THandle>
     class SpawnInitializer {
 
     public:
@@ -63,9 +64,9 @@ export namespace helios::engine::runtime::spawn::behavior {
          * @param spawnContext Context data including optional emitter info.
          */
         virtual void initialize(
-            helios::engine::ecs::GameObject gameObject,
+            helios::engine::runtime::world::GameObject gameObject,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) = 0;
 
         /**

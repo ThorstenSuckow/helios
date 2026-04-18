@@ -39,7 +39,7 @@ import helios.engine.runtime.pooling.GameObjectPoolManager;
 
 
 import helios.engine.runtime.spawn.types;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
 import helios.engine.mechanics.spawn.components.SpawnedByProfileComponent;
@@ -50,58 +50,31 @@ import helios.math;
 
 import helios.engine.common.tags.ManagerRole;
 
-using namespace helios::engine::runtime::messaging::command;
 using namespace helios::engine::runtime::spawn::commands;
 using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn {
 
     /**
-     * @brief Manager for processing spawn and despawn commands.
+     * @brief Manager for processing typed spawn and despawn commands.
      *
-     * @details SpawnManager is a Manager that handles the lifecycle of pooled
-     * GameObjects. It receives commands via SpawnCommandHandler::submit() and
-     * queues them for deferred processing during the manager flush phase.
+     * @details `SpawnManager` handles pooled entity lifecycle through
+     * `SpawnCommand<THandle>`, `DespawnCommand<THandle>`, and
+     * `ScheduledSpawnPlanCommand<THandle>`. Commands are queued via `submit(...)`
+     * and executed during `flush(...)`.
      *
-     * ## Command Processing Order
+     * Processing order in `flush(...)`:
+     * 1. despawn commands
+     * 2. direct spawn commands
+     * 3. scheduled spawn-plan commands
      *
-     * During flush(), commands are processed in this order:
-     * 1. **Despawn commands** - Entities are returned to their pools
-     * 2. **Spawn commands** - Single entities are acquired and initialized
-     * 3. **Scheduled spawn plan commands** - Batch spawns from scheduler
-     *
-     * ## Spawn Profiles
-     *
-     * Each spawn profile defines:
-     * - Which pool to acquire entities from
-     * - How to position spawned entities (SpawnPlacer)
-     * - How to initialize spawned entities (SpawnInitializer)
-     *
-     * ## Integration
-     *
-     * SpawnManager registers itself with the GameWorld for each profile ID,
-     * allowing commands to route to the correct handler.
-     *
-     * Example:
-     * ```cpp
-     * auto spawnManager = std::make_unique<SpawnManager>();
-     *
-     * spawnManager->addSpawnProfile(bulletProfileId, std::make_unique<SpawnProfile>(
-     *     SpawnProfile{
-     *         .gameObjectPoolId = bulletPoolId,
-     *         .spawnPlacer = std::make_unique<EmitterSpawnPlacer>(),
-     *         .spawnInitializer = std::make_unique<EmitterInitializer>()
-     *     }
-     * ));
-     *
-     * gameWorld.addManager(std::move(spawnManager));
-     * ```
+     * @tparam THandle Handle type for spawned/despawned entities.
      *
      * @see SpawnCommand
      * @see DespawnCommand
      * @see ScheduledSpawnPlanCommand
      * @see SpawnProfile
-     * @see SpawnCommandHandler
      */
+    template<typename THandle>
     class SpawnManager {
 
 
@@ -113,34 +86,34 @@ export namespace helios::engine::runtime::spawn {
          * ScheduledSpawnPlan instances for execution. Multiple schedulers allow
          * grouping spawn rules by category (e.g., enemies, powerups, projectiles).
          */
-        std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>> spawnSchedulers_;
+        std::vector<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler<THandle>>> spawnSchedulers_;
 
         /**
          * @brief Queue of pending spawn commands.
          */
-        std::vector<SpawnCommand> spawnCommands_;
+        std::vector<SpawnCommand<THandle>> spawnCommands_;
 
         /**
          * @brief Queue of pending despawn commands.
          */
-        std::vector<DespawnCommand> despawnCommands_;
+        std::vector<DespawnCommand<THandle>> despawnCommands_;
 
         /**
          * @brief Queue of pending scheduled spawn plan commands.
          */
-        std::vector<ScheduledSpawnPlanCommand> scheduledSpawnPlanCommands_;
+        std::vector<ScheduledSpawnPlanCommand<THandle>> scheduledSpawnPlanCommands_;
 
         /**
          * @brief Pointer to the pool manager for acquire/release operations.
          */
-        helios::engine::runtime::pooling::GameObjectPoolManager* gameObjectPoolManager_ = nullptr;
+        helios::engine::runtime::pooling::GameObjectPoolManager<THandle>* gameObjectPoolManager_ = nullptr;
 
         /**
          * @brief Map from profile IDs to their spawn profiles.
          */
         std::unordered_map<
             helios::engine::runtime::spawn::types::SpawnProfileId,
-            std::unique_ptr<const SpawnProfile>> spawnProfiles_;
+            std::unique_ptr<const SpawnProfile<THandle>>> spawnProfiles_;
 
         /**
          * @brief Ensures that the bounds are properly computed..
@@ -156,7 +129,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @see helios::engine::modules::physics::collision::Bounds::computeWorldAabb
          */
-        void ensureBounds(helios::engine::ecs::GameObject go, helios::math::aabbf& bounds) {
+        void ensureBounds(helios::engine::runtime::world::GameObject go, helios::math::aabbf& bounds) {
             if (bounds.min()[0] > bounds.max()[0]) {
                 const auto* mab   = go.get<helios::engine::modules::rendering::model::components::ModelAabbComponent>();
                 const auto* sca    = go.get<helios::engine::modules::spatial::transform::components::ScaleStateComponent>();
@@ -179,11 +152,10 @@ export namespace helios::engine::runtime::spawn {
          * the profile's initializer, and pushes a frame event for confirmation.
          *
          * @param commands Span of scheduled spawn plan commands to process.
-         * @param gameWorld The game world.
          * @param updateContext The current update context.
          */
         void executeScheduledSpawnPlanCommands(
-            std::span<ScheduledSpawnPlanCommand> commands,
+            std::span<ScheduledSpawnPlanCommand<THandle>> commands,
             helios::engine::runtime::world::UpdateContext& updateContext
         ) {
 
@@ -244,7 +216,7 @@ export namespace helios::engine::runtime::spawn {
                         ensureBounds(go.value(), bounds);
 
                         const auto position = spawnProfile->spawnPlacer->getPosition(
-                            go->entityHandle(),
+                            go->handle(),
                             bounds,
                             updateContext.level()->bounds(),
                             spawnCursor,
@@ -272,11 +244,10 @@ export namespace helios::engine::runtime::spawn {
          * @brief Processes spawn commands, acquiring and initializing objects.
          *
          * @param commands Span of spawn commands to process.
-         * @param gameWorld The game world.
          * @param updateContext The current update context.
          */
         void spawnObjects(
-            std::span<SpawnCommand> commands,
+            std::span<SpawnCommand<THandle>> commands,
             helios::engine::runtime::world::UpdateContext& updateContext) {
 
             for (auto& spawnCommand: commands) {
@@ -318,7 +289,7 @@ export namespace helios::engine::runtime::spawn {
                     ensureBounds(go.value(), bounds);
 
                     const auto position = spawnProfile->spawnPlacer->getPosition(
-                        go->entityHandle(),
+                        go->handle(),
                         bounds,
                         updateContext.level()->bounds(),
                         {1, 1},
@@ -343,11 +314,10 @@ export namespace helios::engine::runtime::spawn {
          * @brief Processes despawn commands, releasing objects back to pools.
          *
          * @param commands Span of despawn commands to process.
-         * @param gameWorld The game world.
          * @param updateContext The current update context.
          */
         void despawnObjects(
-            std::span<DespawnCommand> commands,
+            std::span<DespawnCommand<THandle>> commands,
             helios::engine::runtime::world::UpdateContext& updateContext) {
 
             for (auto& despawnCommand : commands) {
@@ -379,7 +349,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @return Always returns true.
          */
-        bool submit(const SpawnCommand command) noexcept {
+        bool submit(const SpawnCommand<THandle> command) noexcept {
             spawnCommands_.push_back(command);
             return true;
         }
@@ -393,7 +363,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @param scheduler The scheduler to add. Ownership is transferred.
          */
-        void addScheduler(std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler> scheduler) {
+        void addScheduler(std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler<THandle>> scheduler) {
             spawnSchedulers_.push_back(std::move(scheduler));
         }
 
@@ -404,7 +374,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @return Always returns true.
          */
-        bool submit(const DespawnCommand command) noexcept {
+        bool submit(const DespawnCommand<THandle> command) noexcept {
             despawnCommands_.push_back(command);
             return true;
         }
@@ -418,7 +388,7 @@ export namespace helios::engine::runtime::spawn {
          * @return Always returns true.
          */
         bool submit(
-            const ScheduledSpawnPlanCommand scheduledSpawnPlanCommand
+            const ScheduledSpawnPlanCommand<THandle> scheduledSpawnPlanCommand
         ) noexcept {
             scheduledSpawnPlanCommands_.push_back(scheduledSpawnPlanCommand);
             return true;
@@ -427,7 +397,6 @@ export namespace helios::engine::runtime::spawn {
         /**
          * @brief Flushes pending commands, processing despawns then spawns.
          *
-         * @param gameWorld The game world.
          * @param updateContext The current update context.
          */
         void flush(
@@ -466,7 +435,7 @@ export namespace helios::engine::runtime::spawn {
          */
         SpawnManager& addSpawnProfile(
             const SpawnProfileId& spawnProfileId,
-            std::unique_ptr<const SpawnProfile> spawnProfile) {
+            std::unique_ptr<const SpawnProfile<THandle>> spawnProfile) {
 
             assert(!spawnProfiles_.contains(spawnProfileId) && "SpawnProfileId already added");
 
@@ -482,7 +451,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @return Pointer to the profile, or nullptr if not found.
          */
-        [[nodiscard]] const SpawnProfile* spawnProfile(
+        [[nodiscard]] const SpawnProfile<THandle>* spawnProfile(
             const SpawnProfileId& spawnProfileId) const {
 
             if (!spawnProfiles_.contains(spawnProfileId)) {
@@ -493,20 +462,23 @@ export namespace helios::engine::runtime::spawn {
         }
 
         /**
-         * @brief Initializes the manager with the game world.
+         * @brief Initializes the manager with required runtime resources.
          *
-         * @details Acquires a reference to the GameObjectPoolManager and
-         * registers this manager as the SpawnCommandHandler for all
-         * configured spawn profiles.
+         * @details Resolves `GameObjectPoolManager<THandle>` and registers
+         * command handlers for typed spawn command variants.
          *
-         * @param gameWorld The game world to initialize with.
+         * @param gameWorld Game world used for resource lookup and handler registration.
          */
         void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept {
 
-            assert(gameWorld.hasManager<helios::engine::runtime::pooling::GameObjectPoolManager>() && "Unexpected missing GameObjectPoolManager");
-            gameObjectPoolManager_ = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+            assert(gameWorld.hasManager<helios::engine::runtime::pooling::GameObjectPoolManager<THandle>>() && "Unexpected missing GameObjectPoolManager");
+            gameObjectPoolManager_ = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager<THandle>>();
 
-            gameWorld.registerCommandHandler<SpawnCommand, DespawnCommand, ScheduledSpawnPlanCommand>(*this);
+            gameWorld.registerCommandHandler<
+                SpawnCommand<THandle>,
+                DespawnCommand<THandle>,
+                ScheduledSpawnPlanCommand<THandle>
+            >(*this);
         }
 
         /**
@@ -538,7 +510,7 @@ export namespace helios::engine::runtime::spawn {
          *
          * @return Span of spawn scheduler unique pointers.
          */
-        std::span<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler>> spawnSchedulers() {
+        std::span<std::unique_ptr<helios::engine::runtime::spawn::scheduling::SpawnScheduler<THandle>>> spawnSchedulers() {
             return spawnSchedulers_;
         }
     };

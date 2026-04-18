@@ -40,6 +40,7 @@ export namespace helios::engine::runtime::spawn::types {
      * @see SpawnInitializer
      * @see SpawnManager
      */
+    template<typename THandle>
     struct SpawnProfile {
 
         /**
@@ -50,12 +51,12 @@ export namespace helios::engine::runtime::spawn::types {
         /**
          * @brief Strategy for determining spawn positions.
          */
-        std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnPlacer> spawnPlacer;
+        std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnPlacer<THandle>> spawnPlacer;
 
         /**
          * @brief Strategy for initializing spawned entity state.
          */
-        std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnInitializer> spawnInitializer;
+        std::unique_ptr<helios::engine::runtime::spawn::behavior::SpawnInitializer<THandle>> spawnInitializer;
 
     };
 

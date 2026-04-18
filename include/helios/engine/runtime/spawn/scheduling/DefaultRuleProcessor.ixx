@@ -45,7 +45,8 @@ export namespace helios::engine::runtime::spawn::scheduling {
      * @see DefaultSpawnScheduler
      * @see CyclicSpawnScheduler
      */
-    class DefaultRuleProcessor : public RuleProcessor {
+    template<typename THandle>
+    class DefaultRuleProcessor : public RuleProcessor<THandle> {
 
     public:
 
@@ -67,13 +68,13 @@ export namespace helios::engine::runtime::spawn::scheduling {
         SpawnPlan processRule(
             const world::GameWorld& gameWorld,
             const UpdateContext& updateContext,
-            const SpawnContext& spawnContext,
+            const SpawnContext<THandle>& spawnContext,
             const SpawnProfileId spawnProfileId,
-            SpawnRule& spawnRule,
+            SpawnRule<THandle>& spawnRule,
             SpawnRuleState& spawnRuleState
         ) noexcept override {
-            const auto* poolManager  = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
-            const auto* spawnManager = gameWorld.tryManager<helios::engine::runtime::spawn::SpawnManager>();
+            const auto* poolManager  = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager<THandle>>();
+            const auto* spawnManager = gameWorld.tryManager<helios::engine::runtime::spawn::SpawnManager<THandle>>();
 
             const auto* spawnProfile = spawnManager->spawnProfile(spawnProfileId);
             assert(spawnProfile != nullptr);

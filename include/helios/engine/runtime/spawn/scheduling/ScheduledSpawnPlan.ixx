@@ -27,6 +27,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
      * @see SpawnScheduler
      * @see SpawnProfile
      */
+    template<typename THandle>
     struct ScheduledSpawnPlan {
 
         /**
@@ -42,7 +43,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         /**
          * @brief The spawn context of the plan.
          */
-        const SpawnContext spawnContext;
+        const SpawnContext<THandle> spawnContext;
 
     };
 

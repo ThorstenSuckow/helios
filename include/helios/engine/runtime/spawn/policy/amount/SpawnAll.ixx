@@ -29,7 +29,8 @@ export namespace helios::engine::runtime::spawn::policy::amount {
      * spawned at once, such as initial wave spawning or respawning
      * all enemies after a level reset.
      */
-    class SpawnAll : public SpawnAmountProvider {
+    template<typename THandle>
+    class SpawnAll : public SpawnAmountProvider<THandle> {
 
     public:
 
@@ -42,7 +43,7 @@ export namespace helios::engine::runtime::spawn::policy::amount {
             const helios::engine::runtime::world::GameWorld& gameWorld,
             const helios::engine::runtime::world::UpdateContext& updateContext
         ) const override {
-            const auto* manager = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager>();
+            const auto* manager = gameWorld.tryManager<helios::engine::runtime::pooling::GameObjectPoolManager<THandle>>();
             if (!manager) {
                 return 0;
             }

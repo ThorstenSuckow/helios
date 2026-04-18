@@ -12,7 +12,7 @@ import helios.engine.runtime.spawn.types.SpawnPlanCursor;
 import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.math;
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::behavior::placements {
@@ -29,7 +29,8 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
      * @see SpawnPlacer
      * @see EmitterContext
      */
-    class EmitterSpawnPlacer final : public SpawnPlacer {
+    template<typename THandle>
+    class EmitterSpawnPlacer final : public SpawnPlacer<THandle> {
 
     public:
 
@@ -47,11 +48,11 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @pre spawnContext.emitterContext must have a value.
          */
         helios::math::vec3f getPosition(
-            const helios::engine::ecs::EntityHandle& entityHandle,
+            const THandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) override {
 
             const auto emitterCtx = spawnContext.emitterContext;

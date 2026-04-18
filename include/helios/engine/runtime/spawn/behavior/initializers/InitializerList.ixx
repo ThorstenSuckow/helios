@@ -12,7 +12,7 @@ export module helios.engine.runtime.spawn.behavior.initializers.InitializerList;
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
 import helios.engine.runtime.spawn.types.SpawnPlanCursor;
 import helios.engine.runtime.spawn.types.SpawnContext;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 
 
 using namespace helios::engine::runtime::spawn::types;
@@ -39,13 +39,13 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      * @see SpawnInitializer
      * @see SpawnContext
      */
-    template<std::size_t N>
-    class InitializerList final : public SpawnInitializer {
+    template<typename THandle, std::size_t N>
+    class InitializerList final : public SpawnInitializer<THandle> {
 
         /**
          * @brief Fixed-size array of initializers to execute.
          */
-        const std::array<std::unique_ptr<SpawnInitializer>, N> initializers_;
+        const std::array<std::unique_ptr<SpawnInitializer<THandle>>, N> initializers_;
 
     public:
 
@@ -58,7 +58,7 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          *             arguments must match the template parameter N.
          */
         template<typename... Args>
-        requires (sizeof...(Args) == N && (std::derived_from<Args, SpawnInitializer> && ...))
+        requires (sizeof...(Args) == N && (std::derived_from<Args, SpawnInitializer<THandle>> && ...))
         explicit InitializerList(std::unique_ptr<Args>&& ...args) : initializers_{std::move(args)...}{}
 
         /**
@@ -69,9 +69,9 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @param spawnContext Context providing access to spawn-related data.
          */
         void initialize(
-            helios::engine::ecs::GameObject gameObject,
+            helios::engine::runtime::world::GameObject gameObject,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) override {
             for (std::size_t i = 0; i < initializers_.size(); ++i) {
                 initializers_[i]->initialize(

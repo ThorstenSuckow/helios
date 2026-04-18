@@ -11,7 +11,7 @@ export module helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.engine.runtime.spawn.types.SpawnPlanCursor;
 import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.math;
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 using namespace helios::engine::runtime::spawn::types;
 export namespace helios::engine::runtime::spawn::behavior {
@@ -44,6 +44,7 @@ export namespace helios::engine::runtime::spawn::behavior {
      * @see SpawnInitializer
      * @see SpawnContext
      */
+    template<typename THandle>
     class SpawnPlacer {
 
     public:
@@ -62,11 +63,11 @@ export namespace helios::engine::runtime::spawn::behavior {
          * @return The world position for the spawned entity.
          */
         virtual helios::math::vec3f getPosition(
-            const helios::engine::ecs::EntityHandle& entityHandle,
+            const THandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) = 0;
 
         /**

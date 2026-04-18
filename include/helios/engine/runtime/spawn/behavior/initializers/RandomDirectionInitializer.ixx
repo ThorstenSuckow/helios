@@ -9,7 +9,7 @@ export module helios.engine.runtime.spawn.behavior.initializers.RandomDirectionI
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
 import helios.engine.runtime.spawn.types.SpawnPlanCursor;
 import helios.engine.runtime.spawn.types.SpawnContext;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
 import helios.math;
@@ -33,7 +33,8 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      *
      * @see SpawnInitializer
      */
-    class RandomDirectionInitializer final : public SpawnInitializer {
+    template<typename THandle>
+    class RandomDirectionInitializer final : public SpawnInitializer<THandle> {
 
         helios::util::Random rGen_{12345};
 
@@ -47,9 +48,9 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @param spawnContext Context data (unused).
          */
         void initialize(
-            helios::engine::ecs::GameObject gameObject,
+            helios::engine::runtime::world::GameObject gameObject,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) override {
 
 

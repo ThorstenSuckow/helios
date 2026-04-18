@@ -36,7 +36,8 @@ export namespace helios::engine::runtime::spawn::policy::amount {
      * @see SpawnAmountProvider
      * @see FixedSpawnAmount
      */
-    class SpawnAmountByCallback : public SpawnAmountProvider {
+    template<typename THandle>
+    class SpawnAmountByCallback : public SpawnAmountProvider<THandle> {
 
         /**
          * @brief Function signature for amount evaluation.

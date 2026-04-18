@@ -4,7 +4,15 @@ Entity spawning infrastructure for the helios engine.
 
 ## Overview
 
-This module provides a complete spawning pipeline for managing entity lifecycle at runtime. It separates concerns into scheduling (when/how many), behavior (where/how), and execution (pool integration).
+This module provides a complete spawning pipeline for runtime entity lifecycle
+management. The architecture separates concerns into:
+
+- **Policy layer** (*when/how many*)
+- **Behavior layer** (*where/how*)
+- **Execution layer** (*pool acquisition/release and command handling*)
+
+The full stack is template-based on handle type (`THandle`) so spawn logic can
+be reused across handle domains with compile-time type safety.
 
 ## Architecture
 
@@ -14,30 +22,32 @@ This module provides a complete spawning pipeline for managing entity lifecycle 
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  POLICY LAYER (when/how many)                                       │
-│  ┌─────────────┐    ┌─────────────┐    ┌──────────────┐             │
-│  │ SpawnRule   │───>│SpawnCondition───>│AmountProvider│             │
-│  └─────────────┘    └─────────────┘    └──────────────┘             │
+│  ┌─────────────┐   ┌──────────────┐   ┌─────────────────┐           │
+│  │ SpawnRule   │──>│SpawnCondition│──>│SpawnAmount      │           │
+│  │ <THandle>   │   │              │   │Provider<THandle>│           │
+│  └─────────────┘   └──────────────┘   └─────────────────┘           │
 │         │                                                           │
 │         ▼                                                           │
 │  SCHEDULING LAYER                                                   │
 │  ┌─────────────────────────────────────────┐                        │
-│  │           SpawnScheduler                │                        │
-│  │  (evaluates rules, produces plans)      │                        │
+│  │        SpawnScheduler<THandle>          │                        │
+│  │   (evaluates rules, produces plans)     │                        │
 │  └────────────────────┬────────────────────┘                        │
 │                       │                                             │
 │                       ▼                                             │
 │  COMMAND LAYER                                                      │
 │  ┌─────────────────────────────────────────┐                        │
-│  │     ScheduledSpawnPlanCommand           │                        │
+│  │ ScheduledSpawnPlanCommand<THandle>      │                        │
 │  └────────────────────┬────────────────────┘                        │
 │                       │                                             │
 │                       ▼                                             │
 │  EXECUTION LAYER                                                    │
 │  ┌─────────────────────────────────────────┐                        │
-│  │           SpawnManager                  │                        │
-│  │  ┌───────────┐    ┌───────────┐         │                        │
-│  │  │SpawnPlacer│    │Initializer│         │                        │
-│  │  └───────────┘    └───────────┘         │                        │
+│  │        SpawnManager<THandle>            │                        │
+│  │  ┌────────────────┐ ┌────────────────┐  │                        │
+│  │  │SpawnPlacer     │ │SpawnInitializer│  │                        │
+│  │  │<THandle>       │ │<THandle>       │  │                        │
+│  │  └────────────────┘ └────────────────┘  │                        │
 │  └─────────────────────────────────────────┘                        │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
@@ -47,46 +57,36 @@ This module provides a complete spawning pipeline for managing entity lifecycle 
 
 | Directory | Purpose |
 |-----------|---------|
-| `behavior/` | SpawnPlacer and SpawnInitializer interfaces with implementations |
-| `commands/` | Spawn and despawn commands for deferred execution |
-| `events/` | Frame-level events for spawn confirmation |
-| `policy/` | Spawn rules, conditions, and amount providers |
-| `scheduling/` | SpawnScheduler and SpawnPlan management |
+| `behavior/` | `SpawnPlacer<THandle>` and `SpawnInitializer<THandle>` abstractions + implementations |
+| `commands/` | Typed spawn/despawn command payloads |
+| `events/` | Spawn pipeline events (e.g. plan execution confirmation) |
+| `policy/` | Rules, conditions, and amount providers |
+| `scheduling/` | Scheduler implementations and plan production |
+| `types/` | Shared ids, contexts, profiles, cursors |
 
-## Key Classes
+## Key Types
 
-| Class | Purpose |
-|-------|---------|
-| `SpawnManager` | Manager processing spawn/despawn requests via pools |
-| `SpawnProfile` | Configuration bundling pool ID, placer, and initializer |
-| `SpawnScheduler` | Evaluates rules and produces scheduled spawn plans |
-| `SpawnContext` | Context passed to placers/initializers during spawn |
-| `EmitterContext` | Source entity state for emitter-relative spawning |
+| Type | Purpose |
+|------|---------|
+| `SpawnManager<THandle>` | Executes spawn/despawn command queues and pool operations |
+| `SpawnProfile<THandle>` | Binds pool, placer, and initializer for a profile id |
+| `SpawnScheduler<THandle>` | Produces scheduled spawn plans from rules |
+| `SpawnContext<THandle>` | Context payload for placement/initialization |
+| `EmitterContext<THandle>` | Optional emitter/source context |
 
 ## Usage
 
 ```cpp
-// 1. Create spawn profile with behaviors
-auto profile = std::make_unique<SpawnProfile>(SpawnProfile{
+using Handle = GameObjectHandle;
+
+auto profile = std::make_unique<SpawnProfile<Handle>>(SpawnProfile<Handle>{
     .gameObjectPoolId = bulletPoolId,
-    .spawnPlacer = std::make_unique<EmitterSpawnPlacer>(),
-    .spawnInitializer = std::make_unique<EmitterInitializer>()
+    .spawnPlacer = std::make_unique<EmitterSpawnPlacer<Handle>>(),
+    .spawnInitializer = std::make_unique<EmitterInitializer<Handle>>()
 });
 
-// 2. Register profile with spawn manager
+auto& spawnManager = gameWorld.registerManager<SpawnManager<Handle>>();
 spawnManager.addSpawnProfile(bulletProfileId, std::move(profile));
-
-// 3. Create scheduler with rules
-auto scheduler = std::make_unique<SpawnScheduler>();
-scheduler->addRule(bulletProfileId, std::make_unique<SpawnRule>(
-    std::make_unique<TimerSpawnCondition>(0.1f),
-    std::make_unique<FixedSpawnAmount>(1),
-    SpawnRuleId{1}
-));
-
-// 4. Add spawn system to game loop
-gameLoop.phase(PhaseType::Main).addPass()
-    .addSystem<GameObjectSpawnSystem>(std::move(scheduler));
 ```
 
 ---
@@ -94,5 +94,6 @@ gameLoop.phase(PhaseType::Main).addPass()
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::spawn
 @brief Entity spawning infrastructure for the helios engine.
-@details Provides a complete spawning pipeline separating scheduling (when/how many), behavior (where/how), and execution (pool integration) concerns.
+@details Template-based spawn pipeline with separated policy, scheduling,
+behavior, and execution responsibilities.
 </p></details>

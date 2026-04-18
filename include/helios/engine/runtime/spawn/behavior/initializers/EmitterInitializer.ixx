@@ -11,7 +11,7 @@ export module helios.engine.runtime.spawn.behavior.initializers.EmitterInitializ
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
 import helios.engine.runtime.spawn.types.SpawnPlanCursor;
 import helios.engine.runtime.spawn.types.SpawnContext;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
 import helios.engine.modules.physics.motion.components.SteeringComponent;
@@ -37,7 +37,8 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      * @see SpawnInitializer
      * @see EmitterContext
      */
-    class EmitterInitializer final : public SpawnInitializer {
+    template<typename THandle>
+    class EmitterInitializer final : public SpawnInitializer<THandle> {
 
     public:
 
@@ -51,9 +52,9 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @pre spawnContext.emitterContext must have a value.
          */
         void initialize(
-            helios::engine::ecs::GameObject gameObject,
+            helios::engine::runtime::world::GameObject gameObject,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) override {
 
             const auto& emitterContext = spawnContext.emitterContext;

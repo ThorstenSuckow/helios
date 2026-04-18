@@ -12,7 +12,7 @@ export module helios.engine.runtime.spawn.behavior.initializers.MoveInitializer;
 import helios.engine.runtime.spawn.behavior.SpawnInitializer;
 import helios.engine.runtime.spawn.types.SpawnPlanCursor;
 import helios.engine.runtime.spawn.types.SpawnContext;
-import helios.engine.ecs.GameObject;
+import helios.engine.runtime.world.GameObject;
 import helios.engine.modules.physics.motion.components.Move2DComponent;
 import helios.engine.modules.physics.motion.components.DirectionComponent;
 
@@ -109,9 +109,12 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
      * @see Move2DComponent
      * @see TranslationStateComponent
      */
-    class MoveInitializer final : public SpawnInitializer {
+    template<typename TEntity>
+    class MoveInitializer final : public SpawnInitializer<typename TEntity::Handle_type> {
 
         helios::util::Random rGen_{12345};
+
+        using Handle_type = typename TEntity::Handle_type;
 
         /**
          * @brief The direction strategy to apply during initialization.
@@ -133,24 +136,24 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * If a SteeringComponent is present, the entity is rotated to face the
          * movement direction.
          *
-         * @param gameObject The spawned entity to initialize.
+         * @param entity The spawned entity to initialize.
          * @param cursor The spawn plan cursor (unused).
          * @param spawnContext The spawn context (unused).
          */
         void random(
-            helios::engine::ecs::GameObject gameObject,
+            TEntity entity,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<Handle_type>& spawnContext
         ) noexcept {
 
-            auto* mc = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
-            auto* dc = gameObject.get<helios::engine::modules::physics::motion::components::DirectionComponent>();
+            auto* mc = entity.template get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+            auto* dc = entity.template get<helios::engine::modules::physics::motion::components::DirectionComponent>();
 
             auto dir = helios::math::vec2f{
                 rGen_.randomFloat(-1.0f, 1.0f),
                 rGen_.randomFloat(-1.0f, 1.0f)
             };
-            auto* sc = gameObject.get<helios::engine::modules::physics::motion::components::SteeringComponent>();
+            auto* sc = entity.template get<helios::engine::modules::physics::motion::components::SteeringComponent>();
             if (sc) {
                 sc->setTargetRotationAngle(helios::math::degrees(std::atan2(dir[1], dir[0])));
                 sc->setCurrentRotationAngle(helios::math::degrees(std::atan2(dir[1], dir[0])));
@@ -172,30 +175,30 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * updates the SteeringComponent to rotate the entity toward the movement
          * direction.
          *
-         * @param gameObject The spawned entity to initialize.
+         * @param entity The spawned entity to initialize.
          * @param cursor The spawn plan cursor (unused).
          * @param spawnContext The spawn context (unused).
          * @param target The target axis vector or point coordinates.
          * @param directionType The direction strategy (`Axis` or `Point`).
          */
         void alignTo (
-            helios::engine::ecs::GameObject gameObject,
+            TEntity entity,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext,
+            const SpawnContext<Handle_type>& spawnContext,
             const helios::math::vec3f target,
             const DirectionType directionType = DirectionType::Axis
             
         ) noexcept {
 
-            auto* mc = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
-            auto* sc = gameObject.get<helios::engine::modules::physics::motion::components::SteeringComponent>();
-            auto* dc = gameObject.get<helios::engine::modules::physics::motion::components::DirectionComponent>();
+            auto* mc = entity.template get<helios::engine::modules::physics::motion::components::Move2DComponent>();
+            auto* sc = entity.template get<helios::engine::modules::physics::motion::components::SteeringComponent>();
+            auto* dc = entity.template get<helios::engine::modules::physics::motion::components::DirectionComponent>();
 
             auto direction = target;
             if (directionType == DirectionType::Axis) {
                 assert(direction.isNormalized() && "axis initializer requires valid direction vector");
             } else if (directionType == DirectionType::Point) {
-                auto* tsc = gameObject.get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+                auto* tsc = entity.get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
 
                 direction = (target - (tsc->translation() * -1.0f)).normalize();
                 assert(direction.isNormalized() && "point initializer requires valid direction vector");
@@ -248,32 +251,32 @@ export namespace helios::engine::runtime::spawn::behavior::initializers {
          * @details Delegates to the appropriate strategy method based on
          * the configured Direction enum value.
          *
-         * @param gameObject The spawned entity to initialize.
+         * @param entity The spawned entity to initialize.
          * @param cursor The spawn plan cursor providing batch context.
          * @param spawnContext The spawn context with emitter information.
          */
         void initialize(
-            helios::engine::ecs::GameObject gameObject,
+            TEntity entity,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<Handle_type>& spawnContext
         ) override {
 
             switch (directionType_) {
                 case DirectionType::Random:
-                    random(gameObject, cursor, spawnContext);
+                    random(entity, cursor, spawnContext);
                     return;
                 case DirectionType::Right:
-                    alignTo(gameObject, cursor, spawnContext, helios::math::X_AXISf);
+                    alignTo(entity, cursor, spawnContext, helios::math::X_AXISf);
                     return;
                 case DirectionType::Left:
-                    alignTo(gameObject, cursor, spawnContext, helios::math::X_AXISf * -1.0f);
+                    alignTo(entity, cursor, spawnContext, helios::math::X_AXISf * -1.0f);
                     return;
                 case DirectionType::Axis:
-                    alignTo(gameObject, cursor, spawnContext, direction_);
+                    alignTo(entity, cursor, spawnContext, direction_);
                     return;
                     
                 case DirectionType::Point:
-                    alignTo(gameObject, cursor, spawnContext, direction_, directionType_);
+                    alignTo(entity, cursor, spawnContext, direction_, directionType_);
                     return;
             }
         }

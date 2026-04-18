@@ -40,6 +40,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
      * @see SpawnScheduler
      * @see SpawnRule
      */
+    template<typename THandle>
     class RuleProcessor {
 
     public:
@@ -68,9 +69,9 @@ export namespace helios::engine::runtime::spawn::scheduling {
         virtual SpawnPlan processRule(
             const GameWorld& gameWorld,
             const UpdateContext& updateContext,
-            const SpawnContext& spawnContext,
+            const SpawnContext<THandle>& spawnContext,
             const SpawnProfileId spawnProfileId,
-            SpawnRule& spawnRule,
+            SpawnRule<THandle>& spawnRule,
             SpawnRuleState& spawnRuleState
         ) noexcept = 0;
 

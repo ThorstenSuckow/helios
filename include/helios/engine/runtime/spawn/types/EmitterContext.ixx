@@ -9,7 +9,7 @@ export module helios.engine.runtime.spawn.types.EmitterContext;
 import helios.math;
 import helios.util;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 export namespace helios::engine::runtime::spawn::types {
 
@@ -32,6 +32,7 @@ export namespace helios::engine::runtime::spawn::types {
      * @see SpawnContext
      * @see SpawnCommand
      */
+    template<typename THandle>
     struct EmitterContext {
 
         /**
@@ -47,7 +48,7 @@ export namespace helios::engine::runtime::spawn::types {
         /**
          * @brief Handle of the entity that is responsible for this EmitterContext.
          */
-        const helios::engine::ecs::EntityHandle source;
+        const THandle source;
 
     };
 

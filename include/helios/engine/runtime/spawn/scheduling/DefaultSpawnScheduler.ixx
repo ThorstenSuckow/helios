@@ -64,7 +64,8 @@ export namespace helios::engine::runtime::spawn::scheduling {
      * @see ScheduledSpawnPlan
      * @see GameObjectSpawnSystem
      */
-    class DefaultSpawnScheduler : public SpawnScheduler {
+    template<typename THandle>
+    class DefaultSpawnScheduler : public SpawnScheduler<THandle> {
 
     protected:
 
@@ -72,7 +73,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
           * @brief Map from spawn profile IDs to their spawn rules.
           */
          std::unordered_map<helios::engine::runtime::spawn::types::SpawnProfileId,
-                            std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule>>
+                            std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule<THandle>>>
                  spawnRules_;
 
         /**
@@ -86,7 +87,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         /**
          * @brief Processor for evaluating individual rules.
          */
-        DefaultRuleProcessor ruleProcessor_{};
+        DefaultRuleProcessor<THandle> ruleProcessor_{};
 
     public:
 
@@ -96,7 +97,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          * @param initialSpanPlanSize Initial capacity for the spawn plan buffer.
          */
         DefaultSpawnScheduler(const size_t initialSpanPlanSize = 20) {
-            scheduledSpawnPlans_.reserve(initialSpanPlanSize);
+            SpawnScheduler<THandle>::scheduledSpawnPlans_.reserve(initialSpanPlanSize);
         }
 
         /**
@@ -112,9 +113,9 @@ export namespace helios::engine::runtime::spawn::scheduling {
         void evaluate(
             const GameWorld& gameWorld,
             const UpdateContext& updateContext,
-            const SpawnContext& spawnContext) noexcept override{
+            const SpawnContext<THandle>& spawnContext) noexcept override{
 
-            scheduledSpawnPlans_.clear();
+            SpawnScheduler<THandle>::scheduledSpawnPlans_.clear();
 
             for (auto& [spawnProfileId, rule] : spawnRules_) {
 
@@ -124,7 +125,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
                 );
 
                 if (spawnPlan.amount > 0) {
-                    scheduledSpawnPlans_.push_back({
+                    SpawnScheduler<THandle>::scheduledSpawnPlans_.push_back({
                         spawnProfileId,
                         std::move(spawnPlan),
                         spawnContext
@@ -145,7 +146,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          */
         DefaultSpawnScheduler& addRule(
             const helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId,
-            std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule> spawnRule
+            std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule<THandle>> spawnRule
         ) {
             assert(!spawnRules_.contains(spawnProfileId) && "Duplicate SpawnProfile entry");
             assert(!spawnRuleStates_.contains(spawnRule->spawnRuleId()) && "Duplicate SpawnRuleId entry");

@@ -4,41 +4,46 @@ Spawn rules, conditions, and amount providers.
 
 ## Overview
 
-This module provides the policy layer for the spawn system. It defines rules that combine conditions (when to spawn) with amount providers (how many to spawn).
+This module defines the *policy* layer of runtime spawning.
+`SpawnRule<THandle>` combines:
 
-## Key Classes
+- a `SpawnCondition` (*when to spawn*)
+- a `SpawnAmountProvider<THandle>` (*how many to spawn*)
 
-| Class | Purpose |
-|-------|---------|
-| `SpawnRule` | Combines condition and amount provider into evaluatable rule |
-| `SpawnCondition` | Abstract interface for spawn timing conditions |
-| `SpawnRuleState` | Runtime state tracked per rule (e.g., time since last spawn) |
+Rule execution state is tracked via `SpawnRuleState`.
+
+> **Note:** `SpawnCondition` is *not* template-based — conditions operate on
+> pool snapshots and rule state independent of the handle type.
+
+## Key Types
+
+| Type | Purpose |
+|------|---------|
+| `SpawnRule<THandle>` | Composes condition and amount provider into one evaluatable rule |
+| `SpawnCondition` | Interface for spawn trigger checks |
+| `SpawnConditionAll` | Composite AND-condition over multiple `SpawnCondition` instances |
+| `SpawnAmountProvider<THandle>` | Interface for dynamic amount calculation |
+| `SpawnRuleState` | Mutable per-rule runtime state |
 
 ## Submodules
 
 | Directory | Purpose |
 |-----------|---------|
-| `amount/` | SpawnAmountProvider implementations |
-| `conditions/` | SpawnCondition implementations |
+| `amount/` | Amount provider implementations |
+| `conditions/` | Condition implementations |
 
-## Usage
+## Evaluation Flow
 
-```cpp
-// Create a rule: spawn 3 enemies every 2 seconds
-auto rule = std::make_unique<SpawnRule>(
-    std::make_unique<TimerSpawnCondition>(2.0f),
-    std::make_unique<FixedSpawnAmount>(3),
-    SpawnRuleId{1}
-);
-
-// Add to scheduler
-scheduler.addRule(enemyProfileId, std::move(rule));
-```
+1. Scheduler selects active rules.
+2. Rule processor updates `SpawnRuleState`.
+3. `SpawnCondition` decides whether spawning is allowed.
+4. `SpawnAmountProvider<THandle>` computes spawn count.
+5. Result is encoded in `SpawnPlan`.
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::spawn::policy
 @brief Spawn rules, conditions, and amount providers.
-@details Provides the policy layer for spawn timing and quantity control, separating "when" from "how many" logic.
+@details Template-based policy primitives used by spawn schedulers.
 </p></details>

@@ -44,12 +44,13 @@ export namespace helios::engine::runtime::spawn::policy {
      * @see SpawnAmountProvider
      * @see SpawnScheduler
      */
+    template<typename THandle>
     class SpawnRule {
 
         /**
          * @brief Provider that determines spawn quantity.
          */
-        std::unique_ptr<const amount::SpawnAmountProvider> spawnAmountProvider_;
+        std::unique_ptr<const amount::SpawnAmountProvider<THandle>> spawnAmountProvider_;
 
         /**
          * @brief Condition that determines if spawning should occur.
@@ -72,7 +73,7 @@ export namespace helios::engine::runtime::spawn::policy {
          */
         explicit SpawnRule(
             std::unique_ptr<const SpawnCondition> spawnCondition,
-            std::unique_ptr<const amount::SpawnAmountProvider> spawnAmountProvider,
+            std::unique_ptr<const amount::SpawnAmountProvider<THandle>> spawnAmountProvider,
             const helios::engine::runtime::spawn::types::SpawnRuleId spawnRuleId
         ) :
             spawnCondition_(std::move(spawnCondition)),

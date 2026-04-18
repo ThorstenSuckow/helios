@@ -9,7 +9,7 @@ module;
 
 export module helios.engine.runtime.spawn.commands.DespawnCommand;
 
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 
 
@@ -32,12 +32,13 @@ export namespace helios::engine::runtime::spawn::commands {
      * @see DespawnCommandDispatcher
      * @see SpawnManager
      */
+    template<typename THandle>
     class DespawnCommand {
 
         /**
          * @brief The handle of the entity to despawn.
          */
-        helios::engine::ecs::EntityHandle entityHandle_;
+        THandle entityHandle_;
 
         /**
          * @brief The spawn profile ID for pool return.
@@ -53,7 +54,7 @@ export namespace helios::engine::runtime::spawn::commands {
          * @param spawnProfileId The spawn profile ID for pool return.
          */
         explicit DespawnCommand(
-            const helios::engine::ecs::EntityHandle entityHandle,
+            const THandle entityHandle,
             const helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId) :
             entityHandle_(entityHandle), spawnProfileId_(spawnProfileId) {}
 
@@ -63,7 +64,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The entity handle.
          */
-        [[nodiscard]] helios::engine::ecs::EntityHandle entityHandle() const noexcept {
+        [[nodiscard]] THandle entityHandle() const noexcept {
             return entityHandle_;
         }
 

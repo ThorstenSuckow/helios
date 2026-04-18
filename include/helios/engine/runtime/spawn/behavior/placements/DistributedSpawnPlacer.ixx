@@ -16,7 +16,7 @@ import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.runtime.spawn.behavior.SpawnPlacer;
 import helios.util.Random;
 import helios.math;
-import helios.engine.ecs.EntityHandle;
+import helios.ecs.types.EntityHandle;
 
 import helios.engine.runtime.world.UpdateContext;
 
@@ -64,8 +64,8 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
      * @see SpawnPlacer
      * @see AxisSpawnPlacer
      */
-    template<std::size_t N>
-    class DistributedSpawnPlacer final : public SpawnPlacer {
+    template<typename THandle, std::size_t N>
+    class DistributedSpawnPlacer final : public SpawnPlacer<THandle> {
 
         /**
          * @brief Fixed array of spawn point locations.
@@ -102,11 +102,11 @@ export namespace helios::engine::runtime::spawn::behavior::placements {
          * @return World position from the locations array.
          */
         helios::math::vec3f getPosition(
-            const helios::engine::ecs::EntityHandle& entityHandle,
+            const THandle& entityHandle,
             const helios::math::aabbf& gameObjectBounds,
             const helios::math::aabbf& environmentBounds,
             const SpawnPlanCursor& cursor,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) override {
 
             const size_t bin = N * (cursor.position/static_cast<float>(cursor.spawnCount));

@@ -16,31 +16,25 @@ import helios.engine.runtime.spawn.types.SpawnContext;
 import helios.engine.runtime.spawn.scheduling.SpawnPlan;
 import helios.engine.runtime.spawn.types.SpawnProfileId;
 
+import helios.engine.runtime.world.types.GameObjectHandle;
 
 using namespace helios::engine::runtime::spawn::types;
 using namespace helios::engine::runtime::spawn::scheduling;
+using namespace helios::engine::runtime::world::types;
 export namespace helios::engine::runtime::spawn::commands {
 
     /**
-     * @brief Command for executing a scheduled spawn plan.
+     * @brief Command payload for execution of a scheduled spawn plan.
      *
-     * @details ScheduledSpawnPlanCommand wraps a ScheduledSpawnPlan and routes
-     * it to the appropriate dispatcher for execution. The command itself does
-     * not perform spawning directly; instead, it delegates to a dispatcher
-     * which forwards the command to the SpawnManager.
+     * @details This command is produced by scheduler-driven systems and consumed
+     * by `SpawnManager<THandle>` via command-handler dispatch.
      *
-     * ## Execution Flow
-     *
-     * 1. GameObjectSpawnSystem creates command from ScheduledSpawnPlan
-     * 2. Command is added to CommandBuffer
-     * 3. CommandBuffer flushes and calls accept() on each command
-     * 4. Dispatcher routes command to SpawnManager
-     * 5. SpawnManager processes the spawn command
+     * @tparam THandle Handle type carried by spawn context data.
      *
      * @see ScheduledSpawnPlan
-     * @see ScheduledSpawnPlanCommandDispatcher
      * @see SpawnManager
      */
+    template<typename THandle>
     class ScheduledSpawnPlanCommand {
 
         /**
@@ -56,7 +50,7 @@ export namespace helios::engine::runtime::spawn::commands {
         /**
          * @brief Context providing spawn-time information.
          */
-        SpawnContext spawnContext_;
+        SpawnContext<THandle> spawnContext_;
 
     public:
 
@@ -70,7 +64,7 @@ export namespace helios::engine::runtime::spawn::commands {
         explicit ScheduledSpawnPlanCommand(
             const SpawnProfileId spawnProfileId,
             const SpawnPlan spawnPlan,
-            const SpawnContext& spawnContext
+            const SpawnContext<THandle>& spawnContext
         ) :
             spawnProfileId_(spawnProfileId),
             spawnPlan_(spawnPlan),
@@ -96,11 +90,11 @@ export namespace helios::engine::runtime::spawn::commands {
         }
 
         /**
-         * @brief Retrieves the spawn context associated with this instance.
+         * @brief Retrieves the spawn context stored in this command.
          *
-         * @return The spawn context.
+         * @return Spawn context specialized for `GameObjectHandle`.
          */
-        [[nodiscard]] SpawnContext spawnContext() const noexcept {
+        [[nodiscard]] SpawnContext<GameObjectHandle> spawnContext() const noexcept {
             return spawnContext_;
         }
 

@@ -23,7 +23,8 @@ export namespace helios::engine::runtime::spawn::policy::amount {
      *
      * @see SpawnAmountProvider
      */
-    class FixedSpawnAmount : public SpawnAmountProvider {
+    template<typename THandle>
+    class FixedSpawnAmount : public SpawnAmountProvider<THandle> {
 
         /**
          * @brief The fixed number of entities to spawn.

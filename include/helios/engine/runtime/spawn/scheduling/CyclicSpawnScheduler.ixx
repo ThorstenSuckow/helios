@@ -36,6 +36,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
     /**
      * @brief Configuration pairing a spawn profile with its rule.
      */
+    template<typename THandle>
     struct RuleConfig {
 
         /**
@@ -46,7 +47,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         /**
          * @brief The spawn rule controlling when spawns occur.
          */
-        std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule> spawnRule;
+        std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule<THandle>> spawnRule;
     };
 
     /**
@@ -88,13 +89,13 @@ export namespace helios::engine::runtime::spawn::scheduling {
      * @see DefaultSpawnScheduler
      * @see RuleConfig
      */
-    template<std::size_t N>
-    class CyclicSpawnScheduler : public SpawnScheduler {
+    template<typename THandle, std::size_t N>
+    class CyclicSpawnScheduler : public SpawnScheduler<THandle> {
 
         /**
          * @brief Fixed-size ring buffer of rule configurations.
          */
-        std::array<RuleConfig, N> ringBuffer_{};
+        std::array<RuleConfig<THandle>, N> ringBuffer_{};
 
         /**
          * @brief Current position in the ring buffer.
@@ -117,7 +118,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
         /**
          * @brief Processor for evaluating individual rules.
          */
-        DefaultRuleProcessor ruleProcessor_;
+        DefaultRuleProcessor<THandle> ruleProcessor_;
 
     public:
 
@@ -135,9 +136,9 @@ export namespace helios::engine::runtime::spawn::scheduling {
         void evaluate(
             const GameWorld& gameWorld,
             const UpdateContext& updateContext,
-            const SpawnContext& spawnContext ) noexcept override {
+            const SpawnContext<THandle>& spawnContext ) noexcept override {
 
-            scheduledSpawnPlans_.clear();
+            SpawnScheduler<THandle>::scheduledSpawnPlans_.clear();
 
             // Process queue
             auto& [spawnProfileId, spawnRule] = ringBuffer_[cursor_];
@@ -146,7 +147,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
                 spawnRuleStates_[spawnRule->spawnRuleId()]);
 
             if (spawnPlan.amount  > 0) {
-                scheduledSpawnPlans_.push_back({
+                SpawnScheduler<THandle>::scheduledSpawnPlans_.push_back({
                     spawnProfileId,
                     std::move(spawnPlan),
                     spawnContext
@@ -172,7 +173,7 @@ export namespace helios::engine::runtime::spawn::scheduling {
          */
         CyclicSpawnScheduler& addRule(
             const helios::engine::runtime::spawn::types::SpawnProfileId spawnProfileId,
-            std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule> spawnRule
+            std::unique_ptr<helios::engine::runtime::spawn::policy::SpawnRule<THandle>> spawnRule
         ) {
             assert(count_ < N);
 

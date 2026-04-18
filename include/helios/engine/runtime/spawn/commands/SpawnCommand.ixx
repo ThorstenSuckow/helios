@@ -33,6 +33,7 @@ export namespace helios::engine::runtime::spawn::commands {
      * @see SpawnManager
      * @see GameObjectSpawnSystem
      */
+    template<typename THandle>
     class SpawnCommand {
 
         /**
@@ -48,7 +49,7 @@ export namespace helios::engine::runtime::spawn::commands {
         /**
          * @brief Context providing spawn-time information (e.g., emitter).
          */
-        SpawnContext spawnContext_;
+        SpawnContext<THandle> spawnContext_;
 
     public:
 
@@ -61,7 +62,7 @@ export namespace helios::engine::runtime::spawn::commands {
          */
         explicit SpawnCommand(
             const SpawnProfileId spawnProfileId,
-            const SpawnContext& spawnContext,
+            const SpawnContext<THandle>& spawnContext,
             const size_t spawnBudget = 1
         ) :
         spawnProfileId_(spawnProfileId),
@@ -93,7 +94,7 @@ export namespace helios::engine::runtime::spawn::commands {
          *
          * @return The spawn context of this command.
          */
-        [[nodiscard]] SpawnContext spawnContext() const noexcept {
+        [[nodiscard]] SpawnContext<THandle> spawnContext() const noexcept {
             return spawnContext_;
         }
     };

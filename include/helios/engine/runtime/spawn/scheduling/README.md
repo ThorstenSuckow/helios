@@ -4,54 +4,57 @@ Spawn scheduling and plan management.
 
 ## Overview
 
-This module provides the scheduling layer for the spawn system. Schedulers evaluate spawn rules and produce ScheduledSpawnPlan instances that are processed by the command pipeline. The architecture separates scheduling strategies from rule processing logic.
-
-## Key Classes
-
-| Class | Purpose |
-|-------|---------|
-| `SpawnScheduler` | Abstract base class defining the scheduler interface |
-| `DefaultSpawnScheduler` | Evaluates all rules every frame |
-| `CyclicSpawnScheduler<N>` | Round-robin evaluation, advances on successful spawn |
-| `RuleProcessor` | Abstract interface for rule evaluation logic |
-| `DefaultRuleProcessor` | Standard rule processing implementation |
-| `SpawnPlan` | Data describing a planned spawn (rule, amount) |
-| `ScheduledSpawnPlan` | A plan paired with profile ID and context |
-| `RuleConfig` | Configuration pairing profile ID with a rule |
+This module provides the scheduling layer for the spawn system. Schedulers
+(`SpawnScheduler<THandle>`) evaluate spawn rules and produce
+`ScheduledSpawnPlan<THandle>` instances that are forwarded through command
+buffers to `SpawnManager<THandle>`.
 
 ## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                        SpawnScheduler (abstract)                        │
+│                    SpawnScheduler<THandle> (abstract)                   │
 │  ┌───────────────────────────────────────────────────────────────────┐  │
-│  │ evaluate()           → Process rules, produce plans               │  │
-│  │ drainScheduledPlans() → Return and clear pending plans            │  │
-│  │ commit()             → Update rule state after spawn              │  │
+│  │ evaluate()            → process rules, produce plans              │  │
+│  │ drainScheduledPlans() → return and clear pending plans            │  │
+│  │ commit()              → update rule state after successful spawn  │  │
 │  └───────────────────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────────────────┘
                     │                                │
-        ┌───────────┴────────────┐       ┌───────────┴────────────┐
-        │  DefaultSpawnScheduler │       │  CyclicSpawnScheduler  │
-        │  (all rules/frame)     │       │  (advance on success)  │
-        └───────────┬────────────┘       └───────────┬────────────┘
+        ┌───────────┴────────────┐       ┌───────────┴─────────────┐
+        │ DefaultSpawnScheduler  │       │  CyclicSpawnScheduler   │
+        │       <THandle>        │       │     <THandle, N>        │
+        └───────────┬────────────┘       └───────────┬─────────────┘
                     │                                │
                     └───────────┬────────────────────┘
                                 │
                     ┌───────────┴────────────┐
-                    │   DefaultRuleProcessor │
-                    │   (shared logic)       │
+                    │ DefaultRuleProcessor   │
+                    │      <THandle>         │
                     └────────────────────────┘
 ```
 
+## Key Types
+
+| Type | Purpose |
+|------|---------|
+| `SpawnScheduler<THandle>` | Scheduler interface |
+| `DefaultSpawnScheduler<THandle>` | Evaluate all rules each update |
+| `CyclicSpawnScheduler<THandle, N>` | Round-robin rule evaluation with fixed-size ring buffer |
+| `RuleProcessor<THandle>` | Strategy interface for rule processing |
+| `DefaultRuleProcessor<THandle>` | Standard processing implementation |
+| `RuleConfig<THandle>` | Profile/rule pairing used by `CyclicSpawnScheduler` |
+| `SpawnPlan` | Rule result (`ruleId`, `amount`) |
+| `ScheduledSpawnPlan<THandle>` | `SpawnPlan` + profile id + typed context |
+
 ## Scheduler Strategies
 
-### DefaultSpawnScheduler
+### DefaultSpawnScheduler<THandle>
 
-Evaluates **all registered rules** every frame. Best for independent spawn sources that should trigger simultaneously.
+Evaluates all registered rules each update tick.
 
 ```cpp
-DefaultSpawnScheduler scheduler;
+DefaultSpawnScheduler<EnemyHandle> scheduler;
 scheduler
     .addRule(enemyProfileId, std::make_unique<TimerSpawnRule>(ruleA, 2.0f, 3))
     .addRule(pickupProfileId, std::make_unique<TimerSpawnRule>(ruleB, 5.0f, 1));
@@ -60,13 +63,14 @@ scheduler
 scheduler.evaluate(updateContext, spawnContext);
 ```
 
-### CyclicSpawnScheduler
+### CyclicSpawnScheduler<THandle, N>
 
-Evaluates the **current rule** each frame and advances to the next rule **only after a spawn was successfull committed**. 
-The same rule is re-evaluated until its conditions are met. Best for sequential wave patterns where each wave must complete before the next begins.
+Evaluates one active rule per frame in a fixed-size (`N`) ring buffer and
+advances cyclically after a successful spawn. Ideal for wave-based or
+sequential spawn patterns.
 
 ```cpp
-CyclicSpawnScheduler<3> scheduler;
+CyclicSpawnScheduler<EnemyHandle, 3> scheduler;
 scheduler
     .addRule(wave1ProfileId, std::make_unique<TimerSpawnRule>(rule1, 1.0f, 5))
     .addRule(wave2ProfileId, std::make_unique<TimerSpawnRule>(rule2, 1.0f, 5))
@@ -79,53 +83,16 @@ scheduler.evaluate(updateContext, spawnContext);
 
 ## Workflow
 
-```
-SpawnRule::evaluate() → SpawnPlan → ScheduledSpawnPlan → Command → SpawnManager
-```
-
-1. **Registration:** Rules added via `addRule()` with profile IDs
-2. **Evaluation:** `evaluate()` called each frame by GameObjectSpawnSystem
-3. **Processing:** RuleProcessor evaluates rules, updates state
-4. **Scheduling:** Rules that pass produce ScheduledSpawnPlans
-5. **Draining:** `drainScheduledPlans()` returns pending plans
-6. **Commit:** `commit()` called after spawns to update rule state
-
-## Rule Processing
-
-The `RuleProcessor` abstraction separates evaluation logic from scheduling strategy:
-
-```cpp
-class RuleProcessor {
-public:
-    virtual SpawnPlan processRule(
-        const GameWorld& gameWorld,
-        const UpdateContext& updateContext,
-        const SpawnContext& spawnContext,
-        SpawnProfileId spawnProfileId,
-        SpawnRule& spawnRule,
-        SpawnRuleState& spawnRuleState
-    ) noexcept = 0;
-};
-```
-
-`DefaultRuleProcessor` provides the standard implementation:
-1. Retrieve pool snapshot from GameObjectPoolManager
-2. Update rule state with delta time
-3. Evaluate rule conditions
-4. Return SpawnPlan with spawn amount
-
-## Related Modules
-
-| Module | Purpose |
-|--------|---------|
-| `helios.engine.runtime.spawn.policy` | SpawnRule implementations |
-| `helios.engine.runtime.spawn` | SpawnManager, SpawnProfile |
-| `helios.engine.runtime.pooling` | GameObjectPoolManager |
+1. Register `SpawnRule<THandle>` entries.
+2. Call `evaluate(gameWorld, updateContext, spawnContext)`.
+3. Drain `ScheduledSpawnPlan<THandle>` entries.
+4. Queue `ScheduledSpawnPlanCommand<THandle>`.
+5. `SpawnManager<THandle>` executes plans during flush.
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::engine::runtime::spawn::scheduling
 @brief Spawn scheduling and plan management.
-@details Provides schedulers for evaluating spawn rules and producing spawn plans. Supports multiple scheduling strategies through SpawnScheduler implementations and separates rule processing logic via the RuleProcessor abstraction.
+@details Template-based schedulers and rule processors for typed spawn flows.
 </p></details>

@@ -148,7 +148,7 @@ The builder module follows these principles:
 | Module | Purpose |
 |--------|---------|
 | `helios.ecs` | GameObject, Component base classes |
-| `helios.engine.modules` | Component implementations used by configs |
+| `helios` | Component implementations used by configs |
 | `helios.gameplay` | Gameplay-specific components |
 
 ---

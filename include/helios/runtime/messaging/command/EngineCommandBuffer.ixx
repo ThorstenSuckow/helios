@@ -19,12 +19,12 @@ import helios.platform.lifecycle.commands;
 
 import helios.runtime.messaging.command.TypedCommandBuffer;
 
-import helios.engine.modules.ui.widgets.commands;
+import helios.ui.widgets.commands;
 import helios.gameplay.timing.commands;
 import helios.gameplay.combat.commands;
 import helios.gameplay.damage.commands;
 import helios.gameplay.scoring.commands;
-import helios.engine.modules.physics.motion.commands;
+import helios.physics.motion.commands;
 import helios.gameplay.lifecycle.commands.WorldLifecycleCommand;
 
 import helios.rendering.shader.commands;
@@ -40,9 +40,9 @@ export namespace helios::runtime::messaging::command {
 
     using EngineCommandBuffer = helios::runtime::messaging::command::TypedCommandBuffer<
 
-            helios::engine::modules::physics::motion::commands::Move2DCommand<GameObjectHandle>,
-            helios::engine::modules::physics::motion::commands::SteeringCommand<GameObjectHandle>,
-            helios::engine::modules::ui::widgets::commands::UiActionCommand<GameObjectHandle>,
+            helios::physics::motion::commands::Move2DCommand<GameObjectHandle>,
+            helios::physics::motion::commands::SteeringCommand<GameObjectHandle>,
+            helios::ui::widgets::commands::UiActionCommand<GameObjectHandle>,
 
             helios::gameplay::scoring::commands::UpdateScoreCommand,
             helios::gameplay::timing::commands::TimerControlCommand,

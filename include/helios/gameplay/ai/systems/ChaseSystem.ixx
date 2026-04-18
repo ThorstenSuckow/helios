@@ -18,11 +18,11 @@ import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.ai.components.ChaseComponent;
-import helios.engine.modules.physics.motion.components.SteeringComponent;
+import helios.physics.motion.components.SteeringComponent;
 
 import helios.gameplay.lifecycle.components.DeadTagComponent;
 
-import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.transform.components.TranslationStateComponent;
 
 import helios.ecs.components.Active;
 
@@ -63,9 +63,9 @@ export namespace helios::gameplay::ai::systems {
 
             for (auto [entity, sc, cc, tsc, active] : updateContext.view<
                 THandle,
-                helios::engine::modules::physics::motion::components::SteeringComponent<THandle>,
+                helios::physics::motion::components::SteeringComponent<THandle>,
                 helios::gameplay::ai::components::ChaseComponent<THandle>,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::spatial::transform::components::TranslationStateComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
@@ -77,7 +77,7 @@ export namespace helios::gameplay::ai::systems {
                     continue;
                 }
 
-                const auto* ttr = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+                const auto* ttr = go->get<helios::spatial::transform::components::TranslationStateComponent>();
                 if (!ttr) {
                     continue;
                 }

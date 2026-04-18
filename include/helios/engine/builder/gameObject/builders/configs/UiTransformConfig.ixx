@@ -8,17 +8,17 @@ export module helios.engine.builder.gameObject.builders.configs.UiTransformConfi
 
 import helios.engine.common.types;
 
-import helios.engine.modules.ui;
+import helios.ui;
 
 import helios.math;
 
 import helios.core;
-import helios.engine.core;
+import helios.core;
 
 import helios.rendering.viewport;
 
-import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
-import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.transform.components.ComposeTransformComponent;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -44,9 +44,9 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param gameObject Target GameObject to configure.
          */
         explicit UiTransformConfig(Entity gameObject) : gameObject_(gameObject) {
-            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
-            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::TranslationStateComponent<Handle_type>>();
-            gameObject_.template add<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::spatial::transform::components::TranslationStateComponent<Handle_type>>();
+            gameObject_.template add<helios::ui::transform::components::UiTransformComponent<Handle_type>>();
         }
 
         /**
@@ -56,8 +56,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        UiTransformConfig& anchor(const helios::engine::modules::ui::layout::Anchor anchor) {
-            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>()
+        UiTransformConfig& anchor(const helios::ui::layout::Anchor anchor) {
+            gameObject_.get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setAnchor(anchor);
             return *this;
         }
@@ -70,7 +70,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& viewport(const helios::rendering::viewport::types::ViewportHandle viewportHandle) {
-            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>()
+            gameObject_.get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setViewportHandle(viewportHandle);
             return *this;
         }
@@ -82,8 +82,8 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        UiTransformConfig& pivot(const helios::engine::modules::ui::layout::Anchor anchor) {
-            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>()
+        UiTransformConfig& pivot(const helios::ui::layout::Anchor anchor) {
+            gameObject_.get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setPivot(anchor);
             return *this;
         }
@@ -96,7 +96,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& offsets(const helios::math::vec4f offsets) {
-            gameObject_.get<helios::engine::modules::ui::transform::components::UiTransformComponent<Handle_type>>()
+            gameObject_.get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setOffsets(offsets);
             return *this;
         }

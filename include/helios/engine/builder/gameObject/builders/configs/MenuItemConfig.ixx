@@ -10,11 +10,11 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.MenuItemConfig;
 
 
-import helios.engine.modules.ui.widgets.types;
-import helios.engine.modules.ui.widgets.components.MenuComponent;
-import helios.engine.modules.ui.widgets.components.UiStyleComponent;
-import helios.engine.modules.ui.widgets.components.UiStateComponent;
-import helios.engine.modules.ui.widgets.components.UiActionComponent;
+import helios.ui.widgets.types;
+import helios.ui.widgets.components.MenuComponent;
+import helios.ui.widgets.components.UiStyleComponent;
+import helios.ui.widgets.components.UiStateComponent;
+import helios.ui.widgets.components.UiActionComponent;
 
 import helios.math;
 
@@ -59,7 +59,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         void attach() {
             assert(parentMenu_ != nullptr);
 
-            auto* mc = parentMenu_->get<helios::engine::modules::ui::widgets::components::MenuComponent<Handle_type>>();
+            auto* mc = parentMenu_->get<helios::ui::widgets::components::MenuComponent<Handle_type>>();
 
             assert(mc != nullptr && "Unexpected nullptr for MenuComponent");
 
@@ -82,11 +82,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         ) : gameObject_(gameObject), parentMenu_(&parentMenu) {
 
 
-            gameObject_.template getOrAdd<helios::engine::modules::ui::widgets::components::UiStyleComponent<Handle_type>>();
-            gameObject_.template getOrAdd<helios::engine::modules::ui::widgets::components::UiStateComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::ui::widgets::components::UiStyleComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::ui::widgets::components::UiStateComponent<Handle_type>>();
 
 
-            assert(parentMenu_->template has<helios::engine::modules::ui::widgets::components::MenuComponent<Handle_type>>() &&
+            assert(parentMenu_->template has<helios::ui::widgets::components::MenuComponent<Handle_type>>() &&
                 "parent menu must have MenuComponent");
 
             attach();
@@ -106,7 +106,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
 
             }
             if (index_) {
-                parentMenu_->get<helios::engine::modules::ui::widgets::components::MenuComponent<Handle_type>>()
+                parentMenu_->get<helios::ui::widgets::components::MenuComponent<Handle_type>>()
                            ->setSelectedIndex(index_.value());
             } else {
                 isSelected_ = isSelected;
@@ -123,7 +123,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for method chaining.
          */
         MenuItemConfig& normalColor(const helios::math::vec4f color) {
-            gameObject_.get<helios::engine::modules::ui::widgets::components::UiStyleComponent<Handle_type>>()
+            gameObject_.get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
                        ->setNormalColor(color);
 
             return *this;
@@ -137,7 +137,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for method chaining.
          */
         MenuItemConfig& normalScale(const float scale) {
-            gameObject_.get<helios::engine::modules::ui::widgets::components::UiStyleComponent<Handle_type>>()
+            gameObject_.get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
                        ->setNormalScale(scale);
 
             return *this;
@@ -151,7 +151,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for method chaining.
          */
         MenuItemConfig& selectedColor(helios::math::vec4f color) {
-            gameObject_.get<helios::engine::modules::ui::widgets::components::UiStyleComponent<Handle_type>>()
+            gameObject_.get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
                        ->setSelectedColor(color);
 
             return *this;
@@ -165,7 +165,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for method chaining.
          */
         MenuItemConfig& selectedScale(const float scale) {
-            gameObject_.get<helios::engine::modules::ui::widgets::components::UiStyleComponent<Handle_type>>()
+            gameObject_.get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
                        ->setSelectedScale(scale);
 
             return *this;
@@ -178,9 +178,9 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for method chaining.
          */
-        MenuItemConfig& actionId(const helios::engine::modules::ui::widgets::types::ActionId actionId) {
+        MenuItemConfig& actionId(const helios::ui::widgets::types::ActionId actionId) {
 
-            gameObject_.template add<helios::engine::modules::ui::widgets::components::UiActionComponent<Handle_type>>(actionId);
+            gameObject_.template add<helios::ui::widgets::components::UiActionComponent<Handle_type>>(actionId);
 
             return *this;
         }
@@ -194,11 +194,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          */
         MenuItemConfig& index(const size_t index) {
 
-            parentMenu_->template get<helios::engine::modules::ui::widgets::components::MenuComponent<Handle_type>>()
+            parentMenu_->template get<helios::ui::widgets::components::MenuComponent<Handle_type>>()
                        ->insert(gameObject_.handle(), index);
 
             if (isSelected_) {
-                parentMenu_->template get<helios::engine::modules::ui::widgets::components::MenuComponent<Handle_type>>()
+                parentMenu_->template get<helios::ui::widgets::components::MenuComponent<Handle_type>>()
                        ->setSelectedIndex(index);
             }
 

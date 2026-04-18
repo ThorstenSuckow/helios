@@ -12,9 +12,9 @@ import helios.gameplay.spawn.behavior.SpawnInitializer;
 import helios.gameplay.spawn.types.SpawnPlanCursor;
 import helios.gameplay.spawn.types.SpawnContext;
 import helios.runtime.world.GameObject;
-import helios.engine.modules.physics.motion.components.Move2DComponent;
-import helios.engine.modules.physics.motion.components.DirectionComponent;
-import helios.engine.modules.physics.motion.components.SteeringComponent;
+import helios.physics.motion.components.Move2DComponent;
+import helios.physics.motion.components.DirectionComponent;
+import helios.physics.motion.components.SteeringComponent;
 
 
 using namespace helios::gameplay::spawn::types;
@@ -63,15 +63,15 @@ export namespace helios::gameplay::spawn::behavior::initializers {
             const auto velocity = emitterContext.value().velocity;
             auto direction = velocity.normalize();
 
-            if (auto* m2c = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>()) {
+            if (auto* m2c = gameObject.get<helios::physics::motion::components::Move2DComponent>()) {
                 m2c->setMoveIntent(direction, 1.0f);
             }
 
-            if (auto* dc = gameObject.get<helios::engine::modules::physics::motion::components::DirectionComponent>()) {
+            if (auto* dc = gameObject.get<helios::physics::motion::components::DirectionComponent>()) {
                 dc->setDirection(direction);
             }
 
-            if (auto* hc = gameObject.get<helios::engine::modules::physics::motion::components::SteeringComponent>()) {
+            if (auto* hc = gameObject.get<helios::physics::motion::components::SteeringComponent>()) {
                 hc->setSteeringIntent(direction, 1.0f);
             }
         }

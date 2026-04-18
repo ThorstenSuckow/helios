@@ -20,3 +20,13 @@ export import helios.scene;
 export import helios.input;
 export import helios.engine;
 export import helios.util;
+export import helios.state;
+export import helios.ui;
+export import helios.physics;
+export import helios.spatial;
+export import helios.gameplay;
+export import helios.runtime;
+export import helios.platform;
+
+export import helios.bootstrap;
+

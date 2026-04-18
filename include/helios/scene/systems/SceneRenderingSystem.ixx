@@ -27,7 +27,7 @@ import helios.rendering.RenderPassFactory;
 import helios.scene.SceneToViewportMap;
 
 import helios.scene.components.SceneNodeComponent;
-import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.transform.components.ComposeTransformComponent;
 import helios.engine.common.tags.SystemRole;
 
 using namespace helios::scene;

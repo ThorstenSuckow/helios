@@ -33,7 +33,7 @@ import helios.ecs.types.TypeDefs;
 import helios.gameplay.health.events.HealthDepletedEvent;
 
 
-import helios.engine.modules.physics.collision.events;
+import helios.physics.collision.events;
 
 
 import helios.util.log;

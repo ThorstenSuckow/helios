@@ -7,7 +7,7 @@ module;
 
 #include <cmath>
 
-export module helios.engine.modules.physics.motion.systems.SpinSystem;
+export module helios.physics.motion.systems.SpinSystem;
 
 
 import helios.runtime.world.UpdateContext;
@@ -16,14 +16,14 @@ import helios.runtime.world.GameWorld;
 import helios.math;
 
 import helios.gameplay.effects.gfx.components.SpinComponent;
-import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
-import helios.engine.modules.spatial.transform.components.RotationStateComponent;
+import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.transform.components.RotationStateComponent;
 
 import helios.ecs.components.Active;
 
 import helios.engine.common.tags.SystemRole;
 
-export namespace helios::engine::modules::physics::motion::systems {
+export namespace helios::physics::motion::systems {
     
     /**
      * @brief System that updates the spin rotation of entities.
@@ -56,7 +56,7 @@ export namespace helios::engine::modules::physics::motion::systems {
             for (auto [entity, sc, rsc, active] : updateContext.view<
                 THandle,
                 helios::gameplay::effects::gfx::components::SpinComponent<THandle>,
-                helios::engine::modules::spatial::transform::components::RotationStateComponent<THandle>,
+                helios::spatial::transform::components::RotationStateComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 

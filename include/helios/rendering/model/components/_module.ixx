@@ -1,6 +1,6 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for helios::engine::modules::model::components namespace.
+ * @brief Aggregate module for helios::model::components namespace.
  */
 
 

@@ -13,13 +13,13 @@ import helios.gameplay.spawn.behavior.SpawnInitializer;
 import helios.gameplay.spawn.types.SpawnPlanCursor;
 import helios.gameplay.spawn.types.SpawnContext;
 import helios.runtime.world.GameObject;
-import helios.engine.modules.physics.motion.components.Move2DComponent;
-import helios.engine.modules.physics.motion.components.DirectionComponent;
+import helios.physics.motion.components.Move2DComponent;
+import helios.physics.motion.components.DirectionComponent;
 
-import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.transform.components.TranslationStateComponent;
 
-import helios.engine.modules.spatial.transform.components.RotationStateComponent;
-import helios.engine.modules.physics.motion.components.SteeringComponent;
+import helios.spatial.transform.components.RotationStateComponent;
+import helios.physics.motion.components.SteeringComponent;
 
 import helios.math;
 import helios.util.Random;
@@ -146,14 +146,14 @@ export namespace helios::gameplay::spawn::behavior::initializers {
             const SpawnContext<Handle_type>& spawnContext
         ) noexcept {
 
-            auto* mc = entity.template get<helios::engine::modules::physics::motion::components::Move2DComponent>();
-            auto* dc = entity.template get<helios::engine::modules::physics::motion::components::DirectionComponent>();
+            auto* mc = entity.template get<helios::physics::motion::components::Move2DComponent>();
+            auto* dc = entity.template get<helios::physics::motion::components::DirectionComponent>();
 
             auto dir = helios::math::vec2f{
                 rGen_.randomFloat(-1.0f, 1.0f),
                 rGen_.randomFloat(-1.0f, 1.0f)
             };
-            auto* sc = entity.template get<helios::engine::modules::physics::motion::components::SteeringComponent>();
+            auto* sc = entity.template get<helios::physics::motion::components::SteeringComponent>();
             if (sc) {
                 sc->setTargetRotationAngle(helios::math::degrees(std::atan2(dir[1], dir[0])));
                 sc->setCurrentRotationAngle(helios::math::degrees(std::atan2(dir[1], dir[0])));
@@ -190,15 +190,15 @@ export namespace helios::gameplay::spawn::behavior::initializers {
             
         ) noexcept {
 
-            auto* mc = entity.template get<helios::engine::modules::physics::motion::components::Move2DComponent>();
-            auto* sc = entity.template get<helios::engine::modules::physics::motion::components::SteeringComponent>();
-            auto* dc = entity.template get<helios::engine::modules::physics::motion::components::DirectionComponent>();
+            auto* mc = entity.template get<helios::physics::motion::components::Move2DComponent>();
+            auto* sc = entity.template get<helios::physics::motion::components::SteeringComponent>();
+            auto* dc = entity.template get<helios::physics::motion::components::DirectionComponent>();
 
             auto direction = target;
             if (directionType == DirectionType::Axis) {
                 assert(direction.isNormalized() && "axis initializer requires valid direction vector");
             } else if (directionType == DirectionType::Point) {
-                auto* tsc = entity.get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+                auto* tsc = entity.get<helios::spatial::transform::components::TranslationStateComponent>();
 
                 direction = (target - (tsc->translation() * -1.0f)).normalize();
                 assert(direction.isNormalized() && "point initializer requires valid direction vector");

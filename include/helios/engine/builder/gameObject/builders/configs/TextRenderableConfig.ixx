@@ -11,13 +11,13 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.TextRenderableConfig;
 
 import helios.rendering;
-import helios.engine.modules.ui.widgets.types.FontId;
+import helios.ui.widgets.types.FontId;
 import helios.core.types;
 import helios.ext.opengl;
 import helios.rendering;
 import helios.math.types;
 import helios.scene.SceneNode;
-import helios.engine.modules.ui;
+import helios.ui;
 
 
 
@@ -80,7 +80,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
         /**
          * @brief The font identifier.
          */
-        helios::engine::modules::ui::widgets::types::FontId fontId_{helios::core::types::no_init};
+        helios::ui::widgets::types::FontId fontId_{helios::core::types::no_init};
 
         /**
          * @brief Format string for timestamp display (std::vformat syntax).
@@ -306,7 +306,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for method chaining.
          */
-        TextRenderableConfig& fontId(helios::engine::modules::ui::widgets::types::FontId fontId) {
+        TextRenderableConfig& fontId(helios::ui::widgets::types::FontId fontId) {
             fontId_ = fontId;
             return *this;
         }
@@ -353,16 +353,16 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             msc.setAabb(renderable->localAABB());
 
             if (isUiText_ || usesNumberFormatter_ || usesTimeFormatter_) {
-                gameObject_.template add<helios::engine::modules::ui::widgets::components::UiTextComponent<Handle_type>>(renderable.get());
+                gameObject_.template add<helios::ui::widgets::components::UiTextComponent<Handle_type>>(renderable.get());
                 isUiText_ = false;
             }
 
             if (usesTimeFormatter_) {
-                auto& tfc = gameObject_.template add<helios::engine::modules::ui::layout::components::TimeFormatterComponent<Handle_type>>();
+                auto& tfc = gameObject_.template add<helios::ui::layout::components::TimeFormatterComponent<Handle_type>>();
                 tfc.setFormat(
                     timestampFormat_,
-                    displayRemaining_ ? modules::ui::layout::types::TimeDisplayMode::Remaining
-                                      : modules::ui::layout::types::TimeDisplayMode::Elapsed
+                    displayRemaining_ ? ui::layout::types::TimeDisplayMode::Remaining
+                                      : ui::layout::types::TimeDisplayMode::Elapsed
                 );
                 if (showElapsedLabel_) {
                     tfc.setElapsedLabel(elapsedLabel_);
@@ -372,7 +372,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             }
 
             if (usesNumberFormatter_) {
-                gameObject_.template add<helios::engine::modules::ui::layout::components::NumberFormatterComponent<Handle_type>>()
+                gameObject_.template add<helios::ui::layout::components::NumberFormatterComponent<Handle_type>>()
                             .setFormat(numberFormat_);
                 usesNumberFormatter_ = false;
             }

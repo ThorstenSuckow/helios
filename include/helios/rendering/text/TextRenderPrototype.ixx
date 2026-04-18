@@ -15,7 +15,7 @@ import helios.rendering.text.TextShaderProperties;
 
 import helios.rendering.text.FontResourceProvider;
 import helios.rendering.shader.Shader;
-import helios.engine.modules.ui.widgets.types.FontId;
+import helios.ui.widgets.types.FontId;
 
 export namespace helios::rendering::text {
 

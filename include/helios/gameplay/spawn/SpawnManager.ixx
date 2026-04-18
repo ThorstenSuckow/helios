@@ -27,10 +27,10 @@ import helios.gameplay.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.gameplay.spawn.commands.DespawnCommand;
 
 import helios.rendering.model.components.ModelAabbComponent;
-import helios.engine.modules.spatial.transform.components.ScaleStateComponent;
-import helios.engine.modules.spatial.transform.components.RotationStateComponent;
+import helios.spatial.transform.components.ScaleStateComponent;
+import helios.spatial.transform.components.RotationStateComponent;
 
-import helios.engine.modules.physics.collision.Bounds;
+import helios.physics.collision.Bounds;
 import helios.scene.components.SceneNodeComponent;
 
 import helios.runtime.world.GameWorld;
@@ -41,10 +41,10 @@ import helios.runtime.pooling.GameObjectPoolManager;
 import helios.gameplay.spawn.types;
 import helios.runtime.world.GameObject;
 
-import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.transform.components.TranslationStateComponent;
 import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
-import helios.engine.modules.physics.collision.components.AabbColliderComponent;
+import helios.physics.collision.components.AabbColliderComponent;
 
 import helios.math;
 
@@ -127,18 +127,18 @@ export namespace helios::gameplay::spawn {
          * @param go The GameObject to compute bounds for.
          * @param bounds The bounding box to check and potentially update.
          *
-         * @see helios::engine::modules::physics::collision::Bounds::computeWorldAabb
+         * @see helios::physics::collision::Bounds::computeWorldAabb
          */
         void ensureBounds(helios::runtime::world::GameObject go, helios::math::aabbf& bounds) {
             if (bounds.min()[0] > bounds.max()[0]) {
                 const auto* mab   = go.get<helios::rendering::model::components::ModelAabbComponent>();
-                const auto* sca    = go.get<helios::engine::modules::spatial::transform::components::ScaleStateComponent>();
-                auto* rsc = go.get<helios::engine::modules::spatial::transform::components::RotationStateComponent>();
+                const auto* sca    = go.get<helios::spatial::transform::components::ScaleStateComponent>();
+                auto* rsc = go.get<helios::spatial::transform::components::RotationStateComponent>();
                 const auto* scn   = go.get<helios::scene::components::SceneNodeComponent>();
-                const auto* tsc   = go.get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+                const auto* tsc   = go.get<helios::spatial::transform::components::TranslationStateComponent>();
 
                 assert(mab && scn && tsc && sca && rsc && "Missing Components for AABB computation");
-                bounds = helios::engine::modules::physics::collision::Bounds::computeWorldAabb(
+                bounds = helios::physics::collision::Bounds::computeWorldAabb(
                    *mab, *scn, *tsc, *sca, *rsc
                 );
             }
@@ -193,12 +193,12 @@ export namespace helios::gameplay::spawn {
                     auto go = gameObjectPoolManager_->acquire(gameObjectPoolId);
                     assert(go && "Failed to acquire GameObject");
 
-                    auto* tsc = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+                    auto* tsc = go->get<helios::spatial::transform::components::TranslationStateComponent>();
 
                     auto* sbp = go->get<helios::gameplay::spawn::components::SpawnedByProfileComponent>();
                     assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
-                    auto* aabb = go->get<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
+                    auto* aabb = go->get<helios::physics::collision::components::AabbColliderComponent>();
                     assert(aabb && "unexpected missing AabbColliderComponent");
 
                     auto spawnCursor = SpawnPlanCursor{spawnCount, i};
@@ -270,11 +270,11 @@ export namespace helios::gameplay::spawn {
                 auto go = gameObjectPoolManager_->acquire(gameObjectPoolId);
                 assert(go && "Failed to acquire GameObject");
 
-                auto* tsc = go->get<helios::engine::modules::spatial::transform::components::TranslationStateComponent>();
+                auto* tsc = go->get<helios::spatial::transform::components::TranslationStateComponent>();
                 auto* sbp = go->get<helios::gameplay::spawn::components::SpawnedByProfileComponent>();
                 assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
-                auto* aabb = go->get<helios::engine::modules::physics::collision::components::AabbColliderComponent>();
+                auto* aabb = go->get<helios::physics::collision::components::AabbColliderComponent>();
                 assert(aabb && "unexpected missing AabbColliderComponent");
 
                 const auto& emitter = spawnContext.emitterContext;

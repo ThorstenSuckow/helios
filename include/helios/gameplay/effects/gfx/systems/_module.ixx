@@ -4,4 +4,4 @@
  */
 export module helios.gameplay.effects.gfx.systems;
 
-export import helios.engine.modules.physics.motion.systems.SpinSystem;
+export import helios.physics.motion.systems.SpinSystem;

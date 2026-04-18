@@ -20,7 +20,7 @@ import helios.rendering.text.Glyph;
 import helios.rendering.text.FontResourceProvider;
 
 import helios.rendering.shader.Shader;
-import helios.engine.modules.ui.widgets.types.FontId;
+import helios.ui.widgets.types.FontId;
 
 import helios.util.Colors;
 import helios.math;
@@ -108,7 +108,7 @@ export namespace helios::rendering::text {
         TextLayout layout(
             const std::string_view text,
             const float scale,
-            const helios::engine::modules::ui::widgets::types::FontId fontId,
+            const helios::ui::widgets::types::FontId fontId,
             FontResourceProvider& fontResourceProvider) {
 
             helios::math::aabbf aabb = {};

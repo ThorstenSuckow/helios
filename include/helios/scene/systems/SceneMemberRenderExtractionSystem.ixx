@@ -27,7 +27,7 @@ import helios.engine.common.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
 
-import helios.engine.modules.spatial.transform.components.WorldTransformStateComponent;
+import helios.spatial.transform.components.WorldTransformStateComponent;
 
 import helios.engine.common.tags.SystemRole;
 
@@ -44,7 +44,7 @@ using namespace helios::ecs::components;
 using namespace helios::rendering::components;
 using namespace helios::scene::types;
 using namespace helios::engine::common::concepts;
-using namespace helios::engine::modules::spatial::transform::components;
+using namespace helios::spatial::transform::components;
 using namespace helios::rendering::commands;
 using namespace helios::runtime::messaging::command;
 

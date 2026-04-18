@@ -6,8 +6,8 @@ module;
 
 export module helios.engine.builder.gameObject.builders.configs.SteeringConfig;
 
-import helios.engine.modules.physics;
-import helios.engine.modules.spatial;
+import helios.physics;
+import helios.spatial;
 
 export namespace helios::engine::builder::gameObject::builders::configs {
 
@@ -35,11 +35,11 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @param gameObject Target GameObject to configure.
          */
         explicit SteeringConfig(Entity gameObject) : gameObject_(gameObject) {
-            gameObject_.template add<helios::engine::modules::physics::motion::components::SteeringComponent<Handle_type>>();
+            gameObject_.template add<helios::physics::motion::components::SteeringComponent<Handle_type>>();
 
-            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
-            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent<Handle_type>>();
-            gameObject_.template getOrAdd<helios::engine::modules::physics::motion::components::DirectionComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::spatial::transform::components::RotationStateComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::physics::motion::components::DirectionComponent<Handle_type>>();
         }
 
         /**
@@ -52,7 +52,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         SteeringConfig& instantSteering(const bool useInstantRotation) {
-            gameObject_.get<helios::engine::modules::physics::motion::components::SteeringComponent<Handle_type>>()
+            gameObject_.get<helios::physics::motion::components::SteeringComponent<Handle_type>>()
                       ->setUseInstantRotation(useInstantRotation);
 
             return *this;
@@ -66,7 +66,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          * @return Reference to this config for chaining.
          */
         SteeringConfig& steeringSetsDirection(const bool directionFromSteering) {
-            gameObject_.get<helios::engine::modules::physics::motion::components::SteeringComponent<Handle_type>>()
+            gameObject_.get<helios::physics::motion::components::SteeringComponent<Handle_type>>()
                       ->setDirectionFromSteering(directionFromSteering);
 
             return *this;

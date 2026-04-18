@@ -11,9 +11,9 @@ export module helios.gameplay.bounds.components.LevelBoundsBehaviorComponent;
 
 
 
-import helios.engine.modules.physics.collision.types.CollisionBehavior;
+import helios.physics.collision.types.CollisionBehavior;
 
-import helios.engine.modules.physics.collision.types.CollisionResponse;
+import helios.physics.collision.types.CollisionResponse;
 
 export namespace helios::gameplay::bounds::components {
 
@@ -46,9 +46,9 @@ export namespace helios::gameplay::bounds::components {
          * @details Defines how the entity reacts when hitting level bounds
          * (e.g., Bounce, Reflect, Clamp, Despawn).
          */
-        helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior_ = helios::engine::modules::physics::collision::types::CollisionBehavior::Bounce;
+        helios::physics::collision::types::CollisionBehavior collisionBehavior_ = helios::physics::collision::types::CollisionBehavior::Bounce;
 
-        helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse_ = helios::engine::modules::physics::collision::types::CollisionResponse::None;
+        helios::physics::collision::types::CollisionResponse collisionResponse_ = helios::physics::collision::types::CollisionResponse::None;
 
         /**
          * @brief Whether this component is enabled.
@@ -94,8 +94,8 @@ export namespace helios::gameplay::bounds::components {
          * @param collisionBehavior The collision behavior type (default: Reflect).
          */
         explicit LevelBoundsBehaviorComponent(
-            const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior = helios::engine::modules::physics::collision::types::CollisionBehavior::Reflect,
-            const helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse = helios::engine::modules::physics::collision::types::CollisionResponse::None) :
+            const helios::physics::collision::types::CollisionBehavior collisionBehavior = helios::physics::collision::types::CollisionBehavior::Reflect,
+            const helios::physics::collision::types::CollisionResponse collisionResponse = helios::physics::collision::types::CollisionResponse::None) :
         collisionBehavior_(collisionBehavior),
         collisionResponse_(collisionResponse)
         {}
@@ -129,7 +129,7 @@ export namespace helios::gameplay::bounds::components {
          *
          * @return The collision behavior (e.g., Bounce, Reflect, Clamp, Despawn).
          */
-        [[nodiscard]] helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
+        [[nodiscard]] helios::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
             return collisionBehavior_;
         }
 
@@ -138,7 +138,7 @@ export namespace helios::gameplay::bounds::components {
          *
          * @return The collision response type (e.g., None, Event).
          */
-        [[nodiscard]] helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse() const noexcept {
+        [[nodiscard]] helios::physics::collision::types::CollisionResponse collisionResponse() const noexcept {
             return collisionResponse_;
         }
 
@@ -147,7 +147,7 @@ export namespace helios::gameplay::bounds::components {
          *
          * @param collisionResponse The new collision response to set.
          */
-        void setCollisionResponse(const helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) noexcept {
+        void setCollisionResponse(const helios::physics::collision::types::CollisionResponse collisionResponse) noexcept {
             collisionResponse_ = collisionResponse;
         }
 
@@ -156,7 +156,7 @@ export namespace helios::gameplay::bounds::components {
          *
          * @param collisionBehavior The new collision behavior to set.
          */
-        void setCollisionBehavior(const helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior) noexcept {
+        void setCollisionBehavior(const helios::physics::collision::types::CollisionBehavior collisionBehavior) noexcept {
             collisionBehavior_ = collisionBehavior;
         }
 

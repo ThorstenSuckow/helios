@@ -10,7 +10,7 @@ module;
 export module helios.engine.builder.gameObject.builders.configs.WeaponConfig;
 
 
-import helios.engine.modules.spatial.transform.components;
+import helios.spatial.transform.components;
 
 import helios.gameplay.combat.components;
 
@@ -51,7 +51,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             gameObject_.template getOrAdd<helios::gameplay::combat::components::ShootComponent<Handle_type>>()
                         .setFireRate(fireRate);
 
-            auto* transformComponent_ = gameObject_.get<helios::engine::modules::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
+            auto* transformComponent_ = gameObject_.get<helios::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
             auto* ac = gameObject_.get<helios::gameplay::combat::components::Aim2DComponent<Handle_type>>();
             assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");
             assert(ac != nullptr && "Unexpected nullptr for Aim2DComponent");

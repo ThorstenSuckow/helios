@@ -24,7 +24,7 @@ helios.engine.bootstrap
 │   ├── combat.registry
 │   ├── damage.registry
 │   └── lifecycle.registry
-├── helios.engine.modules.registry
+├── helios.registry
 │   ├── ai.registry
 │   ├── rendering.registry
 │   │   ├── renderable.registry
@@ -53,12 +53,12 @@ Each module with components requires a `registry.ixx` file:
 // helios/engine/modules/physics/collision/registry.ixx
 module;
 
-export module helios.engine.modules.physics.collision.registry;
+export module helios.physics.collision.registry;
 
 import helios.ecs.ComponentReflector;
-import helios.engine.modules.physics.collision.components;
+import helios.physics.collision.components;
 
-export namespace helios::engine::modules::physics::collision {
+export namespace helios::physics::collision {
 
     template<typename TEntityManager>
     inline void registerComponents() {
@@ -80,17 +80,17 @@ Add the new sub-module to the parent registry:
 // helios/engine/modules/physics/registry.ixx
 module;
 
-export module helios.engine.modules.physics.registry;
+export module helios.physics.registry;
 
-import helios.engine.modules.physics.collision.registry;
-import helios.engine.modules.physics.motion.registry;
+import helios.physics.collision.registry;
+import helios.physics.motion.registry;
 
-export namespace helios::engine::modules::physics {
+export namespace helios::physics {
 
     template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::modules::physics::collision::registerComponents<TEntityManager>();
-        helios::engine::modules::physics::motion::registerComponents<TEntityManager>();
+        helios::physics::collision::registerComponents<TEntityManager>();
+        helios::physics::motion::registerComponents<TEntityManager>();
     }
 
 }
@@ -102,11 +102,11 @@ Ensure all components are exported in the `_module.ixx` of the `components` dire
 
 ```cpp
 // helios/engine/modules/physics/collision/components/_module.ixx
-export module helios.engine.modules.physics.collision.components;
+export module helios.physics.collision.components;
 
-export import helios.engine.modules.physics.collision.components.CollisionComponent;
-export import helios.engine.modules.physics.collision.components.CollisionStateComponent;
-export import helios.engine.modules.physics.collision.components.AabbColliderComponent;
+export import helios.physics.collision.components.CollisionComponent;
+export import helios.physics.collision.components.CollisionStateComponent;
+export import helios.physics.collision.components.AabbColliderComponent;
 ```
 
 ## Component Requirements

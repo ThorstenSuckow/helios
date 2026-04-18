@@ -18,10 +18,9 @@ import helios.runtime.world.GameWorld;
 
 import helios.runtime.pooling.components.PrefabIdComponent;
 
-import helios.engine.modules;
 import helios.gameplay;
 import helios.util.Guid;
-import helios.engine.core.units;
+import helios.core.units;
 import helios.engine.common.types.PrefabId;
 import helios.math;
 

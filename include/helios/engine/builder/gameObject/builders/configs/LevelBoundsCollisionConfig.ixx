@@ -11,7 +11,7 @@ export module helios.engine.builder.gameObject.builders.configs.LevelBoundsColli
 
 
 import helios.gameplay.bounds.components.LevelBoundsBehaviorComponent;
-import helios.engine.modules.physics.collision.types;
+import helios.physics.collision.types;
 
 
 export namespace helios::engine::builder::gameObject::builders::configs {
@@ -65,7 +65,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        LevelBoundsCollisionConfig& onCollision(helios::engine::modules::physics::collision::types::CollisionBehavior collisionBehavior) {
+        LevelBoundsCollisionConfig& onCollision(helios::physics::collision::types::CollisionBehavior collisionBehavior) {
 
             gameObject_.template getOrAdd<helios::gameplay::bounds::components::LevelBoundsBehaviorComponent<Handle_type>>()
                         .setCollisionBehavior(collisionBehavior);
@@ -95,7 +95,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
          *
          * @return Reference to this config for chaining.
          */
-        LevelBoundsCollisionConfig& respondWith(helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) {
+        LevelBoundsCollisionConfig& respondWith(helios::physics::collision::types::CollisionResponse collisionResponse) {
 
             gameObject_.template getOrAdd<helios::gameplay::bounds::components::LevelBoundsBehaviorComponent<Handle_type>>()
                         .setCollisionResponse(collisionResponse);

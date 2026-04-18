@@ -8,6 +8,8 @@
 
 #pragma once
 
+using namespace helios::bootstrap;
+
 // External backends
 using namespace helios::ext::opengl::rendering;
 using namespace helios::ext::opengl::rendering::shader;
@@ -53,7 +55,6 @@ using namespace helios::ecs::types;
 
 
 // Engine core
-using namespace helios::engine::bootstrap;
 using namespace helios::engine::common::types;
 using namespace helios::state;
 using namespace helios::state::types;
@@ -114,14 +115,14 @@ using namespace helios::gameplay::matchstate::types;
 
 
 // Modules: physics
-using namespace helios::engine::modules::physics::collision::types;
-using namespace helios::engine::modules::physics::collision::systems;
-using namespace helios::engine::modules::physics::motion::systems;
-using namespace helios::engine::modules::physics::motion::components;
+using namespace helios::physics::collision::types;
+using namespace helios::physics::collision::systems;
+using namespace helios::physics::motion::systems;
+using namespace helios::physics::motion::components;
 
 // Modules: spatial, scene, rendering, UI, AI
-using namespace helios::engine::modules::spatial::transform::systems;
-using namespace helios::engine::modules::spatial::transform::components;
+using namespace helios::spatial::transform::systems;
+using namespace helios::spatial::transform::components;
 using namespace helios::scene::systems;
 using namespace helios::scene::components;
 using namespace helios::scene;
@@ -129,11 +130,11 @@ using namespace helios::rendering::viewport::systems;
 using namespace helios::rendering;
 using namespace helios::rendering::components;
 using namespace helios::rendering::commands;
-using namespace helios::engine::modules::ui;
-using namespace helios::engine::modules::ui::widgets::systems;
-using namespace helios::engine::modules::ui::widgets::commands;
-using namespace helios::engine::modules::ui::widgets::types;
-using namespace helios::engine::modules::ui::binding::systems;
-using namespace helios::engine::modules::ui::transform::systems;
+using namespace helios::ui;
+using namespace helios::ui::widgets::systems;
+using namespace helios::ui::widgets::commands;
+using namespace helios::ui::widgets::types;
+using namespace helios::ui::binding::systems;
+using namespace helios::ui::transform::systems;
 using namespace helios::gameplay::ai::systems;
 

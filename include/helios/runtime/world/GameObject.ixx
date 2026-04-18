@@ -23,4 +23,4 @@ export namespace helios::runtime::world {
      */
     using GameObject = Entity<GameObjectEntityManager>;
 
-} // namespace helios::engine::modules
+} // namespace helios

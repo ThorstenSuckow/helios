@@ -15,19 +15,19 @@ import helios.math;
 import helios.state.Bindings;
 
 
-import helios.engine.modules.physics.collision.types.CollisionBehavior;
-import helios.engine.modules.physics.collision.types.CollisionResponse;
+import helios.physics.collision.types.CollisionBehavior;
+import helios.physics.collision.types.CollisionResponse;
 
 import helios.runtime.world.GameObject;
 import helios.runtime.world.GameWorld;
-import helios.engine.modules.physics.motion.components.Move2DComponent;
-import helios.engine.modules.physics.motion.components.SteeringComponent;
-import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
-import helios.engine.modules.spatial.transform.components.TranslationStateComponent;
-import helios.engine.modules.physics.motion.components.DirectionComponent;
+import helios.physics.motion.components.Move2DComponent;
+import helios.physics.motion.components.SteeringComponent;
+import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.transform.components.TranslationStateComponent;
+import helios.physics.motion.components.DirectionComponent;
 import helios.gameplay.bounds.components.LevelBoundsBehaviorComponent;
-import helios.engine.modules.physics.collision.components.AabbColliderComponent;
-import helios.engine.modules.spatial.transform.components.RotationStateComponent;
+import helios.physics.collision.components.AabbColliderComponent;
+import helios.spatial.transform.components.RotationStateComponent;
 import helios.rendering.model.components.ModelAabbComponent;
 import helios.scene.SceneNode;
 import helios.scene.components.SceneNodeComponent;
@@ -95,16 +95,16 @@ export namespace helios::gameplay::bounds::systems {
          */
         void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
-            using namespace helios::engine::modules::physics::collision::types;
+            using namespace helios::physics::collision::types;
 
             for (auto [entity, m2d, ab, sc, dc, tsc, bc, bbc, active] : updateContext.view<
                 THandle,
-                helios::engine::modules::physics::motion::components::Move2DComponent<THandle>,
+                helios::physics::motion::components::Move2DComponent<THandle>,
                 helios::rendering::model::components::ModelAabbComponent<THandle>,
                 helios::scene::components::SceneNodeComponent<THandle>,
-                helios::engine::modules::physics::motion::components::DirectionComponent<THandle>,
-                helios::engine::modules::spatial::transform::components::TranslationStateComponent<THandle>,
-                helios::engine::modules::physics::collision::components::AabbColliderComponent<THandle>,
+                helios::physics::motion::components::DirectionComponent<THandle>,
+                helios::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::physics::collision::components::AabbColliderComponent<THandle>,
                 helios::gameplay::bounds::components::LevelBoundsBehaviorComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
@@ -181,10 +181,10 @@ export namespace helios::gameplay::bounds::systems {
         void updateCollisionResponse(
             helios::runtime::world::GameObject go,
             BounceResult bounceResult,
-            helios::engine::modules::physics::collision::types::CollisionResponse collisionResponse) {
+            helios::physics::collision::types::CollisionResponse collisionResponse) {
 
-            if (collisionResponse == helios::engine::modules::physics::collision::types::CollisionResponse::AlignHeadingToDirection) {
-                auto* psc = go.get<helios::engine::modules::physics::motion::components::SteeringComponent<THandle>>();
+            if (collisionResponse == helios::physics::collision::types::CollisionResponse::AlignHeadingToDirection) {
+                auto* psc = go.get<helios::physics::motion::components::SteeringComponent<THandle>>();
 
                 const auto direction = bounceResult.direction;
 
@@ -219,8 +219,8 @@ export namespace helios::gameplay::bounds::systems {
             helios::math::aabbf objectBounds,
             helios::math::aabbf levelBounds,
             const float restitution,
-            helios::engine::modules::physics::motion::components::Move2DComponent<THandle>& m2d,
-            helios::engine::modules::physics::motion::components::DirectionComponent<THandle>& dc
+            helios::physics::motion::components::Move2DComponent<THandle>& m2d,
+            helios::physics::motion::components::DirectionComponent<THandle>& dc
         ) noexcept {
 
 

@@ -395,4 +395,4 @@ export namespace helios::ecs {
 
 
 
-} // namespace helios::engine::modules
+} // namespace helios

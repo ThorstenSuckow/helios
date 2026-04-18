@@ -21,8 +21,8 @@ import helios.state.Bindings;
 
 import helios.gameplay.lifecycle.components.DeadTagComponent;
 
-import helios.engine.modules.physics.motion.commands.Move2DCommand;
-import helios.engine.modules.physics.motion.commands.SteeringCommand;
+import helios.physics.motion.commands.Move2DCommand;
+import helios.physics.motion.commands.SteeringCommand;
 import helios.gameplay.combat.commands.Aim2DCommand;
 import helios.gameplay.combat.commands.ShootCommand;
 
@@ -99,7 +99,7 @@ export namespace helios::gameplay::input::systems {
             auto rdir = helios::math::vec2f{0.0f, 0.0f};
 
             if (entityHandle_.has<DeadTagComponent>()) {
-                updateContext.queueCommand<TCommandBuffer, helios::engine::modules::physics::motion::commands::Move2DCommand<THandle>>(
+                updateContext.queueCommand<TCommandBuffer, helios::physics::motion::commands::Move2DCommand<THandle>>(
                     entityHandle_, ldir, finalSpeed
                 );
                 updateContext.queueCommand<TCommandBuffer, helios::gameplay::combat::commands::Aim2DCommand<THandle>>(
@@ -116,11 +116,11 @@ export namespace helios::gameplay::input::systems {
              * @todo DO NOT POST IF input is already inactive in shootComponent
              * and no input was detected (after normalizing)
              */
-            updateContext.queueCommand<TCommandBuffer, helios::engine::modules::physics::motion::commands::Move2DCommand<THandle>>(
+            updateContext.queueCommand<TCommandBuffer, helios::physics::motion::commands::Move2DCommand<THandle>>(
                 entityHandle_, ldir, finalSpeed
             );
 
-            updateContext.queueCommand<TCommandBuffer, helios::engine::modules::physics::motion::commands::SteeringCommand<THandle>>(
+            updateContext.queueCommand<TCommandBuffer, helios::physics::motion::commands::SteeringCommand<THandle>>(
                 entityHandle_, ldir, finalSpeed
             );
 

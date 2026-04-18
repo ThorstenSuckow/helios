@@ -21,7 +21,7 @@ import helios.engine.common.concepts.IsCommandBufferLike;
 import helios.state.Bindings;
 
 
-import helios.engine.modules.physics.collision.events.SolidCollisionEvent;
+import helios.physics.collision.events.SolidCollisionEvent;
 
 import helios.gameplay.damage.components.DamageDealerComponent;
 import helios.engine.common.types;
@@ -84,7 +84,7 @@ export namespace helios::gameplay::damage::systems {
         void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
             auto eventPass = updateContext.readPass<
-                helios::engine::modules::physics::collision::events::SolidCollisionEvent<THandle>>();
+                helios::physics::collision::events::SolidCollisionEvent<THandle>>();
 
             for (const auto& event : eventPass) {
 

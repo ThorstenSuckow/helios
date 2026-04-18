@@ -12,7 +12,7 @@ import helios.math;
 
 import helios.runtime.world.GameObject;
 import helios.gameplay.combat.components.Aim2DComponent;
-import helios.engine.modules.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.transform.components.ComposeTransformComponent;
 
 import helios.ecs.types.ComponentTypeId;
 

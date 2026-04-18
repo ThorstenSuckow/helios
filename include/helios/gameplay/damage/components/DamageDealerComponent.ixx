@@ -12,7 +12,7 @@ module;
 
 export module helios.gameplay.damage.components.DamageDealerComponent;
 
-import helios.engine.modules.physics.collision.types.CollisionLayer;
+import helios.physics.collision.types.CollisionLayer;
 
 
 
@@ -35,7 +35,7 @@ export namespace helios::gameplay::damage::components {
         /**
          * @brief Damage values indexed by collision layer.
          */
-        std::array<float, helios::engine::modules::physics::collision::types::MAX_COLLISION_LAYERS> damageRegistry_{};
+        std::array<float, helios::physics::collision::types::MAX_COLLISION_LAYERS> damageRegistry_{};
 
         /**
          * @brief Whether this component is enabled.

@@ -18,7 +18,7 @@ import helios.runtime.world.UpdateContext;
 
 
 
-import helios.engine.modules.physics.collision.events;
+import helios.physics.collision.events;
 
 import helios.ecs.components.Active;
 

@@ -8,7 +8,7 @@ export module helios.engine.builder.gameObject.builders.configs.GfxEffectsConfig
 
 
 import helios.gameplay.effects.gfx.components.SpinComponent;
-import helios.engine.modules.spatial.transform.components.RotationStateComponent;
+import helios.spatial.transform.components.RotationStateComponent;
 
 import helios.math;
 
@@ -52,7 +52,7 @@ export namespace helios::engine::builder::gameObject::builders::configs {
             gameObject_.template add<helios::gameplay::effects::gfx::components::SpinComponent<Handle_type>>(
                 degreesPerSecond, spinAxis
             );
-            gameObject_.template getOrAdd<helios::engine::modules::spatial::transform::components::RotationStateComponent<Handle_type>>();
+            gameObject_.template getOrAdd<helios::spatial::transform::components::RotationStateComponent<Handle_type>>();
             return *this;
         }
 

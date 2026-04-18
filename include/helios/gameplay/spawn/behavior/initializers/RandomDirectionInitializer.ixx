@@ -10,8 +10,8 @@ import helios.gameplay.spawn.behavior.SpawnInitializer;
 import helios.gameplay.spawn.types.SpawnPlanCursor;
 import helios.gameplay.spawn.types.SpawnContext;
 import helios.runtime.world.GameObject;
-import helios.engine.modules.physics.motion.components.Move2DComponent;
-import helios.engine.modules.physics.motion.components.DirectionComponent;
+import helios.physics.motion.components.Move2DComponent;
+import helios.physics.motion.components.DirectionComponent;
 import helios.math;
 import helios.util.Random;
 
@@ -54,8 +54,8 @@ export namespace helios::gameplay::spawn::behavior::initializers {
         ) override {
 
 
-            auto* mc = gameObject.get<helios::engine::modules::physics::motion::components::Move2DComponent>();
-            auto* dc = gameObject.get<helios::engine::modules::physics::motion::components::DirectionComponent>();
+            auto* mc = gameObject.get<helios::physics::motion::components::Move2DComponent>();
+            auto* dc = gameObject.get<helios::physics::motion::components::DirectionComponent>();
 
             auto dir = helios::math::vec2f{
                 rGen_.randomFloat(-1.0f, 1.0f),

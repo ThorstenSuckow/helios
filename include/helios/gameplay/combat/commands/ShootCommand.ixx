@@ -9,7 +9,7 @@ export module helios.gameplay.combat.commands.ShootCommand;
 import helios.ecs;
 import helios.math.types;
 import helios.gameplay.combat.components.ShootComponent;
-import helios.engine.modules.physics.motion.components.Move2DComponent;
+import helios.physics.motion.components.Move2DComponent;
 
 
 import helios.runtime.world.UpdateContext;
@@ -107,7 +107,7 @@ export namespace helios::gameplay::combat::commands {
             auto* shootComponent = entity->template get<helios::gameplay::combat::components::ShootComponent<THandle>>();
 
             if (shootComponent) {
-                auto* m2d = entity->template get<helios::engine::modules::physics::motion::components::Move2DComponent<THandle>>();
+                auto* m2d = entity->template get<helios::physics::motion::components::Move2DComponent<THandle>>();
 
                 shootComponent->shoot(
                     intensity_,

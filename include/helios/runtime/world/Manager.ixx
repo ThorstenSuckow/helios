@@ -15,7 +15,7 @@ import helios.runtime.world.UpdateContextFwd;
 import helios.runtime.world.GameWorldFwd;
 
 
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::world::concepts;
 export namespace helios::runtime::world {
 
     /**

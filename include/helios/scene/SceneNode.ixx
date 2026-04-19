@@ -34,7 +34,6 @@ export namespace helios::scene {
      * @see https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p2893r3.html#passkey-idiom
      */
     struct SceneGraphKey {
-    private:
         friend class helios::scene::Scene;
         SceneGraphKey() = default;
     };

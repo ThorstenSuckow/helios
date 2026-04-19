@@ -9,13 +9,13 @@ module;
 #include <vector>
 #include <cstddef>
 
-export module helios.core.container.buffer.TypeIndexedDoubleBuffer;
+export module helios.core.container.buffer:TypeIndexedDoubleBuffer;
 
 import helios.core.container.buffer.concepts.IsTypeIndexerLike;
-import helios.core.container.buffer.DoubleBuffer;
-import helios.core.container.buffer.WriteBuffer;
-import helios.core.container.buffer.ReadBuffer;
-import helios.core.container.buffer.ReadWriteDoubleBuffer;
+import :DoubleBuffer;
+import :WriteBuffer;
+import :ReadBuffer;
+import :ReadWriteDoubleBuffer;
 
 using namespace helios::core::container::buffer::concepts;
 export namespace helios::core::container::buffer {

@@ -198,7 +198,7 @@ export namespace helios::gameplay::spawn::behavior::initializers {
             if (directionType == DirectionType::Axis) {
                 assert(direction.isNormalized() && "axis initializer requires valid direction vector");
             } else if (directionType == DirectionType::Point) {
-                auto* tsc = entity.get<helios::spatial::transform::components::TranslationStateComponent>();
+                auto* tsc = entity.template get<helios::spatial::transform::components::TranslationStateComponent<Handle_type>>();
 
                 direction = (target - (tsc->translation() * -1.0f)).normalize();
                 assert(direction.isNormalized() && "point initializer requires valid direction vector");

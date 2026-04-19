@@ -39,7 +39,7 @@ export namespace helios::gameplay::builder::gameObject::builders::configs {
          */
         void ensureLevelBoundsBehaviorComponent(const bool isAvailable) const noexcept {
 
-            auto* lbcc = gameObject_.get<helios::gameplay::bounds::components::LevelBoundsBehaviorComponent<Handle_type>>();
+            auto* lbcc = gameObject_.template get<helios::gameplay::bounds::components::LevelBoundsBehaviorComponent<Handle_type>>();
 
             if (isAvailable) {
                 assert(lbcc && "LevelBoundsBehaviorComponent not configured");

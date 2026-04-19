@@ -8,9 +8,9 @@ module;
 #include <vector>
 #include <cstddef>
 
-export module helios.core.container.buffer.ReadWriteBuffer;
+export module helios.core.container.buffer:ReadWriteBuffer;
 
-import helios.core.container.buffer.Buffer;
+import :Buffer;
 
 export namespace helios::core::container::buffer {
 

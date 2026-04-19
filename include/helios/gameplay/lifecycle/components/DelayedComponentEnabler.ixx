@@ -9,7 +9,7 @@ module;
 #include <typeindex>
 #include <memory>
 #include <vector>
-
+#include <ranges>
 export module helios.gameplay.lifecycle.components.DelayedComponentEnabler;
 
 

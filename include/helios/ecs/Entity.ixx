@@ -220,7 +220,7 @@ export namespace helios::ecs {
          * @return Raw void pointer to the component, or nullptr if not found.
          */
         void* raw(const ComponentTypeId_type typeId) {
-            return entityManager_->template  raw(entityHandle_, typeId);
+            return entityManager_->raw(entityHandle_, typeId);
         }
 
         /**
@@ -267,7 +267,7 @@ export namespace helios::ecs {
          * @return True if the component is attached, false otherwise.
          */
         bool has(ComponentTypeId_type typeId) const noexcept {
-            return entityManager_->template  has(entityHandle_, typeId);
+            return entityManager_->has(entityHandle_, typeId);
         }
 
         /**
@@ -276,7 +276,7 @@ export namespace helios::ecs {
          * @param typeId The component type identifier.
          */
         void enableComponent(const ComponentTypeId_type typeId) {
-            entityManager_->template  enable(entityHandle_, typeId);
+            entityManager_->enable(entityHandle_, typeId);
         }
 
         /**
@@ -285,7 +285,7 @@ export namespace helios::ecs {
          * @param typeId The component type identifier.
          */
         void disableComponent(const ComponentTypeId_type typeId) {
-            entityManager_->template  disable(entityHandle_, typeId);
+            entityManager_->disable(entityHandle_, typeId);
         }
 
         /**
@@ -371,7 +371,7 @@ export namespace helios::ecs {
                     const auto& ops = ComponentOpsRegistry_type::ops(typeId);
 
                     if (ops.onRelease) {
-                        void* raw = entityManager_->template  raw(entityHandle_, typeId);
+                        void* raw = entityManager_->raw(entityHandle_, typeId);
                         ops.onRelease(raw);
                     }
                 }
@@ -392,7 +392,7 @@ export namespace helios::ecs {
                     const auto& ops = ComponentOpsRegistry_type::ops(typeId);
 
                     if (ops.onAcquire) {
-                        void* raw = entityManager_->template  raw(entityHandle_, typeId);
+                        void* raw = entityManager_->raw(entityHandle_, typeId);
                         ops.onAcquire(raw);
                     }
                 }

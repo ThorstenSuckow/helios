@@ -60,7 +60,7 @@ export namespace helios::gameplay::builder::gameObject::builders::configs {
         void attach() {
             assert(parentMenu_ != nullptr);
 
-            auto* mc = parentMenu_->get<helios::ui::widgets::components::MenuComponent<Handle_type>>();
+            auto* mc = parentMenu_->template get<helios::ui::widgets::components::MenuComponent<Handle_type>>();
 
             assert(mc != nullptr && "Unexpected nullptr for MenuComponent");
 
@@ -107,7 +107,7 @@ export namespace helios::gameplay::builder::gameObject::builders::configs {
 
             }
             if (index_) {
-                parentMenu_->get<helios::ui::widgets::components::MenuComponent<Handle_type>>()
+                parentMenu_->template get<helios::ui::widgets::components::MenuComponent<Handle_type>>()
                            ->setSelectedIndex(index_.value());
             } else {
                 isSelected_ = isSelected;
@@ -124,7 +124,7 @@ export namespace helios::gameplay::builder::gameObject::builders::configs {
          * @return Reference to this config for method chaining.
          */
         MenuItemConfig& normalColor(const helios::math::vec4f color) {
-            gameObject_.get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
+            gameObject_.template get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
                        ->setNormalColor(color);
 
             return *this;
@@ -138,7 +138,7 @@ export namespace helios::gameplay::builder::gameObject::builders::configs {
          * @return Reference to this config for method chaining.
          */
         MenuItemConfig& normalScale(const float scale) {
-            gameObject_.get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
+            gameObject_.template get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
                        ->setNormalScale(scale);
 
             return *this;
@@ -152,7 +152,7 @@ export namespace helios::gameplay::builder::gameObject::builders::configs {
          * @return Reference to this config for method chaining.
          */
         MenuItemConfig& selectedColor(helios::math::vec4f color) {
-            gameObject_.get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
+            gameObject_.template get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
                        ->setSelectedColor(color);
 
             return *this;
@@ -166,7 +166,7 @@ export namespace helios::gameplay::builder::gameObject::builders::configs {
          * @return Reference to this config for method chaining.
          */
         MenuItemConfig& selectedScale(const float scale) {
-            gameObject_.get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
+            gameObject_.template get<helios::ui::widgets::components::UiStyleComponent<Handle_type>>()
                        ->setSelectedScale(scale);
 
             return *this;

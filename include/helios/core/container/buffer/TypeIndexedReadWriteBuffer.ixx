@@ -9,11 +9,11 @@ module;
 #include <vector>
 #include <cstddef>
 
-export module helios.core.container.buffer.TypeIndexedReadWriteBuffer;
+export module helios.core.container.buffer:TypeIndexedReadWriteBuffer;
 
 import helios.core.container.buffer.concepts.IsTypeIndexerLike;
-import helios.core.container.buffer.Buffer;
-import helios.core.container.buffer.ReadWriteBuffer;
+import :Buffer;
+import :ReadWriteBuffer;
 
 using namespace helios::core::container::buffer::concepts;
 export namespace helios::core::container::buffer {

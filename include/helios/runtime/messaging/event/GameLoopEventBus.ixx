@@ -7,7 +7,7 @@ module;
 export module helios.runtime.messaging.event.GameLoopEventBus;
 
 import helios.core.TypeIndexer;
-import helios.core.container.buffer.TypeIndexedDoubleBuffer;
+import helios.core.container.buffer;
 
 
 export namespace helios::runtime::messaging::event {

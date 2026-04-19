@@ -54,8 +54,8 @@ export namespace helios::gameplay::spawn::behavior::initializers {
         ) override {
 
 
-            auto* mc = gameObject.get<helios::physics::motion::components::Move2DComponent>();
-            auto* dc = gameObject.get<helios::physics::motion::components::DirectionComponent>();
+            auto* mc = gameObject.template get<helios::physics::motion::components::Move2DComponent<THandle>>();
+            auto* dc = gameObject.template get<helios::physics::motion::components::DirectionComponent<THandle>>();
 
             auto dir = helios::math::vec2f{
                 rGen_.randomFloat(-1.0f, 1.0f),

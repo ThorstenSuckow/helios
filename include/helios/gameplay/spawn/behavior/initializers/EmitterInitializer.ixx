@@ -63,15 +63,15 @@ export namespace helios::gameplay::spawn::behavior::initializers {
             const auto velocity = emitterContext.value().velocity;
             auto direction = velocity.normalize();
 
-            if (auto* m2c = gameObject.get<helios::physics::motion::components::Move2DComponent>()) {
+            if (auto* m2c = gameObject.template get<helios::physics::motion::components::Move2DComponent<THandle>>()) {
                 m2c->setMoveIntent(direction, 1.0f);
             }
 
-            if (auto* dc = gameObject.get<helios::physics::motion::components::DirectionComponent>()) {
+            if (auto* dc = gameObject.template get<helios::physics::motion::components::DirectionComponent<THandle>>()) {
                 dc->setDirection(direction);
             }
 
-            if (auto* hc = gameObject.get<helios::physics::motion::components::SteeringComponent>()) {
+            if (auto* hc = gameObject.template get<helios::physics::motion::components::SteeringComponent<THandle>>()) {
                 hc->setSteeringIntent(direction, 1.0f);
             }
         }

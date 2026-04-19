@@ -7,6 +7,7 @@ module;
 
 #include <stdexcept>
 #include <unordered_map>
+#include <algorithm>
 
 export module helios.gameplay.scoring.ScorePool;
 

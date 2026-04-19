@@ -31,7 +31,7 @@ class MenuComponent {
     /**
      * @brief Entity handles of the menu items.
      */
-    std::vector<typename THandle> menuItems_;
+    std::vector<THandle> menuItems_;
 
     /**
      * @brief Unique identifier for this menu.

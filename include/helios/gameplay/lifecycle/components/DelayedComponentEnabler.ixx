@@ -13,8 +13,6 @@ module;
 export module helios.gameplay.lifecycle.components.DelayedComponentEnabler;
 
 
-
-import helios.runtime.world.GameObject;
 import helios.gameplay.spawn.types.SpawnProfileId;
 import helios.ecs.types.ComponentTypeId;
 import helios.core.types;
@@ -118,20 +116,21 @@ export namespace helios::gameplay::lifecycle::components {
          *
          * @note Asserts if delta <= 0 or if the component does not exist on the entity.
          */
+        template<typename TEntity>
         void defer(
-            helios::runtime::world::GameObject gameObject,
+            TEntity entity,
             helios::ecs::types::ComponentTypeId<THandle> componentTypeId, const float delta) {
             assert(delta > 0 && "delta must be greater than 0");
 
-            const bool hasCmp  = gameObject.has(componentTypeId);
-            assert(hasCmp && "ComponentTypeId not part of GameObject");
+            const bool hasCmp  = entity.has(componentTypeId);
+            assert(hasCmp && "ComponentTypeId not part of Entity");
 
             const auto it = std::ranges::find_if(deferredComponents_,
                 [componentTypeId](const auto& item) {
                 return item.componentTypeId == componentTypeId;
             });
 
-            gameObject.disableComponent(componentTypeId);
+            entity.disableComponent(componentTypeId);
 
             if (it == deferredComponents_.end()) {
                 deferredComponents_.push_back({delta, componentTypeId});

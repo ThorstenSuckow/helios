@@ -16,11 +16,11 @@ export namespace helios::gameplay::spawn::events {
      * @brief Event indicating a spawn plan command has been executed.
      *
      * @details SpawnPlanCommandExecutedEvent is pushed to the frame event bus
-     * after a spawn command completes. The GameObjectSpawnSystem reads these
+     * after a spawn command completes. The EntitySpawnSystem reads these
      * events in the next frame to commit spawn counts to the SpawnScheduler.
      *
      * @see SpawnScheduler::commit
-     * @see GameObjectSpawnSystem
+     * @see EntitySpawnSystem
      */
     struct SpawnPlanCommandExecutedEvent {
 

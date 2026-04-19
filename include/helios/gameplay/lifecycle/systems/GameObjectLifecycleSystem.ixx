@@ -1,5 +1,5 @@
 /**
- * @file GameObjectLifecycleSystem.ixx
+ * @file EntityLifecycleSystem.ixx
  * @brief System that processes health depletion events and triggers despawning.
  */
 module;
@@ -8,7 +8,7 @@ module;
 #include <vector>
 #include <cassert>
 
-export module helios.gameplay.lifecycle.systems.GameObjectLifecycleSystem;
+export module helios.gameplay.lifecycle.systems.EntityLifecycleSystem;
 
 import helios.state.Bindings;
 
@@ -59,7 +59,7 @@ export namespace helios::gameplay::lifecycle::systems {
      */
     template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
     requires IsCommandBufferLike<TCommandBuffer>
-     class GameObjectLifecycleSystem {
+     class EntityLifecycleSystem {
 
     public:
 
@@ -83,7 +83,7 @@ export namespace helios::gameplay::lifecycle::systems {
                     if (hc) {
                         auto healthDepletedBehavior = hc->healthDepletedBehavior();
                         if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::Despawn)) {
-                            if (auto* sbp = go->get<SpawnedByProfileComponent>()) {
+                            if (auto* sbp = go->template get<SpawnedByProfileComponent>()) {
                                 assert(sbp->spawnProfileId().value() != 0 && "Entity has no SpawnProfileId.");
                                 updateContext.queueCommand<TCommandBuffer, DespawnCommand<THandle>>(go->handle(), sbp->spawnProfileId());
                             } else {

@@ -13,8 +13,6 @@ import helios.math;
 
 import helios.core.units.Unit;
 
-import helios.runtime.world.GameObject;
-import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.ai.components.ChaseComponent;

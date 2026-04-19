@@ -15,7 +15,6 @@ export module helios.gameplay.spawn.behavior.initializers.DelayedComponentEnable
 import helios.gameplay.spawn.behavior.SpawnInitializer;
 import helios.gameplay.spawn.types.SpawnPlanCursor;
 import helios.gameplay.spawn.types.SpawnContext;
-import helios.runtime.world.GameObject;
 
 import helios.gameplay.lifecycle.components.DelayedComponentEnabler;
 import helios.ecs.types.ComponentTypeId;
@@ -49,7 +48,7 @@ export namespace helios::gameplay::spawn::behavior::initializers {
      * @see DelayedComponentEnabler
      */
     template<typename THandle, typename ... ComponentTypes>
-    class DelayedComponentEnablerInitializer final : public SpawnInitializer<THandle> {
+    class DelayedComponentEnablerInitializer {
 
         /**
          * @brief Base delay in seconds between activations.
@@ -92,21 +91,23 @@ export namespace helios::gameplay::spawn::behavior::initializers {
          * DelayedComponentEnabler for deferred activation. The delay duration depends
          * on the spawn batch position and the configured base delay.
          *
-         * @param gameObject The entity to initialize.
+         * @param entity The entity to initialize.
          * @param cursor Provides batch position for delay calculation.
          * @param spawnContext Context data (unused).
          */
+        template<typename TEntity>
+        requires std::is_same_v<TEntity::Handle_type, THandle>
         void initialize(
-            helios::runtime::world::GameObject gameObject,
+            TEntity entity,
             const SpawnPlanCursor& cursor,
             const SpawnContext<THandle>& spawnContext
-        ) override {
+        )  {
 
             bool deferFound = false;
 
             auto position = cycleLength_ != 0 ?  cursor.position % cycleLength_ : cursor.position;
 
-            gameObject.forEachComponentTypeId(
+            entity.forEachComponentTypeId(
                 [&](const auto typeId) {
                     // Find the component that should be deferred.
                     const bool deferThisComponent = std::find(
@@ -115,10 +116,10 @@ export namespace helios::gameplay::spawn::behavior::initializers {
 
                     if (deferThisComponent) {
                         deferFound = true;
-                        auto* dec = gameObject.get<helios::gameplay::lifecycle::components::DelayedComponentEnabler<THandle>>();
+                        auto* dec = entity.template get<helios::gameplay::lifecycle::components::DelayedComponentEnabler<THandle>>();
                         assert(dec && "Missing DelayedComponentEnabler");
 
-                        dec->defer(gameObject, typeId, (position + 1) * delay_);
+                        dec->defer(entity, typeId, (position + 1) * delay_);
                     }
                 }
             );

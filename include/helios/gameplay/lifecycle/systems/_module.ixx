@@ -5,4 +5,4 @@
 export module helios.gameplay.lifecycle.systems;
 
 export import helios.gameplay.lifecycle.systems.DelayedComponentEnablerSystem;
-export import helios.gameplay.lifecycle.systems.GameObjectLifecycleSystem;
+export import helios.gameplay.lifecycle.systems.EntityLifecycleSystem;

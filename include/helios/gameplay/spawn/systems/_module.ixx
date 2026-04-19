@@ -4,5 +4,5 @@
  */
 export module helios.gameplay.spawn.systems;
 
-export import helios.gameplay.spawn.systems.GameObjectSpawnSystem;
+export import helios.gameplay.spawn.systems.EntitySpawnSystem;
 

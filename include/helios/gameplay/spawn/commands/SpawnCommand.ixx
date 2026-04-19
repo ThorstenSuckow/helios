@@ -1,6 +1,6 @@
 /**
  * @file SpawnCommand.ixx
- * @brief Command for requesting GameObject spawning from a pool.
+ * @brief Command for requesting Entity spawning from a pool.
  */
 module;
 
@@ -20,10 +20,10 @@ using namespace helios::gameplay::spawn::types;
 export namespace helios::gameplay::spawn::commands {
 
     /**
-     * @brief Command to request spawning of GameObjects from a pool.
+     * @brief Command to request spawning of Entities from a pool.
      *
      * @details SpawnCommand is a WorldCommand that requests the activation of
-     * GameObjects from a specific pool. The command carries a spawn budget
+     * Entities from a specific pool. The command carries a spawn budget
      * indicating how many objects should be spawned.
      *
      * The command itself does not execute spawning directly. Instead, it is
@@ -38,7 +38,7 @@ export namespace helios::gameplay::spawn::commands {
     class SpawnCommand {
 
         /**
-         * @brief The number of GameObjects to spawn.
+         * @brief The number of Entities to spawn.
          */
         size_t spawnBudget_;
 

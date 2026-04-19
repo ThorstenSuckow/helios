@@ -10,7 +10,6 @@ export module helios.gameplay.input.systems.TwinStickInputSystem;
 
 import helios.math.types;
 import helios.math.utils;
-import helios.runtime.world.GameObject;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
@@ -45,7 +44,7 @@ export namespace helios::gameplay::input::systems {
      * Move2DCommand, SteeringCommand and Aim2DCommand instances that are queued in the CommandBuffer
      * for later execution.
      *
-     * @note Requires the owning GameObject to have Move2DComponent and Aim2DComponent
+     * @note Requires the owning Entity to have Move2DComponent and Aim2DComponent
      *       attached for the generated commands to have any effect.
      */
     template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
@@ -70,9 +69,9 @@ export namespace helios::gameplay::input::systems {
         using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
-         * @brief Constructs a TwinStickInputSystem for the specified GameObject.
+         * @brief Constructs a TwinStickInputSystem for the specified Entity.
          *
-         * @param gameObject Reference to the GameObject to generate input commands for.
+         * @param entityHandle The entiytHandle to generate input commands for.
          */
         explicit TwinStickInputSystem(THandle entityHandle) :
         entityHandle_(entityHandle) {}

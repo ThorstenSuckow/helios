@@ -1,5 +1,5 @@
 /**
- * @file GameObjectSpawnSystem.ixx
+ * @file EntitySpawnSystem.ixx
  * @brief System for processing spawn schedules and enqueuing spawn commands.
  */
 module;
@@ -8,7 +8,7 @@ module;
 #include <memory>
 #include <vector>
 
-export module helios.gameplay.spawn.systems.GameObjectSpawnSystem;
+export module helios.gameplay.spawn.systems.EntitySpawnSystem;
 
 
 
@@ -31,26 +31,26 @@ using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::messaging::command::concepts;
 export namespace helios::gameplay::spawn::systems {
 
-    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    template<typename THandle, typename TWorld, typename TCommandBuffer = NullCommandBuffer>
     requires IsCommandBufferLike<TCommandBuffer>
-    class GameObjectSpawnSystem {
+    class EntitySpawnSystem {
 
 
         helios::gameplay::spawn::SpawnManager<THandle>& spawnManager_;
 
-       GameWorld* gameWorld_ = nullptr;
+       TWorld* world_ = nullptr;
 
     public:
 
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
 
-        explicit GameObjectSpawnSystem(helios::gameplay::spawn::SpawnManager<THandle>& spawnManager) noexcept
+        explicit EntitySpawnSystem(helios::gameplay::spawn::SpawnManager<THandle>& spawnManager) noexcept
         : spawnManager_{spawnManager} {}
 
 
-        void init(GameWorld& gameWorld) noexcept {
-            gameWorld_ = &gameWorld;
+        void init(TWorld& world) noexcept {
+            world_ = &world;
         }
 
         /**
@@ -81,7 +81,7 @@ export namespace helios::gameplay::spawn::systems {
                     spawnScheduler->commit(event.spawnRuleId, event.spawnCount);
                 }
 
-                spawnScheduler->evaluate(*gameWorld_, updateContext);
+                spawnScheduler->evaluate(*world_, updateContext);
 
                 auto scheduledPlans = spawnScheduler->drainScheduledPlans();
 

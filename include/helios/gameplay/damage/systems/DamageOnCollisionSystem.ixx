@@ -11,8 +11,6 @@ module;
 export module helios.gameplay.damage.systems.DamageOnCollisionSystem;
 
 
-import helios.runtime.world.GameObject;
-
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
 import helios.runtime.messaging.command.NullCommandBuffer;

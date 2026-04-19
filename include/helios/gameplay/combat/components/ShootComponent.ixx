@@ -10,7 +10,6 @@ export module helios.gameplay.combat.components.ShootComponent;
 
 import helios.math;
 
-import helios.runtime.world.GameObject;
 import helios.gameplay.combat.components.Aim2DComponent;
 import helios.spatial.transform.components.ComposeTransformComponent;
 
@@ -21,7 +20,7 @@ export namespace helios::gameplay::combat::components {
     /**
      * @brief Component for handling projectile shooting with rate limiting.
      *
-     * @details Manages the shooting mechanics for a GameObject by coordinating with
+     * @details Manages the shooting mechanics for a Entity by coordinating with
      * aim-components for direction and a projectile pool for projectile spawning. Implements
      * a cooldown timer to control fire rate.
      *
@@ -29,7 +28,7 @@ export namespace helios::gameplay::combat::components {
      * Example usage:
      * ```cpp
      * auto shootComponent = std::make_unique<ShootComponent>();
-     * gameObject.add(std::move(shootComponent));
+     * entity.add(std::move(shootComponent));
      *
      * // Trigger shooting (typically from ShootCommand)
      * shootComponent->shoot(1.0f);

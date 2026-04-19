@@ -40,7 +40,6 @@ import helios.runtime.pooling.EntityPoolManager;
 
 
 import helios.gameplay.spawn.types;
-import helios.runtime.world.GameObject;
 
 import helios.spatial.transform.components.TranslationStateComponent;
 import helios.gameplay.spawn.components.SpawnedByProfileComponent;
@@ -122,21 +121,23 @@ export namespace helios::gameplay::spawn {
          * @details Checks if the bounding box was initialized (i.e. has valid
          * min/max values: min <= max).
          * If the bounds are inverted (min > max), it recomputes the world AABB
-         * using the GameObject's components (ModelAabb, ScaleState, RotationState,
+         * using the Entity's components (ModelAabb, ScaleState, RotationState,
          * SceneNode, TranslationState).
          *
-         * @param go The GameObject to compute bounds for.
+         * @param go The Entity to compute bounds for.
          * @param bounds The bounding box to check and potentially update.
          *
          * @see helios::physics::collision::Bounds::computeWorldAabb
          */
-        void ensureBounds(helios::runtime::world::GameObject go, helios::math::aabbf& bounds) {
+        template<typename TEntity>
+        requires std::is_same_v<typename TEntity::Handle_type, THandle>
+        void ensureBounds(TEntity entity, helios::math::aabbf& bounds) {
             if (bounds.min()[0] > bounds.max()[0]) {
-                const auto* mab   = go.get<helios::rendering::model::components::ModelAabbComponent>();
-                const auto* sca    = go.get<helios::spatial::transform::components::ScaleStateComponent>();
-                auto* rsc = go.get<helios::spatial::transform::components::RotationStateComponent>();
-                const auto* scn   = go.get<helios::scene::components::SceneNodeComponent>();
-                const auto* tsc   = go.get<helios::spatial::transform::components::TranslationStateComponent>();
+                const auto* mab  = entity.template get<helios::rendering::model::components::ModelAabbComponent>();
+                const auto* sca  = entity.template get<helios::spatial::transform::components::ScaleStateComponent>();
+                auto* rsc        = entity.template get<helios::spatial::transform::components::RotationStateComponent>();
+                const auto* scn  = entity.template get<helios::scene::components::SceneNodeComponent>();
+                const auto* tsc  = entity.template get<helios::spatial::transform::components::TranslationStateComponent>();
 
                 assert(mab && scn && tsc && sca && rsc && "Missing Components for AABB computation");
                 bounds = helios::physics::collision::Bounds::computeWorldAabb(
@@ -192,7 +193,7 @@ export namespace helios::gameplay::spawn {
                 for (size_t i = 0; i < spawnCount; i++) {
 
                     auto go = entityPoolManager_->acquire(entityPoolId);
-                    assert(go && "Failed to acquire GameObject");
+                    assert(go && "Failed to acquire Entity");
 
                     auto* tsc = go->get<helios::spatial::transform::components::TranslationStateComponent>();
 
@@ -268,18 +269,18 @@ export namespace helios::gameplay::spawn {
                     continue;
                 }
 
-                auto go = entityPoolManager_->acquire(entityPoolId);
-                assert(go && "Failed to acquire GameObject");
+                auto entity = entityPoolManager_->acquire(entityPoolId);
+                assert(entity && "Failed to acquire Entity");
 
-                auto* tsc = go->get<helios::spatial::transform::components::TranslationStateComponent>();
-                auto* sbp = go->get<helios::gameplay::spawn::components::SpawnedByProfileComponent>();
+                auto* tsc = entity->template get<helios::spatial::transform::components::TranslationStateComponent<THandle>>();
+                auto* sbp = entity->template get<helios::gameplay::spawn::components::SpawnedByProfileComponent<THandle>>();
                 assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
-                auto* aabb = go->get<helios::physics::collision::components::AabbColliderComponent>();
+                auto* aabb = entity->template get<helios::physics::collision::components::AabbColliderComponent<THandle>>();
                 assert(aabb && "unexpected missing AabbColliderComponent");
 
                 const auto& emitter = spawnContext.emitterContext;
-                auto* ebc = go->get<helios::gameplay::spawn::components::EmittedByComponent>();
+                auto* ebc = entity->template get<helios::gameplay::spawn::components::EmittedByComponent<THandle>>();
                 if (emitter.has_value() && ebc) {
                     ebc->setSource(emitter.value().source);
                 }
@@ -287,10 +288,10 @@ export namespace helios::gameplay::spawn {
                 if (tsc) {
 
                     auto bounds = aabb->bounds();
-                    ensureBounds(go.value(), bounds);
+                    ensureBounds(entity.value(), bounds);
 
                     const auto position = spawnProfile->spawnPlacer->getPosition(
-                        go->handle(),
+                        entity->handle(),
                         bounds,
                         updateContext.level()->bounds(),
                         {1, 1},
@@ -303,10 +304,10 @@ export namespace helios::gameplay::spawn {
 
                 assert(spawnProfile->spawnInitializer && "Unexpected missing spawn initializer");
 
-                spawnProfile->spawnInitializer->initialize(*go, {1, 1}, spawnContext);
+                spawnProfile->spawnInitializer->initialize(*entity, {1, 1}, spawnContext);
                 sbp->setSpawnProfileId(spawnProfileId);
 
-                go->setActive(true);
+                entity->setActive(true);
             }
         }
 

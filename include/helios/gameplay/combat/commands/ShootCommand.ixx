@@ -1,6 +1,6 @@
 /**
  * @file ShootCommand.ixx
- * @brief Command for triggering shooting actions on GameObjects.
+ * @brief Command for triggering shooting actions on Entities.
  */
 module;
 
@@ -18,7 +18,7 @@ import helios.runtime.world.GameWorld;
 export namespace helios::gameplay::combat::commands {
 
     /**
-     * @brief Command that triggers a shooting action on a GameObject.
+     * @brief Command that triggers a shooting action on a Entity.
      *
      * @details ShootCommand is a TargetedCommand that initiates projectile firing
      * on the target entity. The command carries an intensity value (typically from
@@ -41,7 +41,7 @@ export namespace helios::gameplay::combat::commands {
      * }
      * ```
      *
-     * @note The target GameObject must have a ShootComponent attached for this
+     * @note The target Entity must have a ShootComponent attached for this
      *       command to have any effect. Move2DComponent is optional.
      *
      * @see ShootComponent
@@ -88,13 +88,13 @@ export namespace helios::gameplay::combat::commands {
         }
 
         /**
-         * @brief Executes the shoot command on the target GameObject.
+         * @brief Executes the shoot command on the target Entity.
          *
          * @details Retrieves the ShootComponent and optionally the Move2DComponent
          * from the target. Calls `ShootComponent::shoot()` with the intensity and
          * the entity's current velocity for momentum inheritance.
          *
-         * @param gameObject The target entity with a ShootComponent.
+         * @param entity The target entity with a ShootComponent.
          */
         void execute(helios::runtime::world::UpdateContext& updateContext) const noexcept {
 

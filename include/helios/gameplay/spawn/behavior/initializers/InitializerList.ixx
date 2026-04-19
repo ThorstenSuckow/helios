@@ -13,7 +13,6 @@ export module helios.gameplay.spawn.behavior.initializers.InitializerList;
 import helios.gameplay.spawn.behavior.SpawnInitializer;
 import helios.gameplay.spawn.types.SpawnPlanCursor;
 import helios.gameplay.spawn.types.SpawnContext;
-import helios.runtime.world.GameObject;
 
 
 using namespace helios::gameplay::spawn::types;
@@ -41,7 +40,7 @@ export namespace helios::gameplay::spawn::behavior::initializers {
      * @see SpawnContext
      */
     template<typename THandle, std::size_t N>
-    class InitializerList final : public SpawnInitializer<THandle> {
+    class InitializerList {
 
         /**
          * @brief Fixed-size array of initializers to execute.
@@ -63,20 +62,22 @@ export namespace helios::gameplay::spawn::behavior::initializers {
         explicit InitializerList(std::unique_ptr<Args>&& ...args) : initializers_{std::move(args)...}{}
 
         /**
-         * @brief Executes all initializers in sequence on the spawned GameObject.
+         * @brief Executes all initializers in sequence on the spawned Entity.
          *
-         * @param gameObject The GameObject being initialized.
+         * @param entity The Entity being initialized.
          * @param cursor The current spawn plan cursor with batch and index information.
          * @param spawnContext Context providing access to spawn-related data.
          */
+        template<typename TEntity>
+        requires std::is_same_v<typename TEntity::Handle_type, THandle>
         void initialize(
-            helios::runtime::world::GameObject gameObject,
+            TEntity entity,
             const SpawnPlanCursor& cursor,
             const SpawnContext<THandle>& spawnContext
-        ) override {
+        )  {
             for (std::size_t i = 0; i < initializers_.size(); ++i) {
                 initializers_[i]->initialize(
-                    gameObject,
+                    entity,
                     cursor,
                     spawnContext
                 );

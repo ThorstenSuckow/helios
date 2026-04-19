@@ -8,7 +8,6 @@ export module helios.gameplay.spawn.behavior.SpawnInitializer;
 
 import helios.gameplay.spawn.types.SpawnPlanCursor;
 import helios.gameplay.spawn.types.SpawnContext;
-import helios.runtime.world.GameObject;
 
 using namespace helios::gameplay::spawn::types;
 export namespace helios::gameplay::spawn::behavior {
@@ -33,7 +32,7 @@ export namespace helios::gameplay::spawn::behavior {
      * public:
      *     explicit ProjectileInitializer(float speed) : speed_(speed) {}
      *
-     *     void initialize(const GameObject go, const SpawnPlanCursor& cursor,
+     *     void initialize(const Entity go, const SpawnPlanCursor& cursor,
      *                     const SpawnContext& ctx) override {
      *         if (auto* dir = go.get<DirectionComponent>()) {
      *             dir->setDirection(ctx.emitterContext->velocity.normalized());
@@ -59,12 +58,12 @@ export namespace helios::gameplay::spawn::behavior {
         /**
          * @brief Initializes a spawned entity's state.
          *
-         * @param gameObject The entity to initialize.
+         * @param entity The entity to initialize.
          * @param cursor The current position within the spawn batch.
          * @param spawnContext Context data including optional emitter info.
          */
         virtual void initialize(
-            helios::runtime::world::GameObject gameObject,
+            THandle handle,
             const SpawnPlanCursor& cursor,
             const SpawnContext<THandle>& spawnContext
         ) = 0;

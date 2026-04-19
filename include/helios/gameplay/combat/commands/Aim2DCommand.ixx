@@ -1,6 +1,6 @@
 /**
  * @file Aim2DCommand.ixx
- * @brief Command for applying 2D aiming direction to GameObjects.
+ * @brief Command for applying 2D aiming direction to Entities.
  */
 module;
 
@@ -20,14 +20,14 @@ using namespace helios::runtime::world::types;
 export namespace helios::gameplay::combat::commands {
 
     /**
-     * @brief Command that applies 2D aiming direction to a GameObject.
+     * @brief Command that applies 2D aiming direction to a Entity.
      *
      * @details This command encapsulates an aim request consisting of a normalized
      * direction vector and a frequency factor derived from analog stick magnitude.
      * When executed, it invokes Aim2DComponent::aim() to update the aiming direction
      * and fire frequency.
      *
-     * @note The target GameObject must have an Aim2DComponent attached for this
+     * @note The target Entity must have an Aim2DComponent attached for this
      *       command to have any effect.
      *
      * @see helios::runtime::messaging::command::Command
@@ -67,7 +67,7 @@ export namespace helios::gameplay::combat::commands {
 
 
         /**
-         * @brief Executes the aim command on a GameObject.
+         * @brief Executes the aim command on a Entity.
          *
          * @param entity The target entity with an Aim2DComponent.
          */
@@ -76,7 +76,7 @@ export namespace helios::gameplay::combat::commands {
             auto entity = updateContext.find<THandle>(entityHandle_);
 
             if (!entity) {
-                assert(false && "GameObject not found in the world.");
+                assert(false && "Entity not found in the world.");
                 return;
             }
 

@@ -4,12 +4,13 @@
  */
 module;
 
+#include <type_traits>
+
 export module helios.gameplay.spawn.behavior.initializers.RandomDirectionInitializer;
 
 import helios.gameplay.spawn.behavior.SpawnInitializer;
 import helios.gameplay.spawn.types.SpawnPlanCursor;
 import helios.gameplay.spawn.types.SpawnContext;
-import helios.runtime.world.GameObject;
 import helios.physics.motion.components.Move2DComponent;
 import helios.physics.motion.components.DirectionComponent;
 import helios.math;
@@ -34,7 +35,7 @@ export namespace helios::gameplay::spawn::behavior::initializers {
      * @see SpawnInitializer
      */
     template<typename THandle>
-    class RandomDirectionInitializer final : public SpawnInitializer<THandle> {
+    class RandomDirectionInitializer {
 
         helios::util::Random rGen_{12345};
 
@@ -43,19 +44,21 @@ export namespace helios::gameplay::spawn::behavior::initializers {
         /**
          * @brief Initializes entity with a random direction.
          *
-         * @param gameObject The entity to initialize.
+         * @param entity The entity to initialize.
          * @param cursor The current position within the spawn batch (unused).
          * @param spawnContext Context data (unused).
          */
+        template<typename TEntity>
+        requires std::is_same_v<TEntity::Handle_type, THandle>
         void initialize(
-            helios::runtime::world::GameObject gameObject,
+            TEntity entity,
             const SpawnPlanCursor& cursor,
             const SpawnContext<THandle>& spawnContext
-        ) override {
+        ) {
 
 
-            auto* mc = gameObject.template get<helios::physics::motion::components::Move2DComponent<THandle>>();
-            auto* dc = gameObject.template get<helios::physics::motion::components::DirectionComponent<THandle>>();
+            auto* mc = entity.template get<helios::physics::motion::components::Move2DComponent<THandle>>();
+            auto* dc = entity.template get<helios::physics::motion::components::DirectionComponent<THandle>>();
 
             auto dir = helios::math::vec2f{
                 rGen_.randomFloat(-1.0f, 1.0f),
@@ -69,7 +72,7 @@ export namespace helios::gameplay::spawn::behavior::initializers {
         /**
          * @brief Resets the random number generator to its initial seed.
          */
-        void onReset() noexcept override  {
+        void onReset() noexcept  {
             rGen_.reset();
         }
 

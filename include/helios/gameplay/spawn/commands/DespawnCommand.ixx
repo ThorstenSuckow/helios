@@ -1,6 +1,6 @@
 /**
  * @file DespawnCommand.ixx
- * @brief Command for requesting GameObject despawning and pool return.
+ * @brief Command for requesting Entity despawning and pool return.
  */
 module;
 
@@ -19,10 +19,10 @@ import helios.gameplay.spawn.types.SpawnProfileId;
 export namespace helios::gameplay::spawn::commands {
 
     /**
-     * @brief Command to request despawning of a GameObject.
+     * @brief Command to request despawning of a Entity.
      *
      * @details DespawnCommand is a WorldCommand that requests the deactivation
-     * and return of a GameObject to its pool. The command identifies the target
+     * and return of a Entity to its pool. The command identifies the target
      * entity by its handle and specifies the spawn profile for pool return.
      *
      * The command is dispatched to a DespawnCommandDispatcher which forwards it

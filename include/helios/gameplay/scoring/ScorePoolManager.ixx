@@ -18,7 +18,6 @@ import helios.gameplay.scoring.commands;
 
 import helios.gameplay.scoring.types.ScorePoolId;
 
-import helios.runtime.world.GameObject;
 import helios.runtime.world.UpdateContext;
 
 import helios.runtime.world.GameWorld;

@@ -18,7 +18,6 @@ import helios.state.Bindings;
 import helios.physics.collision.types.CollisionBehavior;
 import helios.physics.collision.types.CollisionResponse;
 
-import helios.runtime.world.GameObject;
 import helios.runtime.world.GameWorld;
 import helios.physics.motion.components.Move2DComponent;
 import helios.physics.motion.components.SteeringComponent;
@@ -81,7 +80,7 @@ export namespace helios::gameplay::bounds::systems {
 
 
     public:
-
+        using Entity_type = THandle::Entity_type;
         using EngineRoleTag = helios::runtime::tags::SystemRole;
 
         /**
@@ -131,14 +130,14 @@ export namespace helios::gameplay::bounds::systems {
                         );
 
                         bouncedWorldTranslation = bounceResult.translation;
-                        updateCollisionResponse(entity.handle(), bounceResult, bbc->collisionResponse());
+                        updateCollisionResponse(entity, bounceResult, bbc->collisionResponse());
 
                     } else if (bbc->collisionBehavior() == CollisionBehavior::Despawn) {
 
                         /**
                          * @todo optimize
                          */
-                        auto* sbp = entity.get<helios::gameplay::spawn::components::SpawnedByProfileComponent<THandle>>();
+                        auto* sbp = entity.template get<helios::gameplay::spawn::components::SpawnedByProfileComponent<THandle>>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
                         updateContext.queueCommand<TCommandBuffer, helios::gameplay::spawn::commands::DespawnCommand<THandle>>(
@@ -174,17 +173,17 @@ export namespace helios::gameplay::bounds::systems {
          * If the response is set to AlignHeadingToDirection, this method updates the
          * SteeringComponent to match the new bounce direction.
          *
-         * @param go Pointer to the GameObject to update.
+         * @param go Pointer to the Entity to update.
          * @param bounceResult The result data from the bounce calculation.
          * @param collisionResponse The type of response to apply.
          */
         void updateCollisionResponse(
-            helios::runtime::world::GameObject go,
+            auto entity,
             BounceResult bounceResult,
             helios::physics::collision::types::CollisionResponse collisionResponse) {
 
             if (collisionResponse == helios::physics::collision::types::CollisionResponse::AlignHeadingToDirection) {
-                auto* psc = go.get<helios::physics::motion::components::SteeringComponent<THandle>>();
+                auto* psc = entity.template get<helios::physics::motion::components::SteeringComponent<THandle>>();
 
                 const auto direction = bounceResult.direction;
 

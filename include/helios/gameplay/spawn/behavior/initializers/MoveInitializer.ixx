@@ -12,7 +12,6 @@ export module helios.gameplay.spawn.behavior.initializers.MoveInitializer;
 import helios.gameplay.spawn.behavior.SpawnInitializer;
 import helios.gameplay.spawn.types.SpawnPlanCursor;
 import helios.gameplay.spawn.types.SpawnContext;
-import helios.runtime.world.GameObject;
 import helios.physics.motion.components.Move2DComponent;
 import helios.physics.motion.components.DirectionComponent;
 

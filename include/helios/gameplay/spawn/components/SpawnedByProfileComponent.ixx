@@ -1,6 +1,6 @@
 /**
  * @file SpawnedByProfileComponent.ixx
- * @brief Component that tracks which spawn profile created a GameObject.
+ * @brief Component that tracks which spawn profile created a Entity.
  */
 module;
 
@@ -13,9 +13,9 @@ import helios.core.types;
 export namespace helios::gameplay::spawn::components {
 
     /**
-     * @brief Component that stores the spawn profile ID that created this GameObject.
+     * @brief Component that stores the spawn profile ID that created this Entity.
      *
-     * @details SpawnedByProfileComponent is attached to pooled GameObjects to track
+     * @details SpawnedByProfileComponent is attached to pooled Entities to track
      * which spawn profile they belong to. This enables the despawn system to route
      * release requests to the correct pool manager.
      *

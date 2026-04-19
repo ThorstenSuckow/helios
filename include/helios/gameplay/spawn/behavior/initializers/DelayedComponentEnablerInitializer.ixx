@@ -96,7 +96,7 @@ export namespace helios::gameplay::spawn::behavior::initializers {
          * @param spawnContext Context data (unused).
          */
         template<typename TEntity>
-        requires std::is_same_v<TEntity::Handle_type, THandle>
+        requires std::is_same_v<typename TEntity::Handle_type, THandle>
         void initialize(
             TEntity entity,
             const SpawnPlanCursor& cursor,

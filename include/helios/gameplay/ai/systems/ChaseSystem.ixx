@@ -5,6 +5,7 @@
 module;
 
 #include <algorithm>
+#include <cmath>
 
 export module helios.gameplay.ai.systems.ChaseSystem;
 
@@ -71,11 +72,11 @@ export namespace helios::gameplay::ai::systems {
 
                 auto go = updateContext.find(entityHandle);
 
-                if (!go || !go->isActive() || go->has<DeadTagComponent>()) {
+                if (!go || !go->isActive() || go->template has<DeadTagComponent>()) {
                     continue;
                 }
 
-                const auto* ttr = go->get<helios::spatial::transform::components::TranslationStateComponent>();
+                const auto* ttr = go->template get<helios::spatial::transform::components::TranslationStateComponent>();
                 if (!ttr) {
                     continue;
                 }

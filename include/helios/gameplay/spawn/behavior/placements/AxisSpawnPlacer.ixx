@@ -6,6 +6,7 @@ module;
 
 #include <cassert>
 #include <algorithm>
+#include <cmath>
 
 export module helios.gameplay.spawn.behavior.placements.AxisSpawnPlacer;
 

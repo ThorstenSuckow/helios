@@ -51,8 +51,8 @@ export namespace helios::gameplay::builder::entity::builders::configs {
             entity_.template getOrAdd<helios::gameplay::combat::components::ShootComponent<Handle_type>>()
                         .setFireRate(fireRate);
 
-            auto* transformComponent_ = entity_.get<helios::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
-            auto* ac = entity_.get<helios::gameplay::combat::components::Aim2DComponent<Handle_type>>();
+            auto* transformComponent_ = entity_.template get<helios::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
+            auto* ac = entity_.template get<helios::gameplay::combat::components::Aim2DComponent<Handle_type>>();
             assert(transformComponent_ != nullptr && "Unexpected nullptr for transformComponent_");
             assert(ac != nullptr && "Unexpected nullptr for Aim2DComponent");
 

@@ -168,14 +168,17 @@ export namespace helios::runtime::gameloop {
          */
         helios::runtime::gameloop::GameLoop& gameloop_;
 
+        helios::runtime::world::GameWorld& gameWorld_;
+
     public:
 
         /**
-         * @brief Constructs a Phase with a reference to its owning GameLoop.
+         * @brief Constructs a Phase with references to GameLoop and GameWorld.
          *
          * @param gameloop Reference to the parent GameLoop.
+         * @param gameWorld Shared GameWorld used by passes in this phase.
          */
-        explicit Phase(helios::runtime::gameloop::GameLoop& gameloop) : gameloop_(gameloop) {
+        explicit Phase(helios::runtime::gameloop::GameLoop& gameloop, GameWorld& gameWorld) : gameloop_(gameloop), gameWorld_(gameWorld) {
 
         }
 
@@ -216,7 +219,8 @@ export namespace helios::runtime::gameloop {
          *
          * @details The state parameter specifies in which states this pass
          * should execute. Passes are skipped if the current state does not
-         * match the configured mask (using bitwise AND).
+         * match the configured mask (using bitwise AND). New passes are
+         * bound to this phase's GameWorld reference.
          *
          * @tparam StateType The state enum type (e.g., GameState, MatchState).
          *
@@ -230,7 +234,7 @@ export namespace helios::runtime::gameloop {
         template<typename StateType>
         Pass& addPass(const StateType t) {//    const helios::gameplay::gamestate::types::GameState gameState = helios::gameplay::gamestate::types::GameState::Any) {
 
-            auto entry = std::make_unique<TypedPass<StateType>>(*this, t);
+            auto entry = std::make_unique<TypedPass<StateType>>(*this, t, gameWorld_);
             auto* raw = entry.get();
             passEntries_.emplace_back(std::move(entry));
 

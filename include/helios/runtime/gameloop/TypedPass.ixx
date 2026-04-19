@@ -103,11 +103,13 @@ export namespace helios::runtime::gameloop {
         public:
 
         /**
-         * @brief Constructs a Pass with a reference to its owning Phase.
+         * @brief Constructs a typed pass for a state mask.
          *
          * @param owner Reference to the parent Phase.
+         * @param mask State mask controlling when this pass runs.
+         * @param gameWorld GameWorld used by the base Pass for buffer injection.
          */
-        explicit TypedPass(Phase& owner, const StateType mask) : owner_(owner), mask_(mask) {}
+        explicit TypedPass(Phase& owner, const StateType mask, helios::runtime::world::GameWorld& gameWorld) : owner_(owner), mask_(mask), Pass(gameWorld) {}
 
 
         /**

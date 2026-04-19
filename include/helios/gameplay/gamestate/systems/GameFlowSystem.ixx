@@ -61,6 +61,8 @@ export namespace helios::gameplay::gamestate::systems {
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
 
+        using CommandBuffer_type = TCommandBuffer;
+
         /**
          * @brief Updates the game flow and emits state transition commands.
          *
@@ -70,7 +72,7 @@ export namespace helios::gameplay::gamestate::systems {
          *
          * @param updateContext The update context providing session and command buffer access.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& buffer) noexcept {
 
             auto& session = updateContext.session();
 
@@ -90,14 +92,14 @@ export namespace helios::gameplay::gamestate::systems {
 
             switch (gameState) {
                 case GameState::Booting: {
-                    updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
+                    buffer.template add<StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::BootRequest)
                     );
                     break;
                 }
 
                 case GameState::Booted: {
-                    updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
+                    buffer.template add<StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::WarmupRequest)
                     );
                     break;
@@ -105,7 +107,7 @@ export namespace helios::gameplay::gamestate::systems {
 
 
                 case GameState::MatchReady: {
-                    updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
+                    buffer.template add<StateCommand<GameState>>(
                         StateTransitionRequest<GameState>(gameState, GameStateTransitionId::StartMatchRequest)
                     );
                     break;

@@ -39,6 +39,8 @@ import helios.rendering.viewport.ViewportSnapshot;
 
 import helios.runtime.gameloop.PassCommitListener;
 
+import helios.runtime.world.GameWorld;
+
 using namespace helios::runtime::world;
 
 #define HELIOS_LOG_SCOPE "helios::runtime::gameloop::GameLoop"
@@ -110,22 +112,23 @@ export namespace helios::runtime::gameloop {
          */
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
             HELIOS_LOG_SCOPE);
+        GameWorld& gameWorld_;
 
 
         /**
          * @brief The pre-update phase, executed before main gameplay logic.
          */
-        helios::runtime::gameloop::Phase prePhase_{*this};
+        helios::runtime::gameloop::Phase prePhase_;
 
         /**
          * @brief The main update phase for core gameplay systems.
          */
-        helios::runtime::gameloop::Phase mainPhase_{*this};
+        helios::runtime::gameloop::Phase mainPhase_;
 
         /**
          * @brief The post-update phase for cleanup and synchronization.
          */
-        helios::runtime::gameloop::Phase postPhase_{*this};
+        helios::runtime::gameloop::Phase postPhase_;
 
 
         /**
@@ -173,6 +176,7 @@ export namespace helios::runtime::gameloop {
          * @brief Accumulated total time since the first frame, in seconds.
          */
         float totalTime_ = 0.0f;
+
 
 
         /**
@@ -257,13 +261,16 @@ export namespace helios::runtime::gameloop {
 
 
         /**
-         * @brief Default constructor.
+         * @brief Constructs a GameLoop bound to a GameWorld.
          *
-         * @details Creates a GameLoop with empty phases. Systems must be added
-         * to the phases via `phase(PhaseType).addPass().addSystem<T>()` before
-         * calling `init()`.
+         * @details Initializes all phases with the same `GameWorld` reference
+         * so passes can resolve world-owned resources (for example command
+         * buffers) during system registration.
+         *
+         * @param gameWorld The GameWorld associated with this GameLoop.
          */
-        GameLoop() = default;
+        GameLoop(GameWorld& gameWorld) : gameWorld_(gameWorld), prePhase_(*this, gameWorld_), mainPhase_(*this, gameWorld_), postPhase_(*this, gameWorld_) {};
+
 
         /**
          * @brief Returns a reference to the specified phase.
@@ -323,6 +330,10 @@ export namespace helios::runtime::gameloop {
             postPhase_.addPassCommitListener(this);
 
             initialized_ = true;
+        }
+
+        GameWorld& gameWorld() noexcept {
+            return gameWorld_;
         }
 
         /**

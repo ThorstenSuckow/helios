@@ -152,9 +152,10 @@ export namespace helios::bootstrap {
     inline std::pair<std::unique_ptr<GameWorld>, std::unique_ptr<GameLoop>> bootstrapGameWorld(
         const size_t capacity = ENTITY_MANAGER_DEFAULT_CAPACITY
     ) {
-        auto gameLoop = std::make_unique<helios::runtime::gameloop::GameLoop>();
-
         auto gameWorld = std::make_unique<helios::runtime::world::GameWorld>(capacity);
+
+        auto gameLoop = std::make_unique<helios::runtime::gameloop::GameLoop>(*gameWorld);
+
 
         registerAllComponents();
 

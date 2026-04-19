@@ -25,15 +25,19 @@ export namespace helios::runtime::world {
      *
      * @details System uses the Concept/Model pattern to erase the concrete
      * system type. Concrete systems are plain classes that satisfy
-     * `HasUpdate<T>` — they do not inherit from System.
+     * `IsSystemLike<T>` and do not inherit from System.
      *
      * The internal `Concept` base defines the virtual interface, and
      * `Model<T>` adapts the concrete type T, owning it by value.
      * `init()` is conditionally forwarded if `HasInit<T>` is satisfied.
      *
+     * If a system exposes `CommandBuffer_type`, `System` calls
+     * `update(UpdateContext&, CommandBuffer_type&)` and uses the injected
+     * buffer pointer supplied by the creator (typically via Pass registration).
+     *
      * System is move-only (non-copyable).
      *
-     * @see HasUpdate
+     * @see IsSystemLike
      * @see HasInit
      * @see SystemRegistry
      *
@@ -58,20 +62,26 @@ export namespace helios::runtime::world {
         /**
          * @brief Typed wrapper that adapts a concrete system to the Concept interface.
          *
-         * @tparam T The concrete system type, must satisfy `HasUpdate<T>`.
+         * @tparam T The concrete system type, must satisfy `IsSystemLike<T>`.
          */
         template<typename T>
         class Model final : public Concept {
             T system_;
-
+            void* injectedBuffer_{nullptr};
         public:
 
+            explicit Model(T sys, void* buffer = nullptr)
+                    : system_(std::move(sys)), injectedBuffer_(buffer) {}
 
-            explicit Model(T sys) :  system_(std::move(sys)) {}
-
-            void update(UpdateContext& updateContext) noexcept override {
-                system_.update(updateContext);
+            void update(UpdateContext& ctx) noexcept override {
+                if constexpr (requires { typename T::CommandBuffer_type; }) {
+                    using BufT = typename T::CommandBuffer_type;
+                    system_.update(ctx, *static_cast<BufT*>(injectedBuffer_));
+                } else {
+                    system_.update(ctx);
+                }
             }
+
             void init(GameWorld& gameWorld) noexcept override {
                 if constexpr (HasInit<T>) {
                     system_.init(gameWorld);
@@ -99,19 +109,24 @@ export namespace helios::runtime::world {
         /**
          * @brief Wraps a concrete system in a type-erased System.
          *
-         * @tparam T The concrete system type, must satisfy `HasUpdate<T>`.
+         * @tparam T The concrete system type, must satisfy `IsSystemLike<T>`.
          *
          * @param system The concrete system instance to wrap (moved into internal storage).
+         * @param buffer Optional pointer to the concrete `T::CommandBuffer_type`
+         *        instance used for systems with two-parameter update signatures.
          */
         template<typename T>
-        requires HasUpdate<T>
-        explicit System(T system) : pimpl_(std::make_unique<Model<T>>(std::move(system))) {}
+        requires IsSystemLike<T>
+        explicit System(T system, void* buffer = nullptr)
+            : pimpl_(std::make_unique<Model<T>>(std::move(system), buffer))
+        {}
 
         System(const System&) = delete;
         System& operator=(const System&) = delete;
 
         System& operator=(System&&) = default;
         System(System&&) noexcept = default;
+
 
 
         /**

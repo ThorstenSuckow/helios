@@ -7,13 +7,15 @@ module;
 #include <type_traits>
 #include <utility>
 #include <memory>
+#include <cassert>
 
 export module helios.runtime.gameloop.Pass;
 
 import helios.runtime.gameloop.CommitPoint;
 
-
+import helios.runtime.world.GameWorld;
 import helios.runtime.world.SystemRegistry;
+import helios.runtime.world.System;
 import helios.runtime.concepts;
 
 
@@ -21,10 +23,7 @@ import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.gamestate.types;
 
-export namespace helios::runtime::world {
-    class GameWorld;
-}
-
+using namespace helios::runtime::world;
 export namespace helios::runtime::gameloop {
 
     class Phase;
@@ -54,8 +53,25 @@ export namespace helios::runtime::gameloop {
          */
         helios::runtime::world::SystemRegistry systemRegistry_{};
 
+        /**
+         * @brief Reference to the owning GameWorld.
+         *
+         * @details Used to resolve optional command buffer dependencies for
+         * systems declaring `CommandBuffer_type`.
+         */
+        GameWorld& gameWorld_;
+
+
     public:
         virtual ~Pass() = default;
+
+        /**
+         * @brief Constructs a pass bound to a specific GameWorld.
+         *
+         * @param gameWorld GameWorld used for system initialization and
+         *        command buffer lookup.
+         */
+        explicit Pass(GameWorld& gameWorld) : gameWorld_(gameWorld) {};
 
         /**
          * @brief Updates all systems in this pass.
@@ -104,13 +120,27 @@ export namespace helios::runtime::gameloop {
          *
          * @param args Arguments forwarded to the system constructor.
          *
+         * @details If `T` defines `CommandBuffer_type`, the buffer is resolved
+         * from the bound `GameWorld` and injected into the wrapped
+         * `helios::runtime::world::System`.
+         *
          * @return Reference to this Pass for method chaining.
          */
         template<typename T, typename... Args>
         requires helios::runtime::world::concepts::IsSystemLike<T>
         Pass& addSystem(Args&&... args) {
+
+            T concreteSystem(std::forward<Args>(args)...);
+
+            void* bufferPtr = nullptr;
+            if constexpr (requires { typename T::CommandBuffer_type; }) {
+                using TCommandBuffer = typename T::CommandBuffer_type;
+                bufferPtr = gameWorld_.tryCommandBuffer<TCommandBuffer>();
+                assert(bufferPtr && "Command buffer not found for system's CommandBuffer_type");
+            }
+
             systemRegistry_.template add<T>(
-                std::forward<Args>(args)...
+                System(std::move(concreteSystem), bufferPtr)
             );
 
             return *this;

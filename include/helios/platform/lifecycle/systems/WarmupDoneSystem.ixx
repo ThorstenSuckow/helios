@@ -28,7 +28,7 @@ import helios.state.types;
 import helios.gameplay.gamestate.types;
 
 using namespace helios::rendering::shader::concepts;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::ecs::components;
 using namespace helios::rendering::shader::components;
 using namespace helios::runtime::tags;

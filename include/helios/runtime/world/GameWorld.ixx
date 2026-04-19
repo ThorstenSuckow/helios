@@ -47,8 +47,9 @@ import helios.runtime.concepts;
 import helios.runtime.world.EngineWorld;
 
 
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::runtime::messaging::command;
+using namespace helios::runtime::world::concepts;
 using namespace helios::platform::environment::types;
 using namespace helios::runtime::world::types;
 #define HELIOS_LOG_SCOPE "GameWorld"

@@ -32,7 +32,6 @@ import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::gameplay::spawn::types;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
 export namespace helios::gameplay::combat::systems {
 
     /**

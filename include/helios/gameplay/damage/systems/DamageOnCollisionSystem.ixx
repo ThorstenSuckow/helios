@@ -49,7 +49,7 @@ using namespace helios::gameplay::spawn::components;
 
 using namespace helios::gameplay::common::types;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::gameplay::damage::systems::DamageOnCollisionSystem"
 export namespace helios::gameplay::damage::systems {

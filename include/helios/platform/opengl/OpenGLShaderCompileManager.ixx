@@ -44,7 +44,7 @@ using namespace helios::rendering::shader::types;
 using namespace helios::rendering::shader::concepts;
 using namespace helios::rendering::shader::commands;
 using namespace helios::platform::opengl::components;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::runtime::messaging::command;
 #define HELIOS_LOG_SCOPE "helios::platform::opengl::OpenGLShaderCompileManager"
 export namespace helios::platform::opengl {

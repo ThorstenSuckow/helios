@@ -48,7 +48,7 @@ import helios.ecs.components.Active;
 import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 export namespace helios::gameplay::bounds::systems {
 
     /**

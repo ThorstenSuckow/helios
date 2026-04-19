@@ -18,7 +18,7 @@ import helios.platform.environment.commands.PollEventsCommand;
 using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::platform::environment::commands;
 export namespace helios::platform::environment::systems {
 

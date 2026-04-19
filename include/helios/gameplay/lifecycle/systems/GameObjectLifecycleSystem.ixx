@@ -35,7 +35,7 @@ import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 
 using namespace helios::gameplay::matchstate::components;
 using namespace helios::gameplay::matchstate::events;

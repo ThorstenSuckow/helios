@@ -44,7 +44,7 @@ using namespace helios::scene::components;
 using namespace helios::ecs::components;
 using namespace helios::rendering::components;
 using namespace helios::scene::types;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::spatial::transform::components;
 using namespace helios::rendering::commands;
 using namespace helios::runtime::messaging::command;

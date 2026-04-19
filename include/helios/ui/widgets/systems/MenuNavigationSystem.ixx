@@ -45,7 +45,7 @@ using namespace helios::ui::widgets::types;
 using namespace helios::ecs::types;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::ui::widgets::components;
 using namespace helios::ecs::components;
 using namespace helios::input::gamepad;

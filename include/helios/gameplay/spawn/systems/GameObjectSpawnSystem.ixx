@@ -28,7 +28,7 @@ import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 export namespace helios::gameplay::spawn::systems {
 
     template<typename THandle, typename TCommandBuffer = NullCommandBuffer>

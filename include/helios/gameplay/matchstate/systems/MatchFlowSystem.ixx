@@ -29,7 +29,7 @@ using namespace helios::state::types;
 using namespace helios::gameplay::gamestate;
 using namespace helios::gameplay::matchstate::types;
 using namespace helios::runtime::world;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::runtime::messaging::command;
 
 import helios.runtime.world.tags.SystemRole;

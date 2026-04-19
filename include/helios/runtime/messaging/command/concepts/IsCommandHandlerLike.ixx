@@ -8,7 +8,7 @@ module;
 
 export module helios.runtime.messaging.command.concepts.IsCommandHandlerLike;
 
-export namespace helios::runtime::messaging::concepts {
+export namespace helios::runtime::messaging::command::concepts {
 
     /**
      * @brief Constrains T to objects that provide a submit method for specified command types.

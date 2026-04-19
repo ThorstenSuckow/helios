@@ -31,7 +31,7 @@ import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::gameplay::lifecycle::components;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 export namespace helios::gameplay::input::systems {
 
     /**

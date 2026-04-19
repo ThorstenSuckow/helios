@@ -39,7 +39,7 @@ using namespace helios::physics::collision::components;
 using namespace helios::physics::collision::types;
 using namespace helios::gameplay::spawn::commands;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 
 
 import helios.runtime.world.tags.SystemRole;

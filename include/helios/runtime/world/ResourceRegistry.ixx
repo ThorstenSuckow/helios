@@ -26,11 +26,11 @@ import helios.runtime.messaging.command.concepts;
 import helios.runtime.world.types;
 
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::messaging::commands::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::runtime::world::types;
 using namespace helios::core::memory;
 using namespace helios::runtime::world::concepts;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 export namespace helios::runtime::world {
 
 

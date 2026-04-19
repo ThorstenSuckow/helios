@@ -26,7 +26,7 @@ import helios.runtime.world.tags.SystemRole;
 using namespace helios::input::types;
 using namespace helios::state::types;
 using namespace helios::state::commands;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::gameplay::gamestate::types;
 using namespace helios::runtime::messaging::command;
 export namespace helios::gameplay::gamestate::systems {

@@ -31,7 +31,8 @@ import helios.ecs.concepts.IsEntityHandle;
 import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
+
 using namespace helios::ecs::concepts;
 export namespace helios::spatial::transform::systems {
 

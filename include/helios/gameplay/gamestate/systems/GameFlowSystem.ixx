@@ -24,7 +24,7 @@ import helios.runtime.world.Session;
 import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::state::commands;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::state::types;
 using namespace helios::gameplay::gamestate;
 using namespace helios::gameplay::gamestate::types;

@@ -60,7 +60,7 @@ using namespace helios::state::commands;
 using namespace helios::state::types;
 using namespace helios::ecs;
 using namespace helios::ecs::concepts;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::core::types;
 using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::world;

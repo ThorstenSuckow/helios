@@ -29,7 +29,7 @@ using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::rendering::shader;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::rendering::shader::components;
 using namespace helios::rendering::shader::commands;
 using namespace helios::ecs::components;

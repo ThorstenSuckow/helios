@@ -32,7 +32,7 @@ import helios.gameplay.gamestate.types;
 using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::platform::window::components;
 using namespace helios::platform::window::concepts;
 using namespace helios::platform::window::commands;

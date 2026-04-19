@@ -23,7 +23,7 @@ import helios.ecs.components.Active;
 using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::platform::lifecycle::commands;
 export namespace helios::platform::lifecycle::systems {
 

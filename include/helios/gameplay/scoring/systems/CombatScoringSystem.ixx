@@ -46,7 +46,7 @@ using namespace helios::gameplay::health::events;
 using namespace helios::ecs::types;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::messaging::command::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::gameplay::scoring::systems::CombatScoringSystem"
 import helios.runtime.world.tags.SystemRole;

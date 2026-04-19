@@ -16,8 +16,7 @@ import helios.runtime.world.GameWorld;
 import helios.runtime.concepts;
 
 using namespace helios::runtime::world;
-using namespace helios::runtime::concepts;
-
+using namespace helios::runtime::world::concepts;
 export namespace helios::runtime::world {
 
 

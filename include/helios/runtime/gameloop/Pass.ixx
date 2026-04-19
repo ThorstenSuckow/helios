@@ -107,7 +107,7 @@ export namespace helios::runtime::gameloop {
          * @return Reference to this Pass for method chaining.
          */
         template<typename T, typename... Args>
-        requires helios::runtime::concepts::IsSystemLike<T>
+        requires helios::runtime::world::concepts::IsSystemLike<T>
         Pass& addSystem(Args&&... args) {
             systemRegistry_.template add<T>(
                 std::forward<Args>(args)...

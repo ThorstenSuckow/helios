@@ -13,8 +13,8 @@ import helios.runtime.world.tags.ManagerRole;
 
 import helios.runtime.world.UpdateContextFwd;
 
-
-export namespace helios::runtime::concepts {
+using namespace helios::runtime::concepts;
+export namespace helios::runtime::world::concepts {
 
     /**
      * @brief Constrains T to types that provide `flush(UpdateContext&)` and

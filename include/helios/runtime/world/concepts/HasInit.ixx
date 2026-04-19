@@ -10,7 +10,7 @@ export module helios.runtime.world.concepts.HasInit;
 
 import helios.runtime.world.GameWorldFwd;
 
-export namespace helios::runtime::concepts {
+export namespace helios::runtime::world::concepts {
 
     /**
      * @brief Detects whether T provides a `void init(GameWorld&)` method.

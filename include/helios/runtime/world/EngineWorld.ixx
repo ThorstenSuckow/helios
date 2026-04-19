@@ -49,7 +49,7 @@ using namespace helios::platform::window;
 using namespace helios::platform::window::types;
 using namespace helios::platform::window::concepts;
 using namespace helios::runtime::world::types;
-using namespace helios::runtime::concepts;
+using namespace helios::runtime::world::concepts;
 using namespace helios::rendering::shader;
 using namespace helios::rendering::material;
 using namespace helios::rendering::mesh;

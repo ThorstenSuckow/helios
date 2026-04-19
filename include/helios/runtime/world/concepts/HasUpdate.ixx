@@ -10,7 +10,7 @@ export module helios.runtime.world.concepts.HasUpdate;
 
 import helios.runtime.world.UpdateContextFwd;
 
-export namespace helios::runtime::concepts {
+export namespace helios::runtime::world::concepts {
 
     /**a
      * @brief Requires that T provides a `void update(UpdateContext&)` method.

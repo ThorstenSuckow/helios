@@ -15,8 +15,7 @@ import helios.runtime.world.UpdateContextFwd;
 
 import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
-using namespace helios::runtime::concepts;
-
+using namespace helios::runtime::messaging::commands::concepts;
 using namespace helios::runtime::world;
 export namespace helios::runtime::messaging::command {
 

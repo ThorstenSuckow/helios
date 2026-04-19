@@ -20,7 +20,8 @@ import helios.runtime.messaging.command.tags.CommandBufferRole;
 
 using namespace helios::runtime::tags;
 using namespace helios::runtime::world;
-export namespace helios::runtime::concepts {
+using namespace helios::runtime::concepts;
+export namespace helios::runtime::messaging::commands::concepts {
 
     /**
      * @brief Constrains types that can serve as concrete command buffers.

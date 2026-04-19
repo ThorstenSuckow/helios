@@ -13,7 +13,7 @@ module;
 export module helios.ext.opengl.rendering.model.OpenGLMesh;
 
 import helios.rendering.mesh.Mesh;
-import helios.rendering.mesh.MeshConfig;
+import helios.rendering.mesh.types.MeshConfig;
 import helios.rendering.asset.shape.Shape;
 import helios.rendering.Vertex;
 
@@ -147,7 +147,7 @@ export namespace helios::ext::opengl::rendering::model {
         explicit OpenGLMesh(
             std::shared_ptr<const std::vector<helios::rendering::Vertex>> vertices,
             std::shared_ptr<const std::vector<unsigned int>> indices,
-            std::shared_ptr<const helios::rendering::mesh::MeshConfig> meshConfig
+            std::shared_ptr<const helios::rendering::mesh::types::MeshConfig> meshConfig
         ) :
             Mesh(
                 std::move(vertices),
@@ -181,7 +181,7 @@ export namespace helios::ext::opengl::rendering::model {
          */
         explicit OpenGLMesh(
             const helios::rendering::asset::shape::Shape& shape,
-            std::shared_ptr<const helios::rendering::mesh::MeshConfig> meshConfig
+            std::shared_ptr<const helios::rendering::mesh::types::MeshConfig> meshConfig
         ) :
             Mesh(
                 shape,

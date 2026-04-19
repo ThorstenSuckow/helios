@@ -302,13 +302,13 @@ The Command System integrates with the Phase/Pass game loop architecture. Comman
 
 ## Related Modules
 
-- `helios.engine.runtime.messaging.command.CommandBuffer` — Type-erased buffer wrapper (Concept/Model)
-- `helios.engine.runtime.messaging.command.TypedCommandBuffer` — Compile-time typed buffer
-- `helios.engine.runtime.messaging.command.CommandBufferRegistry` — Type-indexed registry for CommandBuffer instances
-- `helios.engine.runtime.messaging.command.CommandHandlerRegistry` — Function-pointer based registry for command handlers
-- `helios.engine.runtime.messaging.command.EngineCommandBuffer` — Concrete engine buffer facade
-- `helios.engine.runtime.world.Manager` — Type-erased wrapper for managers
-- `helios.engine.runtime.world.ResourceRegistry` — Unified resource storage for Managers and CommandBuffers
+- `helios.runtime.messaging.command.CommandBuffer` — Type-erased buffer wrapper (Concept/Model)
+- `helios.runtime.messaging.command.TypedCommandBuffer` — Compile-time typed buffer
+- `helios.runtime.messaging.command.CommandBufferRegistry` — Type-indexed registry for CommandBuffer instances
+- `helios.runtime.messaging.command.CommandHandlerRegistry` — Function-pointer based registry for command handlers
+- `helios.runtime.messaging.command.EngineCommandBuffer` — Concrete engine buffer facade
+- `helios.runtime.world.Manager` — Type-erased wrapper for managers
+- `helios.runtime.world.ResourceRegistry` — Unified resource storage for Managers and CommandBuffers
 
 ## Related Documentation
 

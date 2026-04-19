@@ -8,12 +8,13 @@ module;
 #include <optional>
 #include <stdexcept>
 #include <utility>
-
+#include <string_view>
 
 export module helios.rendering.text.TextRenderable;
 
 import helios.rendering.Renderable;
 import helios.rendering.RenderQueue;
+import helios.math;
 
 import helios.rendering.text.TextRenderCommand;
 

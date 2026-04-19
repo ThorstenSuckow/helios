@@ -7,11 +7,11 @@ export module helios.core.container.buffer;
 
 export import helios.core.container.buffer.concepts;
 
-export import helios.core.container.buffer.Buffer;
-export import helios.core.container.buffer.DoubleBuffer;
-export import helios.core.container.buffer.ReadBuffer;
-export import helios.core.container.buffer.WriteBuffer;
-export import helios.core.container.buffer.ReadWriteBuffer;
-export import helios.core.container.buffer.ReadWriteDoubleBuffer;
-export import helios.core.container.buffer.TypeIndexedDoubleBuffer;
-export import helios.core.container.buffer.TypeIndexedReadWriteBuffer;
+export import :Buffer;
+export import :DoubleBuffer;
+export import :ReadBuffer;
+export import :WriteBuffer;
+export import :ReadWriteBuffer;
+export import :ReadWriteDoubleBuffer;
+export import :TypeIndexedDoubleBuffer;
+export import :TypeIndexedReadWriteBuffer;

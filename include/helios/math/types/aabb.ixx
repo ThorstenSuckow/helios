@@ -6,7 +6,7 @@ module;
 
 #include <memory>
 #include <cassert>
-
+#include <algorithm>
 export module helios.math.types:aabb;
 
 import :vec3;

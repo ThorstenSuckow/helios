@@ -7,6 +7,7 @@ module;
 #include <array>
 #include <optional>
 #include <variant>
+#include <utility>
 
 export module helios.rendering.shader.UniformValueMap;
 

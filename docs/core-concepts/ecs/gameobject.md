@@ -1,4 +1,8 @@
-# GameObject
+# GameObject (Legacy)
+
+> **⚠️ Migration note:** `GameObject` in `helios.engine.ecs` is the legacy, non-templated entity facade. It has been superseded by [`Entity<THandle, TEntityManager>`](entity.md) in `helios.core.ecs`, which supports domain-specific handle types and entity managers via template parameters. The `helios.engine.ecs.GameObject` module is retained for backward compatibility but will be removed in a future release.
+>
+> See [Entity](entity.md) for the current documentation.
 
 A **GameObject** is the primary interface for interacting with entities in the helios ECS. It provides a convenient, type-safe wrapper around an `EntityHandle` and the `EntityManager`, enabling component manipulation without direct access to low-level ECS internals.
 
@@ -261,9 +265,3 @@ enemy.add<SpawnedByProfileComponent>();
 - [Component Lifecycle](../component-lifecycle.md) - Lifecycle hooks
 - [Component System](../component-system.md) - ECS architecture overview
 - [Sparse Set](../sparse-set.md) - Underlying component storage
-
-
-
-
-
-

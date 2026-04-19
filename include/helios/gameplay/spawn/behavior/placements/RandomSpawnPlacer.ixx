@@ -1,0 +1,73 @@
+/**
+ * @file RandomSpawnPlacer.ixx
+ * @brief Placer that spawns entities at random positions within bounds.
+ */
+module;
+
+export module helios.gameplay.spawn.behavior.placements.RandomSpawnPlacer;
+
+import helios.gameplay.spawn.types.SpawnPlanCursor;
+import helios.gameplay.spawn.types.SpawnContext;
+import helios.gameplay.spawn.behavior.SpawnPlacer;
+import helios.util.Random;
+import helios.math;
+import helios.ecs.types.EntityHandle;
+
+using namespace helios::gameplay::spawn::types;
+export namespace helios::gameplay::spawn::behavior::placements {
+
+    /**
+     * @brief Placer that spawns entities at random positions within bounds.
+     *
+     * @details RandomSpawnPlacer generates random X and Y coordinates within
+     * the provided level bounds. The Z coordinate is set to 0, making this
+     * suitable for 2D games.
+     *
+     * @note Uses a static Random generator with a fixed seed for reproducibility.
+     *
+     * @see SpawnPlacer
+     */
+    template<typename THandle>
+    class RandomSpawnPlacer final : public SpawnPlacer<THandle> {
+
+        helios::util::Random rGen_{12345};
+
+    public:
+
+        /**
+         * @brief Returns a random position within the level bounds.
+         *
+         * @param entityHandle The handle of the entity being spawned (unused).
+         * @param gameObjectBounds The bounding box of the entity to spawn (unused).
+         * @param environmentBounds The level bounds to spawn within.
+         * @param cursor The current position within the spawn batch (unused).
+         * @param spawnContext Context data (unused).
+         *
+         * @return A random vec3f with Z = 0.
+         */
+        helios::math::vec3f getPosition(
+            const THandle& entityHandle,
+            const helios::math::aabbf& gameObjectBounds,
+            const helios::math::aabbf& environmentBounds,
+            const SpawnPlanCursor& cursor,
+            const SpawnContext<THandle>& spawnContext
+        ) override {
+
+
+            float xPos = rGen_.randomFloat(environmentBounds.min()[0], environmentBounds.max()[0]);
+            float yPos = rGen_.randomFloat(environmentBounds.min()[1], environmentBounds.max()[1]);
+
+            return helios::math::vec3f{xPos, yPos, 0.0f};
+        }
+
+        /**
+         * @brief Resets the random number generator to its initial seed.
+         */
+        void onReset() noexcept override {
+            rGen_.reset();
+        }
+
+
+    };
+
+}

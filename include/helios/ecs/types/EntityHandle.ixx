@@ -7,6 +7,7 @@ module;
 
 #include <functional>
 #include <cstdint>
+#include <cstddef>
 
 export module helios.ecs.types.EntityHandle;
 

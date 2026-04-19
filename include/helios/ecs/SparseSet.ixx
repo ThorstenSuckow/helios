@@ -7,6 +7,7 @@ module;
 #include <cassert>
 #include <functional>
 #include <vector>
+#include <cstddef>
 
 export module helios.ecs.SparseSet;
 

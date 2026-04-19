@@ -7,7 +7,6 @@ module;
 #include <cassert>
 #include <type_traits>
 #include <typeindex>
-#include <generator>
 
 
 export module helios.ecs.Entity;
@@ -121,9 +120,9 @@ export namespace helios::ecs {
          *
          * @return Generator yielding ComponentTypeId for each attached component.
          */
-        [[nodiscard]] std::generator<ComponentTypeId_type>
-        componentTypeIds() const {
-            return entityManager_->componentTypeIds(entityHandle_);
+        template<typename TFunc>
+        void forEachComponentTypeId(TFunc&& func) const {
+            entityManager_->forEachComponentTypeId(entityHandle_, std::forward<TFunc>(func));
         }
 
         /**
@@ -221,7 +220,7 @@ export namespace helios::ecs {
          * @return Raw void pointer to the component, or nullptr if not found.
          */
         void* raw(const ComponentTypeId_type typeId) {
-            return entityManager_->template  raw(entityHandle_, typeId);
+            return entityManager_->raw(entityHandle_, typeId);
         }
 
         /**
@@ -268,7 +267,7 @@ export namespace helios::ecs {
          * @return True if the component is attached, false otherwise.
          */
         bool has(ComponentTypeId_type typeId) const noexcept {
-            return entityManager_->template  has(entityHandle_, typeId);
+            return entityManager_->has(entityHandle_, typeId);
         }
 
         /**
@@ -277,7 +276,7 @@ export namespace helios::ecs {
          * @param typeId The component type identifier.
          */
         void enableComponent(const ComponentTypeId_type typeId) {
-            entityManager_->template  enable(entityHandle_, typeId);
+            entityManager_->enable(entityHandle_, typeId);
         }
 
         /**
@@ -286,7 +285,7 @@ export namespace helios::ecs {
          * @param typeId The component type identifier.
          */
         void disableComponent(const ComponentTypeId_type typeId) {
-            entityManager_->template  disable(entityHandle_, typeId);
+            entityManager_->disable(entityHandle_, typeId);
         }
 
         /**
@@ -312,7 +311,6 @@ export namespace helios::ecs {
          * @see HierarchyPropagationSystem
          */
         void setActive(const bool active) {
-
             bool isActive = entityManager_->template  has<ActiveComponent_type>(entityHandle_);
             bool isInActive = entityManager_->template  has<InactiveComponent_type>(entityHandle_);
 
@@ -336,16 +334,19 @@ export namespace helios::ecs {
                 entityManager_->template  remove<ActiveComponent_type>(entityHandle_);
             }
 
-            for (auto typeId : componentTypeIds()) {
-                const auto ops = ComponentOpsRegistry_type::ops(typeId);
-                void* raw = entityManager_->raw(entityHandle_, typeId);
+            forEachComponentTypeId(
+                [&](const ComponentTypeId_type typeId) {
+                    const auto& ops = ComponentOpsRegistry_type::ops(typeId);
 
-                if (active && ops.onActivate) {
-                    ops.onActivate(raw);
-                } else if (!active && ops.onDeactivate) {
-                    ops.onDeactivate(raw);
+                    if (active && ops.onActivate) {
+                        void* raw = entityManager_->raw(entityHandle_, typeId);
+                        ops.onActivate(raw);
+                    } else if (!active && ops.onDeactivate) {
+                        void* raw = entityManager_->raw(entityHandle_, typeId);
+                        ops.onDeactivate(raw);
+                    }
                 }
-            }
+            );
         }
 
         /**
@@ -364,14 +365,19 @@ export namespace helios::ecs {
          * on those that implement it.
          */
         void onRelease() {
-            for (auto typeId : componentTypeIds()) {
-                const auto ops = ComponentOpsRegistry_type::ops(typeId);
-                void* raw = entityManager_->template  raw(entityHandle_, typeId);
 
-                if (ops.onRelease) {
-                    ops.onRelease(raw);
+            forEachComponentTypeId(
+                [&](const ComponentTypeId_type typeId) {
+                    const auto& ops = ComponentOpsRegistry_type::ops(typeId);
+
+                    if (ops.onRelease) {
+                        void* raw = entityManager_->raw(entityHandle_, typeId);
+                        ops.onRelease(raw);
+                    }
                 }
-            }
+            );
+
+
         }
 
         /**
@@ -381,18 +387,20 @@ export namespace helios::ecs {
          * on those that implement it.
          */
         void onAcquire() {
-            for (auto typeId : componentTypeIds()) {
-                const auto ops = ComponentOpsRegistry_type::ops(typeId);
-                void* raw = entityManager_->template  raw(entityHandle_, typeId);
+            forEachComponentTypeId(
+                [&](const ComponentTypeId_type typeId) {
+                    const auto& ops = ComponentOpsRegistry_type::ops(typeId);
 
-                if (ops.onAcquire) {
-                    ops.onAcquire(raw);
+                    if (ops.onAcquire) {
+                        void* raw = entityManager_->raw(entityHandle_, typeId);
+                        ops.onAcquire(raw);
+                    }
                 }
-            }
+            );
         }
 
     };
 
 
 
-} // namespace helios::engine::modules
+} // namespace helios

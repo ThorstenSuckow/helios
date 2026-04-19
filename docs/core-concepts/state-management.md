@@ -138,12 +138,12 @@ To use `StateManager<YourState>`, you must specialize `StateTransitionId`:
 ```cpp
 // In your bindings module:
 template<>
-struct helios::engine::state::types::StateTransitionId<GameState> {
+struct helios::state::types::StateTransitionId<GameState> {
     using Type = GameStateTransitionId;
 };
 
 template<>
-struct helios::engine::state::types::StateTransitionId<MatchState> {
+struct helios::state::types::StateTransitionId<MatchState> {
     using Type = MatchStateTransitionId;
 };
 ```
@@ -170,7 +170,7 @@ When a state transition is requested:
 Rules define valid state changes with optional guards:
 
 ```cpp
-using namespace helios::engine::state::types;
+using namespace helios::state::types;
 
 // Define rules as constexpr array
 constexpr StateTransitionRule<GameState> gameStateRules[] = {
@@ -218,7 +218,7 @@ public:
 ### Lambda-based Listener
 
 ```cpp
-using namespace helios::engine::state::listeners;
+using namespace helios::state::listeners;
 
 auto listener = std::make_unique<LambdaStateListener<GameState>>(
     // onExit
@@ -249,8 +249,8 @@ stateManager->addStateListener(std::move(listener));
 `DelayedStateCommand<StateType>` schedules a state transition that is triggered by a `GameTimerId`. When the timer expires, the command is submitted to the `StateManager` as a regular `StateCommand`:
 
 ```cpp
-using namespace helios::engine::state::commands;
-using namespace helios::engine::mechanics::timing::types;
+using namespace helios::state::commands;
+using namespace helios::gameplay::timing::types;
 
 // Schedule a transition when a timer expires
 updateContext.queueCommand<DelayedStateCommand<MatchState>>(
@@ -314,7 +314,7 @@ void init(GameWorld& gameWorld) {
 ### Creating State Managers
 
 ```cpp
-using namespace helios::engine::state;
+using namespace helios::state;
 
 // Register state types with session (required before managers are flushed)
 auto& session = gameWorld.session();
@@ -339,8 +339,8 @@ gameStateManager.addStateListener(std::make_unique<LambdaStateListener<GameState
 ### Requesting State Transitions
 
 ```cpp
-using namespace helios::engine::state::commands;
-using namespace helios::engine::state::types;
+using namespace helios::state::commands;
+using namespace helios::state::types;
 
 // Request game start
 updateContext.queueCommand<StateCommand<GameState>>(
@@ -377,7 +377,7 @@ if (gameState == GameState::Running && matchState == MatchState::Playing) {
 For associating viewports or menus with states, use the mapping utilities:
 
 ```cpp
-using namespace helios::engine::state;
+using namespace helios::state;
 
 CombinedStateToIdMapPair<GameState, MatchState, ViewportId> viewportPolicy;
 

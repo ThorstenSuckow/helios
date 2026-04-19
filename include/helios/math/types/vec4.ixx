@@ -6,6 +6,7 @@ module;
 
 #include <cassert>
 #include <memory>
+#include <cstddef>
 
 
 export module helios.math.types:vec4;

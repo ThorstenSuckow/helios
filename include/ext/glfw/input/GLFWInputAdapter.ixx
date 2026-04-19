@@ -18,14 +18,20 @@ import helios.input.gamepad.GamepadState;
 import helios.input.gamepad.DeadzoneStrategy;
 import helios.input.InputAdapter;
 import helios.input.types.Gamepad;
-import helios.window.Window;
 import helios.input.types.Key;
 import helios.input.gamepad.GamepadSettings;
 
 import helios.ext.glfw.input.GLFWKeyLookup;
 import helios.ext.glfw.input.GLFWGamepadLookup;
-import helios.ext.glfw.window.GLFWWindow;
 
+
+namespace helios::ext::glfw::window {
+    class GLFWWindow;
+}
+
+namespace helios::window {
+    class Window;
+}
 export namespace helios::ext::glfw::input {
 
     /**
@@ -43,7 +49,7 @@ export namespace helios::ext::glfw::input {
      * @see GamepadSettings for per-controller configuration.
      * @see DeadzoneStrategy for input normalization strategies.
      */
-    class GLFWInputAdapter final : public helios::input::InputAdapter {
+    class GLFWInputAdapter  {
 
 
 
@@ -64,9 +70,9 @@ export namespace helios::ext::glfw::input {
          * @param deadzoneStrategy The strategy used for analog stick normalization.
          *                         Ownership is transferred to the base InputAdapter.
          */
-        GLFWInputAdapter(std::unique_ptr<helios::input::gamepad::DeadzoneStrategy> deadzoneStrategy) :
-        helios::input::InputAdapter(std::move(deadzoneStrategy))
-        {}
+     //   GLFWInputAdapter(std::unique_ptr<helios::input::gamepad::DeadzoneStrategy> deadzoneStrategy) :
+     //   helios::input::InputAdapter(std::move(deadzoneStrategy))
+      //  {}
 
         /**
          * @brief Checks if a specific key is currently pressed for the given window.
@@ -74,17 +80,19 @@ export namespace helios::ext::glfw::input {
          *
          * @copydoc helios::input::InputAdapter::isKeyPressed()
          */
-        [[nodiscard]] bool isKeyPressed(helios::input::types::Key key,
-            const helios::window::Window& win) const noexcept override {
-            auto const* win_ptr = dynamic_cast<helios::ext::glfw::window::GLFWWindow const*>(&win);
+       // [[nodiscard]] bool isKeyPressed(helios::input::types::Key key,
+       //     const helios::window::Window win) const noexcept {
+           // auto const* win_ptr = dynamic_cast<helios::ext::glfw::window::GLFWWindow const*>(&win);
 
-            if (!win_ptr) {
+        //    return false;
+            /*if (!win_ptr) {
                 logger_.warn("GLFWInput requires GLFWWindow");
                 return false;
             }
 
             return isKeyPressed(key, *win_ptr);
-        }
+        */
+     //   }
 
         /**
          * @brief Checks if a specific key is currently released for the given window.
@@ -94,15 +102,16 @@ export namespace helios::ext::glfw::input {
          * @copydoc helios::input::InputAdapter::isKeyReleased()
          */
         [[nodiscard]] bool isKeyReleased(helios::input::types::Key key,
-            const helios::window::Window& win) const noexcept override {
-            auto const* win_ptr = dynamic_cast<helios::ext::glfw::window::GLFWWindow const*>(&win);
-
+            const helios::window::Window& win) const noexcept {
+           // auto const* win_ptr = dynamic_cast<helios::ext::glfw::window::GLFWWindow const*>(&win);
+/*
             if (!win_ptr) {
                 logger_.warn("GLFWInput requires GLFWWindow");
                 return false;
             }
 
-            return isKeyReleased(key, *win_ptr);
+            return isKeyReleased(key, *win_ptr);*/
+            return false;
         }
 
         /**
@@ -113,13 +122,14 @@ export namespace helios::ext::glfw::input {
          *
          * @return true if the key is pressed, otherwise false.
          */
-        [[nodiscard]] bool isKeyPressed(helios::input::types::Key key,
-            const helios::ext::glfw::window::GLFWWindow& win) const noexcept {
-            return glfwGetKey(
+       // [[nodiscard]] bool isKeyPressed(helios::input::types::Key key,
+      //      const helios::ext::glfw::window::GLFWWindow win) const noexcept {
+            /*return glfwGetKey(
                 win.nativeHandle(),
                 helios::ext::glfw::input::GLFWKeyLookup::from(key)
-            ) == GLFW_PRESS;
-        }
+            ) == GLFW_PRESS;*/
+      //      return false
+      //  }
 
         /**
          * @brief Checks if a specific key is currently released for the given GLFWWindow.
@@ -129,19 +139,21 @@ export namespace helios::ext::glfw::input {
          *
          * @return true if the key is released, otherwise false.
          */
-        [[nodiscard]] bool isKeyReleased(helios::input::types::Key key,
-            const helios::ext::glfw::window::GLFWWindow& win) const noexcept {
+        //[[nodiscard]] bool isKeyReleased(helios::input::types::Key key,
+        //    const helios::ext::glfw::window::GLFWWindow win) const noexcept {
+            /*
             return glfwGetKey(
                 win.nativeHandle(),
                 helios::ext::glfw::input::GLFWKeyLookup::from(key)
-            ) == GLFW_RELEASE;
-        }
+            ) == GLFW_RELEASE;*/
+         //   return false;
+       // }
 
         /**
          * @copydoc helios::input::InputAdapter::gamepadState()
          */
         [[nodiscard]] const helios::input::gamepad::GamepadState& gamepadState(
-            helios::input::types::Gamepad gamepadId) const noexcept override {
+            helios::input::types::Gamepad gamepadId) const noexcept  {
             return gamepadStates_[
                 helios::ext::glfw::input::GLFWGamepadLookup::toArrayIndex(gamepadId)
             ];
@@ -150,7 +162,8 @@ export namespace helios::ext::glfw::input {
         /**
          * @copydoc helios::input::InputAdapter::updateGamepadState()
          */
-        void updateGamepadState(unsigned int gamepadMask) noexcept override {
+        void updateGamepadState(unsigned int gamepadMask) noexcept  {
+            /*
             int index = 0;
             while (gamepadMask != 0) {
 
@@ -230,13 +243,14 @@ export namespace helios::ext::glfw::input {
                 index++;
                 gamepadMask >>= 1;
             }
+            */
         }
 
         /**
          * @copydoc helios::input::InputAdapter::isConnected()
          */
         [[nodiscard]] bool isConnected(
-            helios::input::types::Gamepad gamepadId) const noexcept override {
+            helios::input::types::Gamepad gamepadId) const noexcept  {
             const int glfwGamepadId = helios::ext::glfw::input::GLFWGamepadLookup::from(gamepadId);
             return glfwJoystickPresent(glfwGamepadId) != 0;
         }

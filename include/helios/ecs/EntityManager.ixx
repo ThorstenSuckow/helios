@@ -4,10 +4,9 @@
  */
 module;
 
-#include <coroutine>
-#include <generator>
 #include <memory>
 #include <vector>
+#include <cstddef>
 
 export module helios.ecs.EntityManager;
 
@@ -453,24 +452,22 @@ export namespace helios::ecs {
         }
 
         /**
-         * @brief Returns a generator over all component type IDs attached to an entity.
+         * @brief Returns a span over all component type IDs attached to an entity.
          *
          * @param handle The entity to query.
-         *
-         * @return Generator yielding ComponentTypeId for each attached component.
          */
-        std::generator<ComponentTypeId_type>
-        componentTypeIds(const Handle_type handle) const {
+        template<typename TFunc>
+        void forEachComponentTypeId(const Handle_type handle, TFunc&& func) const {
             if (!registry_.isValid(handle)) {
-                co_return;
+                return;
             }
 
             for (size_t i = 0; i < components_.size(); i++) {
                 if (components_[i] && components_[i]->contains(handle.entityId)) {
-                    co_yield ComponentTypeId_type{i};
+                    std::forward<TFunc>(func)(ComponentTypeId_type{i});
                 }
             }
-        }
+         }
 
         /**
          * @brief Clones all components from source entity to target entity.
@@ -488,21 +485,20 @@ export namespace helios::ecs {
                 return;
             }
 
-            for (auto typeId : componentTypeIds(source)) {
+            forEachComponentTypeId(
+                [&](const ComponentTypeId_type typeId) {
+                    if (!has(target, typeId)) {
 
-                if (!has(target, typeId)) {
+                        const auto& ops = ComponentOpsRegistry_type::ops(typeId);
+                        const void* sourceCmp = raw(source, typeId);
 
-                    const auto& ops = ComponentOpsRegistry_type::ops(typeId);
-
-                    const void* sourceCmp = raw(source, typeId);
-
-                    if (sourceCmp && ops.clone) {
-                        ops.clone(this, sourceCmp, &target);
+                        if (sourceCmp && ops.clone) {
+                            ops.clone(this, sourceCmp, &target);
+                        }
                     }
-
                 }
+            );
 
-            }
         }
 
         /**

@@ -10,21 +10,23 @@ export module helios.platform.glfw.systems.GLFWWindowCloseSystem;
 
 
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
 import helios.platform.glfw.components;
 import helios.platform.window.components;
 import helios.platform.window.commands.WindowCloseCommand;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+import helios.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
 import helios.platform.window.concepts.IsWindowHandle;
 
-using namespace helios::engine::common::tags;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::tags;
+using namespace helios::runtime::world;
+using namespace helios::runtime::messaging::command;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::platform::glfw::components;
 using namespace helios::platform::window::commands;
 using namespace helios::platform::window::components;
@@ -37,8 +39,8 @@ export namespace helios::platform::glfw::systems {
      *
      * @tparam THandle Window handle type.
      */
-    template<typename THandle>
-    requires IsWindowHandle<THandle>
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsWindowHandle<THandle> && IsCommandBufferLike<TCommandBuffer>
     class GLFWWindowCloseSystem {
 
 
@@ -64,7 +66,7 @@ export namespace helios::platform::glfw::systems {
                 Active<THandle>
                 >().whereEnabled()) {
                 if (glfwWindowShouldClose(glfw->handle)) {
-                    updateContext.queueCommand<EngineCommandBuffer, WindowCloseCommand<THandle>>(
+                    updateContext.queueCommand<TCommandBuffer, WindowCloseCommand<THandle>>(
                         entity.handle()
                     );
                 }

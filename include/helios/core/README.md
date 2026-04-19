@@ -21,7 +21,7 @@ import helios.core.types.FuncDefs;
 constexpr uint32_t id = helios::ecs::types::fnv1a_hash("enemy_spawn");
 
 // Used internally by strongly-typed ID constructors
-constexpr GameObjectPoolId POOL{"bullets"};    // calls fnv1a_hash
+constexpr EntityPoolId POOL{"bullets"};    // calls fnv1a_hash
 constexpr SpawnProfileId PROFILE{"enemies"};   // calls fnv1a_hash
 constexpr SpawnRuleId RULE{"wave_spawn"};      // calls fnv1a_hash
 ```

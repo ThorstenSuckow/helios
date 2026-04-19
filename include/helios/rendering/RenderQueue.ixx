@@ -10,6 +10,7 @@ module;
 #include <memory>
 #include <span>
 #include <vector>
+#include <cstddef>
 
 export module helios.rendering.RenderQueue;
 

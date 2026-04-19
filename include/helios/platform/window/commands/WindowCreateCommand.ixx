@@ -10,12 +10,11 @@ export module helios.platform.window.commands.WindowCreateCommand;
 
 import helios.platform.window.types.WindowConfig;
 
-import helios.ecs.types.EntityHandle;
-
 import helios.platform.window.types.WindowHandle;
+import helios.platform.window.concepts.IsWindowHandle;
 
 using namespace helios::platform::window::types;
-using namespace helios::ecs::types;
+using namespace helios::platform::window::concepts;
 export namespace helios::platform::window::commands {
 
     /**
@@ -24,9 +23,10 @@ export namespace helios::platform::window::commands {
      * @tparam THandle Window handle type.
      */
     template<typename THandle>
+    requires IsWindowHandle<THandle>
     struct WindowCreateCommand {
         /** @brief Target window entity handle. */
-        WindowHandle windowHandle;
+        THandle windowHandle;
 
         /** @brief Creation configuration payload. */
         WindowConfig windowConfig;

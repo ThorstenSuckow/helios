@@ -19,8 +19,8 @@ export module helios.platform.opengl.OpenGLShaderCompileManager;
 
 import helios.util.log;
 import helios.util.io;
-import helios.engine.common.tags;
-import helios.engine.runtime.world;
+import helios.runtime.world.tags;
+import helios.runtime.world;
 import helios.rendering.shader.commands;
 import helios.rendering.shader.components;
 import helios.rendering.shader.ShaderEntity;
@@ -29,14 +29,14 @@ import helios.rendering.shader.concepts;
 import helios.rendering.shader.commands;
 import helios.platform.opengl.components.OpenGLShaderComponent;
 
-import helios.engine.runtime.world.EngineWorld;
-import helios.engine.runtime.messaging.command.NullCommandBuffer;
-import helios.engine.common.concepts;
+import helios.runtime.world.EngineWorld;
+import helios.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.concepts;
 
-using namespace helios::engine::runtime::world;
+using namespace helios::runtime::world;
 using namespace helios::util::log;
 using namespace helios::util::io;
-using namespace helios::engine::common::tags;
+using namespace helios::runtime::tags;
 using namespace helios::rendering::shader::commands;
 using namespace helios::rendering::shader::components;
 using namespace helios::rendering::shader;
@@ -44,8 +44,8 @@ using namespace helios::rendering::shader::types;
 using namespace helios::rendering::shader::concepts;
 using namespace helios::rendering::shader::commands;
 using namespace helios::platform::opengl::components;
-using namespace helios::engine::common::concepts;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::messaging::command::concepts;
+using namespace helios::runtime::messaging::command;
 #define HELIOS_LOG_SCOPE "helios::platform::opengl::OpenGLShaderCompileManager"
 export namespace helios::platform::opengl {
 
@@ -247,7 +247,7 @@ export namespace helios::platform::opengl {
          *
          * @param gameWorld Runtime world used for command-handler registration.
          */
-        void init(helios::engine::runtime::world::GameWorld& gameWorld) noexcept {
+        void init(helios::runtime::world::GameWorld& gameWorld) noexcept {
 
             gameWorld.registerCommandHandler<
                 ShaderCompileCommand<THandle>,

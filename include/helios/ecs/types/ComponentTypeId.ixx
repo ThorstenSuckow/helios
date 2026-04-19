@@ -8,6 +8,7 @@
 module;
 
 #include <functional>
+#include <cstddef>
 
 export module helios.ecs.types.ComponentTypeId;
 

@@ -8,6 +8,7 @@ module;
 #include <format>
 #include <stdexcept>
 #include <string>
+#include <memory>
 #include <helios/helios_config.h>
 
 export module helios.ext.opengl.rendering.shader.LegacyOpenGLShader;

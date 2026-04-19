@@ -11,11 +11,11 @@ module;
 #include <vector>
 #include <type_traits>
 #include <optional>
+#include <cstddef>
 
 export module helios.ecs.TypedHandleWorld;
 
 import helios.ecs.View;
-import helios.ecs.EntityResolver;
 import helios.ecs.Entity;
 
 

@@ -24,3 +24,6 @@ export import helios.rendering.text;
 export import helios.rendering.mesh;
 export import helios.rendering.viewport;
 export import helios.rendering.framebuffer;
+export import helios.rendering.commands;
+export import helios.rendering.model;
+export import helios.rendering.components;

@@ -11,12 +11,13 @@ export module helios.platform.window.systems.SwapBuffersSystem;
 
 
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
-import helios.engine.common.tags.SystemRole;
+import helios.runtime.world.tags.SystemRole;
 
-import helios.engine.runtime.world;
-import helios.engine.runtime.messaging.command.EngineCommandBuffer;
+import helios.runtime.world;
+import helios.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.ecs.components.Active;
 
@@ -25,17 +26,18 @@ import helios.platform.window.components;
 import helios.platform.window.concepts.IsWindowHandle;
 
 
-import helios.engine.state.Bindings;
-import helios.engine.mechanics.gamestate.types;
+import helios.state.Bindings;
+import helios.gameplay.gamestate.types;
 
-using namespace helios::engine::common::tags;
-using namespace helios::engine::runtime::world;
-using namespace helios::engine::runtime::messaging::command;
+using namespace helios::runtime::tags;
+using namespace helios::runtime::world;
+using namespace helios::runtime::messaging::command;
+using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::platform::window::components;
 using namespace helios::platform::window::concepts;
 using namespace helios::platform::window::commands;
 using namespace helios::ecs::components;
-using namespace helios::engine::mechanics::gamestate::types;
+using namespace helios::gameplay::gamestate::types;
 export namespace helios::platform::window::systems {
 
     /**
@@ -43,8 +45,8 @@ export namespace helios::platform::window::systems {
      *
      * @tparam THandle Window handle type.
      */
-    template<typename THandle>
-    requires IsWindowHandle<THandle>
+    template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
+    requires IsWindowHandle<THandle> && IsCommandBufferLike<TCommandBuffer>
     class SwapBuffersSystem {
 
     public:
@@ -66,7 +68,7 @@ export namespace helios::platform::window::systems {
                 WindowComponent<THandle>, WindowShownComponent<THandle>, Active<THandle>
                 >().whereEnabled()) {
 
-                updateContext.queueCommand<EngineCommandBuffer, SwapBuffersCommand<THandle>>(entity.handle());
+                updateContext.queueCommand<TCommandBuffer, SwapBuffersCommand<THandle>>(entity.handle());
             }
 
         }

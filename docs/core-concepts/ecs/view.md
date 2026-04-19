@@ -2,6 +2,8 @@
 
 A **View** provides lightweight, efficient iteration over entities that have specific components. It uses the sparse set architecture to achieve cache-friendly traversal without copying data.
 
+> **Migration note:** `View` has been moved from `helios.engine.ecs` to `helios.core.ecs` and generalised with a `TEntityManager` template parameter. This allows views to work with any domain-specific EntityManager specialisation.
+
 ## Overview
 
 Views enable component-based queries using a fluent API:
@@ -27,6 +29,22 @@ void update(UpdateContext& ctx) noexcept {
 }
 ```
 
+## Template Parameters
+
+```cpp
+template<typename TEntityManager, typename... Components>
+class View;
+```
+
+| Parameter | Description |
+|-----------|-------------|
+| `TEntityManager` | The concrete `EntityManager` specialisation to iterate over. Determines the handle type and component storage. |
+| `Components...` | The component types to query for. The first type serves as the "lead" iterator. |
+
+The `TEntityManager` parameter was added when the View was moved to
+`helios.core.ecs`, replacing the hard-coded dependency on the engine's
+concrete `EntityManager`.
+
 ## Architecture
 
 The View uses the **lead set pattern**:
@@ -49,31 +67,30 @@ Result:                   [E0, E2, E7]
 
 ### Construction
 
-Views are typically obtained from `UpdateContext` (in systems) or `GameWorld` (during initialization):
+Views are typically obtained from `TypedHandleWorld` or `UpdateContext`:
 
 ```cpp
-// In a system (preferred)
-auto view = ctx.view<ComponentA, ComponentB, ComponentC>();
+// Via TypedHandleWorld
+auto view = world.view<GameHandle, ComponentA, ComponentB>();
 
-// During initialization (outside system update)
-auto view = gameWorld.view<ComponentA, ComponentB, ComponentC>();
+// Via UpdateContext (in a system)
+auto view = ctx.view<ComponentA, ComponentB>();
 ```
 
-Or directly from `EntityManager`:
+Or directly from an `EntityManager`:
 
 ```cpp
-View<ComponentA, ComponentB> view(&entityManager);
+View<GameEM, ComponentA, ComponentB> view(&entityManager);
 ```
 
 ### Filtering
 
-#### exclude<T>()
+#### exclude\<T\>()
 
 Excludes entities that have a specific component:
 
 ```cpp
-// Skip entities with Shield component
-for (auto [e, health] : ctx.view<HealthComponent>()
+for (auto [e, health] : world.view<GameHandle, HealthComponent>()
     .exclude<ShieldComponent>()) {
     // Only unshielded entities
 }
@@ -84,7 +101,7 @@ for (auto [e, health] : ctx.view<HealthComponent>()
 Filters to only include entities where all queried components are enabled:
 
 ```cpp
-for (auto [e, move, active] : ctx.view<
+for (auto [e, move, active] : world.view<GameHandle,
     Move2DComponent,
     Active
 >().whereEnabled()) {
@@ -100,15 +117,15 @@ Views support range-based for loops with structured bindings:
 
 ```cpp
 for (auto [entity, compA, compB] : view) {
-    // entity: GameObject
+    // entity: Entity<THandle, TEntityManager>
     // compA: ComponentA*
     // compB: ComponentB*
 }
 ```
 
 The tuple contains:
-1. `GameObject` - wrapper for the entity
-2. `Component*...` - pointers to each queried component
+1. `Entity<THandle, TEntityManager>` — wrapper for the entity
+2. `Component*...` — pointers to each queried component
 
 ## Usage Patterns
 
@@ -198,7 +215,11 @@ Each additional component type adds an O(1) existence check per entity. For view
 
 ```cpp
 struct Iterator {
-    LeadIterator current_;  // Points into lead SparseSet
+    using Entity_type = Entity<typename TEntityManager::Handle_type, TEntityManager>;
+    using LeadComponent = std::tuple_element_t<0, std::tuple<Components...>>;
+    using LeadIterator  = typename SparseSet<LeadComponent>::Iterator;
+
+    LeadIterator current_;
     LeadIterator end_;
     const View* view_;
     
@@ -211,10 +232,10 @@ struct Iterator {
 
 For each entity, the iterator checks:
 
-1. **Entity validity** - Handle is still valid in registry
-2. **Include check** - Entity has all required components
-3. **Exclude check** - Entity has none of the excluded components
-4. **Enabled check** - All components pass `isEnabled()` (if filtered)
+1. **Entity validity** — Handle is still valid in registry
+2. **Include check** — Entity has all required components
+3. **Exclude check** — Entity has none of the excluded components
+4. **Enabled check** — All components pass `isEnabled()` (if filtered)
 
 ## Thread Safety
 
@@ -224,9 +245,9 @@ Views are **not thread-safe**. The underlying EntityManager and SparseSets must 
 
 - [EntityManager](entity-manager.md) - Component storage
 - [SparseSet](../sparse-set.md) - Underlying data structure
-- [GameObject](gameobject.md) - Entity wrapper returned by views
+- [Entity](entity.md) - Entity wrapper returned by views
+- [TypedHandleWorld](typed-handle-world.md) - World-level view creation
 - [System](system.md) - Systems that use views for queries
 - [Traits](traits.md) - isEnabled() detection
 - [Component Lifecycle](../component-lifecycle.md) - isEnabled() and other hooks
-
 

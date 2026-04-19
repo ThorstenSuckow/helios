@@ -13,9 +13,9 @@ import helios.gameplay.spawn.policy.SpawnCondition;
 import helios.gameplay.spawn.policy.amount.SpawnAmountProvider;
 import helios.gameplay.spawn.policy.SpawnRuleState;
 import helios.gameplay.spawn.scheduling.SpawnPlan;
-import helios.runtime.pooling.GameObjectPoolSnapshot;
+import helios.runtime.pooling.EntityPoolSnapshot;
 import helios.runtime.world;
-import helios.runtime.pooling.types.GameObjectPoolId;
+import helios.runtime.pooling.types.EntityPoolId;
 import helios.gameplay.spawn.types.SpawnRuleId;
 
 export namespace helios::gameplay::spawn::policy {
@@ -112,7 +112,7 @@ export namespace helios::gameplay::spawn::policy {
         /**
          * @brief Evaluates the rule and returns a spawn plan.
          *
-         * @param gameObjectPoolId The pool to spawn from.
+         * @param entityPoolId The pool to spawn from.
          * @param poolSnapshot Current pool state.
          * @param spawnRuleState The rule's runtime state.
          * @param gameWorld The game world where the spawn plan is executed.
@@ -121,13 +121,13 @@ export namespace helios::gameplay::spawn::policy {
          * @return A SpawnPlan with amount > 0 if condition satisfied, 0 otherwise.
          */
         [[nodiscard]] helios::gameplay::spawn::scheduling::SpawnPlan evaluate(
-            const helios::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
-            const helios::runtime::pooling::GameObjectPoolSnapshot& poolSnapshot,
+            const helios::runtime::pooling::types::EntityPoolId entityPoolId,
+            const helios::runtime::pooling::EntityPoolSnapshot& poolSnapshot,
             const SpawnRuleState& spawnRuleState,
             const helios::runtime::world::GameWorld& gameWorld,
             const helios::runtime::world::UpdateContext& updateContext
         ) {
-            auto amount = spawnAmountProvider_->getAmount(gameObjectPoolId, spawnRuleState, gameWorld, updateContext);
+            auto amount = spawnAmountProvider_->getAmount(entityPoolId, spawnRuleState, gameWorld, updateContext);
 
             if (spawnCondition_->isSatisfied(amount, spawnRuleState, poolSnapshot, updateContext)) {
                 return helios::gameplay::spawn::scheduling::SpawnPlan{spawnRuleId_, amount};

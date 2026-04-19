@@ -6,5 +6,5 @@ module;
 
 export module helios.gameplay.builder;
 
-export import helios.gameplay.builder.gameObject;
+export import helios.gameplay.builder.entity;
 export import helios.gameplay.builder.spawnSystem;

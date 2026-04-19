@@ -36,7 +36,7 @@ import helios.scene.components.SceneNodeComponent;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
-import helios.runtime.pooling.GameObjectPoolManager;
+import helios.runtime.pooling.EntityPoolManager;
 
 
 import helios.gameplay.spawn.types;
@@ -107,7 +107,7 @@ export namespace helios::gameplay::spawn {
         /**
          * @brief Pointer to the pool manager for acquire/release operations.
          */
-        helios::runtime::pooling::GameObjectPoolManager<THandle>* gameObjectPoolManager_ = nullptr;
+        helios::runtime::pooling::EntityPoolManager<THandle>* entityPoolManager_ = nullptr;
 
         /**
          * @brief Map from profile IDs to their spawn profiles.
@@ -173,11 +173,11 @@ export namespace helios::gameplay::spawn {
 
                 const auto spawnProfile = it->second.get();
 
-                const auto gameObjectPoolId = spawnProfile->gameObjectPoolId;
+                const auto entityPoolId = spawnProfile->entityPoolId;
 
 
 
-                const auto poolSnapshot = gameObjectPoolManager_->poolSnapshot(gameObjectPoolId);
+                const auto poolSnapshot = entityPoolManager_->poolSnapshot(entityPoolId);
 
                 if (amount == 0) {
                     assert(false && "Amount must not be 0");
@@ -191,7 +191,7 @@ export namespace helios::gameplay::spawn {
                 const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
                 for (size_t i = 0; i < spawnCount; i++) {
 
-                    auto go = gameObjectPoolManager_->acquire(gameObjectPoolId);
+                    auto go = entityPoolManager_->acquire(entityPoolId);
                     assert(go && "Failed to acquire GameObject");
 
                     auto* tsc = go->get<helios::spatial::transform::components::TranslationStateComponent>();
@@ -259,16 +259,16 @@ export namespace helios::gameplay::spawn {
                 assert(it != spawnProfiles_.end() && "SpawnProfile not part of SpawnManager");
 
                 const auto spawnProfile = it->second.get();
-                const auto gameObjectPoolId = spawnProfile->gameObjectPoolId;
+                const auto entityPoolId = spawnProfile->entityPoolId;
 
-                if (gameObjectPoolManager_->poolSnapshot(gameObjectPoolId).inactiveCount == 0) {
+                if (entityPoolManager_->poolSnapshot(entityPoolId).inactiveCount == 0) {
                     /**
                      * @todo log
                      */
                     continue;
                 }
 
-                auto go = gameObjectPoolManager_->acquire(gameObjectPoolId);
+                auto go = entityPoolManager_->acquire(entityPoolId);
                 assert(go && "Failed to acquire GameObject");
 
                 auto* tsc = go->get<helios::spatial::transform::components::TranslationStateComponent>();
@@ -327,9 +327,9 @@ export namespace helios::gameplay::spawn {
                 const auto it = spawnProfiles_.find(spawnProfileId);
                 assert(it != spawnProfiles_.end() && "SpawnProfile not part of SpawnManager");
                 const auto spawnProfile = it->second.get();
-                auto gameObjectPoolId = spawnProfile->gameObjectPoolId;
+                auto entityPoolId = spawnProfile->entityPoolId;
 
-                gameObjectPoolManager_->release(gameObjectPoolId, despawnCommand.entityHandle());
+                entityPoolManager_->release(entityPoolId, despawnCommand.entityHandle());
 
             }
         }
@@ -465,15 +465,15 @@ export namespace helios::gameplay::spawn {
         /**
          * @brief Initializes the manager with required runtime resources.
          *
-         * @details Resolves `GameObjectPoolManager<THandle>` and registers
+         * @details Resolves `EntityPoolManager<THandle>` and registers
          * command handlers for typed spawn command variants.
          *
          * @param gameWorld Game world used for resource lookup and handler registration.
          */
         void init(helios::runtime::world::GameWorld& gameWorld) noexcept {
 
-            assert(gameWorld.hasManager<helios::runtime::pooling::GameObjectPoolManager<THandle>>() && "Unexpected missing GameObjectPoolManager");
-            gameObjectPoolManager_ = gameWorld.tryManager<helios::runtime::pooling::GameObjectPoolManager<THandle>>();
+            assert(gameWorld.hasManager<helios::runtime::pooling::EntityPoolManager<THandle>>() && "Unexpected missing EntityPoolManager");
+            entityPoolManager_ = gameWorld.tryManager<helios::runtime::pooling::EntityPoolManager<THandle>>();
 
             gameWorld.registerCommandHandler<
                 SpawnCommand<THandle>,

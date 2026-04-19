@@ -32,7 +32,7 @@ export namespace helios::core::types {
      * constexpr uint32_t id = fnv1a_hash("enemy_spawn");
      *
      * // Used internally by strongly-typed ID constructors
-     * constexpr GameObjectPoolId POOL{"bullets"};  // calls fnv1a_hash
+     * constexpr EntityPoolId POOL{"bullets"};  // calls fnv1a_hash
      * ```
      *
      * @param str The string view to hash.
@@ -42,7 +42,7 @@ export namespace helios::core::types {
      * @note This is not a cryptographic hash. Do not use for security purposes.
      *
      * @see https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
-     * @see GameObjectPoolId
+     * @see EntityPoolId
      * @see SpawnProfileId
      * @see SpawnRuleId
      */

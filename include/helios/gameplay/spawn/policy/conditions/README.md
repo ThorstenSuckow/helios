@@ -8,7 +8,7 @@ This module provides `SpawnCondition` implementations that determine when
 spawning should occur based on time, pool state, or other game conditions.
 
 > `SpawnCondition` is not template-based. Conditions operate on
-> `SpawnRuleState`, `GameObjectPoolSnapshot`, and `UpdateContext`.
+> `SpawnRuleState`, `EntityPoolSnapshot`, and `UpdateContext`.
 
 ## Key Classes
 
@@ -45,7 +45,7 @@ auto rule = std::make_unique<SpawnRule<Handle>>(
 class WaveSpawnCondition : public SpawnCondition {
 public:
     bool isSatisfied(size_t amount, const SpawnRuleState& state,
-                     const GameObjectPoolSnapshot& pool,
+                     const EntityPoolSnapshot& pool,
                      const UpdateContext& ctx) const noexcept override {
         return state.sinceLastSpawn() >= waveInterval_
             && pool.inactiveCount >= amount;

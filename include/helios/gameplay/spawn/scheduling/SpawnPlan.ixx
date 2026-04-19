@@ -8,7 +8,7 @@ module;
 #include <cstddef>
 export module helios.gameplay.spawn.scheduling.SpawnPlan;
 
-import helios.runtime.pooling.types.GameObjectPoolId;
+import helios.runtime.pooling.types.EntityPoolId;
 import helios.gameplay.spawn.types.SpawnRuleId;
 
 export namespace helios::gameplay::spawn::scheduling {

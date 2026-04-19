@@ -26,7 +26,7 @@ auto amount = std::make_unique<FixedSpawnAmount<Handle>>(3);
 
 // Callback-based: dynamic amount based on game state
 auto dynamicAmount = std::make_unique<SpawnAmountByCallback<Handle>>(
-    [](const GameObjectPoolId& poolId, const SpawnRuleState& state,
+    [](const EntityPoolId& poolId, const SpawnRuleState& state,
        const GameWorld& gameWorld, const UpdateContext& ctx) -> size_t {
         return 2;  // dynamic logic here
     }

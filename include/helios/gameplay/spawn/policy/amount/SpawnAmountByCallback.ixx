@@ -9,7 +9,7 @@ module;
 
 export module helios.gameplay.spawn.policy.amount.SpawnAmountByCallback;
 
-import helios.runtime.pooling.types.GameObjectPoolId;
+import helios.runtime.pooling.types.EntityPoolId;
 import helios.gameplay.spawn.policy.amount.SpawnAmountProvider;
 import helios.gameplay.spawn.policy.SpawnRuleState;
 import helios.runtime.world;
@@ -26,7 +26,7 @@ export namespace helios::gameplay::spawn::policy::amount {
      * Example:
      * ```cpp
      * auto dynamicAmount = std::make_unique<SpawnAmountByCallback>(
-     *     [&DIFFICULTY_LEVEL](const GameObjectPoolId& poolId, const SpawnRuleState& state,
+     *     [&DIFFICULTY_LEVEL](const EntityPoolId& poolId, const SpawnRuleState& state,
      *        const UpdateContext& ctx) -> size_t {
      *         // Scale spawn count with difficulty
      *         return 2 * DIFFICULTY_LEVEL;
@@ -44,7 +44,7 @@ export namespace helios::gameplay::spawn::policy::amount {
          * @brief Function signature for amount evaluation.
          */
         using AmountEvaluator = std::function<size_t(
-            const helios::runtime::pooling::types::GameObjectPoolId,
+            const helios::runtime::pooling::types::EntityPoolId,
             const SpawnRuleState&,
             const helios::runtime::world::GameWorld& gameWorld,
             const helios::runtime::world::UpdateContext&
@@ -69,12 +69,12 @@ export namespace helios::gameplay::spawn::policy::amount {
          * @copydoc SpawnAmountProvider::getAmount
          */
         [[nodiscard]] size_t getAmount(
-            const helios::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
+            const helios::runtime::pooling::types::EntityPoolId entityPoolId,
             const SpawnRuleState& spawnRuleState,
             const helios::runtime::world::GameWorld& gameWorld,
             const helios::runtime::world::UpdateContext& updateContext
         ) const override {
-            return evaluator_(gameObjectPoolId, spawnRuleState, gameWorld, updateContext);
+            return evaluator_(entityPoolId, spawnRuleState, gameWorld, updateContext);
         }
 
     };

@@ -4,5 +4,5 @@
  */
 export module helios.runtime.pooling.types;
 
-export import helios.runtime.pooling.types.GameObjectPoolId;
+export import helios.runtime.pooling.types.EntityPoolId;
 

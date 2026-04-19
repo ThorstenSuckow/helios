@@ -75,7 +75,7 @@ export namespace helios::gameplay::spawn::commands {
         /**
          * @brief Returns the target pool ID.
          *
-         * @return The GameObjectPoolId to spawn from.
+         * @return The EntityPoolId to spawn from.
          */
         [[nodiscard]] SpawnProfileId spawnProfileId() const noexcept {
             return spawnProfileId_;

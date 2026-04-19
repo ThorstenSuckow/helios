@@ -38,7 +38,7 @@ export namespace helios::gameplay::spawn::components {
      * ```
      *
      * @see SpawnProfileId
-     * @see GameObjectPoolManager
+     * @see EntityPoolManager
      */
     template<typename THandle>
     class SpawnedByProfileComponent  {

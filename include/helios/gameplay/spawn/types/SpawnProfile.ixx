@@ -10,7 +10,7 @@ export module helios.gameplay.spawn.types.SpawnProfile;
 
 import helios.gameplay.spawn.behavior.SpawnPlacer;
 import helios.gameplay.spawn.behavior.SpawnInitializer;
-import helios.runtime.pooling.types.GameObjectPoolId;
+import helios.runtime.pooling.types.EntityPoolId;
 
 export namespace helios::gameplay::spawn::types {
 
@@ -29,7 +29,7 @@ export namespace helios::gameplay::spawn::types {
      * Example:
      * ```cpp
      * auto profile = std::make_unique<SpawnProfile>(SpawnProfile{
-     *     .gameObjectPoolId = bulletPoolId,
+     *     .entityPoolId = bulletPoolId,
      *     .spawnPlacer = std::make_unique<EmitterRelativePlacer>(),
      *     .spawnInitializer = std::make_unique<ProjectileInitializer>(speed)
      * });
@@ -46,7 +46,7 @@ export namespace helios::gameplay::spawn::types {
         /**
          * @brief The pool from which entities are acquired.
          */
-        const helios::runtime::pooling::types::GameObjectPoolId gameObjectPoolId;
+        const helios::runtime::pooling::types::EntityPoolId entityPoolId;
 
         /**
          * @brief Strategy for determining spawn positions.

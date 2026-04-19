@@ -8,7 +8,7 @@ module;
 #include <cstddef>
 export module helios.gameplay.spawn.policy.amount.FixedSpawnAmount;
 
-import helios.runtime.pooling.types.GameObjectPoolId;
+import helios.runtime.pooling.types.EntityPoolId;
 import helios.gameplay.spawn.policy.amount.SpawnAmountProvider;
 import helios.gameplay.spawn.policy.SpawnRuleState;
 import helios.runtime.world.GameWorld;
@@ -47,7 +47,7 @@ export namespace helios::gameplay::spawn::policy::amount {
          * @copydoc SpawnAmountProvider::getAmount
          */
         [[nodiscard]] size_t getAmount(
-            const helios::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
+            const helios::runtime::pooling::types::EntityPoolId entityPoolId,
             const SpawnRuleState& spawnRuleState,
             const helios::runtime::world::GameWorld& gameWorld,
             const helios::runtime::world::UpdateContext& updateContext

@@ -40,7 +40,7 @@ Both interfaces are template-based on `THandle`.
 using Handle = GameObjectHandle;
 
 auto profile = std::make_unique<SpawnProfile<Handle>>(SpawnProfile<Handle>{
-    .gameObjectPoolId = enemyPoolId,
+    .entityPoolId = enemyPoolId,
     .spawnPlacer = std::make_unique<RandomSpawnPlacer<Handle>>(),
     .spawnInitializer = std::make_unique<RandomDirectionInitializer<Handle>>(minSpeed, maxSpeed)
 });

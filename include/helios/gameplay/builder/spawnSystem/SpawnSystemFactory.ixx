@@ -9,7 +9,7 @@ export module helios.gameplay.builder.spawnSystem.SpawnSystemFactory;
 import helios.gameplay.builder.spawnSystem.builders.configs.SpawnPoolConfig;
 
 import helios.gameplay.spawn.SpawnManager;
-import helios.runtime.pooling.GameObjectPoolManager;
+import helios.runtime.pooling.EntityPoolManager;
 
 export namespace helios::gameplay::builder::spawnSystem {
 
@@ -59,7 +59,7 @@ export namespace helios::gameplay::builder::spawnSystem {
          * @return A SpawnSystemConfigurator for chained pool() calls.
          */
         static helios::gameplay::builder::spawnSystem::builders::configs::SpawnSystemConfigurator<THandle> configure(
-            helios::runtime::pooling::GameObjectPoolManager<THandle>& poolManager,
+            helios::runtime::pooling::EntityPoolManager<THandle>& poolManager,
             helios::gameplay::spawn::SpawnManager<THandle>& spawnManager
         ) {
             return helios::gameplay::builder::spawnSystem::builders::configs::SpawnSystemConfigurator<THandle>{

@@ -11,7 +11,7 @@ Fluent, ID-centric builder API for configuring the spawn system: pools, profiles
 ```
 spawnSystem/
 ├── _module.ixx                  # Module facade
-├── SpawnSystemFactory.ixx       # Entry point (analog to GameObjectFactory)
+├── SpawnSystemFactory.ixx       # Entry point (analog to EntityFactory)
 ├── README.md
 ├── builders/
 │   ├── _module.ixx
@@ -115,9 +115,9 @@ sb.cyclicScheduler(
 
 ## See Also
 
-- [GameObjectFactory](../gameObject/README.md) - analogous builder for GameObjects
+- [EntityFactory](../entity/README.md) - analogous builder for Entities
 - [SpawnManager](../../runtime/spawn/README.md) - processes spawn/despawn commands
-- [GameObjectPoolManager](../../runtime/pooling/README.md) - manages pre-allocated pools
+- [EntityPoolManager](../../runtime/pooling/README.md) - manages pre-allocated pools
 
 
 

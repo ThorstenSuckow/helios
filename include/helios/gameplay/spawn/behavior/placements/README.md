@@ -22,21 +22,21 @@ using Handle = GameObjectHandle;
 
 // Enemies spawn at random locations
 auto enemyProfile = SpawnProfile<Handle>{
-    .gameObjectPoolId = enemyPoolId,
+    .entityPoolId = enemyPoolId,
     .spawnPlacer = std::make_unique<RandomSpawnPlacer<Handle>>(),
     .spawnInitializer = std::make_unique<RandomDirectionInitializer<Handle>>()
 };
 
 // Projectiles spawn at the firing entity's position
 auto bulletProfile = SpawnProfile<Handle>{
-    .gameObjectPoolId = bulletPoolId,
+    .entityPoolId = bulletPoolId,
     .spawnPlacer = std::make_unique<EmitterSpawnPlacer<Handle>>(),
     .spawnInitializer = std::make_unique<EmitterInitializer<Handle>>()
 };
 
 // Line formation along positive X-axis
 auto formationProfile = SpawnProfile<Handle>{
-    .gameObjectPoolId = enemyPoolId,
+    .entityPoolId = enemyPoolId,
     .spawnPlacer = std::make_unique<AxisSpawnPlacer<Handle>>(
         helios::math::vec3f{1.0f, 0.0f, 0.0f},   // axis (normalized)
         helios::math::vec3f{-100.0f, 0.0f, 0.0f}  // origin

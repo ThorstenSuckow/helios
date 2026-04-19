@@ -24,14 +24,14 @@ using Handle = GameObjectHandle;
 
 // Projectiles inherit direction from firing entity
 auto profile = SpawnProfile<Handle>{
-    .gameObjectPoolId = bulletPoolId,
+    .entityPoolId = bulletPoolId,
     .spawnPlacer = std::make_unique<EmitterSpawnPlacer<Handle>>(),
     .spawnInitializer = std::make_unique<EmitterInitializer<Handle>>()
 };
 
 // Enemies spawn with random movement directions
 auto enemyProfile = SpawnProfile<Handle>{
-    .gameObjectPoolId = enemyPoolId,
+    .entityPoolId = enemyPoolId,
     .spawnPlacer = std::make_unique<RandomSpawnPlacer<Handle>>(),
     .spawnInitializer = std::make_unique<RandomDirectionInitializer<Handle>>()
 };

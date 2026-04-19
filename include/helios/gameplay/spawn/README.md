@@ -88,7 +88,7 @@ be reused across handle domains with compile-time type safety.
 
 ## Related Modules
 
-- `helios.runtime.pooling` — `GameObjectPoolManager`
+- `helios.runtime.pooling` — `EntityPoolManager`
 
 ## Usage
 
@@ -97,7 +97,7 @@ using Handle = GameObjectHandle;
 
 // 1. Register a spawn profile with placer and initializer
 auto profile = std::make_unique<SpawnProfile<Handle>>(SpawnProfile<Handle>{
-    .gameObjectPoolId = bulletPoolId,
+    .entityPoolId = bulletPoolId,
     .spawnPlacer = std::make_unique<EmitterSpawnPlacer<Handle>>(),
     .spawnInitializer = std::make_unique<EmitterInitializer<Handle>>()
 });

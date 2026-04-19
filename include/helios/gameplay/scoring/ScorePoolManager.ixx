@@ -22,7 +22,7 @@ import helios.runtime.world.GameObject;
 import helios.runtime.world.UpdateContext;
 
 import helios.runtime.world.GameWorld;
-import helios.runtime.pooling.GameObjectPool;
+import helios.runtime.pooling.EntityPool;
 
 import helios.core.types;
 import helios.util.Guid;

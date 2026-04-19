@@ -26,7 +26,7 @@ import helios.gameplay.spawn.scheduling.ScheduledSpawnPlan;
 import helios.gameplay.spawn.types;
 import helios.gameplay.spawn.policy.SpawnRule;
 import helios.gameplay.spawn.policy.SpawnRuleState;
-import helios.runtime.pooling.GameObjectPoolManager;
+import helios.runtime.pooling.EntityPoolManager;
 
 import helios.core.types;
 

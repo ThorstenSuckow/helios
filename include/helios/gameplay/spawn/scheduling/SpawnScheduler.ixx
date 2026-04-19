@@ -20,7 +20,7 @@ import helios.gameplay.spawn.types.SpawnProfileId;
 import helios.gameplay.spawn.types.SpawnRuleId;
 import helios.gameplay.spawn.policy.SpawnRule;
 import helios.gameplay.spawn.policy.SpawnRuleState;
-import helios.runtime.pooling.GameObjectPoolManager;
+import helios.runtime.pooling.EntityPoolManager;
 
 
 using namespace helios::gameplay::spawn::types;

@@ -8,7 +8,7 @@ module;
 #include <cstddef>
 export module helios.gameplay.spawn.policy.amount.SpawnAll;
 
-import helios.runtime.pooling.types.GameObjectPoolId;
+import helios.runtime.pooling.types.EntityPoolId;
 
 import helios.gameplay.spawn.policy.amount.SpawnAmountProvider;
 import helios.gameplay.spawn.policy.SpawnRuleState;
@@ -16,14 +16,14 @@ import helios.gameplay.spawn.policy.SpawnRuleState;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
 
-import helios.runtime.pooling.GameObjectPoolManager;
+import helios.runtime.pooling.EntityPoolManager;
 
 export namespace helios::gameplay::spawn::policy::amount {
 
     /**
      * @brief Spawns all inactive objects from a pool.
      *
-     * This provider queries the GameObjectPoolManager to determine
+     * This provider queries the EntityPoolManager to determine
      * how many inactive objects are available in the specified pool
      * and returns that count as the spawn amount.
      *
@@ -40,16 +40,16 @@ export namespace helios::gameplay::spawn::policy::amount {
          * @copydoc SpawnAmountProvider::getAmount
          */
         [[nodiscard]] size_t getAmount(
-            const helios::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
+            const helios::runtime::pooling::types::EntityPoolId entityPoolId,
             const SpawnRuleState& spawnRuleState,
             const helios::runtime::world::GameWorld& gameWorld,
             const helios::runtime::world::UpdateContext& updateContext
         ) const override {
-            const auto* manager = gameWorld.tryManager<helios::runtime::pooling::GameObjectPoolManager<THandle>>();
+            const auto* manager = gameWorld.tryManager<helios::runtime::pooling::EntityPoolManager<THandle>>();
             if (!manager) {
                 return 0;
             }
-            return manager->poolSnapshot(gameObjectPoolId).inactiveCount;
+            return manager->poolSnapshot(entityPoolId).inactiveCount;
         }
 
     };

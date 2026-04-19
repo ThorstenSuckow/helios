@@ -11,7 +11,7 @@ export module helios.gameplay.spawn.policy.conditions.RequestedAmountIsAvailable
 
 import helios.gameplay.spawn.policy.SpawnCondition;
 import helios.gameplay.spawn.policy.SpawnRuleState;
-import helios.runtime.pooling.GameObjectPoolSnapshot;
+import helios.runtime.pooling.EntityPoolSnapshot;
 import helios.runtime.world.UpdateContext;
 
 export namespace helios::gameplay::spawn::policy::conditions {
@@ -43,7 +43,7 @@ export namespace helios::gameplay::spawn::policy::conditions {
      *
      * @see SpawnCondition
      * @see SpawnConditionAll
-     * @see GameObjectPoolSnapshot
+     * @see EntityPoolSnapshot
      */
     class RequestedAmountIsAvailableCondition : public SpawnCondition {
 
@@ -62,7 +62,7 @@ export namespace helios::gameplay::spawn::policy::conditions {
         [[nodiscard]] bool isSatisfied(
             const size_t requestedAmount,
             const SpawnRuleState& spawnState,
-            const helios::runtime::pooling::GameObjectPoolSnapshot poolSnapshot,
+            const helios::runtime::pooling::EntityPoolSnapshot poolSnapshot,
             const helios::runtime::world::UpdateContext& updateContext
         ) const noexcept override {
             return requestedAmount <= poolSnapshot.inactiveCount;

@@ -4,22 +4,22 @@ Fluent builder pattern implementation for constructing game entities in the heli
 
 ## Overview
 
-This module provides a declarative, composable API for creating `GameObject` instances with their associated components. The builder pattern enables clean, readable entity construction while abstracting the complexity of component dependencies and initialization order.
+This module provides a declarative, composable API for creating `Entity` instances with their associated components. The builder pattern enables clean, readable entity construction while abstracting the complexity of component dependencies and initialization order.
 
 ## Key Classes
 
 | Class | Purpose |
 |-------|---------|
-| `GameObjectFactory` | Entry point for creating and cloning GameObjects |
-| `GameObjectPrototype` | Fluent builder for configuring entity components |
+| `EntityFactory` | Entry point for creating and cloning Entities |
+| `EntityPrototype` | Fluent builder for configuring entity components |
 
 ## Submodules
 
-### gameObject/
+### entity/
 
-The main factory and prototype classes for GameObject construction.
+The main factory and prototype classes for Entity construction.
 
-### gameObject/builders/
+### entity/builders/
 
 Domain-specific builders for different aspects of entity configuration:
 
@@ -40,7 +40,7 @@ Domain-specific builders for different aspects of entity configuration:
 | `ScoringBuilder` | Score tracking configuration |
 | `ObserverBuilder` | Data binding and observation |
 
-### gameObject/builders/configs/
+### entity/builders/configs/
 
 Fine-grained configuration classes used by builders:
 
@@ -68,10 +68,10 @@ Fine-grained configuration classes used by builders:
 
 ## Usage
 
-### Creating a New GameObject
+### Creating a New Entity
 
 ```cpp
-auto player = GameObjectFactory::gameObject()
+auto player = EntityFactory::entity()
     .withMotion([](auto& motion) {
         motion.move2D()
               .speed(5.0f)
@@ -95,11 +95,11 @@ auto player = GameObjectFactory::gameObject()
     .make(true); // active = true
 ```
 
-### Cloning an Existing GameObject
+### Cloning an Existing Entity
 
 ```cpp
 auto enemyTemplate = createEnemyTemplate();
-auto enemy = GameObjectFactory::from(enemyTemplate.get())
+auto enemy = EntityFactory::from(enemyTemplate.get())
     .withTransform([&](auto& transform) {
         transform.transform()
                  .translate(spawnPosition);
@@ -111,9 +111,9 @@ auto enemy = GameObjectFactory::from(enemyTemplate.get())
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     GameObjectFactory                           │
+│                     EntityFactory                           │
 │  ┌───────────────────────────────────────────────────────────┐  │
-│  │                  GameObjectPrototype                      │  │
+│  │                  EntityPrototype                      │  │
 │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │  │
 │  │  │MotionBuilder│  │RenderingBld │  │CollisionBld │  ...   │  │
 │  │  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘        │  │
@@ -126,7 +126,7 @@ auto enemy = GameObjectFactory::from(enemyTemplate.get())
 │  │         │                │                │               │  │
 │  │         ▼                ▼                ▼               │  │
 │  │  ┌─────────────────────────────────────────────────────┐  │  │
-│  │  │                    GameObject                       │  │  │
+│  │  │                    Entity                       │  │  │
 │  │  │  [Move2DComponent] [RenderableComponent] [...]      │  │  │
 │  │  └─────────────────────────────────────────────────────┘  │  │
 │  └───────────────────────────────────────────────────────────┘  │
@@ -141,13 +141,13 @@ The builder module follows these principles:
 2. **Callback-Based Configuration**: Builders are configured via lambdas, allowing scoped access.
 3. **Automatic Dependencies**: Configs automatically add required dependent components.
 4. **Separation of Concerns**: Each builder focuses on a single domain (motion, rendering, etc.).
-5. **Cloning Support**: `GameObjectFactory::from()` creates new entities based on existing templates.
+5. **Cloning Support**: `EntityFactory::from()` creates new entities based on existing templates.
 
 ## Related Modules
 
 | Module | Purpose |
 |--------|---------|
-| `helios.ecs` | GameObject, Component base classes |
+| `helios.ecs` | Entity, Component base classes |
 | `helios` | Component implementations used by configs |
 | `helios.gameplay` | Gameplay-specific components |
 
@@ -156,6 +156,6 @@ The builder module follows these principles:
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::gameplay::builder
-@brief Fluent builder pattern for constructing GameObjects.
-@details This module provides a declarative, composable API for creating GameObject instances with their associated components. The builder pattern enables clean, readable entity construction while abstracting component dependencies and initialization order. Key classes include GameObjectFactory (entry point), GameObjectPrototype (fluent configuration), domain-specific builders (MotionBuilder, RenderingBuilder, CollisionBuilder, etc.), and fine-grained config classes (Move2DConfig, MeshRenderableConfig, etc.).
+@brief Fluent builder pattern for constructing Entities.
+@details This module provides a declarative, composable API for creating Entity instances with their associated components. The builder pattern enables clean, readable entity construction while abstracting component dependencies and initialization order. Key classes include EntityFactory (entry point), EntityPrototype (fluent configuration), domain-specific builders (MotionBuilder, RenderingBuilder, CollisionBuilder, etc.), and fine-grained config classes (Move2DConfig, MeshRenderableConfig, etc.).
 </p></details>

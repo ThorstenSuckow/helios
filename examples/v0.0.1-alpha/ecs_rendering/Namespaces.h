@@ -61,7 +61,7 @@ using namespace helios::tooling;
 
 
 // Builder
-using namespace helios::gameplay::builder::gameObject;
+using namespace helios::gameplay::builder::entity;
 
 // Runtime
 using namespace helios::runtime::messaging::command;

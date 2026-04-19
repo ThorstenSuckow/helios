@@ -21,7 +21,7 @@ import helios.gameplay.spawn.scheduling.ScheduledSpawnPlan;
 import helios.gameplay.spawn.types;
 import helios.gameplay.spawn.policy.SpawnRule;
 import helios.gameplay.spawn.policy.SpawnRuleState;
-import helios.runtime.pooling.GameObjectPoolManager;
+import helios.runtime.pooling.EntityPoolManager;
 
 using namespace helios::gameplay::spawn::policy;
 using namespace helios::gameplay::spawn::types;
@@ -34,7 +34,7 @@ export namespace helios::gameplay::spawn::scheduling {
      * @details DefaultRuleProcessor provides the standard rule processing logic:
      *
      * 1. Retrieves the SpawnProfile from the SpawnManager
-     * 2. Gets a pool snapshot from the GameObjectPoolManager
+     * 2. Gets a pool snapshot from the EntityPoolManager
      * 3. Updates the rule state with the current delta time
      * 4. Evaluates the rule and returns the resulting SpawnPlan
      *
@@ -72,21 +72,21 @@ export namespace helios::gameplay::spawn::scheduling {
             SpawnRule<THandle>& spawnRule,
             SpawnRuleState& spawnRuleState
         ) noexcept override {
-            const auto* poolManager  = gameWorld.tryManager<helios::runtime::pooling::GameObjectPoolManager<THandle>>();
+            const auto* poolManager  = gameWorld.tryManager<helios::runtime::pooling::EntityPoolManager<THandle>>();
             const auto* spawnManager = gameWorld.tryManager<helios::gameplay::spawn::SpawnManager<THandle>>();
 
             const auto* spawnProfile = spawnManager->spawnProfile(spawnProfileId);
             assert(spawnProfile != nullptr);
 
-            const auto& [gameObjectPoolId, _, __] = *spawnProfile;
+            const auto& [entityPoolId, _, __] = *spawnProfile;
 
-            const auto poolSnapshot = poolManager->poolSnapshot(gameObjectPoolId);
+            const auto poolSnapshot = poolManager->poolSnapshot(entityPoolId);
 
             // tick the rule state
             spawnRuleState.update(updateContext.deltaTime());
 
             return spawnRule.evaluate(
-                gameObjectPoolId, poolSnapshot,
+                entityPoolId, poolSnapshot,
                 spawnRuleState,
                 gameWorld,
                 updateContext

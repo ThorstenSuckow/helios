@@ -17,7 +17,7 @@ export module helios.gameplay.builder.spawnSystem.builders.configs.SpawnPoolConf
 
 import helios.ecs;
 
-import helios.runtime.pooling.types.GameObjectPoolId;
+import helios.runtime.pooling.types.EntityPoolId;
 import helios.gameplay.common.types.PrefabId;
 
 import helios.runtime.pooling;
@@ -50,7 +50,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
         /**
          * @brief The pool manager for pool registration.
          */
-        helios::runtime::pooling::GameObjectPoolManager<THandle>& poolManager_;
+        helios::runtime::pooling::EntityPoolManager<THandle>& poolManager_;
 
         /**
          * @brief The spawn manager for profile and scheduler registration.
@@ -66,7 +66,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
          * @param spawnManager The spawn manager for profile and scheduler registration.
          */
         SpawnSystemConfigurator(
-            helios::runtime::pooling::GameObjectPoolManager<THandle>& poolManager,
+            helios::runtime::pooling::EntityPoolManager<THandle>& poolManager,
             helios::gameplay::spawn::SpawnManager<THandle>& spawnManager
         ) noexcept : poolManager_(poolManager), spawnManager_(spawnManager) {}
 
@@ -74,13 +74,13 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
          * @brief Begins ID-centric configuration of a spawn pool.
          *
          * @param poolId Unique pool identifier.
-         * @param prefab Template GameObject for cloning.
+         * @param prefab Template Entity for cloning.
          * @param poolSize Number of instances to pre-allocate.
          *
          * @return SpawnPoolConfig for fluent configuration.
          */
         [[nodiscard]] SpawnPoolConfig<THandle> pool(
-            helios::runtime::pooling::types::GameObjectPoolId poolId,
+            helios::runtime::pooling::types::EntityPoolId poolId,
             helios::gameplay::common::types::PrefabId prefabId,
             size_t poolSize
         );
@@ -249,7 +249,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
         /**
          * @brief Pool to acquire entities from.
          */
-        helios::runtime::pooling::types::GameObjectPoolId poolId_;
+        helios::runtime::pooling::types::EntityPoolId poolId_;
 
         /**
          * @brief Placement strategy for spawned entities.
@@ -280,7 +280,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
             SpawnPoolConfig<THandle>& parent,
             helios::gameplay::spawn::SpawnManager<THandle>& spawnManager,
             helios::gameplay::spawn::types::SpawnProfileId profileId,
-            helios::runtime::pooling::types::GameObjectPoolId poolId
+            helios::runtime::pooling::types::EntityPoolId poolId
         ) : parent_(parent), spawnManager_(spawnManager),
             profileId_(profileId), poolId_(poolId) {}
 
@@ -411,7 +411,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
                 profileId_,
                 std::make_unique<SpawnProfile<THandle>>(
                     SpawnProfile{
-                        .gameObjectPoolId = poolId_,
+                        .entityPoolId = poolId_,
                         .spawnPlacer = std::move(placer_),
                         .spawnInitializer = std::move(initializer_)
                     }
@@ -452,7 +452,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
         /**
          * @brief The pool manager to register with.
          */
-        helios::runtime::pooling::GameObjectPoolManager<THandle>& poolManager_;
+        helios::runtime::pooling::EntityPoolManager<THandle>& poolManager_;
 
         /**
          * @brief The spawn manager to register profiles with.
@@ -462,7 +462,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
         /**
          * @brief Pool identifier.
          */
-        helios::runtime::pooling::types::GameObjectPoolId poolId_;
+        helios::runtime::pooling::types::EntityPoolId poolId_;
 
         /**
          * @brief Identifier of the prefab template for cloning.
@@ -493,9 +493,9 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
          * @param poolSize Number of instances to pre-allocate.
          */
         SpawnPoolConfig(
-            helios::runtime::pooling::GameObjectPoolManager<THandle>& poolManager,
+            helios::runtime::pooling::EntityPoolManager<THandle>& poolManager,
             helios::gameplay::spawn::SpawnManager<THandle>& spawnManager,
-            helios::runtime::pooling::types::GameObjectPoolId poolId,
+            helios::runtime::pooling::types::EntityPoolId poolId,
             helios::gameplay::common::types::PrefabId prefabId,
             size_t poolSize
         ) : poolManager_(poolManager), spawnManager_(spawnManager),
@@ -600,7 +600,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
         void commitPool() {
 
             poolManager_.addPoolConfig(
-                std::make_unique<helios::runtime::pooling::GameObjectPoolConfig>(
+                std::make_unique<helios::runtime::pooling::EntityPoolConfig>(
                     poolId_, prefabId_, size_
                 )
             );
@@ -637,7 +637,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
     }
 
     inline SpawnPoolConfig SpawnSystemConfigurator::pool(
-        helios::runtime::pooling::types::GameObjectPoolId poolId,
+        helios::runtime::pooling::types::EntityPoolId poolId,
         helios::gameplay::common::types::PrefabId prefabId,
         size_t poolSize
     ) {

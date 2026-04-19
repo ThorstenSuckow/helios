@@ -9,7 +9,7 @@ module;
 export module helios.gameplay.spawn.policy.amount.SpawnAmountProvider;
 
 import helios.gameplay.spawn.policy.SpawnRuleState;
-import helios.runtime.pooling.types.GameObjectPoolId;
+import helios.runtime.pooling.types.EntityPoolId;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
 
@@ -39,7 +39,7 @@ export namespace helios::gameplay::spawn::policy::amount {
         /**
          * @brief Returns the number of entities to spawn.
          *
-         * @param gameObjectPoolId The pool to spawn from.
+         * @param entityPoolId The pool to spawn from.
          * @param spawnRuleState The rule's current runtime state.
          * @param gameWorld The game world in which the spawn occurs.
          * @param updateContext The current frame's context.
@@ -47,7 +47,7 @@ export namespace helios::gameplay::spawn::policy::amount {
          * @return Number of entities to spawn.
          */
         [[nodiscard]] virtual size_t getAmount(
-            const helios::runtime::pooling::types::GameObjectPoolId gameObjectPoolId,
+            const helios::runtime::pooling::types::EntityPoolId entityPoolId,
             const SpawnRuleState& spawnRuleState,
             const helios::runtime::world::GameWorld& gameWorld,
             const helios::runtime::world::UpdateContext& updateContext

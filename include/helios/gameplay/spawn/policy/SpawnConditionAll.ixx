@@ -14,7 +14,7 @@ export module helios.gameplay.spawn.policy.SpawnConditionAll;
 import helios.gameplay.spawn.policy.SpawnCondition;
 
 import helios.gameplay.spawn.policy.SpawnRuleState;
-import helios.runtime.pooling.GameObjectPoolSnapshot;
+import helios.runtime.pooling.EntityPoolSnapshot;
 import helios.runtime.world.UpdateContext;
 
 
@@ -90,7 +90,7 @@ export namespace helios::gameplay::spawn::policy {
         [[nodiscard]] bool isSatisfied(
             const size_t requestedAmount,
             const SpawnRuleState& spawnState,
-            const helios::runtime::pooling::GameObjectPoolSnapshot poolSnapshot,
+            const helios::runtime::pooling::EntityPoolSnapshot poolSnapshot,
             const helios::runtime::world::UpdateContext& updateContext
         ) const noexcept override {
 

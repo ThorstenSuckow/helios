@@ -1,6 +1,6 @@
 /**
  * @file PrefabIdComponent.ixx
- * @brief Component that stores the prefab identity of a pooled GameObject.
+ * @brief Component that stores the prefab identity of a pooled Entity.
  */
 module;
 
@@ -15,9 +15,9 @@ using namespace helios::gameplay::common::types;
 export namespace helios::runtime::pooling::components {
 
     /**
-     * @brief Component that stores the PrefabId identifying a GameObject's prefab origin.
+     * @brief Component that stores the PrefabId identifying a Entity's prefab origin.
      *
-     * @details PrefabIdComponent is attached to pooled GameObjects to record which
+     * @details PrefabIdComponent is attached to pooled Entities to record which
      * prefab template they were cloned from. The pool system uses this ID to
      * associate entities with their originating pool configuration.
      *
@@ -27,8 +27,8 @@ export namespace helios::runtime::pooling::components {
      * through the blueprint copy path.
      *
      * @see PrefabId
-     * @see GameObjectPoolConfig
-     * @see GameObjectFactory::withPrefabId
+     * @see EntityPoolConfig
+     * @see EntityFactory::withPrefabId
      */
     template<typename THandle>
     class PrefabIdComponent  {

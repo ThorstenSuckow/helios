@@ -31,7 +31,7 @@ export namespace helios::gameplay::spawn::types {
      *
      * @see helios::core::types::StrongId
      * @see SpawnProfileId
-     * @see GameObjectPoolId
+     * @see EntityPoolId
      */
     using SpawnRuleId = helios::core::types::StrongId<SpawnRuleIdTag>;
 

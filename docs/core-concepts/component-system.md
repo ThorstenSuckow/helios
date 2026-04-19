@@ -101,7 +101,7 @@ Components are stored in type-specific `SparseSet<T>` containers managed by `Ent
 Global logic processors that operate on the entire GameWorld. Systems are registered with the **GameLoop** and executed within Phases and Passes.
 
 ```cpp
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 class PhysicsSystem {
 public:
@@ -123,12 +123,12 @@ Systems are organized into Phases (Pre, Main, Post) and Passes within each Phase
 
 ### `GameWorld`
 
-The root container managing entities, Managers, and Pools. Located in `helios::engine::runtime::world`.
+The root container managing entities, Managers, and Pools. Located in `helios::runtime::world`.
 
 ```cpp
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 
-helios::engine::runtime::world::GameWorld world;
+helios::runtime::world::GameWorld world;
 
 // Create entities
 auto player = world.addGameObject();
@@ -149,12 +149,12 @@ for (auto [entity, move, collision, active] : world.view<
 
 ### `GameLoop`
 
-The orchestrator for system execution, located in `helios::engine::runtime::gameloop`. Systems are added to Phases and Passes:
+The orchestrator for system execution, located in `helios::runtime::gameloop`. Systems are added to Phases and Passes:
 
 ```cpp
-import helios.engine.runtime.gameloop.GameLoop;
+import helios.runtime.gameloop.GameLoop;
 
-helios::engine::runtime::gameloop::GameLoop gameLoop;
+helios::runtime::gameloop::GameLoop gameLoop;
 
 // Pre Phase: Input processing
 gameLoop.phase(PhaseType::Pre)
@@ -298,13 +298,13 @@ Define a plain class with an `update(UpdateContext&)` method. Systems are regist
 ```cpp
 export module myproject.systems.Spawner;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 export class SpawnerSystem {
     float timer_ = 0.0f;
 
 public:
-    void update(helios::engine::runtime::world::UpdateContext& ctx) noexcept {
+    void update(helios::runtime::world::UpdateContext& ctx) noexcept {
         timer_ += ctx.deltaTime();
         if (timer_ > 5.0f) {
             timer_ = 0.0f;
@@ -320,8 +320,8 @@ public:
 Systems query entities via `UpdateContext::view<>()`, which returns a `View` over all entities possessing the requested components. The `Active` tag component and `.whereEnabled()` filter replace the former `GameObjectFilter` API.
 
 ```cpp
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.runtime.world.UpdateContext;
+import helios.gameplay.lifecycle.components.Active;
 
 // In a system's update():
 void update(UpdateContext& ctx) noexcept {

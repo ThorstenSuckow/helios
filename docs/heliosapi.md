@@ -334,7 +334,7 @@ A composition-based game architecture separating data (Components) from behavior
 **Component-Based Design:**
 ```cpp
 import helios.engine.ecs.GameObject;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.GameWorld;
 
 // Create entity with components
 auto entity = std::make_unique<GameObject>();
@@ -353,7 +353,7 @@ for (auto [obj, move] : gameWorld.find<Move2DComponent>().each()) {
 
 **GameLoop with Phases:**
 ```cpp
-import helios.engine.runtime.gameloop.GameLoop;
+import helios.runtime.gameloop.GameLoop;
 
 GameLoop gameLoop;
 
@@ -382,8 +382,8 @@ while (running) {
 
 **Object Pooling:**
 ```cpp
-import helios.engine.runtime.pooling.GameObjectPoolManager;
-import helios.engine.runtime.spawn.SpawnManager;
+import helios.runtime.pooling.GameObjectPoolManager;
+import helios.gameplay.spawn.SpawnManager;
 
 // Create pool manager
 auto poolManager = std::make_unique<GameObjectPoolManager>();
@@ -431,8 +431,8 @@ Control frame rate and monitor performance with built-in timing tools.
 
 **Example:**
 ```cpp
-import helios.engine.tooling.FramePacer;
-import helios.engine.tooling.FpsMetrics;
+import helios.tooling.FramePacer;
+import helios.tooling.FpsMetrics;
 
 // Setup frame pacing
 FramePacer pacer;
@@ -483,7 +483,7 @@ const auto& history = metrics.getHistory();
 import helios.ext.glfw.app.GLFWFactory;
 import helios.scene.Scene;
 import helios.scene.CameraSceneNode;
-import helios.rendering.Viewport;
+import helios.rendering.viewport.Viewport;
 
 int main() {
     // 1. Create application

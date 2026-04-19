@@ -1,21 +1,24 @@
 # EntityRegistry
 
-The **EntityRegistry** is the single source of truth for entity lifecycle management in the helios ECS. It handles entity creation, destruction, and validation through versioned handles.
+The **EntityRegistry** is the single source of truth for entity lifecycle management in the helios ECS. It handles entity creation, destruction, and validation through versioned handles with domain-specific strong IDs.
+
+> **Migration note:** `EntityRegistry` has been moved from `helios.engine.ecs` to `helios.core.ecs` and generalised with template parameters `TStrongId`, `TLookupStrategy`, `TAllowRemoval` and `TCapacity`.
 
 ## Overview
 
 The registry is responsible for:
 
-- **Handle Allocation** - Generates unique `EntityHandle` instances
-- **Version Tracking** - Maintains version numbers for stale handle detection
-- **Index Recycling** - Reuses destroyed entity indices via a free list
-- **Validation** - Determines if a handle refers to a living entity
+- **Handle Allocation** — Generates unique `EntityHandle<TStrongId>` instances
+- **Version Tracking** — Maintains version numbers for stale handle detection
+- **Strong ID Management** — Tracks domain-specific strong IDs with collision detection
+- **Index Recycling** — Reuses destroyed entity indices via a free list
+- **Validation** — Determines if a handle refers to a living entity
 
 ```cpp
-EntityRegistry registry;
+EntityRegistry<MyStrongId> registry;
 
 // Create entity
-auto handle = registry.create();  // {entityId: 0, versionId: 1}
+auto handle = registry.create();  // {entityId: 0, versionId: 1, strongId: ...}
 
 // Validate
 if (registry.isValid(handle)) {
@@ -29,22 +32,46 @@ registry.destroy(handle);
 assert(!registry.isValid(handle));
 ```
 
+## Template Parameters
+
+```cpp
+template<
+    typename TStrongId,
+    typename TLookupStrategy = HashedLookupStrategy,
+    bool TAllowRemoval = true,
+    size_t TCapacity = DEFAULT_ENTITY_MANAGER_CAPACITY
+>
+requires IsStrongIdLike<TStrongId> && IsStrongIdCollisionResolverLike<TLookupStrategy>
+class EntityRegistry;
+```
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `TStrongId` | *(required)* | Domain-specific strong ID type satisfying `IsStrongIdLike`. |
+| `TLookupStrategy` | `HashedLookupStrategy` | Strategy for strong ID collision detection. |
+| `TAllowRemoval` | `true` | If `false`, `destroy()` triggers a `static_assert` — useful for append-only registries. |
+| `TCapacity` | `DEFAULT_ENTITY_MANAGER_CAPACITY` | Default initial capacity for pre-allocation. |
+
 ## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     EntityRegistry                          │
+│       EntityRegistry<TStrongId, TLookupStrategy, ...>       │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  versions_: [1, 2, 1, 1, 3, ...]                            │
-│              │  │  │  │  │                                  │
-│              │  │  │  │  └─ Entity 4: version 3 (recycled)  │
-│              │  │  │  └──── Entity 3: version 1 (alive)     │
-│              │  │  └─────── Entity 2: version 1 (alive)     │
-│              │  └────────── Entity 1: version 2 (recycled)  │
-│              └───────────── Entity 0: version 1 (alive)     │
+│  versions_:  [1, 2, 1, 1, 3, ...]                          │
+│  strongIds_: [5, 0, 3, 7, 0, ...]   (0 = cleared)          │
+│               │  │  │  │  │                                 │
+│               │  │  │  │  └─ Entity 4: destroyed (v3)       │
+│               │  │  │  └──── Entity 3: alive (v1, sid=7)    │
+│               │  │  └─────── Entity 2: alive (v1, sid=3)    │
+│               │  └────────── Entity 1: destroyed (v2)       │
+│               └───────────── Entity 0: alive (v1, sid=5)    │
 │                                                             │
-│  freeList_: [1]  ← Recycled indices available for reuse     │
+│  freeList_: [1, 4]  ← Recycled indices                     │
+│                                                             │
+│  lookupStrategy_: HashedLookupStrategy                      │
+│    → tracks which strong IDs are in use                     │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -54,64 +81,60 @@ assert(!registry.isValid(handle));
 ### Construction
 
 ```cpp
-// Default constructor
-EntityRegistry registry;
+// Default capacity
+EntityRegistry<MyStrongId> registry;
 
 // With pre-allocated capacity
-EntityRegistry registry(1000);  // Reserve space for 1000 entities
+EntityRegistry<MyStrongId> registry(1000);
+
+// Custom lookup strategy
+EntityRegistry<MyStrongId, LinearLookupStrategy> registry;
+
+// Append-only (no removal)
+EntityRegistry<MyStrongId, HashedLookupStrategy, false> registry;
 ```
 
 ### Entity Creation
 
 ```cpp
-EntityHandle create();
+EntityHandle<TStrongId> create(TStrongId strongId = TStrongId{});
 ```
 
 Creates a new entity and returns its handle:
 - If the free list has recycled indices, one is reused
 - Otherwise, a new index is allocated
-- New entities start with version 1
+- If `strongId` is invalid (default), one is auto-generated
+- Asserts if the strong ID already exists (collision)
 
 ```cpp
-auto e1 = registry.create();  // {0, 1}
-auto e2 = registry.create();  // {1, 1}
-auto e3 = registry.create();  // {2, 1}
+auto e1 = registry.create();             // auto-assigned strong ID
+auto e2 = registry.create(MyStrongId{42}); // explicit strong ID
 ```
 
 ### Entity Destruction
 
 ```cpp
-bool destroy(const EntityHandle handle);
+bool destroy(EntityHandle<TStrongId> handle);
 ```
 
 Destroys the entity:
 - Increments the version (invalidates existing handles)
+- Unregisters the strong ID from the lookup strategy
 - Adds the index to the free list
 - Returns `false` if handle was already invalid
 
-```cpp
-registry.destroy(e2);
-// e2's index (1) is now in free list
-// Next create() will reuse index 1 with version 2
-
-auto e4 = registry.create();  // {1, 2} - recycled index
-```
+If `TAllowRemoval` is `false`, triggers a `static_assert`.
 
 ### Validation
 
 ```cpp
-bool isValid(const EntityHandle handle) const noexcept;
+bool isValid(EntityHandle<TStrongId> handle) const noexcept;
 ```
 
-Checks if a handle refers to a living entity:
-
-```cpp
-auto handle = registry.create();
-registry.isValid(handle);  // true
-
-registry.destroy(handle);
-registry.isValid(handle);  // false (version mismatch)
-```
+Checks if a handle refers to a living entity. All three must match:
+1. `handle.versionId` matches the stored version
+2. `handle.strongId.value()` matches the stored strong ID
+3. `handle.strongId.isValid()` returns `true`
 
 ### Version Query
 
@@ -119,49 +142,22 @@ registry.isValid(handle);  // false (version mismatch)
 VersionId version(EntityId entityId) const;
 ```
 
-Returns the current version for an entity index:
+Returns the current version for an entity index.
+
+### Strong ID Query
 
 ```cpp
-auto handle = registry.create();        // {5, 1}
-registry.version(5);                    // 1
-
-registry.destroy(handle);
-registry.version(5);                    // 2 (incremented)
+TStrongId strongId(EntityId entityId) const;
 ```
 
-## Versioning System
+Returns the strong ID for an entity index, or an invalid default if out of bounds.
 
-The versioning system prevents the **ABA problem**:
+## Lookup Strategies
 
-```
-Timeline:
-─────────────────────────────────────────────────────────────
-1. create()     → Handle {id:0, ver:1}    versions_[0] = 1
-2. destroy()    → Index 0 freed           versions_[0] = 2
-3. create()     → Handle {id:0, ver:2}    (recycled)
-4. Old handle {id:0, ver:1} is STALE      (ver 1 ≠ ver 2)
-─────────────────────────────────────────────────────────────
-```
-
-## Index Recycling
-
-Destroyed indices are recycled to keep memory compact:
-
-```cpp
-auto a = registry.create();  // {0, 1}
-auto b = registry.create();  // {1, 1}
-auto c = registry.create();  // {2, 1}
-
-registry.destroy(b);         // freeList_ = [1]
-registry.destroy(a);         // freeList_ = [1, 0]
-
-auto d = registry.create();  // {0, 2} - reuses index 0
-auto e = registry.create();  // {1, 2} - reuses index 1
-```
-
-## Thread Safety
-
-`EntityRegistry` is **not thread-safe**. All operations must be performed from a single thread or externally synchronized.
+| Strategy | Lookup | Insertion | Removal | Use Case |
+|----------|--------|-----------|---------|----------|
+| `HashedLookupStrategy` | O(1) avg | O(1) avg | O(1) avg | Default — large registries |
+| `LinearLookupStrategy` | O(n) | O(n) | O(1) | Small registries where hash overhead is undesirable |
 
 ## Performance
 
@@ -171,10 +167,15 @@ auto e = registry.create();  // {1, 2} - reuses index 1
 | `destroy()` | O(1) |
 | `isValid()` | O(1) |
 | `version()` | O(1) |
+| `strongId()` | O(1) |
+
+## Thread Safety
+
+`EntityRegistry` is **not thread-safe**. All operations must be performed from a single thread or externally synchronized.
 
 ## See Also
 
 - [EntityHandle](entity-handle.md) - Versioned entity reference
 - [EntityManager](entity-manager.md) - Combines registry with component storage
-- [GameObject](gameobject.md) - High-level entity wrapper
-
+- [Entity](entity.md) - High-level entity wrapper
+- [TypedHandleWorld](typed-handle-world.md) - Multi-domain world

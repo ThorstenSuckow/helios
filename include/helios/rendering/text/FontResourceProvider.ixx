@@ -10,7 +10,7 @@ export module helios.rendering.text.FontResourceProvider;
 
 import helios.rendering.text.Glyph;
 
-import helios.engine.modules.ui.widgets.types.FontId;
+import helios.ui.widgets.types.FontId;
 
 
 export namespace helios::rendering::text{
@@ -55,7 +55,7 @@ export namespace helios::rendering::text{
          * @note If a font with the same `fontId` is already loaded, behavior is
          *       implementation-defined (may replace or ignore).
          */
-        virtual void loadFont(helios::engine::modules::ui::widgets::types::FontId fontId, unsigned int pixelHeight, std::string_view pathToFont) = 0;
+        virtual void loadFont(helios::ui::widgets::types::FontId fontId, unsigned int pixelHeight, std::string_view pathToFont) = 0;
 
         /**
          * @brief Retrieves the glyph data for a character.
@@ -71,7 +71,7 @@ export namespace helios::rendering::text{
          * @note This method is marked `noexcept` and must not throw exceptions.
          *       If the character is not available, a fallback glyph should be returned.
          */
-        virtual helios::rendering::text::Glyph glyph(char c, helios::engine::modules::ui::widgets::types::FontId fontId) = 0;
+        virtual helios::rendering::text::Glyph glyph(char c, helios::ui::widgets::types::FontId fontId) = 0;
 
 
 

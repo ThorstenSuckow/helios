@@ -5,17 +5,17 @@ Generic container types shared across the engine.
 ## Overview
 
 This module provides reusable container infrastructure that is not specific
-to any engine subsystem. It contains the type-erased registry pattern used
-by Systems and Managers, as well as double-buffered message-passing containers
-used by the event system.
+to a single subsystem. It contains the type-erased registry pattern used by
+systems/managers and generic handle-mapping utilities used across runtime and
+rendering code.
 
 ## Submodules
 
 | Submodule | Purpose |
 |-----------|---------|
 | `ConceptModelRegistry` | Generic type-indexed registry for type-erased wrappers (Concept/Model pattern) |
-| `DenseRuntimeHandleRegistry` | Dense registry mapping `StrongId`-based identifiers to contiguous runtime indices |
-| `buffer/` | Double-buffering infrastructure for thread-safe message passing |
+| `HandleMultiMap` | Dense one-to-many handle association map with reverse lookup |
+| `buffer/` | Buffer and double-buffer infrastructure for frame-based message passing |
 
 ## Key Types
 
@@ -25,33 +25,30 @@ A generic container that stores type-erased wrapper instances indexed by a
 compile-time ID provider. Provides O(1) lookup by concrete type and
 insertion-order iteration for deterministic processing.
 
-Used as the backend for:
+Used as backend for multiple registries, for example:
 
 | Alias | AnyT | IdProvider |
 |-------|------|------------|
 | `SystemRegistry` | `System` | `SystemTypeId` |
 | `ManagerRegistry` | `Manager` | `ResourceTypeId` |
+| `CommandBufferRegistry` | `CommandBuffer` | `CommandBufferTypeId` |
 
-### DenseRuntimeHandleRegistry
+### HandleMultiMap
 
-A dense registry that maps `StrongId`-based identifiers to contiguous
-`RuntimeId` indices. Produces `RuntimeHandle` instances via idempotent
-`getOrCreate()`. Used as the backend for per-resource-type handle registries:
+`HandleMultiMap<TOneHandle, TManyHandle>` stores a dense one-to-many relation
+(`TOneHandle -> span<TManyHandle>`) plus reverse lookup (`TManyHandle -> TOneHandle`).
 
-| Alias | StrongIdentifier | RuntimeId |
-|-------|-----------------|-----------|
-| `ViewportHandleRegistry` | `ViewportId` | `ViewportRuntimeId` |
-| `FramebufferHandleRegistry` | `FramebufferId` | `FramebufferRuntimeId` |
-| `MaterialHandleRegistry` | `MaterialId` | `MaterialRuntimeId` |
-| `MeshHandleRegistry` | `MeshId` | `MeshRuntimeId` |
-| `ShaderHandleRegistry` | `ShaderId` | `ShaderRuntimeId` |
+Typical use case:
+
+- map one render target handle to many child handles,
+- resolve owner handle from a child handle in O(1)-style indexed access.
 
 ## See Also
 
-- [Data](../data/README.md) — `StrongId` and `RuntimeHandle` primitives
-- [Buffer](buffer/README.md) — Double-buffered message containers
-- [System](../../engine/runtime/world/README.md) — System architecture using SystemRegistry
-- [Resource Registry](../../../../docs/core-concepts/resource-registry.md) — ManagerRegistry integration
+- [Buffer](buffer/README.md) — buffer and double-buffer containers
+- [Buffer Concepts](buffer/concepts/README.md) — concept constraints for type-indexed buffer utilities
+- [Core Types](../types/README.md) — foundational id/type utilities used by container templates
+- [Resource Registry](../../../../docs/core-concepts/resource-registry.md) — engine-side registry integration
 
 ---
 <details>

@@ -8,13 +8,11 @@ module;
 #include <memory>
 #include <span>
 #include <vector>
+#include <cstddef>
 
 
 export module helios.core.container.ConceptModelRegistry;
 
-import helios.engine.common.concepts;
-
-using namespace helios::engine::common::concepts;
 
 export namespace helios::core::container {
 
@@ -27,8 +25,8 @@ export namespace helios::core::container {
      *
      * - **O(1) lookup** by concrete type via `item<T>()`
      * - **Insertion-order iteration** via `items()` for deterministic processing
-     * - **Type-safe registration** via `add<T>(args...)` returning a reference
-     *   to the underlying concrete instance
+     * - **Type-safe registration** via `add<T>(args...)` or `add<T>(AnyT&&)`
+     *   returning a reference to the underlying concrete instance
      *
      * The registry is used as the backend for `SystemRegistry` and
      * `ManagerRegistry`.
@@ -140,7 +138,7 @@ export namespace helios::core::container {
         template<typename T, typename... Args>
         T& add(Args&&... args) {
 
-            assert(!has<T>() && "AnyT already registered with GameLoopPhase");
+            assert(!has<T>() && "AnyT already registered.");
 
             AnyT wrapper{T{std::forward<Args>(args)...}};
 
@@ -161,6 +159,47 @@ export namespace helios::core::container {
             insertionOrder_.push_back(idx);
 
             needsUpdate_ = true;
+            return *static_cast<T*>(rawUnderlying);
+        }
+
+        /**
+         * @brief Registers a pre-built wrapper instance for concrete type T.
+         *
+         * @details Stores an already-constructed `AnyT` at the slot determined
+         * by `IdProvider::id<T>()` and returns the underlying `T` reference.
+         *
+         * This overload is useful when wrapper construction needs custom
+         * arguments that are not expressed as `T{args...}` (for example,
+         * pre-wrapped systems with injected dependencies).
+         *
+         * @tparam T The concrete type represented by `wrapper`.
+         *
+         * @param wrapper Pre-built type-erased wrapper owning a `T` instance.
+         *
+         * @return Reference to the registered T instance.
+         *
+         * @pre `wrapper` must contain a concrete `T` instance.
+         * @pre T should not already be registered.
+         */
+        template<typename T>
+        T& add(AnyT&& wrapper) {
+            const auto idx = IdProvider::template id<T>().value();
+
+            if (items_.size() <= idx) {
+                items_.resize(idx + 1);
+            }
+            if (underlyingAnyT_.size() <= idx) {
+                underlyingAnyT_.resize(idx + 1);
+            }
+
+            items_[idx] = std::move(wrapper);
+
+            void* rawUnderlying = items_[idx].underlying();
+            underlyingAnyT_[idx] = rawUnderlying;
+
+            insertionOrder_.push_back(idx);
+            needsUpdate_ = true;
+
             return *static_cast<T*>(rawUnderlying);
         }
 

@@ -19,6 +19,8 @@ export namespace helios::rendering::shader {
      *
      * This class defines common operations for managing and utilizing shaders.
      * Derived classes provide rendering API specifics for loading and compiling the shaders.
+     *
+     * @deprecated
      */
     class Shader {
 

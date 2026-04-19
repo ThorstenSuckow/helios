@@ -1,66 +1,60 @@
 # helios::ecs::components
 
-ECS core components for entity lifecycle and relationships.
+Core ECS components for activation state and hierarchy.
 
 ## Overview
 
-This submodule provides fundamental components used by the ECS architecture
-itself, as opposed to game-specific components defined in mechanics or modules.
-It includes tag components for entity activation state as well as hierarchy
-management for parent-child entity graphs.
+This submodule contains foundational ECS components used by infrastructure
+code instead of gameplay domains. Components are templated by handle type to
+support domain-scoped ECS worlds.
 
 ## Components
 
 | Component | Purpose |
 |-----------|---------|
-| `Active` | Tag component marking an entity as active |
-| `Inactive` | Tag component marking an entity as inactive |
-| `HierarchyComponent` | Parent-child relationships for entity graphs |
+| `Active<THandle>` | Marker tag for active entities |
+| `Inactive<THandle>` | Marker tag for inactive entities |
+| `HierarchyComponent<THandle>` | Parent-child relationships and dirty propagation flag |
 
 ## Active / Inactive
 
-Empty tag structs used to filter entities by activation state in views.
-Managed automatically by `Entity::setActive()`:
+`Active<THandle>` and `Inactive<THandle>` are empty marker components used in
+views for state filtering.
 
-- `setActive(true)` → adds `Active`, removes `Inactive`, calls `onActivate()`
-- `setActive(false)` → adds `Inactive`, removes `Active`, calls `onDeactivate()`
+Typical usage:
 
 ```cpp
-// Query only active entities
-for (auto [entity, health, active] : gameWorld->view<
-    HealthComponent, Active
->().whereEnabled()) { ... }
+for (auto [entity, health, active] : world.view<MyHandle, HealthComponent, Active<MyHandle>>()) {
+    // active entities only
+}
 ```
 
 ## HierarchyComponent
 
-Enables entities to form tree structures where state changes propagate from parent to child entities.
+`HierarchyComponent<THandle>` stores:
 
-**Members:**
-- `children_` – Child entity handles
-- `parent_` – Optional parent handle  
-- `isDirty_` – Signals pending hierarchy propagation
+- `children_` — child handles
+- `parent_` — optional parent handle
+- `isDirty_` — marks pending hierarchy propagation
 
-**Usage:**
+Typical usage:
+
 ```cpp
-auto* hc = entity.add<HierarchyComponent>();
+auto* hc = entity.add<HierarchyComponent<MyHandle>>();
 hc->setParent(parentHandle);
 hc->addChild(childHandle);
-hc->markDirty();  // Triggers propagation next frame
+hc->markDirty();
 ```
 
-## Related Modules
+## See Also
 
-| Module | Purpose |
-|--------|---------|
-| `helios.ecs.Entity` | Manages `Active`/`Inactive` tags via `setActive()` |
-| `helios.ecs.systems` | Systems that process ECS components |
+- [Entity](../Entity.ixx) — facade API often used with these components
+- [View](../View.ixx) — typed query interface used for tag filtering
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::ecs::components
-@brief ECS core components for entity lifecycle and relationships.
-@details Provides tag components for entity activation state (Active, Inactive) and hierarchy management for parent-child entity relationships.
+@brief Core ECS components for activation state and hierarchy.
+@details Provides domain-templated marker and relationship components used by ECS infrastructure.
 </p></details>
-

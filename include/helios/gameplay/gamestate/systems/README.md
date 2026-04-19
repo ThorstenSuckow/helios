@@ -1,0 +1,25 @@
+# helios::gameplay::gamestate::systems
+
+Systems for game state management.
+
+## Systems
+
+| System | Description |
+|--------|-------------|
+| `GameStateInputResponseSystem` | Handles input for state transitions |
+
+## GameStateInputResponseSystem
+
+Listens for the gamepad Start button and issues appropriate `StateCommand<GameState>` based on the current state:
+
+- **Title** + Start → `ReadyMatchRequest` transition
+- **Running** + Start → `TogglePause` transition
+
+---
+
+<details>
+<summary>Doxygen</summary><p>
+@namespace helios::gameplay::gamestate::systems
+@brief Systems for game state management.
+@details Contains ECS systems that handle game state logic.
+</p></details>

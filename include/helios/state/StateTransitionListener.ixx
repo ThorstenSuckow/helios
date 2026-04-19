@@ -1,0 +1,77 @@
+/**
+ * @file StateTransitionListener.ixx
+ * @brief Interface for state transition observers.
+ */
+module;
+
+
+export module helios.state.StateTransitionListener;
+
+import helios.runtime.world.UpdateContext;
+
+import helios.state.types;
+
+using namespace helios::state::types;
+
+export namespace helios::state {
+
+    /**
+     * @brief Interface for observing state transitions.
+     *
+     * @details Listeners are notified during state transitions in order:
+     * 1. onStateExit() - before leaving the current state
+     * 2. onStateTransition() - during the transition
+     * 3. onStateEnter() - after entering the new state
+     *
+     * @tparam StateType The state enum type.
+     *
+     * @see StateManager
+     * @see LambdaStateListener
+     */
+    template<typename StateType>
+    class StateTransitionListener {
+
+
+    public:
+        virtual ~StateTransitionListener() = default;
+
+        /**
+         * @brief Called when exiting a state.
+         *
+         * @param updateContext The current frame's update context.
+         * @param from The state being exited.
+         */
+        virtual void onStateExit(
+            helios::runtime::world::UpdateContext& updateContext,
+            const StateType from
+        ) noexcept = 0;
+
+        /**
+         * @brief Called when entering a state.
+         *
+         * @param updateContext The current frame's update context.
+         * @param to The state being entered.
+         */
+        virtual void onStateEnter(
+           helios::runtime::world::UpdateContext& updateContext,
+           const StateType to
+       ) noexcept = 0;
+
+        /**
+         * @brief Called during a state transition.
+         *
+         * @param updateContext The current frame's update context.
+         * @param transitionCtx The complete transition context.
+         */
+        virtual void onStateTransition(
+            helios::runtime::world::UpdateContext& updateContext,
+            const StateTransitionContext<StateType> transitionCtx
+        ) noexcept = 0;
+
+
+
+
+    };
+
+}
+

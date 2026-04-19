@@ -61,7 +61,7 @@ User code defines plain classes. `System` is infrastructure-only and erases the 
 ### System (Type-Erased Wrapper)
 
 ```cpp
-namespace helios::engine::runtime::world {
+namespace helios::runtime::world {
 
     template<typename T>
     concept HasInit = requires(T& t, GameWorld& gw) {
@@ -111,10 +111,10 @@ namespace helios::engine::runtime::world {
 
 ```cpp
 import helios.core.container.ConceptModelRegistry;
-import helios.engine.runtime.world.System;
-import helios.engine.runtime.world.types.SystemTypeId;
+import helios.runtime.world.System;
+import helios.runtime.world.types.SystemTypeId;
 
-namespace helios::engine::runtime::world {
+namespace helios::runtime::world {
 
     using SystemRegistry = helios::core::container::ConceptModelRegistry<System, types::SystemTypeId>;
 

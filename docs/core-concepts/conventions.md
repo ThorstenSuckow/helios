@@ -164,7 +164,7 @@ This is essential for object pooling where pre-allocated objects wait in an inac
 Systems use the `View` API to filter for active entities with enabled components:
 
 ```cpp
-import helios.engine.mechanics.lifecycle.components.Active;
+import helios.gameplay.lifecycle.components.Active;
 
 void update(UpdateContext& ctx) noexcept {
     // Filter for active entities with enabled components
@@ -182,7 +182,7 @@ void update(UpdateContext& ctx) noexcept {
 Alternatively, exclude inactive entities:
 
 ```cpp
-import helios.engine.mechanics.lifecycle.components.Inactive;
+import helios.gameplay.lifecycle.components.Inactive;
 
 void update(UpdateContext& ctx) noexcept {
     for (auto [entity, component] : ctx.view<MyComponent>()

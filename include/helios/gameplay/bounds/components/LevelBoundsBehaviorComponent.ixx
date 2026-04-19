@@ -1,0 +1,178 @@
+/**
+ * @file LevelBoundsBehaviorComponent.ixx
+ * @brief Component defining behavior when an entity interacts with level boundaries.
+ */
+module;
+
+#include <algorithm>
+#include <cassert>
+
+export module helios.gameplay.bounds.components.LevelBoundsBehaviorComponent;
+
+
+
+import helios.physics.collision.types.CollisionBehavior;
+
+import helios.physics.collision.types.CollisionResponse;
+
+export namespace helios::gameplay::bounds::components {
+
+
+    /**
+     * @brief Component that defines how an entity reacts to level boundaries.
+     *
+     * @details
+     * This component stores properties related to boundary interactions, such as
+     * restitution (bounciness) when colliding with level walls, used by physics
+     * or movement systems to resolve out-of-bounds conditions.
+     */
+    template<typename THandle>
+    class LevelBoundsBehaviorComponent  {
+
+    private:
+        /**
+         * @brief Coefficient of restitution (bounciness).
+         *
+         * @details
+         * A value of 1.0 means a perfectly elastic collision (no energy lost).
+         * A value of 0.0 means a perfectly inelastic collision (no bounce).
+         * Default is 0.5.
+         */
+        float restitution_ = 0.5f;
+
+        /**
+         * @brief The behavior type for boundary collisions.
+         *
+         * @details Defines how the entity reacts when hitting level bounds
+         * (e.g., Bounce, Reflect, Clamp, Despawn).
+         */
+        helios::physics::collision::types::CollisionBehavior collisionBehavior_ = helios::physics::collision::types::CollisionBehavior::Bounce;
+
+        helios::physics::collision::types::CollisionResponse collisionResponse_ = helios::physics::collision::types::CollisionResponse::None;
+
+        /**
+         * @brief Whether this component is enabled.
+         */
+        bool isEnabled_ = true;
+
+    public:
+
+        /**
+         * @brief Checks whether this component is enabled.
+         *
+         * @return True if enabled, false otherwise.
+         */
+        [[nodiscard]] bool isEnabled() const noexcept {
+            return isEnabled_;
+        }
+
+        /**
+         * @brief Enables this component.
+         */
+        void enable() noexcept {
+            isEnabled_ = true;
+        }
+
+        /**
+         * @brief Disables this component.
+         */
+        void disable() noexcept {
+            isEnabled_ = false;
+        }
+
+        /**
+         * @brief Constructs a LevelBoundsBehaviorComponent with a specified restitution.
+         *
+         * @param restitution The coefficient of restitution (0.0 to 1.0).
+         */
+        explicit LevelBoundsBehaviorComponent(const float restitution) :
+        restitution_(restitution) {}
+
+        /**
+         * @brief Constructs a LevelBoundsBehaviorComponent with a specified collision behavior.
+         *
+         * @param collisionBehavior The collision behavior type (default: Reflect).
+         */
+        explicit LevelBoundsBehaviorComponent(
+            const helios::physics::collision::types::CollisionBehavior collisionBehavior = helios::physics::collision::types::CollisionBehavior::Reflect,
+            const helios::physics::collision::types::CollisionResponse collisionResponse = helios::physics::collision::types::CollisionResponse::None) :
+        collisionBehavior_(collisionBehavior),
+        collisionResponse_(collisionResponse)
+        {}
+
+        /**
+         * @brief Copy constructor.
+         *
+         * @param other The component to copy from.
+         */
+        LevelBoundsBehaviorComponent(const LevelBoundsBehaviorComponent& other) :
+        restitution_(other.restitution_),
+        collisionBehavior_(other.collisionBehavior_),
+        collisionResponse_(other.collisionResponse_)
+        {}
+
+        LevelBoundsBehaviorComponent& operator=(const LevelBoundsBehaviorComponent&) = default;
+        LevelBoundsBehaviorComponent(LevelBoundsBehaviorComponent&&) noexcept = default;
+        LevelBoundsBehaviorComponent& operator=(LevelBoundsBehaviorComponent&&) noexcept = default;
+
+        /**
+         * @brief Retrieves the restitution coefficient.
+         *
+         * @return The restitution value.
+         */
+        [[nodiscard]] float restitution() const noexcept {
+            return restitution_;
+        }
+
+        /**
+         * @brief Retrieves the collision behavior type.
+         *
+         * @return The collision behavior (e.g., Bounce, Reflect, Clamp, Despawn).
+         */
+        [[nodiscard]] helios::physics::collision::types::CollisionBehavior collisionBehavior() const noexcept {
+            return collisionBehavior_;
+        }
+
+        /**
+         * @brief Retrieves the collision response type.
+         *
+         * @return The collision response type (e.g., None, Event).
+         */
+        [[nodiscard]] helios::physics::collision::types::CollisionResponse collisionResponse() const noexcept {
+            return collisionResponse_;
+        }
+
+        /**
+         * @brief Sets the collision response type.
+         *
+         * @param collisionResponse The new collision response to set.
+         */
+        void setCollisionResponse(const helios::physics::collision::types::CollisionResponse collisionResponse) noexcept {
+            collisionResponse_ = collisionResponse;
+        }
+
+        /**
+         * @brief Sets the collision behavior type.
+         *
+         * @param collisionBehavior The new collision behavior to set.
+         */
+        void setCollisionBehavior(const helios::physics::collision::types::CollisionBehavior collisionBehavior) noexcept {
+            collisionBehavior_ = collisionBehavior;
+        }
+
+        /**
+         * @brief Sets the coefficient of restitution (bounciness).
+         *
+         * @param restitution The new restitution value to set. Must be within the
+         * range [0.0, 1.0]. Values outside this range will be clamped.
+         */
+        void setRestitution(const float restitution) noexcept {
+            assert(restitution >= 0.0f && restitution <= 1.0f && "Unexpected value for restitution");
+            restitution_ = std::clamp(restitution, 0.0f, 1.0f);
+        }
+
+
+    };
+
+
+}

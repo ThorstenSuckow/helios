@@ -7,12 +7,15 @@ module;
 #include <memory>
 #include <span>
 #include <vector>
+#include <cstddef>
 
-export module helios.core.container.buffer.ReadWriteDoubleBuffer;
+export module helios.core.container.buffer:ReadWriteDoubleBuffer;
 
-import helios.core.container.buffer.DoubleBuffer;
-import helios.core.container.buffer.WriteBuffer;
-import helios.core.container.buffer.ReadBuffer;
+export import :ReadWriteDoubleBufferFwd;
+
+import :DoubleBuffer;
+import :WriteBuffer;
+import :ReadBuffer;
 
 
 export namespace helios::core::container::buffer {

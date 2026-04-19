@@ -10,13 +10,15 @@ module;
 
 export module helios.rendering.mesh.MeshRenderable;
 
-import helios.rendering.mesh.MeshRenderCommand;
+import helios.rendering.mesh.commands.MeshRenderCommand;
 
 import helios.rendering.Renderable;
 import helios.rendering.RenderQueue;
 import helios.rendering.RenderPrototype;
 import helios.rendering.material.MaterialShaderPropertiesOverride;
 import helios.rendering.shader.UniformValueMap;
+
+import helios.math;
 
 import helios.util.log.Logger;
 import helios.util.log.LogManager;
@@ -241,7 +243,7 @@ export namespace helios::rendering::mesh {
 
             writeUniformValues(materialUniformValues);
 
-            renderQueue.add(helios::rendering::mesh::MeshRenderCommand(
+            renderQueue.add(helios::rendering::mesh::commands::MeshRenderCommand(
                 renderPrototype_.get(),
                 objectUniformValues,
                 materialUniformValues

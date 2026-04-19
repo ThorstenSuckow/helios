@@ -8,7 +8,7 @@ module;
 #include <span>
 #include <vector>
 
-export module helios.core.container.buffer.Buffer;
+export module helios.core.container.buffer:Buffer;
 
 
 export namespace helios::core::container::buffer {

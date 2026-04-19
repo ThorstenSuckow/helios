@@ -54,14 +54,15 @@ export namespace helios::ext::opengl::rendering {
      *       (`LegacyOpenGLShader` and `OpenGLMesh`). Using incompatible types will trigger assertions.
      *
      * @see helios::rendering::mesh::MeshRenderer
-     * @see helios::rendering::mesh::MeshRenderCommand
+     * @see helios::rendering::mesh::commands::MeshRenderCommand
      * @see OpenGLDevice
      */
-    class OpenGLMeshRenderer : public helios::rendering::mesh::MeshRenderer {
+    class OpenGLMeshRenderer {
 
 
 
         friend class OpenGLDevice;
+        friend class OpenGLBackend;
 
         /**
          * @brief Cached pointer to the last used shader for state optimization.
@@ -113,7 +114,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * Ensures clean OpenGL state upon destruction.
          */
-        ~OpenGLMeshRenderer() override {
+        ~OpenGLMeshRenderer() {
 
             glBindVertexArray(0);
         }
@@ -141,7 +142,7 @@ export namespace helios::ext::opengl::rendering {
          * @see UniformValueMap
          */
         void render(
-            const helios::rendering::mesh::MeshRenderCommand& command,
+            const helios::rendering::mesh::commands::MeshRenderCommand& command,
             const helios::rendering::shader::UniformValueMap& frameUniformValues)  noexcept {
 
             if (const auto renderPrototype_ptr = command.renderPrototype()) {

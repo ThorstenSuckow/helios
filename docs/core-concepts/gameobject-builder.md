@@ -62,7 +62,7 @@ The builder system is organized into three layers:
 The entry point for entity construction. Requires a GameWorld reference.
 
 ```cpp
-import helios.engine.builder;
+import helios.gameplay.builder;
 
 // Create a new entity via the GameWorld
 auto prototype = GameObjectFactory::gameObject(gameWorld);
@@ -251,9 +251,9 @@ The `SpawnSystemFactory` uses done()-chaining because its configuration has a na
 | Module | Purpose |
 |--------|---------|
 | `helios.engine.ecs` | GameObject, Component |
-| `helios.engine.modules` | Component implementations |
-| `helios.engine.mechanics` | Gameplay-specific components |
-| `helios.engine.runtime.world` | GameWorld entity management |
+| `helios` | Component implementations |
+| `helios.gameplay` | Gameplay-specific components |
+| `helios.runtime.world` | GameWorld entity management |
 
 ## Related Concepts
 

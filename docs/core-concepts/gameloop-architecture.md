@@ -97,8 +97,8 @@ The following example demonstrates how to configure a complete game loop for a t
 
 ```cpp
 // Create core objects
-helios::engine::runtime::gameloop::GameLoop gameLoop{};
-helios::engine::runtime::world::GameWorld gameWorld{};
+helios::runtime::gameloop::GameLoop gameLoop{};
+helios::runtime::world::GameWorld gameWorld{};
 
 // Register state types with session
 auto& session = gameWorld.session();

@@ -211,9 +211,9 @@ Each module directory should contain a `README.md` file following this structure
 
 1. **Title:** Use the C++ namespace as the heading (with `::` separators), prefixed with `#`:
    ```markdown
-   # helios::engine::modules::physics
+   # helios::physics
    ```
-   Not the module name (`helios.engine.modules.physics`).
+   Not the module name (`helios.physics`).
 
 2. **Description:** A brief paragraph describing the module's purpose.
 
@@ -222,7 +222,7 @@ Each module directory should contain a `README.md` file following this structure
    ---
    <details>
    <summary>Doxygen</summary><p>
-   @namespace helios::engine::modules::physics
+   @namespace helios::physics
    @brief Physics simulation and collision detection.
    @details Extended description...
    </p></details>

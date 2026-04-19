@@ -81,7 +81,7 @@ export namespace helios::ecs {
          */
         explicit View(TEntityManager* em) : em_(em) {
             // Retrieve pointers to the specific component sets immediately.
-            includeSets_ = std::make_tuple(em_->getSparseSet<Components>()...);
+            includeSets_ = std::make_tuple(em_->template getSparseSet<Components>()...);
         };
 
         /**
@@ -105,7 +105,7 @@ export namespace helios::ecs {
          */
         template<typename T>
         View& exclude() {
-            auto* set = em_->getSparseSet<T>();
+            auto* set = em_->template getSparseSet<T>();
 
             if (set) {
                 excludeChecks_.emplace_back([set](EntityId entityId) {

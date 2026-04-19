@@ -336,11 +336,11 @@ for (phase : {Pre, Main, Post}) {
 
 ## Related Modules
 
-- `helios.engine.runtime.messaging.event.GameLoopEventBus` - Double-buffered event bus
-- `helios.engine.runtime.world.UpdateContext` - Event push/read methods
-- `helios.engine.runtime.gameloop.GameLoop` - Phase/pass orchestration
-- `helios.engine.runtime.gameloop.Phase` - Phase container
-- `helios.engine.runtime.gameloop.Pass` - Pass container with optional commit point
+- `helios.runtime.messaging.event.GameLoopEventBus` - Double-buffered event bus
+- `helios.runtime.world.UpdateContext` - Event push/read methods
+- `helios.runtime.gameloop.GameLoop` - Phase/pass orchestration
+- `helios.runtime.gameloop.Phase` - Phase container
+- `helios.runtime.gameloop.Pass` - Pass container with optional commit point
 - `helios.core.container.buffer.TypeIndexedDoubleBuffer` - Underlying buffer implementation
 
 ## Related Documentation

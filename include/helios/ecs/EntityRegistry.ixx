@@ -7,10 +7,12 @@ module;
 #include "helios/helios_config.h"
 #include <vector>
 #include <cassert>
+#include <cstddef>
 
 export module helios.ecs.EntityRegistry;
 
 import helios.core.types.TypeDefs;
+import helios.core.concepts.IsStrongIdLike;
 import helios.ecs.types.TypeDefs;
 import helios.ecs.types.EntityHandle;
 import helios.ecs.strategies.LinearLookupStrategy;
@@ -69,7 +71,7 @@ export namespace helios::ecs {
         bool TAllowRemoval = true,
         size_t TCapacity = DEFAULT_ENTITY_MANAGER_CAPACITY
     >
-    requires helios::ecs::concepts::IsStrongIdLike<TStrongId> &&
+    requires helios::core::concepts::IsStrongIdLike<TStrongId> &&
     helios::ecs::concepts::IsStrongIdCollisionResolverLike<TLookupStrategy>
     class EntityRegistry {
 

@@ -11,7 +11,7 @@ module;
 
 export module helios.scene.Snapshot;
 
-import helios.rendering.Viewport;
+import helios.rendering.viewport.Viewport;
 import helios.scene.SnapshotItem;
 import helios.math.types;
 
@@ -59,7 +59,7 @@ export namespace helios::scene {
         /**
          * @brief The viewport associated with this Snapshot.
          */
-        const helios::rendering::Viewport& viewport_;
+        const helios::rendering::viewport::Viewport& viewport_;
 
     public:
 
@@ -99,7 +99,7 @@ export namespace helios::scene {
          * transferring ownership to this instance.
          */
         Snapshot(
-            const helios::rendering::Viewport& viewport,
+            const helios::rendering::viewport::Viewport& viewport,
             const math::mat4f& projectionMatrix,
             const math::mat4f& viewMatrix,
             std::vector<SnapshotItem> snapshotItems) noexcept :
@@ -125,7 +125,7 @@ export namespace helios::scene {
          *
          * @return A shared pointer to the const Viewport.
          */
-        [[nodiscard]] const helios::rendering::Viewport& viewport() const noexcept {
+        [[nodiscard]] const helios::rendering::viewport::Viewport& viewport() const noexcept {
             return viewport_;
         }
 

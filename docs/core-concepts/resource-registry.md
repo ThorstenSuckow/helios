@@ -205,7 +205,7 @@ A custom Manager is a plain class that provides `flush(UpdateContext&)`, declare
 ```cpp
 export module myapp.commands;
 
-import helios.engine.runtime.world.UpdateContext;
+import helios.runtime.world.UpdateContext;
 
 export namespace myapp::commands {
 
@@ -221,15 +221,15 @@ export namespace myapp::commands {
 ```cpp
 export module myapp.CoinManager;
 
-import helios.engine.runtime.world.UpdateContext;
-import helios.engine.runtime.world.GameWorld;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.GameWorld;
 import helios.engine.common.tags.ManagerRole;
 import myapp.commands;
 
 export namespace myapp {
 
-    using namespace helios::engine::runtime::world;
-    using namespace helios::engine::runtime::messaging::command;
+    using namespace helios::runtime::world;
+    using namespace helios::runtime::messaging::command;
 
     class CoinManager {
 

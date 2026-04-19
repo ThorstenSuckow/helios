@@ -15,8 +15,8 @@ Components must be registered with the `ComponentReflector` to support the follo
 The registry structure is organized hierarchically:
 
 ```
-helios.engine.Bootstrap
-├── helios.engine.mechanics.registry
+helios.engine.bootstrap
+├── helios.gameplay.registry
 │   ├── scoring.registry
 │   ├── health.registry
 │   ├── spawn.registry
@@ -24,22 +24,23 @@ helios.engine.Bootstrap
 │   ├── combat.registry
 │   ├── damage.registry
 │   └── lifecycle.registry
-└── helios.engine.modules.registry
-    ├── ai.registry
-    ├── rendering.registry
-    │   ├── renderable.registry
-    │   └── model.registry
-    ├── spatial.registry
-    │   └── transform.registry
-    ├── ui.registry
-    │   ├── widgets.registry
-    │   └── transform.registry
-    ├── scene.registry
-    ├── physics.registry
-    │   ├── collision.registry
-    │   └── motion.registry
-    └── effects.registry
-        └── gfx.registry
+├── helios.registry
+│   ├── ai.registry
+│   ├── rendering.registry
+│   │   ├── renderable.registry
+│   │   └── model.registry
+│   ├── spatial.registry
+│   │   └── transform.registry
+│   ├── ui.registry
+│   │   ├── widgets.registry
+│   │   └── transform.registry
+│   ├── scene.registry
+│   ├── physics.registry
+│   │   ├── collision.registry
+│   │   └── motion.registry
+│   └── effects.registry
+│       └── gfx.registry
+└── helios.ecs.registry
 ```
 
 ## Registering New Components
@@ -52,19 +53,20 @@ Each module with components requires a `registry.ixx` file:
 // helios/engine/modules/physics/collision/registry.ixx
 module;
 
-export module helios.engine.modules.physics.collision.registry;
+export module helios.physics.collision.registry;
 
-import helios.engine.ecs.ComponentReflector;
-import helios.engine.modules.physics.collision.components;
+import helios.ecs.ComponentReflector;
+import helios.physics.collision.components;
 
-export namespace helios::engine::modules::physics::collision {
+export namespace helios::physics::collision {
 
+    template<typename TEntityManager>
     inline void registerComponents() {
-        using R = helios::engine::ecs::ComponentReflector;
+        using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::registerType<components::CollisionStateComponent>();
-        R::registerType<components::CollisionComponent>();
-        R::registerType<components::AabbColliderComponent>();
+        R::template registerType<components::CollisionStateComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::CollisionComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<components::AabbColliderComponent<typename TEntityManager::Handle_type>>();
     }
 
 }
@@ -78,16 +80,17 @@ Add the new sub-module to the parent registry:
 // helios/engine/modules/physics/registry.ixx
 module;
 
-export module helios.engine.modules.physics.registry;
+export module helios.physics.registry;
 
-import helios.engine.modules.physics.collision.registry;
-import helios.engine.modules.physics.motion.registry;
+import helios.physics.collision.registry;
+import helios.physics.motion.registry;
 
-export namespace helios::engine::modules::physics {
+export namespace helios::physics {
 
+    template<typename TEntityManager>
     inline void registerComponents() {
-        helios::engine::modules::physics::collision::registerComponents();
-        helios::engine::modules::physics::motion::registerComponents();
+        helios::physics::collision::registerComponents<TEntityManager>();
+        helios::physics::motion::registerComponents<TEntityManager>();
     }
 
 }
@@ -99,11 +102,11 @@ Ensure all components are exported in the `_module.ixx` of the `components` dire
 
 ```cpp
 // helios/engine/modules/physics/collision/components/_module.ixx
-export module helios.engine.modules.physics.collision.components;
+export module helios.physics.collision.components;
 
-export import helios.engine.modules.physics.collision.components.CollisionComponent;
-export import helios.engine.modules.physics.collision.components.CollisionStateComponent;
-export import helios.engine.modules.physics.collision.components.AabbColliderComponent;
+export import helios.physics.collision.components.CollisionComponent;
+export import helios.physics.collision.components.CollisionStateComponent;
+export import helios.physics.collision.components.AabbColliderComponent;
 ```
 
 ## Component Requirements
@@ -146,20 +149,22 @@ Components can implement the following methods:
 
 ## Bootstrap
 
-Registration is called once at engine startup:
+Component registration is handled automatically by `bootstrapGameWorld()`:
 
 ```cpp
-#include <helios/engine/bootstrap.ixx>
+import helios.engine.bootstrap;
 
 int main() {
-    // Must be called before creating GameObjects
-    helios::engine::bootstrap::registerAllComponents();
-    
-    // ... engine initialization
+    // bootstrapGameWorld() calls registerAllComponents() internally
+    auto [gameWorldPtr, gameLoopPtr] = helios::engine::bootstrap::bootstrapGameWorld();
+
+    // ... application-specific setup
 }
 ```
 
-The `registerAllComponents()` function is idempotent - multiple calls have no effect.
+`registerAllComponents()` uses `ComponentRegistrar<RegisteredEntityManagers>` to
+expand registration across all entity-manager types defined in `EngineWorld`.
+The function is idempotent — multiple calls have no effect.
 
 ## See Also
 

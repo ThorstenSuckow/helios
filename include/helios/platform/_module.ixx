@@ -1,0 +1,13 @@
+/**
+ * @file _module.ixx
+ * @brief Module aggregator for `helios.platform`.
+ */
+export module helios.platform;
+
+
+export import helios.platform.glfw;
+export import helios.platform.opengl;
+export import helios.platform.environment;
+export import helios.platform.lifecycle;
+export import helios.platform.window;
+export import helios.platform.concepts;

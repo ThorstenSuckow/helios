@@ -11,11 +11,11 @@ module;
 #include <vector>
 #include <type_traits>
 #include <optional>
+#include <cstddef>
 
 export module helios.ecs.TypedHandleWorld;
 
 import helios.ecs.View;
-import helios.ecs.EntityResolver;
 import helios.ecs.Entity;
 
 
@@ -120,10 +120,10 @@ export namespace helios::ecs {
     template<typename... TEntityManagers>
     class TypedHandleWorld {
 
-        std::tuple<TEntityManagers...> entityManagers_;
-
 
     public:
+
+        using EntityManager_types = std::tuple<TEntityManagers...>;
 
         /**
          * @brief Returns a reference to the EntityManager that owns handles
@@ -168,7 +168,7 @@ export namespace helios::ecs {
          * @return An `Entity` wrapping the newly created handle.
          */
         template<typename THandle>
-        [[nodiscard]] auto addEntity(THandle::StrongId_type strongId) {
+        [[nodiscard]] auto addEntity(typename THandle::StrongId_type strongId) {
             auto& em = entityManager<THandle>();
 
             auto handle = em.create(strongId);
@@ -281,6 +281,9 @@ export namespace helios::ecs {
             return View<EM, TComponents...>(&em);
         }
 
+    private:
+
+        EntityManager_types entityManagers_;
     };
 
 }

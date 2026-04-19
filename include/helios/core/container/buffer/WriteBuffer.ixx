@@ -5,15 +5,15 @@
 module;
 
 #include <vector>
+#include <cstddef>
 
-export module helios.core.container.buffer.WriteBuffer;
+export module helios.core.container.buffer:WriteBuffer;
 
-import helios.core.container.buffer.ReadBuffer;
+import :ReadWriteDoubleBufferFwd;
+import :ReadBuffer;
+
 
 export namespace helios::core::container::buffer {
-
-    template <typename T>
-    class ReadWriteDoubleBuffer{};
 
     /**
      * @class WriteBuffer

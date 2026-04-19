@@ -7,6 +7,7 @@ module;
 #include <vector>
 #include <algorithm>
 #include <ranges>
+#include <cstddef>
 
 export module helios.ecs.strategies.LinearLookupStrategy;
 

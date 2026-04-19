@@ -12,6 +12,10 @@ foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
 
     add_executable(${UNIQUE_TARGET} ${EXAMPLE_FILE})
 
+    if (MSVC)
+        target_compile_options(${UNIQUE_TARGET} PRIVATE /bigobj)
+    endif()
+
     target_link_libraries(${UNIQUE_TARGET} PRIVATE
             helios
             thirdparty::opengl

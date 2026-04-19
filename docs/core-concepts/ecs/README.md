@@ -6,7 +6,7 @@ The **Entity-Component-System (ECS)** architecture in helios separates data (Com
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        GameWorld                            │
+│                   TypedHandleWorld                           │
 │  ┌──────────────────┐    ┌────────────────────────────┐     │
 │  │  EntityRegistry  │◄───│      EntityManager         │     │
 │  │  (handle alloc)  │    │  (component storage)       │     │
@@ -14,10 +14,10 @@ The **Entity-Component-System (ECS)** architecture in helios separates data (Com
 │           │                          ▲                      │
 │           ▼                          │                      │
 │    ┌──────────────┐           ┌──────────────┐              │
-│    │ EntityHandle │◄──────────│  GameObject  │              │
-│    │ (id+version) │           │   (facade)   │              │
-│    └──────────────┘           └──────────────┘              │
-│                                      │                      │
+│    │ EntityHandle │◄──────────│    Entity    │              │
+│    │ (id+version  │           │   (facade)   │              │
+│    │  +strongId)  │           └──────────────┘              │
+│    └──────────────┘                  │                      │
 │                               ┌──────┴──────┐               │
 │                               │    View     │               │
 │                               │  (queries)  │               │
@@ -37,15 +37,18 @@ The **Entity-Component-System (ECS)** architecture in helios separates data (Com
 
 ## Module Structure
 
-The `helios.engine.ecs` module exports the following classes:
+The `helios.core.ecs` module exports the following classes. All types are
+**policy-based templates**, parameterised on handle, registry and manager types
+so they can be specialised for different domains without code duplication.
 
 | Class | Purpose | 
 |-------|---------|
 | [Component Structure](component-structure.md) | Required structure for components (Copy/Move) |
-| [GameObject](gameobject.md) | High-level entity facade (~16 bytes, pass-by-value) | 
-| [EntityHandle](entity-handle.md) | Versioned entity reference (8 bytes) | 
+| [Entity](entity.md) | High-level entity facade (~16 bytes, pass-by-value) | 
+| [EntityHandle](entity-handle.md) | Versioned, strongly-typed entity reference | 
 | [EntityRegistry](entity-registry.md) | Handle allocation & validation | 
 | [EntityManager](entity-manager.md) | Component storage via SparseSets | 
+| [TypedHandleWorld](typed-handle-world.md) | Multi-domain world with compile-time handle dispatch |
 | [View](view.md) | Component-based entity queries | 
 | [System](system.md) | Type-erased wrapper for game logic processors |
 | [SystemRegistry](system.md#systemregistry) | Type-indexed registry for system instances |
@@ -54,19 +57,45 @@ The `helios.engine.ecs` module exports the following classes:
 | [ComponentOps](component-ops.md) | Function pointers for lifecycle callbacks | 
 | [ComponentOpsRegistry](component-ops.md#componentopsregistry) | Global registry for ComponentOps | 
 | [ComponentReflector](../component-registry.md) | Type registration helper | 
+| [EntityResolver](entity-resolver.md) | Callable for resolving handles to Entity wrappers |
+
+## Template Parameterisation
+
+The core ECS types are templated so that **each domain** (game entities,
+UI elements, audio sources, …) can have its own handle type, registry and
+manager — with all type relationships resolved at compile time.
+
+| Parameter | Used In | Purpose |
+|-----------|---------|---------|
+| `TStrongId` | `EntityHandle`, `EntityRegistry` | Domain-specific strong ID type |
+| `THandle` | `EntityManager`, `Entity`, `ComponentTypeId`, `ComponentOpsRegistry`, `ComponentReflector` | Concrete `EntityHandle<TStrongId>` — scopes type IDs per domain |
+| `TEntityRegistry` | `EntityManager` | Concrete `EntityRegistry` specialisation |
+| `TEntityManager` | `Entity`, `View`, `EntityResolver`, `ComponentReflector` | Concrete `EntityManager` specialisation |
+| `TLookupStrategy` | `EntityRegistry` | Pluggable strong ID collision detection |
+| `TAllowRemoval` | `EntityRegistry` | `false` disables `destroy()` at compile time |
+| `TCapacity` | `EntityRegistry`, `EntityManager` | Default initial capacity hint |
 
 ## Quick Start
 
 ```cpp
-// 1. Get a GameObject from the world
-auto player = gameWorld.addGameObject();
+import helios.core.ecs;
 
-// 2. Add components
+// 1. Define types for your domain
+using GameHandle  = EntityHandle<GameStrongId>;
+using GameReg     = EntityRegistry<GameStrongId>;
+using GameEM      = EntityManager<GameHandle, GameReg, 4096>;
+
+// 2. Use TypedHandleWorld for multi-domain setups
+TypedHandleWorld<GameEM> world;
+
+auto player = world.addEntity<GameHandle>();
+
+// 3. Add components
 player.add<TransformComponent>(position);
 player.add<HealthComponent>(100.0f);
 player.add<VelocityComponent>();
 
-// 3. Query entities in a system
+// 4. Query entities in a system
 void update(UpdateContext& ctx) noexcept {
     for (auto [entity, transform, velocity, active] : ctx.view<
         TransformComponent,
@@ -80,7 +109,7 @@ void update(UpdateContext& ctx) noexcept {
 
 ## Data Flow
 
-1. **Entity Creation**: `EntityRegistry` allocates versioned handle
+1. **Entity Creation**: `EntityRegistry` allocates versioned handle with strong ID
 2. **Component Attachment**: `EntityManager` stores in type-indexed `SparseSet`
 3. **Queries**: `View` iterates entities with matching components
 4. **Updates**: `System` processes entities each frame
@@ -88,12 +117,20 @@ void update(UpdateContext& ctx) noexcept {
 
 ## Key Features
 
-### Versioned Handles
-Detect stale references to destroyed entities:
+### Versioned Handles with Strong IDs
+Detect stale references and carry domain semantics:
 ```cpp
-auto handle = registry.create();
+auto handle = registry.create();       // {entityId, version, strongId}
 registry.destroy(handle);
-registry.isValid(handle);  // false
+registry.isValid(handle);              // false — version mismatch
+```
+
+### Domain-Specific Entity Managers
+`TypedHandleWorld` dispatches to the correct manager at compile time:
+```cpp
+TypedHandleWorld<GameEM, UiEM> world;
+auto player = world.addEntity<GameHandle>();  // → GameEM
+auto button = world.addEntity<UiHandle>();    // → UiEM
 ```
 
 ### Type-Indexed Storage
@@ -113,7 +150,6 @@ for (auto [e, t, v, a] : view<Transform, Velocity, Active>()) {
 ### Compile-Time Lifecycle Detection
 Traits detect hooks without runtime overhead:
 ```cpp
-// Detected at compile time via concepts
 if constexpr (traits::HasOnAcquire<T>) {
     component->onAcquire();
 }
@@ -122,10 +158,11 @@ if constexpr (traits::HasOnAcquire<T>) {
 ## Documentation
 
 ### Entity Management
-- [GameObject](gameobject.md) - The entity facade you'll use most
+- [Entity](entity.md) - The entity facade you'll use most
 - [EntityHandle](entity-handle.md) - How entity references work
 - [EntityRegistry](entity-registry.md) - Handle lifecycle internals
 - [EntityManager](entity-manager.md) - Component storage details
+- [TypedHandleWorld](typed-handle-world.md) - Multi-domain world
 
 ### Querying & Processing
 - [View](view.md) - Efficient component queries
@@ -143,5 +180,4 @@ if constexpr (traits::HasOnAcquire<T>) {
 - [Component System](../component-system.md) - High-level ECS concepts
 - [Game Loop Architecture](../gameloop-architecture.md) - How systems execute
 - [Spawn System](../spawn-system.md) - Entity pooling and spawning
-
 

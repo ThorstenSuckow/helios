@@ -10,6 +10,8 @@ export import helios.rendering.text.TextRenderable;
 export import helios.rendering.text.TextRenderCommand;
 export import helios.rendering.text.TextMesh;
 export import helios.rendering.text.FontResourceProvider;
+export import helios.rendering.text.TextRenderer;
+export import helios.rendering.text.TypeSetter;
 
 export import helios.rendering.text.TextShaderProperties;
 export import helios.rendering.text.TextShaderPropertiesOverride;

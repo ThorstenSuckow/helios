@@ -17,9 +17,16 @@ export import helios.core;
 export import helios.math;
 export import helios.rendering;
 export import helios.scene;
-export import helios.window;
 export import helios.input;
-export import helios.event;
-export import helios.engine;
-export import helios.app;
 export import helios.util;
+export import helios.state;
+export import helios.ui;
+export import helios.physics;
+export import helios.spatial;
+export import helios.gameplay;
+export import helios.runtime;
+export import helios.platform;
+export import helios.tooling;
+
+export import helios.bootstrap;
+

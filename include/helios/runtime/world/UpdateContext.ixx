@@ -15,20 +15,17 @@ import helios.rendering.viewport.ViewportSnapshot;
 import helios.runtime.world.Level;
 import helios.runtime.messaging.event.GameLoopEventBus;
 
-import helios.runtime.world.ResourceRegistry;
-
 import helios.runtime.world.RuntimeEnvironment;
 import helios.ecs.types.EntityHandle;
 
 import helios.ecs.View;
+import helios.runtime.world.Session;
 
 import helios.rendering.concepts.IsRenderResourceHandle;
 
 import helios.runtime.world.EngineWorld;
 
 export namespace helios::runtime::world {
-
-    class Session;
 
 
     /**
@@ -37,10 +34,10 @@ export namespace helios::runtime::world {
      * @details UpdateContext bundles frame-scoped data and services used by
      * system updates: timing values, immutable input/viewport snapshots,
      * session/runtime environment access, typed entity access via `EngineWorld`,
-     * event-bus read/write channels, and command-buffer submission.
+     * event-bus read/write channels, and typed ECS access.
      *
-     * Commands are submitted with `queueCommand<TCmdBuffer, TCommand>(...)`
-     * and are flushed at configured game-loop commit points.
+     * Command submission is handled by systems through injected command buffers
+     * (`CommandBuffer_type`) using `cmdBuffer.template add<TCommand>(...)`.
      *
      * @see GameLoop
      * @see Session
@@ -122,12 +119,6 @@ export namespace helios::runtime::world {
         std::span<const helios::rendering::viewport::ViewportSnapshot> viewportSnapshots_;
 
         /**
-         * @brief Reference to the ResourceRegistry used for command-buffer lookup.
-         */
-        helios::runtime::world::ResourceRegistry& resourceRegistry_;
-
-
-        /**
          * @brief Pointer to the active Level, or nullptr if no level is loaded.
          */
         const Level* level_;
@@ -142,7 +133,6 @@ export namespace helios::runtime::world {
         /**
          * @brief Constructs an UpdateContext with all per-frame dependencies.
          *
-         * @param resourceRegistry Reference to the resource registry.
          * @param session Reference to current session state.
          * @param runtimeEnvironment Reference to runtime-environment state.
          * @param deltaTime Time since last frame in seconds.
@@ -156,7 +146,6 @@ export namespace helios::runtime::world {
          * @param engineWorld Aggregate typed world for entity operations.
          */
         UpdateContext(
-            helios::runtime::world::ResourceRegistry& resourceRegistry,
             helios::runtime::world::Session& session,
             helios::runtime::world::RuntimeEnvironment& runtimeEnvironment,
             const float deltaTime,
@@ -169,7 +158,6 @@ export namespace helios::runtime::world {
             const Level* level,
             EngineWorld& engineWorld
         ) :
-        resourceRegistry_(resourceRegistry),
         session_(session),
         runtimeEnvironment_(runtimeEnvironment),
         deltaTime_(deltaTime),
@@ -249,22 +237,6 @@ export namespace helios::runtime::world {
             return level_;
         }
 
-
-        /**
-         * @brief Submits a command to a typed command buffer.
-         *
-         * @tparam TCmdBuffer Target command-buffer type.
-         * @tparam T Command type to enqueue.
-         * @tparam Args Command constructor argument types.
-         *
-         * @param args Arguments forwarded to the command constructor.
-         */
-        template<typename TCmdBuffer, typename T, typename ...Args>
-        void queueCommand(Args&&...args) const noexcept {
-            auto* cmdBuffer = resourceRegistry_.tryGet<TCmdBuffer>();
-            assert(cmdBuffer && "Command buffer not found in registry");
-            cmdBuffer->template add<T>(std::forward<Args>(args)...);
-        }
 
         /**
          * @brief Returns the session for game/match state access.

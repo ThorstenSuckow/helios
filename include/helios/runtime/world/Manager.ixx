@@ -11,21 +11,21 @@ export module helios.runtime.world.Manager;
 
 import helios.runtime.world.concepts.IsManagerLike;
 
-import helios.runtime.world.UpdateContextFwd;
-import helios.runtime.world.GameWorldFwd;
+import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 
-
+using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::world::concepts;
 export namespace helios::runtime::world {
 
     /**
-     * @brief Concept detecting an optional `init(GameWorld&)` method on a manager.
+     * @brief Concept detecting an optional `init(CommandHandlerRegistry&)` method on a manager.
      *
      * @tparam T The manager type to inspect.
      */
     template<typename T>
-    concept HasInit = requires(T& t, GameWorld& gameWorld) {
-        {t.init(gameWorld) } -> std::same_as<void>;
+    concept HasInit = requires(T& t, CommandHandlerRegistry& commandHandlerRegistry) {
+        {t.init(commandHandlerRegistry) } -> std::same_as<void>;
     };
 
     /**
@@ -70,7 +70,7 @@ export namespace helios::runtime::world {
         public:
             virtual ~Concept() = default;
             virtual void flush(UpdateContext& updateContext) noexcept = 0;
-            virtual void init(GameWorld& gameWorld) noexcept = 0;
+            virtual void init(CommandHandlerRegistry& commandHandlerRegistry) noexcept = 0;
             virtual void reset() noexcept = 0;
 
             [[nodiscard]] virtual void* underlying() noexcept = 0;
@@ -93,9 +93,9 @@ export namespace helios::runtime::world {
             void flush(UpdateContext& updateContext) noexcept override {
                 manager_.flush(updateContext);
             }
-            void init(GameWorld& gameWorld) noexcept override {
+            void init(CommandHandlerRegistry& commandHandlerRegistry) noexcept override {
                 if constexpr (HasInit<T>) {
-                    manager_.init(gameWorld);
+                    manager_.init(commandHandlerRegistry);
                 }
             }
             void reset() noexcept override {
@@ -162,15 +162,15 @@ export namespace helios::runtime::world {
          *
          * @details If the concrete type satisfies `HasInit<T>`, its `init()` is
          * called. Otherwise this is a no-op. Typically used by managers to
-         * register their TypedCommandHandlers with the GameWorld.
+         * register command handlers in the command-handler registry.
          *
-         * @param gameWorld The GameWorld for one-time initialization.
+         * @param commandHandlerRegistry Registry used for one-time handler registration.
          *
          * @pre Manager must be initialized (pimpl_ != nullptr).
          */
-        void init(GameWorld& gameWorld) noexcept {
+        void init(CommandHandlerRegistry& commandHandlerRegistry) noexcept {
             assert(pimpl_ && "Manager not initialized");
-            pimpl_->init(gameWorld);
+            pimpl_->init(commandHandlerRegistry);
         }
 
         /**

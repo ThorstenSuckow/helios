@@ -15,8 +15,6 @@ import helios.runtime.gameloop.Pass;
 
 import helios.runtime.world.SystemRegistry;
 
-
-import helios.runtime.world.GameWorldFwd;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.Session;
 
@@ -87,9 +85,7 @@ export namespace helios::runtime::gameloop {
          * @param gameWorld Reference to the game world.
          */
         void init(helios::runtime::world::GameWorld& gameWorld) override {
-            for (auto& sys : systemRegistry_.items()) {
-                sys->init(gameWorld);
-            }
+
         }
 
 

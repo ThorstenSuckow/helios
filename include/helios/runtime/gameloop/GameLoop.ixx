@@ -378,7 +378,6 @@ export namespace helios::runtime::gameloop {
             totalTime_ += deltaTime;
 
             auto updateContext = UpdateContext(
-                  gameWorld.resourceRegistry(),
                   gameWorld.session(),
                   gameWorld.runtimeEnvironment(),
                   deltaTime,

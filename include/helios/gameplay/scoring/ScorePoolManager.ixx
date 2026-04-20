@@ -6,8 +6,9 @@ module;
 
 #include <cassert>
 #include <memory>
-#include <stdexcept>
+#include <ranges>
 #include <unordered_map>
+
 
 export module helios.gameplay.scoring.ScorePoolManager;
 

@@ -250,7 +250,7 @@ export namespace helios::platform::glfw {
             for (auto& handle : currentContexts_) {
                 auto go = updateContext.find<THandle> (handle);
                 if (go) {
-                    go->remove<CurrentContextComponent<THandle>>();
+                    go->template remove<CurrentContextComponent<THandle>>();
                 }
             }
         }

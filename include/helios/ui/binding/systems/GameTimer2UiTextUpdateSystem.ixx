@@ -16,6 +16,7 @@ import helios.runtime.timing.components;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
+import helios.runtime.world.tags.SystemRole;
 
 
 import helios.ui.widgets;
@@ -25,7 +26,6 @@ import helios.ecs.components.Active;
 
 using namespace helios::runtime::timing;
 
-import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::ui::binding::systems {
 
@@ -80,7 +80,7 @@ export namespace helios::ui::binding::systems {
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
-                if (const auto* timer = timerManager_.timer(gtc->timerId());
+                if (const auto* timer = timerManager_.getTimer(gtc->timerId());
                     timer->timerRevision() != gtc->timerRevision()) {
                     txt->setText(dfc->format(timer->elapsed(), timer->duration()));
                     gtc->setTimerRevision(timer->timerRevision());

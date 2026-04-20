@@ -4,7 +4,7 @@
  */
 module;
 
-
+#include "helios/helios_config.h"
 #include <cassert>
 #include <iostream>
 #include <ostream>
@@ -24,12 +24,13 @@ import helios.state.commands.DelayedStateCommand;
 import helios.runtime.timing.TimerManager;
 import helios.runtime.timing.types;
 
+import helios.runtime.messaging.command.tags.CommandBufferRole;
+
 using namespace helios::runtime::world;
 using namespace helios::state::commands;
 using namespace helios::runtime::timing;
 using namespace helios::runtime::timing::types;
 
-import helios.runtime.messaging.command.tags.CommandBufferRole;
 export namespace helios::runtime::messaging::command {
 
     /**
@@ -272,7 +273,7 @@ export namespace helios::runtime::messaging::command {
                    }
 
                } else {
-                   std::cerr << "Command type is not executable" << __FUNCSIG__ << std::endl;
+                   std::cerr << "Command type is not executable" << HELIOS_FUNCTION_SIGNATURE << std::endl;
                    assert(false &&  "Command type is not executable");
                }
 

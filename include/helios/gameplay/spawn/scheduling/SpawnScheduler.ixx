@@ -86,7 +86,7 @@ export namespace helios::gameplay::spawn::scheduling {
          * @param spawnContext Optional spawn context for the operation.
          */
         virtual void evaluate(
-            const TWorld* world,
+            const TWorld world,
             const UpdateContext& updateContext,
             const SpawnContext<THandle>& spawnContext = {})  noexcept = 0;
 

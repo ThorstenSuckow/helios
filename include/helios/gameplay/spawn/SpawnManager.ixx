@@ -179,7 +179,7 @@ export namespace helios::gameplay::spawn {
 
 
 
-                const auto poolSnapshot = entityPoolManager_.poolSnapshot(entityPoolId);
+                const auto poolSnapshot = entityPoolManager_->poolSnapshot(entityPoolId);
 
                 if (amount == 0) {
                     assert(false && "Amount must not be 0");
@@ -193,22 +193,22 @@ export namespace helios::gameplay::spawn {
                 const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
                 for (size_t i = 0; i < spawnCount; i++) {
 
-                    auto go = entityPoolManager_.acquire(entityPoolId);
+                    auto go = entityPoolManager_->acquire(entityPoolId);
                     assert(go && "Failed to acquire Entity");
 
-                    auto* tsc = go->get<helios::spatial::transform::components::TranslationStateComponent>();
+                    auto* tsc = go->template get<helios::spatial::transform::components::TranslationStateComponent>();
 
-                    auto* sbp = go->get<helios::gameplay::spawn::components::SpawnedByProfileComponent>();
+                    auto* sbp = go->template get<helios::gameplay::spawn::components::SpawnedByProfileComponent>();
                     assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
-                    auto* aabb = go->get<helios::physics::collision::components::AabbColliderComponent>();
+                    auto* aabb = go->template get<helios::physics::collision::components::AabbColliderComponent>();
                     assert(aabb && "unexpected missing AabbColliderComponent");
 
                     auto spawnCursor = SpawnPlanCursor{spawnCount, i};
                     const auto& spawnContext =  scheduledSpawnPlanCommand.spawnContext();
 
                     const auto& emitter = spawnContext.emitterContext;
-                    auto* ebc = go->get<helios::gameplay::spawn::components::EmittedByComponent>();
+                    auto* ebc = go->template get<helios::gameplay::spawn::components::EmittedByComponent>();
                     if (emitter.has_value() && ebc) {
                         ebc->setSource(emitter.value().source);
                     }
@@ -263,14 +263,14 @@ export namespace helios::gameplay::spawn {
                 const auto spawnProfile = it->second.get();
                 const auto entityPoolId = spawnProfile->entityPoolId;
 
-                if (entityPoolManager_.poolSnapshot(entityPoolId).inactiveCount == 0) {
+                if (entityPoolManager_->poolSnapshot(entityPoolId).inactiveCount == 0) {
                     /**
                      * @todo log
                      */
                     continue;
                 }
 
-                auto entity = entityPoolManager_.acquire(entityPoolId);
+                auto entity = entityPoolManager_->acquire(entityPoolId);
                 assert(entity && "Failed to acquire Entity");
 
                 auto* tsc = entity->template get<helios::spatial::transform::components::TranslationStateComponent<THandle>>();
@@ -331,7 +331,7 @@ export namespace helios::gameplay::spawn {
                 const auto spawnProfile = it->second.get();
                 auto entityPoolId = spawnProfile->entityPoolId;
 
-                entityPoolManager_.release(entityPoolId, despawnCommand.entityHandle());
+                entityPoolManager_->release(entityPoolId, despawnCommand.entityHandle());
 
             }
         }

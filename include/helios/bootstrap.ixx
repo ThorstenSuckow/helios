@@ -16,6 +16,7 @@ import helios.runtime.gameloop;
 import helios.runtime.world;
 
 import helios.state.Bindings;
+import helios.state.types.StateTransitionContext;
 import helios.runtime.messaging.command;
 
 import helios.platform;

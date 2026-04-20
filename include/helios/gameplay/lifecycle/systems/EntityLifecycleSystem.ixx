@@ -18,6 +18,7 @@ import helios.state.Bindings;
 import helios.runtime.world.Manager;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
+import helios.runtime.world.tags.SystemRole;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
@@ -44,7 +45,6 @@ using namespace helios::gameplay::health::events;
 using namespace helios::gameplay::spawn::components;
 using namespace helios::gameplay::spawn::commands;
 
-import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::lifecycle::systems {
 
@@ -80,7 +80,7 @@ export namespace helios::gameplay::lifecycle::systems {
 
                 if (go) {
 
-                    auto* hc = go->get<helios::gameplay::health::components::HealthComponent>();
+                    auto* hc = go->template get<helios::gameplay::health::components::HealthComponent>();
                     if (hc) {
                         auto healthDepletedBehavior = hc->healthDepletedBehavior();
                         if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::Despawn)) {

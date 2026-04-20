@@ -23,10 +23,9 @@ import helios.ui.widgets.components.UiTextComponent;
 
 import helios.ecs.components.Active;
 
-using namespace helios::gameplay::scoring;
-
 import helios.runtime.world.tags.SystemRole;
 
+using namespace helios::gameplay::scoring;
 export namespace helios::ui::binding::systems {
 
     /**
@@ -70,7 +69,7 @@ export namespace helios::ui::binding::systems {
                     continue;
                 }
 
-                txt->setText(nfc->format<double>(soc->maxScore()));
+                txt->setText(nfc->template format<double>(soc->maxScore()));
             }
         }
 

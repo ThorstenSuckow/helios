@@ -58,7 +58,7 @@ export namespace helios::scene::systems {
      * @tparam CullingStrategy
      */
     template<typename THandle, typename CullingStrategy, typename TCommandBuffer = NullCommandBuffer>
-    requires IsFrustumCullerLike<CullingStrategy> && IsCommandBufferLike<TCommandBuffer>
+    requires IsFrustumCullerLike<CullingStrategy, THandle> && IsCommandBufferLike<TCommandBuffer>
     class SceneMemberRenderExtractionSystem {
 
         CullingStrategy cullingStrategy_;
@@ -95,7 +95,7 @@ export namespace helios::scene::systems {
                 >().whereEnabled()) {
                     if (smc->sceneHandle() == sceneHandle) {
 
-                        auto* mcOverride = innerEntity.get<MaterialOverrideComponent>();
+                        auto* mcOverride = innerEntity.template get<MaterialOverrideComponent>();
 
                         cmdBuffer.template add<RenderCommand>(
                             SceneMemberRenderContext{

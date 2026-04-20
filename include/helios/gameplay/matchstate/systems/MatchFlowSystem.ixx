@@ -23,6 +23,8 @@ import helios.gameplay.gamestate.types;
 import helios.ecs;
 import helios.runtime;
 import helios.runtime.concepts;
+import helios.runtime.world.tags.SystemRole;
+
 
 using namespace helios::state::commands;
 using namespace helios::state::types;
@@ -31,9 +33,6 @@ using namespace helios::gameplay::matchstate::types;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::runtime::messaging::command;
-
-import helios.runtime.world.tags.SystemRole;
-
 export namespace helios::gameplay::matchstate::systems {
 
     /**

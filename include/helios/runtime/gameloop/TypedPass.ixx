@@ -7,11 +7,10 @@ module;
 #include <type_traits>
 #include <utility>
 
-export module helios.runtime.gameloop.TypedPass;
+export module helios.runtime.gameloop:TypedPass;
 
-import helios.runtime.gameloop.CommitPoint;
-
-import helios.runtime.gameloop.Pass;
+import :CommitPoint;
+import :Pass;
 
 import helios.runtime.world.SystemRegistry;
 

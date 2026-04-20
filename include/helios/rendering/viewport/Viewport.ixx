@@ -13,35 +13,18 @@ module;
 export module helios.rendering.viewport.Viewport;
 
 import helios.rendering.viewport.ViewportSnapshot;
+import helios.rendering.framebuffer.Framebuffer;
 
 import helios.rendering.ClearFlags;
 import helios.core.types;
 import helios.rendering.viewport.types.ViewportId;
 import helios.math.types;
 import helios.scene.CameraSceneNode;
-import :FramebufferFwd;
 import helios.util.log.LogManager;
 import helios.util.log.Logger;
 
 #define HELIOS_LOG_SCOPE "helios::rendering::viewport::Viewport"
 export namespace helios::rendering::viewport {
-
-
-    /**
-     * @brief A passkey used to establish a parent-child relationship between a Framebuffer and a Viewport.
-     *
-     * This struct uses the passkey idiom to restrict the calling of `Viewport::setFramebuffer` to
-     * friend classes (specifically `helios::rendering::Framebuffer`), ensuring that the ownership
-     * hierarchy is managed correctly.
-     *
-     * @see `Viewport::setFramebuffer`
-     * @see https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p2893r3.html#passkey-idiom
-     */
-    struct ViewportKey {
-    private:
-        friend class helios::rendering::framebuffer::Framebuffer;
-        ViewportKey() = default;
-    };
 
     /**
      * @brief Represents a rectangular area within a Framebuffer where a scene is rendered.
@@ -267,7 +250,7 @@ export namespace helios::rendering::viewport {
          *
          * @todo The Viewport should observe the Framebuffer for state changes (e.g., resize).
          */
-        Viewport& setFramebuffer(const helios::rendering::framebuffer::Framebuffer* framebuffer, ViewportKey key) noexcept {
+        Viewport& setFramebuffer(const helios::rendering::framebuffer::Framebuffer* framebuffer) noexcept {
             framebuffer_ = framebuffer;
             return *this;
         }

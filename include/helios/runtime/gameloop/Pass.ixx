@@ -9,9 +9,9 @@ module;
 #include <memory>
 #include <cassert>
 
-export module helios.runtime.gameloop.Pass;
+export module helios.runtime.gameloop:Pass;
 
-import helios.runtime.gameloop.CommitPoint;
+import :CommitPoint;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.SystemRegistry;

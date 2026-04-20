@@ -88,7 +88,7 @@ export namespace helios::gameplay::spawn::scheduling {
         /**
          * @brief Processor for evaluating individual rules.
          */
-        DefaultRuleProcessor<THandle> ruleProcessor_{};
+        DefaultRuleProcessor<THandle, TWorld> ruleProcessor_{};
 
     public:
 
@@ -98,7 +98,7 @@ export namespace helios::gameplay::spawn::scheduling {
          * @param initialSpanPlanSize Initial capacity for the spawn plan buffer.
          */
         DefaultSpawnScheduler(const size_t initialSpanPlanSize = 20) {
-            SpawnScheduler<THandle>::scheduledSpawnPlans_.reserve(initialSpanPlanSize);
+            SpawnScheduler<THandle, TWorld>::scheduledSpawnPlans_.reserve(initialSpanPlanSize);
         }
 
         /**
@@ -112,21 +112,21 @@ export namespace helios::gameplay::spawn::scheduling {
          * @param spawnContext Context for spawn operations.
          */
         void evaluate(
-            const GameWorld& gameWorld,
+            const TWorld& world,
             const UpdateContext& updateContext,
             const SpawnContext<THandle>& spawnContext) noexcept override{
 
-            SpawnScheduler<THandle>::scheduledSpawnPlans_.clear();
+            SpawnScheduler<THandle, TWorld>::scheduledSpawnPlans_.clear();
 
             for (auto& [spawnProfileId, rule] : spawnRules_) {
 
                 auto spawnPlan = ruleProcessor_.processRule(
-                    gameWorld, updateContext, spawnContext, spawnProfileId, *rule,
+                    world, updateContext, spawnContext, spawnProfileId, *rule,
                     spawnRuleStates_[rule->spawnRuleId()]
                 );
 
                 if (spawnPlan.amount > 0) {
-                    SpawnScheduler<THandle>::scheduledSpawnPlans_.push_back({
+                    SpawnScheduler<THandle, TWorld>::scheduledSpawnPlans_.push_back({
                         spawnProfileId,
                         std::move(spawnPlan),
                         spawnContext

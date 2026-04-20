@@ -24,8 +24,8 @@ export namespace helios::scene::concepts {
      * @tparam T Candidate culling strategy type.
      * @tparam TStrongId type for the EntityHandle's StrongId.
      */
-    template <typename T, typename TStrongId >
-    concept IsFrustumCullerLike = requires(T& t, const EntityHandle<TStrongId> entityHandle, const PerspectiveCameraContext& cameraContext)
+    template <typename T, typename THandle>
+    concept IsFrustumCullerLike = requires(T& t, const THandle entityHandle, const PerspectiveCameraContext& cameraContext)
     {
         {t.cull(cameraContext, entityHandle)}-> std::same_as<void>;
 

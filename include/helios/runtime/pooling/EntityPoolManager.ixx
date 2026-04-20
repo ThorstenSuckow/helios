@@ -248,7 +248,7 @@ export namespace helios::runtime::pooling {
         ) {
             auto* entityPool = pool(entityPoolId);
             
-            auto worldGo = engineWorld_->findEntity(entityHandle);
+            auto worldGo = engineWorld_->find<Handle_type>(entityHandle);
 
             if (worldGo) {
                 if (entityPool->release(entityHandle)) {
@@ -319,7 +319,7 @@ export namespace helios::runtime::pooling {
 
                 pools_.addPool(entityPoolId, std::move(pool));
 
-                for (auto [entity, pic] : engineWorld_.view<
+                for (auto [entity, pic] : engineWorld_->view<
                     Handle_type,
                     helios::runtime::pooling::components::PrefabIdComponent<Handle_type>>().whereEnabled()) {
                     if (pic->prefabId() == poolConfig->prefabId) {

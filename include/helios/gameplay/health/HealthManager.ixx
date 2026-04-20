@@ -100,7 +100,7 @@ export namespace helios::gameplay::health {
 
                 auto target = updateContext.find(interactionContext.target);
 
-                auto* hc = target->get<HealthComponent>();
+                auto* hc = target->template get<HealthComponent>();
                 if (!hc) {
                     continue;
                 }
@@ -109,7 +109,7 @@ export namespace helios::gameplay::health {
                 auto damageApplied = damageContext.damage;
                 hc->takeDamage(damageApplied);
 
-                auto* lac = target->get<LastDamageComponent>();
+                auto* lac = target->template get<LastDamageComponent>();
                 if (lac && damageApplied > 0) {
                     lac->setDamageContext(damageContext);
                 }
@@ -125,7 +125,7 @@ export namespace helios::gameplay::health {
                     auto healthDepletedBehavior = hc->healthDepletedBehavior();
 
                     if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::DeadTag)) {
-                        target->add<DeadTagComponent>();
+                        target->template add<DeadTagComponent>();
                     }
 
                     updateContext.pushPass<HealthDepletedEvent>(target->entityHandle(), damageContext);

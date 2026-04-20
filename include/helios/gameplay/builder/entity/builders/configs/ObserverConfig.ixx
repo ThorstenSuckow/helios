@@ -71,7 +71,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          */
         ObserverConfig& runningScore(const helios::gameplay::scoring::types::ScorePoolId scorePoolId) {
 
-            auto* soc = entity_.get<helios::gameplay::scoring::components::ScoreObserverComponent<Handle_type>>();
+            auto* soc = entity_.template get<helios::gameplay::scoring::components::ScoreObserverComponent<Handle_type>>();
 
             assert(!soc && "ScoreObserverComponent already available.");
 
@@ -89,7 +89,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          */
         ObserverConfig& lives(const Entity entity) {
 
-            auto* loc = entity_.get<
+            auto* loc = entity_.template get<
                 helios::gameplay::matchstate::components::LivesBindingComponent<Handle_type>
             >();
 
@@ -110,7 +110,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          */
         ObserverConfig& maxScore(const helios::gameplay::scoring::types::ScorePoolId scorePoolId) {
 
-            auto* soc = entity_.get<helios::gameplay::scoring::components::MaxScoreObserverComponent<Handle_type>>();
+            auto* soc = entity_.template get<helios::gameplay::scoring::components::MaxScoreObserverComponent<Handle_type>>();
 
             assert(!soc && "MaxScoreObserverComponent already available.");
 
@@ -128,7 +128,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          */
         ObserverConfig& time(const helios::runtime::timing::types::TimerId timerId) {
 
-            auto* toc = entity_.get<helios::runtime::timing::components::TimerBindingComponent<Handle_type>>();
+            auto* toc = entity_.template get<helios::runtime::timing::components::TimerBindingComponent<Handle_type>>();
 
             assert(!toc && "TimerBindingComponent already available.");
 

@@ -8,7 +8,6 @@ module;
 
 export module helios.rendering.framebuffer.Framebuffer;
 
-import helios.rendering.viewport;
 
 
 export namespace helios::rendering::framebuffer {
@@ -31,7 +30,7 @@ export namespace helios::rendering::framebuffer {
          *
          * @todo The list should be sorted after a meaningful key, like the viewport's z-Index.
          */
-        std::vector<helios::rendering::viewport::types::ViewportHandle> viewports_;
+      //  std::vector<helios::rendering::viewport::types::ViewportHandle> viewports_;
 
         bool isDirty_ = true;
 

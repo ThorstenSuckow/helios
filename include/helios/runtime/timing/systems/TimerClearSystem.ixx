@@ -4,6 +4,7 @@
  */
 module;
 
+#include <span>
 
 export module helios.runtime.timing.systems.TimerClearSystem;
 

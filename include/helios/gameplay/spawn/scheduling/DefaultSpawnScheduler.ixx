@@ -65,8 +65,8 @@ export namespace helios::gameplay::spawn::scheduling {
      * @see ScheduledSpawnPlan
      * @see GameObjectSpawnSystem
      */
-    template<typename THandle>
-    class DefaultSpawnScheduler : public SpawnScheduler<THandle> {
+    template<typename THandle, typename TWorld>
+    class DefaultSpawnScheduler : public SpawnScheduler<THandle, TWorld> {
 
     protected:
 

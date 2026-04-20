@@ -52,7 +52,7 @@ export namespace helios::gameplay::spawn::scheduling {
      * @see CyclicSpawnScheduler
      * @see ScheduledSpawnPlan
      */
-    template<typename THandle>
+    template<typename THandle, typename TWorld>
     class SpawnScheduler {
 
     protected:
@@ -86,7 +86,7 @@ export namespace helios::gameplay::spawn::scheduling {
          * @param spawnContext Optional spawn context for the operation.
          */
         virtual void evaluate(
-            const GameWorld& gameWorld,
+            const TWorld* world,
             const UpdateContext& updateContext,
             const SpawnContext<THandle>& spawnContext = {})  noexcept = 0;
 

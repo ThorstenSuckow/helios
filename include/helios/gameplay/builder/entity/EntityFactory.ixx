@@ -28,7 +28,7 @@ import helios.gameplay.health;
 import helios.gameplay.scoring;
 import helios.gameplay.gamestate;
 import helios.gameplay.matchstate;
-import helios.gameplay.timing;
+import helios.runtime.timing;
 
 import helios.util.Guid;
 import helios.core.units;

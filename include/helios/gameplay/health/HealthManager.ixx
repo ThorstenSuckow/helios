@@ -8,7 +8,7 @@ module;
 
 export module helios.gameplay.health.HealthManager;
 
-import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.damage.commands.ApplyDamageCommand;
@@ -152,10 +152,10 @@ export namespace helios::gameplay::health {
         /**
          * @brief Registers this manager as the damage command handler.
          *
-         * @param gameWorld The game world to register with.
+         * @param commandHandlerRegistry The command-handler registry to register with.
          */
-        void init(GameWorld& gameWorld) {
-            gameWorld.template registerCommandHandler<ApplyDamageCommand<THandle>>(*this);
+        void init(helios::runtime::messaging::command::CommandHandlerRegistry& commandHandlerRegistry) {
+            commandHandlerRegistry.registerHandler<ApplyDamageCommand<THandle>>(*this);
         }
 
         /**

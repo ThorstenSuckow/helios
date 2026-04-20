@@ -16,18 +16,18 @@ export module helios.runtime.messaging.command.TypedCommandBuffer;
 
 import helios.state.components;
 
-import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 
 import helios.state.commands.DelayedStateCommand;
 
-import helios.gameplay.timing.TimerManager;
-import helios.gameplay.timing.types;
+import helios.runtime.timing.TimerManager;
+import helios.runtime.timing.types;
 
 using namespace helios::runtime::world;
 using namespace helios::state::commands;
-using namespace helios::gameplay::timing;
-using namespace helios::gameplay::timing::types;
+using namespace helios::runtime::timing;
+using namespace helios::runtime::timing::types;
 
 import helios.runtime.messaging.command.tags.CommandBufferRole;
 export namespace helios::runtime::messaging::command {
@@ -50,7 +50,7 @@ export namespace helios::runtime::messaging::command {
      * @brief Concept constraining commands that carry a timer gate.
      *
      * @details A command satisfies DelayedCommandLike if it provides a
-     * noexcept `gameTimerId()` accessor returning a GameTimerId. Such
+     * noexcept `timerId()` accessor returning a TimerId. Such
      * commands are held in a scratch queue until their associated timer
      * reaches `TimerState::Finished`.
      *
@@ -58,7 +58,7 @@ export namespace helios::runtime::messaging::command {
      */
     template<typename Cmd>
     concept DelayedCommandLike = requires(Cmd const& c) {
-            {c.gameTimerId() } noexcept;
+            {c.timerId() } noexcept;
     };
 
     /**
@@ -91,6 +91,10 @@ export namespace helios::runtime::messaging::command {
      */
     template <typename... CommandTypes>
     class TypedCommandBuffer {
+
+        TimerManager* timerManager_;
+
+        CommandHandlerRegistry* commandHandlerRegistry_;
 
         /**
          * @brief Per-type command queues stored as a tuple of vectors.
@@ -185,8 +189,8 @@ export namespace helios::runtime::messaging::command {
          * In both branches, if `CommandType` satisfies `DelayedCommandLike`,
          * an additional timer check is performed per command:
          *
-         * 1. The associated `GameTimer` is looked up via the command's
-         *    `gameTimerId()`.
+         * 1. The associated `Timer` is looked up via the command's
+         *    `timerId()`.
          * 2. If the timer is still running (`shouldDelayCommand` returns
          *    true), the command is moved into the scratch queue and
          *    survives the current flush cycle.
@@ -206,9 +210,9 @@ export namespace helios::runtime::messaging::command {
          * @param updateContext The current frame's update context.
          */
         template<typename CommandType>
-        void flushCommandQueue(GameWorld& gameWorld, UpdateContext& updateContext) noexcept {
+        void flushCommandQueue(UpdateContext& updateContext) noexcept {
 
-            auto& timerManager = gameWorld.manager<TimerManager>();
+            //auto& timerManager = gameWorld.manager<TimerManager>();
 
             auto& queue = commandQueue<CommandType>();
             auto& delayed = delayedQueue<CommandType>();
@@ -218,28 +222,26 @@ export namespace helios::runtime::messaging::command {
                 return;
             }
 
-            auto& commandHandlerRegistry = gameWorld.commandHandlerRegistry();
-
-            if (commandHandlerRegistry.has<CommandType>()) {
+            if (commandHandlerRegistry_->has<CommandType>()) {
 
                 for (auto& cmd : queue) {
                     if constexpr (DelayedCommandLike<CommandType>)  {
-                        auto* gameTimer = timerManager.gameTimer(cmd.gameTimerId());
-                        if (!gameTimer) {
-                            assert(gameTimer && "Unexpected null game timer");
-                            commandHandlerRegistry.submit<CommandType>(cmd);
+                        auto* timer = timerManager_->getTimer(cmd.timerId());
+                        if (!timer) {
+                            assert(timer && "Unexpected null game timer");
+                            commandHandlerRegistry_->submit<CommandType>(cmd);
                             continue;
                         }
 
-                        if (shouldDelayCommand(gameTimer->state())) {
+                        if (shouldDelayCommand(timer->state())) {
                             delayed.push_back(std::move(cmd));
-                        } else if (isDelayedCommandReady(gameTimer->state())) {
-                            commandHandlerRegistry.submit<CommandType>(cmd);
-                        } else if (shouldDiscardCommand(gameTimer->state())) {
+                        } else if (isDelayedCommandReady(timer->state())) {
+                            commandHandlerRegistry_->submit<CommandType>(cmd);
+                        } else if (shouldDiscardCommand(timer->state())) {
                             // cancelled? Discard! intentionally noop
                         }
                     } else {
-                        commandHandlerRegistry.submit<CommandType>(cmd);
+                        commandHandlerRegistry_->submit<CommandType>(cmd);
                     }
                 }
 
@@ -249,18 +251,18 @@ export namespace helios::runtime::messaging::command {
 
                    for (auto& cmd : queue) {
                       if constexpr (DelayedCommandLike<CommandType>)  {
-                           auto* gameTimer = timerManager.gameTimer(cmd.gameTimerId());
-                           if (!gameTimer) {
-                               assert(gameTimer && "Unexpected null game timer");
+                           auto* timer = timerManager_->getTimer(cmd.timerId());
+                           if (!timer) {
+                               assert(timer && "Unexpected null game timer");
                                cmd.execute(updateContext);
                                continue;
                            }
 
-                           if (shouldDelayCommand(gameTimer->state())) {
+                           if (shouldDelayCommand(timer->state())) {
                                delayed.push_back(std::move(cmd));
-                           } else if (isDelayedCommandReady(gameTimer->state())) {
+                           } else if (isDelayedCommandReady(timer->state())) {
                                cmd.execute(updateContext);
-                           } else if (shouldDiscardCommand(gameTimer->state())) {
+                           } else if (shouldDiscardCommand(timer->state())) {
                                // cancelled? Discard! intentionally noop
                            }
                        } else {
@@ -299,6 +301,11 @@ export namespace helios::runtime::messaging::command {
             queue.emplace_back(std::forward<Args>(args)...);
         }
 
+        void init(CommandHandlerRegistry& commandHandlerRegistry, TimerManager& timerManager) noexcept {
+            commandHandlerRegistry_ = &commandHandlerRegistry;
+            timerManager_           = &timerManager;
+        }
+
         /**
          * @brief Discards all queued commands without executing them.
          */
@@ -315,8 +322,8 @@ export namespace helios::runtime::messaging::command {
          * @param gameWorld The game world for which the queue should be flushed.
          * @param updateContext The current frame's update context.
          */
-        void flush(GameWorld& gameWorld,  UpdateContext& updateContext) noexcept {
-            (flushCommandQueue<CommandTypes>(gameWorld, updateContext), ...);
+        void flush(UpdateContext& updateContext) noexcept {
+            (flushCommandQueue<CommandTypes>(updateContext), ...);
         }
 
 

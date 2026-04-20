@@ -66,9 +66,10 @@ export namespace helios::scene::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
 
             for (auto [entity, vc, active] : updateContext.view<
@@ -96,7 +97,7 @@ export namespace helios::scene::systems {
 
                         auto* mcOverride = innerEntity.get<MaterialOverrideComponent>();
 
-                        updateContext.queueCommand<TCommandBuffer, RenderCommand>(
+                        cmdBuffer.template add<RenderCommand>(
                             SceneMemberRenderContext{
                                 innerEntity.handle(),
                                 viewportHandle,

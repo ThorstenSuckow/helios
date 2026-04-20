@@ -90,8 +90,8 @@ export namespace helios::gameplay::spawn::scheduling {
      * @see DefaultSpawnScheduler
      * @see RuleConfig
      */
-    template<typename THandle, std::size_t N>
-    class CyclicSpawnScheduler : public SpawnScheduler<THandle> {
+    template<typename THandle, typename TWorld, std::size_t N>
+    class CyclicSpawnScheduler : public SpawnScheduler<THandle, TWorld> {
 
         /**
          * @brief Fixed-size ring buffer of rule configurations.

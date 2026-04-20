@@ -9,12 +9,14 @@ module;
 
 export module helios.runtime.messaging.command.CommandBuffer;
 
-
-import helios.runtime.world.GameWorldFwd;
-import helios.runtime.world.UpdateContextFwd;
+import helios.runtime.world.UpdateContext;
 
 import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
+import helios.runtime.timing.TimerManager;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
+
+using namespace helios::runtime::timing;
 using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::runtime::world;
 export namespace helios::runtime::messaging::command {
@@ -55,8 +57,9 @@ export namespace helios::runtime::messaging::command {
         class Concept {
         public:
             virtual ~Concept() = default;
-            virtual void flush(GameWorld& gameWorld, UpdateContext& updateContext) noexcept = 0;
+            virtual void flush(UpdateContext& updateContext) noexcept = 0;
             virtual void clear() noexcept = 0;
+            virtual void init(CommandHandlerRegistry& commandHandlerRegistry, TimerManager& timerManager) noexcept = 0;
 
             [[nodiscard]] virtual void* underlying() noexcept = 0;
             [[nodiscard]] virtual const void* underlying() const noexcept = 0;
@@ -79,8 +82,12 @@ export namespace helios::runtime::messaging::command {
 
             explicit Model(T cmdBuffer) :  cmdBuffer_(std::move(cmdBuffer)) {}
 
-            void flush(GameWorld& gameWorld, UpdateContext& updateContext) noexcept override {
-                cmdBuffer_.flush(gameWorld, updateContext);
+            void flush(UpdateContext& updateContext) noexcept override {
+                cmdBuffer_.flush(updateContext);
+            }
+
+            void init(CommandHandlerRegistry& commandHandlerRegistry, TimerManager& timerManager) noexcept override {
+                cmdBuffer_.init(commandHandlerRegistry, timerManager);
             }
 
             void clear() noexcept override {
@@ -137,9 +144,9 @@ export namespace helios::runtime::messaging::command {
          *
          * @pre The CommandBuffer must be initialized (not default-constructed).
          */
-        void flush(GameWorld& gameWorld, UpdateContext& updateContext) noexcept {
+        void flush(UpdateContext& updateContext) noexcept {
             assert(pimpl_ && "CommandBuffer not initialized");
-            pimpl_->flush(gameWorld, updateContext);
+            pimpl_->flush(updateContext);
         }
 
         /**
@@ -150,6 +157,11 @@ export namespace helios::runtime::messaging::command {
         void clear() noexcept {
             assert(pimpl_ && "CommandBuffer not initialized");
             pimpl_->clear();
+        }
+
+        void init(CommandHandlerRegistry& commandHandlerRegistry, TimerManager& timerManager) noexcept {
+            assert(pimpl_ && "CommandBuffer not initialized");
+            pimpl_->init(commandHandlerRegistry, timerManager);
         }
 
         /**

@@ -121,6 +121,7 @@ export namespace helios::ui::widgets::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
         /**
@@ -132,7 +133,7 @@ export namespace helios::ui::widgets::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             MenuComponent<THandle>* focusedMenu = nullptr;
 
@@ -179,7 +180,7 @@ export namespace helios::ui::widgets::systems {
                 >();
 
                 if (uac) {
-                    updateContext.queueCommand<TCommandBuffer, helios::ui::widgets::commands::UiActionCommand>(
+                    cmdBuffer.template add<helios::ui::widgets::commands::UiActionCommand>(
                         focusedMenu->menuItems()[focusedMenu->selectedIndex()], uac->actionId()
                     );
                 }

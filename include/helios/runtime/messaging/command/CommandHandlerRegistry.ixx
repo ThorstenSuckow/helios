@@ -132,6 +132,11 @@ export namespace helios::runtime::messaging::command {
             };
         }
 
+        template<typename... CommandType, typename OwningT>
+        void handleCommands(OwningT& owner) {
+            (registerHandler<CommandType>(owner), ...);
+        }
+
         /**
          * @brief Checks if a handler is registered for the specified command type.
          *

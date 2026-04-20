@@ -42,6 +42,8 @@ export namespace helios::platform::window::systems {
 
         public:
 
+        using CommandBuffer_type = TCommandBuffer;
+
         /**
          * @brief Engine role marker used by runtime registries.
          */
@@ -52,14 +54,14 @@ export namespace helios::platform::window::systems {
          *
          * @param updateContext Frame-local update context.
          */
-        void update(UpdateContext& updateContext) noexcept {
+        void update(UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             for (auto [entity, win, active]: updateContext.view<
                 THandle,
                 WindowCreateRequestComponent<THandle>, Active<THandle>
                 >().whereEnabled()) {
 
-                updateContext.queueCommand<TCommandBuffer, WindowCreateCommand<THandle>>(
+                cmdBuffer.template add<WindowCreateCommand<THandle>>(
                     entity.handle(),
                     win->windowConfig
                 );

@@ -46,6 +46,8 @@ export namespace helios::platform::glfw::systems {
 
     public:
 
+        using CommandBuffer_type = TCommandBuffer;
+
         /**
          * @brief Engine role marker used by runtime registries.
          */
@@ -56,7 +58,7 @@ export namespace helios::platform::glfw::systems {
          *
          * @param updateContext Frame-local update context.
          */
-        void update(UpdateContext& updateContext) noexcept {
+        void update(UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             for (auto [entity, wc, glfw, wsc, active]: updateContext.view<
                 THandle,
@@ -66,7 +68,7 @@ export namespace helios::platform::glfw::systems {
                 Active<THandle>
                 >().whereEnabled()) {
                 if (glfwWindowShouldClose(glfw->handle)) {
-                    updateContext.queueCommand<TCommandBuffer, WindowCloseCommand<THandle>>(
+                    cmdBuffer.template add<WindowCloseCommand<THandle>>(
                         entity.handle()
                     );
                 }

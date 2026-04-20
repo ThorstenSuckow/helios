@@ -54,13 +54,14 @@ export namespace helios::gameplay::matchstate::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         /**
          * @brief Processes match state and issues transition commands.
          *
          * @param updateContext The current update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             auto& session = updateContext.session();
 
@@ -78,21 +79,21 @@ export namespace helios::gameplay::matchstate::systems {
 
 
                 case MatchState::Undefined: {
-                    updateContext.queueCommand<TCommandBuffer, StateCommand<MatchState>>(
+                    cmdBuffer.template add<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::WarmupRequest)
                     );
                     break;
                 }
 
                 case MatchState::Warmup: {
-                    updateContext.queueCommand<TCommandBuffer, StateCommand<MatchState>>(
+                    cmdBuffer.template add<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::StartRequest)
                     );
                     break;
                 }
 
                 case MatchState::Start: {
-                    updateContext.queueCommand<TCommandBuffer, StateCommand<MatchState>>(
+                    cmdBuffer.template add<StateCommand<MatchState>>(
                         StateTransitionRequest<MatchState>(matchState, MatchStateTransitionId::CountdownRequest)
                     );
                     break;

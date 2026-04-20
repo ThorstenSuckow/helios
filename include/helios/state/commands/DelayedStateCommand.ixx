@@ -9,14 +9,14 @@ module;
 
 export module helios.state.commands.DelayedStateCommand;
 
-import helios.gameplay.timing.types.GameTimerId;
+import helios.runtime.timing.types.TimerId;
 
 import helios.state.Bindings;
 
 import helios.state.types.StateTransitionRequest;
 
 using namespace helios::state::types;
-using namespace helios::gameplay::timing::types;
+using namespace helios::runtime::timing::types;
 
 
 export namespace helios::state::commands {
@@ -26,7 +26,7 @@ export namespace helios::state::commands {
      *
      * @details Unlike StateCommand, which triggers a transition immediately
      * during the next flush, DelayedStateCommand associates the request with
-     * a GameTimerId. The TypedCommandBuffer holds the command until the
+     * a TimerId. The TypedCommandBuffer holds the command until the
      * referenced timer expires, then forwards it to the StateManager.
      *
      * When the StateManager receives a DelayedStateCommand via submit(),
@@ -50,7 +50,7 @@ export namespace helios::state::commands {
         /**
          * @brief The timer that gates this command.
          */
-        GameTimerId timerId_;
+        TimerId timerId_;
 
     public:
 
@@ -60,7 +60,7 @@ export namespace helios::state::commands {
          * @param transitionRequest The transition to perform when the timer fires.
          * @param timerId Identifier of the timer that triggers this command.
          */
-        explicit DelayedStateCommand(StateTransitionRequest<StateType> transitionRequest, GameTimerId timerId)
+        explicit DelayedStateCommand(StateTransitionRequest<StateType> transitionRequest, TimerId timerId)
             : transitionRequest_(transitionRequest), timerId_(timerId) {}
 
 
@@ -77,9 +77,9 @@ export namespace helios::state::commands {
         /**
          * @brief Returns the associated timer identifier.
          *
-         * @return The GameTimerId that gates this command.
+         * @return The TimerId that gates this command.
          */
-        [[nodiscard]] GameTimerId gameTimerId() const noexcept {
+        [[nodiscard]] TimerId timerId() const noexcept {
             return timerId_;
         }
 

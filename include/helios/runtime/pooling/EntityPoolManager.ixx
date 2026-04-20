@@ -19,12 +19,15 @@ import helios.runtime.pooling.types.EntityPoolId;
 
 import helios.runtime.world.UpdateContext;
 
-import helios.runtime.world.GameWorld;
+import helios.runtime.world.EngineWorld;
 import helios.runtime.pooling.EntityPool;
 import helios.runtime.pooling.EntityPoolRegistry;
 
 import helios.runtime.pooling.EntityPoolConfig;
 import helios.runtime.pooling.components.PrefabIdComponent;
+
+import helios.runtime.messaging.command.CommandHandlerRegistry;
+
 
 import helios.ecs.types.EntityHandle;
 import helios.core.types;
@@ -32,6 +35,7 @@ import helios.runtime.world.tags;
 
 import helios.runtime.pooling.EntityPoolSnapshot;
 
+using namespace helios::runtime::messaging::command;
 export namespace helios::runtime::pooling {
 
     /**
@@ -107,7 +111,7 @@ export namespace helios::runtime::pooling {
     class EntityPoolManager {
 
         using Handle_type = typename TEntity::Handle_type;
-        using EntityManager_type = TEntity::EntityManager_type;
+        using Entity_type = TEntity;
         
         /**
          * @brief Registry of EntityPools for entity recycling.
@@ -123,7 +127,7 @@ export namespace helios::runtime::pooling {
          * @details Set during `init()`. Used for cloning prefabs and looking up
          * Entities by their EntityHandle.
          */
-        helios::runtime::world::GameWorld* gameWorld_ = nullptr;
+        helios::runtime::world::EngineWorld* engineWorld_ = nullptr;
 
         /**
          * @brief Pending pool configurations awaiting initialization.
@@ -167,7 +171,7 @@ export namespace helios::runtime::pooling {
             const size_t space = used < entityPool->size() ? entityPool->size() - used : 0;
 
             for (size_t i = 0; i < space; i++) {
-                EntityManager_type go = gameWorld_->clone(entityPrefab);
+                Entity_type go = engineWorld_->clone(entityPrefab.handle());
                 go.setActive(false);
                 go.onRelease();
                 entityPool->addInactive(go.handle());
@@ -178,6 +182,9 @@ export namespace helios::runtime::pooling {
         
     public:
         using EngineRoleTag = helios::runtime::tags::ManagerRole;
+
+
+        explicit EntityPoolManager(helios::runtime::world::EngineWorld& engineWorld) : engineWorld_(&engineWorld) {}
 
         /**
          * @brief Registers a pool configuration for later initialization.
@@ -241,7 +248,7 @@ export namespace helios::runtime::pooling {
         ) {
             auto* entityPool = pool(entityPoolId);
             
-            auto worldGo = gameWorld_->findEntity(entityHandle);
+            auto worldGo = engineWorld_->findEntity(entityHandle);
 
             if (worldGo) {
                 if (entityPool->release(entityHandle)) {
@@ -277,7 +284,7 @@ export namespace helios::runtime::pooling {
 
             while (entityPool->acquire(entityHandle)) {
 
-                auto worldGo = gameWorld_->find(entityHandle);
+                auto worldGo = engineWorld_->find(entityHandle);
 
                 if (worldGo) {
                     worldGo->onAcquire();
@@ -302,9 +309,8 @@ export namespace helios::runtime::pooling {
          *
          * @param gameWorld The GameWorld to associate with this manager.
          */
-        void init(helios::runtime::world::GameWorld& gameWorld) {
+        void init(CommandHandlerRegistry& commandHandlerRegistry) {
 
-            gameWorld_ = &gameWorld;
             
             for (const auto& [entityPoolId, poolConfig] : poolConfigs_) {
 
@@ -313,7 +319,7 @@ export namespace helios::runtime::pooling {
 
                 pools_.addPool(entityPoolId, std::move(pool));
 
-                for (auto [entity, pic] : gameWorld.view<
+                for (auto [entity, pic] : engineWorld_.view<
                     Handle_type,
                     helios::runtime::pooling::components::PrefabIdComponent<Handle_type>>().whereEnabled()) {
                     if (pic->prefabId() == poolConfig->prefabId) {

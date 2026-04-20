@@ -22,7 +22,7 @@ export namespace helios::ui::layout::components {
      * The format string receives two integer arguments: minutes and seconds.
      *
      * @see TimeDisplayMode
-     * @see GameTimer2UiTextUpdateSystem
+     * @see Timer2UiTextUpdateSystem
      */
     template<typename THandle>
     class TimeFormatterComponent  {

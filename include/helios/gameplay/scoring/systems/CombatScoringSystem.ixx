@@ -70,6 +70,7 @@ export namespace helios::gameplay::scoring::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
         /**
@@ -77,7 +78,7 @@ export namespace helios::gameplay::scoring::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             for (auto& event : updateContext.readPass<HealthDepletedEvent<THandle>>()) {
 
@@ -118,7 +119,7 @@ export namespace helios::gameplay::scoring::systems {
                     svc->score().value())
                 );
 
-                updateContext.queueCommand<TCommandBuffer, UpdateScoreCommand>(
+                cmdBuffer.template add<UpdateScoreCommand>(
                     std::move(scoreContext)
                 );
             }

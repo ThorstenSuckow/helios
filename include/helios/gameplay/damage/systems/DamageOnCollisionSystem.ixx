@@ -72,6 +72,7 @@ export namespace helios::gameplay::damage::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
         /**
@@ -79,7 +80,7 @@ export namespace helios::gameplay::damage::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             auto eventPass = updateContext.readPass<
                 helios::physics::collision::events::SolidCollisionEvent<THandle>>();
@@ -141,7 +142,7 @@ export namespace helios::gameplay::damage::systems {
                     .damage = damageApplied
                 };
 
-                updateContext.queueCommand<TCommandBuffer, ApplyDamageCommand>(dc);
+                cmdBuffer.template add<ApplyDamageCommand>(dc);
 
             }
 

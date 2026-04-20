@@ -34,7 +34,7 @@ import helios.spatial.transform.components.RotationStateComponent;
 import helios.physics.collision.Bounds;
 import helios.scene.components.SceneNodeComponent;
 
-import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.pooling.EntityPoolManager;
 
@@ -50,6 +50,7 @@ import helios.math;
 
 import helios.runtime.world.tags.ManagerRole;
 
+using namespace helios::runtime::messaging::command;
 using namespace helios::gameplay::spawn::commands;
 using namespace helios::gameplay::spawn::types;
 export namespace helios::gameplay::spawn {
@@ -74,7 +75,7 @@ export namespace helios::gameplay::spawn {
      * @see ScheduledSpawnPlanCommand
      * @see SpawnProfile
      */
-    template<typename THandle>
+    template<typename THandle, typename TWorld>
     class SpawnManager {
 
 
@@ -86,7 +87,7 @@ export namespace helios::gameplay::spawn {
          * ScheduledSpawnPlan instances for execution. Multiple schedulers allow
          * grouping spawn rules by category (e.g., enemies, powerups, projectiles).
          */
-        std::vector<std::unique_ptr<helios::gameplay::spawn::scheduling::SpawnScheduler<THandle>>> spawnSchedulers_;
+        std::vector<std::unique_ptr<helios::gameplay::spawn::scheduling::SpawnScheduler<THandle, TWorld>>> spawnSchedulers_;
 
         /**
          * @brief Queue of pending spawn commands.
@@ -178,7 +179,7 @@ export namespace helios::gameplay::spawn {
 
 
 
-                const auto poolSnapshot = entityPoolManager_->poolSnapshot(entityPoolId);
+                const auto poolSnapshot = entityPoolManager_.poolSnapshot(entityPoolId);
 
                 if (amount == 0) {
                     assert(false && "Amount must not be 0");
@@ -192,7 +193,7 @@ export namespace helios::gameplay::spawn {
                 const auto spawnCount = std::min(amount, poolSnapshot.inactiveCount);
                 for (size_t i = 0; i < spawnCount; i++) {
 
-                    auto go = entityPoolManager_->acquire(entityPoolId);
+                    auto go = entityPoolManager_.acquire(entityPoolId);
                     assert(go && "Failed to acquire Entity");
 
                     auto* tsc = go->get<helios::spatial::transform::components::TranslationStateComponent>();
@@ -262,14 +263,14 @@ export namespace helios::gameplay::spawn {
                 const auto spawnProfile = it->second.get();
                 const auto entityPoolId = spawnProfile->entityPoolId;
 
-                if (entityPoolManager_->poolSnapshot(entityPoolId).inactiveCount == 0) {
+                if (entityPoolManager_.poolSnapshot(entityPoolId).inactiveCount == 0) {
                     /**
                      * @todo log
                      */
                     continue;
                 }
 
-                auto entity = entityPoolManager_->acquire(entityPoolId);
+                auto entity = entityPoolManager_.acquire(entityPoolId);
                 assert(entity && "Failed to acquire Entity");
 
                 auto* tsc = entity->template get<helios::spatial::transform::components::TranslationStateComponent<THandle>>();
@@ -330,7 +331,7 @@ export namespace helios::gameplay::spawn {
                 const auto spawnProfile = it->second.get();
                 auto entityPoolId = spawnProfile->entityPoolId;
 
-                entityPoolManager_->release(entityPoolId, despawnCommand.entityHandle());
+                entityPoolManager_.release(entityPoolId, despawnCommand.entityHandle());
 
             }
         }
@@ -342,7 +343,8 @@ export namespace helios::gameplay::spawn {
         /**
          * @brief Default constructor.
          */
-        SpawnManager() = default;
+        explicit SpawnManager(helios::runtime::pooling::EntityPoolManager<THandle> entityPoolManager)
+            : entityPoolManager_(entityPoolManager){}
 
         /**
          * @brief Submits a spawn command for deferred processing.
@@ -365,7 +367,7 @@ export namespace helios::gameplay::spawn {
          *
          * @param scheduler The scheduler to add. Ownership is transferred.
          */
-        void addScheduler(std::unique_ptr<helios::gameplay::spawn::scheduling::SpawnScheduler<THandle>> scheduler) {
+        void addScheduler(std::unique_ptr<helios::gameplay::spawn::scheduling::SpawnScheduler<THandle, TWorld>> scheduler) {
             spawnSchedulers_.push_back(std::move(scheduler));
         }
 
@@ -471,12 +473,9 @@ export namespace helios::gameplay::spawn {
          *
          * @param gameWorld Game world used for resource lookup and handler registration.
          */
-        void init(helios::runtime::world::GameWorld& gameWorld) noexcept {
+        void init(CommandHandlerRegistry& commandHandlerRegistry) noexcept {
 
-            assert(gameWorld.hasManager<helios::runtime::pooling::EntityPoolManager<THandle>>() && "Unexpected missing EntityPoolManager");
-            entityPoolManager_ = gameWorld.tryManager<helios::runtime::pooling::EntityPoolManager<THandle>>();
-
-            gameWorld.registerCommandHandler<
+            commandHandlerRegistry.registerHandler<
                 SpawnCommand<THandle>,
                 DespawnCommand<THandle>,
                 ScheduledSpawnPlanCommand<THandle>
@@ -512,7 +511,7 @@ export namespace helios::gameplay::spawn {
          *
          * @return Span of spawn scheduler unique pointers.
          */
-        std::span<std::unique_ptr<helios::gameplay::spawn::scheduling::SpawnScheduler<THandle>>> spawnSchedulers() {
+        std::span<std::unique_ptr<helios::gameplay::spawn::scheduling::SpawnScheduler<THandle, TWorld>>> spawnSchedulers() {
             return spawnSchedulers_;
         }
     };

@@ -64,13 +64,14 @@ export namespace helios::gameplay::lifecycle::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         /**
          * @brief Processes health depletion events and enqueues despawn commands.
          *
          * @param updateContext Current frame context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             auto events = updateContext.readPass<HealthDepletedEvent<THandle>>();
 
@@ -85,7 +86,7 @@ export namespace helios::gameplay::lifecycle::systems {
                         if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::Despawn)) {
                             if (auto* sbp = go->template get<SpawnedByProfileComponent>()) {
                                 assert(sbp->spawnProfileId().value() != 0 && "Entity has no SpawnProfileId.");
-                                updateContext.queueCommand<TCommandBuffer, DespawnCommand<THandle>>(go->handle(), sbp->spawnProfileId());
+                                cmdBuffer.template add<DespawnCommand<THandle>>(go->handle(), sbp->spawnProfileId());
                             } else {
                                 go->setActive(false);
                                 /**

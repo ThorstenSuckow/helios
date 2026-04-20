@@ -11,7 +11,7 @@ export module helios.runtime.world.concepts.IsSystemLike;
 import helios.runtime.concepts.HasTag;
 import helios.runtime.world.tags.SystemRole;
 
-import helios.runtime.world.UpdateContextFwd;
+import helios.runtime.world.UpdateContext;
 
 using namespace helios::runtime::concepts;
 export namespace helios::runtime::world::concepts {

@@ -11,6 +11,7 @@ export import helios.runtime.messaging.command.tags;
 export import helios.runtime.messaging.command.EngineCommandBuffer;
 export import helios.runtime.messaging.command.StateCommandBuffer;
 export import helios.runtime.messaging.command.RenderCommandBuffer;
+export import helios.runtime.messaging.command.PlatformCommandBuffer;
 export import helios.runtime.messaging.command.NullCommandBuffer;
 export import helios.runtime.messaging.command.TypedCommandBuffer;
 export import helios.runtime.messaging.command.CommandBuffer;

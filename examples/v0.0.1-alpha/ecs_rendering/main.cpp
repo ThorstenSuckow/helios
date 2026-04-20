@@ -4,7 +4,7 @@ import helios.ext;
 import helios.examples.ecs_rendering.GameLoop;
 
 #include "Namespaces.h"
-#include <memory>
+
 
 
 int main() {
@@ -31,7 +31,7 @@ int main() {
     // ==========================================================
 
     // inputmanager
-    auto deadzoneStrategy = std::make_unique<RadialDeadzoneStrategy>();
+    auto deadzoneStrategy = RadialDeadzoneStrategy();
     /*const auto inputManager = std::make_unique<InputManager>(
         std::make_unique<helios::ext::glfw::input::GLFWInputAdapter>(std::move(deadzoneStrategy))
     );*/
@@ -155,8 +155,7 @@ int main() {
     // ========================================
     float DELTA_TIME = 0.0f;
 
-    auto stopwatch = std::make_unique<Stopwatch>();
-    auto framePacer = FramePacer(std::move(stopwatch));
+    auto framePacer = FramePacer();
     framePacer.setTargetFps(0.0f);
     FrameStats frameStats{};
 

@@ -21,7 +21,7 @@ import helios.runtime.messaging.command.CommandHandlerRegistry;
 
 import helios.runtime.world.ManagerRegistry;
 
-import helios.runtime.concepts;
+import helios.runtime.world.concepts;
 import helios.runtime.messaging.command.concepts;
 import helios.runtime.world.types;
 
@@ -185,6 +185,15 @@ export namespace helios::runtime::world {
          */
         std::span<CommandBuffer*> commandBuffers() noexcept {
             return commandBufferRegistry_.items();
+        }
+
+        /**
+         * @brief Returns direct access to the underlying command-buffer registry.
+         *
+         * @return Reference to the internal CommandBufferRegistry.
+         */
+       CommandBufferRegistry& commandBufferRegistry() noexcept {
+            return commandBufferRegistry_;
         }
     };
 }

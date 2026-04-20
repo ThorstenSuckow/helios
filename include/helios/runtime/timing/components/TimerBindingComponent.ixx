@@ -1,40 +1,40 @@
 /**
- * @file GameTimerBindingComponent.ixx
+ * @file TimerBindingComponent.ixx
  * @brief Component that observes a specific game timer.
  */
 module;
 
-export module helios.gameplay.timing.components.GameTimerBindingComponent;
+export module helios.runtime.timing.components.TimerBindingComponent;
 
-import helios.gameplay.timing.types;
+import helios.runtime.timing.types;
 
-import helios.gameplay.timing.types.GameTimerId;
+import helios.runtime.timing.types.TimerId;
 import helios.core.types;
 
-using namespace helios::gameplay::timing::types;
-using namespace helios::gameplay::timing::types;
+using namespace helios::runtime::timing::types;
+using namespace helios::runtime::timing::types;
 
-export namespace helios::gameplay::timing::components {
+export namespace helios::runtime::timing::components {
 
     /**
-     * @brief Component that tracks the revision of a specific GameTimer.
+     * @brief Component that tracks the revision of a specific Timer.
      *
-     * Entities with this component observe a GameTimer identified by its
-     * GameTimerId. The stored revision can be compared against the timer's
+     * Entities with this component observe a Timer identified by its
+     * TimerId. The stored revision can be compared against the timer's
      * current revision to detect updates.
      *
-     * @see GameTimer
-     * @see GameTimerUpdateSystem
+     * @see Timer
+     * @see TimerUpdateSystem
      */
     template<typename THandle>
-    class GameTimerBindingComponent {
+    class TimerBindingComponent {
 
     private:
 
         /**
          * @brief The id of the observed game timer.
          */
-        GameTimerId gameTimerId_;
+        TimerId timerId_;
 
         /**
          * @brief Last known revision of the observed timer.
@@ -45,36 +45,36 @@ export namespace helios::gameplay::timing::components {
     public:
 
 
-        GameTimerBindingComponent() = default;
+        TimerBindingComponent() = default;
 
         /**
          * @brief Copy constructor.
          *
          * @param other The component to copy from.
          */
-        GameTimerBindingComponent(const GameTimerBindingComponent& other) :
-            gameTimerId_(other.gameTimerId_) {}
+        TimerBindingComponent(const TimerBindingComponent& other) :
+            timerId_(other.timerId_) {}
 
-        GameTimerBindingComponent& operator=(const GameTimerBindingComponent&) = default;
-        GameTimerBindingComponent(GameTimerBindingComponent&&) noexcept = default;
-        GameTimerBindingComponent& operator=(GameTimerBindingComponent&&) noexcept = default;
+        TimerBindingComponent& operator=(const TimerBindingComponent&) = default;
+        TimerBindingComponent(TimerBindingComponent&&) noexcept = default;
+        TimerBindingComponent& operator=(TimerBindingComponent&&) noexcept = default;
 
         /**
          * @brief Sets the id of the game timer to observe.
          *
-         * @param gameTimerId The timer id.
+         * @param timerId The timer id.
          */
-        void setGameTimerId(const helios::gameplay::timing::types::GameTimerId gameTimerId) noexcept {
-            gameTimerId_ = gameTimerId;
+        void setTimerId(const helios::runtime::timing::types::TimerId timerId) noexcept {
+            timerId_ = timerId;
         }
 
         /**
          * @brief Returns the observed game timer id.
          *
-         * @return The GameTimerId.
+         * @return The TimerId.
          */
-        [[nodiscard]] helios::gameplay::timing::types::GameTimerId gameTimerId() const noexcept {
-            return gameTimerId_;
+        [[nodiscard]] helios::runtime::timing::types::TimerId timerId() const noexcept {
+            return timerId_;
         }
 
         /**

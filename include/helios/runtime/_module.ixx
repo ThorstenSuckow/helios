@@ -9,3 +9,4 @@ export import helios.runtime.world;
 export import helios.runtime.pooling;
 export import helios.runtime.messaging;
 export import helios.runtime.concepts;
+export import helios.runtime.timing;

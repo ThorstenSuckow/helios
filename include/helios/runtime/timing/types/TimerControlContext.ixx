@@ -5,19 +5,19 @@
 module;
 
 
-export module helios.gameplay.timing.types.TimerControlContext;
+export module helios.runtime.timing.types.TimerControlContext;
 
-import helios.gameplay.timing.types.TimerState;
-import helios.gameplay.timing.types.GameTimerId;
+import helios.runtime.timing.types.TimerState;
+import helios.runtime.timing.types.TimerId;
 
-using namespace helios::gameplay::timing::types;
+using namespace helios::runtime::timing::types;
 
-export namespace helios::gameplay::timing::types {
+export namespace helios::runtime::timing::types {
 
     /**
      * @brief Context describing a requested timer state transition.
      *
-     * Carries the target TimerState and the GameTimerId of the timer
+     * Carries the target TimerState and the TimerId of the timer
      * to be controlled.
      *
      * @see TimerControlCommand
@@ -28,7 +28,7 @@ export namespace helios::gameplay::timing::types {
         /**
          * @brief The id of the timer to control.
         */
-        const GameTimerId gameTimerId;
+        const TimerId timerId;
 
         /**
          * @brief The target state for the timer.

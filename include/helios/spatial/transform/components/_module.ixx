@@ -5,6 +5,7 @@
 export module helios.spatial.transform.components;
 
 export import helios.spatial.transform.components.ScaleStateComponent;
+export import helios.spatial.transform.components.SizeComponent;
 export import helios.spatial.transform.components.DimensionComponent;
 export import helios.spatial.transform.components.ComposeTransformComponent;
 export import helios.spatial.transform.components.TranslationStateComponent;

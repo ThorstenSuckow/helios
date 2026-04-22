@@ -24,6 +24,7 @@ import helios.ui.widgets.components.UiActionComponent;
 import helios.ui.widgets.commands.UiActionCommand;
 
 import helios.runtime.world;
+import helios.runtime.world.tags.SystemRole;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
@@ -49,9 +50,7 @@ using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::ui::widgets::components;
 using namespace helios::ecs::components;
 using namespace helios::input::gamepad;
-
-import helios.runtime.world.tags.SystemRole;
-
+using namespace helios::ui::widgets::commands;
 export namespace helios::ui::widgets::systems {
 
     /**
@@ -98,10 +97,10 @@ export namespace helios::ui::widgets::systems {
                 return;
             }
 
-            UiStateComponent* usc = nullptr;
+            UiStateComponent<THandle>* usc = nullptr;
 
             if (index != prevIndex) {
-                usc = updateContext.find(menuItems[prevIndex])->get<UiStateComponent>();
+                usc = updateContext.find(menuItems[prevIndex])->template get<UiStateComponent>();
                 if (usc) {
                     usc->setSelected(false);
                 }
@@ -109,7 +108,7 @@ export namespace helios::ui::widgets::systems {
             mc->setSelectedIndex(index);
 
             // update ui state
-            usc = updateContext.find(menuItems[index])->get<UiStateComponent>();
+            usc = updateContext.find(menuItems[index])->template get<UiStateComponent>();
             if (usc) {
                 usc->setSelected(true);
             }
@@ -121,6 +120,7 @@ export namespace helios::ui::widgets::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
         /**
@@ -132,7 +132,7 @@ export namespace helios::ui::widgets::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             MenuComponent<THandle>* focusedMenu = nullptr;
 
@@ -140,8 +140,8 @@ export namespace helios::ui::widgets::systems {
                 THandle,
                 UiFocusComponent<THandle>, HierarchyComponent<THandle>, Active<THandle>
             >().whereEnabled()) {
-                assert(hc->parent() && updateContext.find(*hc->parent()) && updateContext.find(*hc->parent())->get<MenuComponent<THandle>>() && "Item expected to have parent menu component.");
-                focusedMenu = updateContext.find(*hc->parent())->get<MenuComponent<THandle>>();
+                assert(hc->parent() && updateContext.find(*hc->parent()) && updateContext.find(*hc->parent())->template get<MenuComponent<THandle>>() && "Item expected to have parent menu component.");
+                focusedMenu = updateContext.find(*hc->parent())->template get<MenuComponent<THandle>>();
                 break;
             }
 
@@ -174,12 +174,11 @@ export namespace helios::ui::widgets::systems {
             }
 
             if (gamepadState.isButtonPressed(GamepadInput::A)) {
-                auto* uac = updateContext.find(focusedMenu->menuItems()[focusedMenu->selectedIndex()])->get<
-                    helios::ui::widgets::components::UiActionComponent<THandle>
-                >();
+                auto* uac = updateContext.find(
+                    focusedMenu->menuItems()[focusedMenu->selectedIndex()])->template get<UiActionComponent<THandle>>();
 
                 if (uac) {
-                    updateContext.queueCommand<TCommandBuffer, helios::ui::widgets::commands::UiActionCommand>(
+                    cmdBuffer.template add<UiActionCommand>(
                         focusedMenu->menuItems()[focusedMenu->selectedIndex()], uac->actionId()
                     );
                 }

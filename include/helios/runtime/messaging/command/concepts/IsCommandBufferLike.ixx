@@ -11,9 +11,7 @@ export module helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 import helios.runtime.concepts.HasTag;
 import helios.runtime.concepts.HasClear;
 
-
-import helios.runtime.world.GameWorldFwd;
-import helios.runtime.world.UpdateContextFwd;
+import helios.runtime.world.UpdateContext;
 
 import helios.runtime.messaging.command.tags.CommandBufferRole;
 
@@ -37,7 +35,7 @@ export namespace helios::runtime::messaging::command::concepts {
      * @see HasClear
      */
     template<class T>
-    concept IsCommandBufferLike = requires(T& t, GameWorld& gameWorld, UpdateContext& updateContext) {
-        {t.flush(gameWorld, updateContext) } -> std::same_as<void>;
+    concept IsCommandBufferLike = requires(T& t, UpdateContext& updateContext) {
+        {t.flush(updateContext) } -> std::same_as<void>;
     } && HasClear<T> && HasTag<T, CommandBufferRole>;
 }

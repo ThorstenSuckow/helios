@@ -15,7 +15,6 @@ import helios.gameplay.spawn.scheduling.RuleProcessor;
 import helios.runtime.world.UpdateContext;
 import helios.gameplay.spawn.SpawnManager;
 import helios.gameplay.spawn.types.SpawnContext;
-import helios.runtime.world.GameWorld;
 import helios.gameplay.spawn.scheduling.SpawnPlan;
 import helios.gameplay.spawn.scheduling.ScheduledSpawnPlan;
 import helios.gameplay.spawn.types;
@@ -44,7 +43,7 @@ export namespace helios::gameplay::spawn::scheduling {
      * @see DefaultSpawnScheduler
      * @see CyclicSpawnScheduler
      */
-    template<typename THandle>
+    template<typename THandle, typename TWorld>
     class DefaultRuleProcessor : public RuleProcessor<THandle> {
 
     public:
@@ -65,15 +64,15 @@ export namespace helios::gameplay::spawn::scheduling {
          * @return SpawnPlan indicating how many entities to spawn.
          */
         SpawnPlan processRule(
-            const GameWorld& gameWorld,
+            const TWorld& world,
             const UpdateContext& updateContext,
             const SpawnContext<THandle>& spawnContext,
             const SpawnProfileId spawnProfileId,
             SpawnRule<THandle>& spawnRule,
             SpawnRuleState& spawnRuleState
         ) noexcept override {
-            const auto* poolManager  = gameWorld.tryManager<helios::runtime::pooling::EntityPoolManager<THandle>>();
-            const auto* spawnManager = gameWorld.tryManager<helios::gameplay::spawn::SpawnManager<THandle>>();
+            const auto* poolManager  = world.template tryManager<helios::runtime::pooling::EntityPoolManager<THandle>>();
+            const auto* spawnManager = world.template tryManager<helios::gameplay::spawn::SpawnManager<THandle, TWorld>>();
 
             const auto* spawnProfile = spawnManager->spawnProfile(spawnProfileId);
             assert(spawnProfile != nullptr);
@@ -88,7 +87,7 @@ export namespace helios::gameplay::spawn::scheduling {
             return spawnRule.evaluate(
                 entityPoolId, poolSnapshot,
                 spawnRuleState,
-                gameWorld,
+                world,
                 updateContext
             );
         }

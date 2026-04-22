@@ -52,6 +52,8 @@ export namespace helios::platform::lifecycle::systems {
 
     public:
 
+        using CommandBuffer_type = TCommandBuffer;
+
         /**
          * @brief Engine role marker used by runtime registries.
          */
@@ -61,11 +63,12 @@ export namespace helios::platform::lifecycle::systems {
          * @brief Checks window activity and queues shutdown when the set is empty.
          *
          * @param updateContext Frame-local update context.
+         * @param cmdBuffer Command buffer for submitting shutdown commands.
          */
-        void update(UpdateContext& updateContext) noexcept {
+        void update(UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             if (updateContext.view<THandle, WindowComponent<THandle>, Active<THandle>>().whereEnabled().empty()) {
-               updateContext.queueCommand<TCommandBuffer, ShutdownCommand>();
+               cmdBuffer.template add<ShutdownCommand>();
             }
 
 

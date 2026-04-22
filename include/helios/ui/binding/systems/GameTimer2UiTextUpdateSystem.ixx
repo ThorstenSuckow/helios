@@ -1,5 +1,5 @@
 /**
- * @file GameTimer2UiTextUpdateSystem.ixx
+ * @file Timer2UiTextUpdateSystem.ixx
  * @brief System for binding game timer values to UI text components.
  */
 module;
@@ -9,13 +9,14 @@ module;
 
 
 
-export module helios.ui.binding.systems.GameTimer2UiTextUpdateSystem;
+export module helios.ui.binding.systems.Timer2UiTextUpdateSystem;
 
-import helios.gameplay.timing.TimerManager;
-import helios.gameplay.timing.components;
+import helios.runtime.timing.TimerManager;
+import helios.runtime.timing.components;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
+import helios.runtime.world.tags.SystemRole;
 
 
 import helios.ui.widgets;
@@ -23,25 +24,24 @@ import helios.ui.layout;
 
 import helios.ecs.components.Active;
 
-using namespace helios::gameplay::timing;
+using namespace helios::runtime::timing;
 
-import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::ui::binding::systems {
 
     /**
      * @brief System for binding game timer values to UI text components.
      *
-     * Queries entities with GameTimerBindingComponent, TimeFormatterComponent,
+     * Queries entities with TimerBindingComponent, TimeFormatterComponent,
      * and UiTextComponent. When the observed timer's revision changes, the
      * formatted time string is propagated to the text component for display.
      *
      * @see TimerManager
-     * @see GameTimerBindingComponent
+     * @see TimerBindingComponent
      * @see TimeFormatterComponent
      */
     template<typename THandle>
-    class GameTimer2UiTextUpdateSystem {
+    class Timer2UiTextUpdateSystem {
 
         /**
          * @brief Reference to the TimerManager that owns the game timers.
@@ -56,7 +56,7 @@ export namespace helios::ui::binding::systems {
          *
          * @param timerManager The TimerManager providing game timer state.
          */
-        explicit GameTimer2UiTextUpdateSystem(TimerManager& timerManager)
+        explicit Timer2UiTextUpdateSystem(TimerManager& timerManager)
         : timerManager_(timerManager) {}
 
 
@@ -74,13 +74,13 @@ export namespace helios::ui::binding::systems {
 
             for (auto [entity, gtc, dfc, txt, active] : updateContext.view<
                 THandle,
-                helios::gameplay::timing::components::GameTimerBindingComponent<THandle>,
+                helios::runtime::timing::components::TimerBindingComponent<THandle>,
                 helios::ui::layout::components::TimeFormatterComponent<THandle>,
                 helios::ui::widgets::components::UiTextComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
-                if (const auto* timer = timerManager_.gameTimer(gtc->gameTimerId());
+                if (const auto* timer = timerManager_.getTimer(gtc->timerId());
                     timer->timerRevision() != gtc->timerRevision()) {
                     txt->setText(dfc->format(timer->elapsed(), timer->duration()));
                     gtc->setTimerRevision(timer->timerRevision());

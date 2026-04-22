@@ -21,6 +21,8 @@ import helios.gameplay.scoring.types;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
+
+import helios.runtime.world.tags.SystemRole;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
@@ -49,7 +51,6 @@ using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::messaging::command::concepts;
 
 #define HELIOS_LOG_SCOPE "helios::gameplay::scoring::systems::CombatScoringSystem"
-import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::scoring::systems {
 
@@ -70,6 +71,7 @@ export namespace helios::gameplay::scoring::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
         /**
@@ -77,7 +79,7 @@ export namespace helios::gameplay::scoring::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             for (auto& event : updateContext.readPass<HealthDepletedEvent<THandle>>()) {
 
@@ -96,12 +98,12 @@ export namespace helios::gameplay::scoring::systems {
                     continue;
                 }
 
-                auto* svc = enemy->get<ScoreValueComponent<KillReward>>();
+                auto* svc = enemy->template get<ScoreValueComponent<THandle, KillReward>>();
                 if (!svc) {
                     continue;
                 }
 
-                auto* scc = instigator->get<ScorePoolComponent>();
+                auto* scc = instigator->template get<ScorePoolComponent>();
                 if (!scc) {
                     continue;
                 }
@@ -118,7 +120,7 @@ export namespace helios::gameplay::scoring::systems {
                     svc->score().value())
                 );
 
-                updateContext.queueCommand<TCommandBuffer, UpdateScoreCommand>(
+                cmdBuffer.template add<UpdateScoreCommand>(
                     std::move(scoreContext)
                 );
             }

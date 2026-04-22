@@ -80,7 +80,7 @@ export namespace helios::gameplay::combat::commands {
                 return;
             }
 
-            auto* aimComponent = entity->get<helios::gameplay::combat::components::Aim2DComponent<THandle>>();
+            auto* aimComponent = entity->template get<helios::gameplay::combat::components::Aim2DComponent<THandle>>();
 
             if (aimComponent) {
                 aimComponent->aim(direction_, freqFactor_);

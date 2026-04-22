@@ -5,10 +5,11 @@
 module;
 
 #include <vector>
+#include <cassert>
 
 export module helios.gameplay.lifecycle.WorldLifecycleManager;
 
-import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.lifecycle.types;
@@ -18,7 +19,7 @@ import helios.runtime.world.tags.ManagerRole;
 using namespace helios::runtime::world;
 using namespace helios::gameplay::lifecycle::commands;
 using namespace helios::gameplay::lifecycle::types;
-
+using namespace helios::runtime::messaging::command;
 export namespace helios::gameplay::lifecycle {
 
     /**
@@ -44,10 +45,6 @@ export namespace helios::gameplay::lifecycle {
          */
         std::vector<WorldLifecycleCommand> pending_;
 
-        /**
-         * @brief Cached pointer to the GameWorld, set during init().
-         */
-        GameWorld* gameWorld_ = nullptr;
 
     public:
 
@@ -70,9 +67,8 @@ export namespace helios::gameplay::lifecycle {
          *
          * @param gameWorld The GameWorld to register with.
          */
-        void init(GameWorld& gameWorld)  {
-            gameWorld_ = &gameWorld;
-            gameWorld.registerCommandHandler<WorldLifecycleCommand>(*this);
+        void init(CommandHandlerRegistry& commandHandlerRegistry)  {
+            commandHandlerRegistry.registerHandler<WorldLifecycleCommand>(*this);
         }
 
         /**
@@ -86,7 +82,7 @@ export namespace helios::gameplay::lifecycle {
          * @param updateContext The current frame's update context.
          */
         void flush(UpdateContext& updateContext) noexcept  {
-            if (pending_.empty() || gameWorld_ == nullptr) {
+            if (pending_.empty()) {
                 return;
             }
 
@@ -96,7 +92,11 @@ export namespace helios::gameplay::lifecycle {
             for (const auto& cmd : queue) {
                 switch (cmd.action()) {
                     case WorldLifecycleAction::Reset:
-                        gameWorld_->reset();
+                        /**
+                         * @todo make GameWorkd CommandHandler for WorldLifecycleAction::Reset
+                         *
+                         */
+                        assert(false && "Needs to call GameWorld reset()");
                         // reset complete, do not process further commands.
                         return;
                 }

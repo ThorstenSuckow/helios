@@ -47,7 +47,7 @@ export namespace helios::tooling {
         /**
          * @brief The stopwatch used for high-resolution time measurement.
          */
-        std::unique_ptr<helios::util::time::Stopwatch> stopwatch_;
+        helios::util::time::Stopwatch stopwatch_{};
 
         /**
          * @brief The target frame rate in Frames Per Second (FPS).
@@ -55,18 +55,6 @@ export namespace helios::tooling {
         float targetFps_ = 0.0f;
 
     public:
-        /**
-         * @brief Constructs a FramePacer with the given stopwatch.
-         *
-         * Initializes a new FramePacer instance in unlimited FPS mode (targetFps = 0.0f).
-         *
-         * @param stopwatch Unique pointer to a valid `Stopwatch` instance. Ownership
-         * is transferred to the FramePacer.
-         */
-        explicit FramePacer(std::unique_ptr<helios::util::time::Stopwatch> stopwatch) :
-            stopwatch_(std::move(stopwatch)) {
-            assert(stopwatch_ && "FramePacer requires a valid Stopwatch (non-null)");
-        }
 
         /**
          * @brief Sets the desired target frame rate.
@@ -101,7 +89,7 @@ export namespace helios::tooling {
          * before any game logic, physics, or rendering operations.
          */
         void beginFrame() {
-            stopwatch_->start();
+            stopwatch_.start();
         }
 
         /**
@@ -121,7 +109,7 @@ export namespace helios::tooling {
          * to improve timing precision and mitigate OS scheduler wake-up latency.
          */
         [[nodiscard]] FrameStats sync() {
-            float workTime = stopwatch_->elapsedSeconds();
+            float workTime = stopwatch_.elapsedSeconds();
 
             float waitTime = 0.0f;
             float totalTime = workTime;
@@ -132,7 +120,7 @@ export namespace helios::tooling {
                     auto requestedWaitTime = targetTime - workTime;
                     auto sleepDuration = std::chrono::duration<float>(requestedWaitTime);
                     std::this_thread::sleep_for(sleepDuration);
-                    totalTime = stopwatch_->elapsedSeconds();
+                    totalTime = stopwatch_.elapsedSeconds();
                     waitTime = totalTime - workTime;
                 }
             }

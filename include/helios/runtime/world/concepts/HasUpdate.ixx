@@ -8,7 +8,7 @@ module;
 
 export module helios.runtime.world.concepts.HasUpdate;
 
-import helios.runtime.world.UpdateContextFwd;
+import helios.runtime.world.UpdateContext;
 
 export namespace helios::runtime::world::concepts {
 

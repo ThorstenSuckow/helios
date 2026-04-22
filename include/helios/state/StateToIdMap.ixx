@@ -11,6 +11,7 @@ module;
 #include <bit>
 #include <algorithm>
 #include <cstddef>
+#include <utility>
 
 export module helios.state.StateToIdMap;
 

@@ -1,30 +1,30 @@
 /**
- * @file GameTimer.ixx
+ * @file Timer.ixx
  * @brief A game timer that tracks elapsed time and supports state transitions.
  */
 module;
 
-export module helios.gameplay.timing.GameTimer;
+export module helios.runtime.timing.Timer;
 
-import helios.gameplay.timing.types.GameTimerId;
+import helios.runtime.timing.types.TimerId;
 
-import helios.gameplay.timing.types;
+import helios.runtime.timing.types;
 
-using namespace helios::gameplay::timing::types;
-using namespace helios::gameplay::timing::types;
+using namespace helios::runtime::timing::types;
+using namespace helios::runtime::timing::types;
 
-export namespace helios::gameplay::timing {
+export namespace helios::runtime::timing {
 
     /**
-     * @brief A game timer identified by a GameTimerId.
+     * @brief A game timer identified by a TimerId.
      *
      * Tracks elapsed time while in the Running state. Each update increments
      * a revision counter that observers can use to detect changes.
      *
      * @see TimerManager
-     * @see GameTimerBindingComponent
+     * @see TimerBindingComponent
      */
-    class GameTimer {
+    class Timer {
 
         /**
          * @brief Monotonically increasing revision counter, incremented on each update.
@@ -34,7 +34,7 @@ export namespace helios::gameplay::timing {
         /**
          * @brief Unique identifier for this timer.
          */
-        GameTimerId gameTimerId_;
+        TimerId timerId_;
 
         /**
          * @brief Accumulated elapsed time in seconds.
@@ -54,20 +54,20 @@ export namespace helios::gameplay::timing {
     public:
 
         /**
-         * @brief Constructs a GameTimer with the given identifier.
+         * @brief Constructs a Timer with the given identifier.
          *
-         * @param gameTimerId The unique identifier for this timer.
+         * @param timerId The unique identifier for this timer.
          */
-        explicit GameTimer(const helios::gameplay::timing::types::GameTimerId gameTimerId)
-            : gameTimerId_{gameTimerId} {}
+        explicit Timer(const helios::runtime::timing::types::TimerId timerId)
+            : timerId_{timerId} {}
 
         /**
          * @brief Returns the timer identifier.
          *
-         * @return The GameTimerId assigned to this timer.
+         * @return The TimerId assigned to this timer.
          */
-        [[nodiscard]] helios::gameplay::timing::types::GameTimerId gameTimerId() const noexcept {
-            return gameTimerId_;
+        [[nodiscard]] helios::runtime::timing::types::TimerId timerId() const noexcept {
+            return timerId_;
         }
 
         /**

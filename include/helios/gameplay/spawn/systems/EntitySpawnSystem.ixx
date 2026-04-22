@@ -36,7 +36,7 @@ export namespace helios::gameplay::spawn::systems {
     class EntitySpawnSystem {
 
 
-        helios::gameplay::spawn::SpawnManager<THandle>& spawnManager_;
+        helios::gameplay::spawn::SpawnManager<THandle, TWorld>& spawnManager_;
 
        TWorld* world_ = nullptr;
 
@@ -44,14 +44,11 @@ export namespace helios::gameplay::spawn::systems {
 
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
-        explicit EntitySpawnSystem(helios::gameplay::spawn::SpawnManager<THandle>& spawnManager) noexcept
-        : spawnManager_{spawnManager} {}
+        explicit EntitySpawnSystem(helios::gameplay::spawn::SpawnManager<THandle, TWorld>& spawnManager, TWorld& tworld) noexcept
+        : spawnManager_{spawnManager}, world_(&tworld) {}
 
-
-        void init(TWorld& world) noexcept {
-            world_ = &world;
-        }
 
         /**
          * @brief Processes spawn scheduling and enqueues spawn commands.
@@ -64,7 +61,7 @@ export namespace helios::gameplay::spawn::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             const auto& events = updateContext.readFrame<
                 helios::gameplay::spawn::events::SpawnPlanCommandExecutedEvent
@@ -81,14 +78,12 @@ export namespace helios::gameplay::spawn::systems {
                     spawnScheduler->commit(event.spawnRuleId, event.spawnCount);
                 }
 
-                spawnScheduler->evaluate(*world_, updateContext);
+                spawnScheduler->evaluate(world_, updateContext);
 
                 auto scheduledPlans = spawnScheduler->drainScheduledPlans();
 
                 for (auto& plan : scheduledPlans) {
-                    updateContext.queueCommand<TCommandBuffer,
-                        helios::gameplay::spawn::commands::ScheduledSpawnPlanCommand<THandle>
-                    >(
+                    cmdBuffer.template add<helios::gameplay::spawn::commands::ScheduledSpawnPlanCommand<THandle>>(
                         plan.spawnProfileId, plan.spawnPlan, plan.spawnContext
                     );
                 }

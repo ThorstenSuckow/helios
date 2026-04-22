@@ -8,7 +8,7 @@ module;
 
 export module helios.gameplay.health.HealthManager;
 
-import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 import helios.runtime.world.UpdateContext;
 
 import helios.gameplay.damage.commands.ApplyDamageCommand;
@@ -100,7 +100,7 @@ export namespace helios::gameplay::health {
 
                 auto target = updateContext.find(interactionContext.target);
 
-                auto* hc = target->get<HealthComponent>();
+                auto* hc = target->template get<HealthComponent>();
                 if (!hc) {
                     continue;
                 }
@@ -109,7 +109,7 @@ export namespace helios::gameplay::health {
                 auto damageApplied = damageContext.damage;
                 hc->takeDamage(damageApplied);
 
-                auto* lac = target->get<LastDamageComponent>();
+                auto* lac = target->template get<LastDamageComponent>();
                 if (lac && damageApplied > 0) {
                     lac->setDamageContext(damageContext);
                 }
@@ -125,7 +125,7 @@ export namespace helios::gameplay::health {
                     auto healthDepletedBehavior = hc->healthDepletedBehavior();
 
                     if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::DeadTag)) {
-                        target->add<DeadTagComponent>();
+                        target->template add<DeadTagComponent>();
                     }
 
                     updateContext.pushPass<HealthDepletedEvent>(target->entityHandle(), damageContext);
@@ -152,10 +152,10 @@ export namespace helios::gameplay::health {
         /**
          * @brief Registers this manager as the damage command handler.
          *
-         * @param gameWorld The game world to register with.
+         * @param commandHandlerRegistry The command-handler registry to register with.
          */
-        void init(GameWorld& gameWorld) {
-            gameWorld.template registerCommandHandler<ApplyDamageCommand<THandle>>(*this);
+        void init(helios::runtime::messaging::command::CommandHandlerRegistry& commandHandlerRegistry) {
+            commandHandlerRegistry.registerHandler<ApplyDamageCommand<THandle>>(*this);
         }
 
         /**

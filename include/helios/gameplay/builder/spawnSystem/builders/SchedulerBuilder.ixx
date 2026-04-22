@@ -27,13 +27,13 @@ export namespace helios::gameplay::builder::spawnSystem::builders {
      * Provides factory methods for creating default and cyclic
      * schedulers, and adding rules to them via fluent SchedulerConfig.
      */
-    template<typename THandle>
+    template<typename THandle, typename TWorld>
     class SchedulerBuilder {
 
         /**
          * @brief The spawn manager to register schedulers with.
          */
-        helios::gameplay::spawn::SpawnManager<THandle>& spawnManager_;
+        helios::gameplay::spawn::SpawnManager<THandle, TWorld>& spawnManager_;
 
         /**
          * @brief Adds rules from a parameter pack to a scheduler.
@@ -58,7 +58,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders {
          * @param spawnManager The spawn manager to register schedulers with.
          */
         explicit SchedulerBuilder(
-            helios::gameplay::spawn::SpawnManager<THandle>& spawnManager
+            helios::gameplay::spawn::SpawnManager<THandle, TWorld>& spawnManager
         ) : spawnManager_(spawnManager) {}
 
         /**
@@ -70,7 +70,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders {
         template<typename... Configs>
         void defaultScheduler(Configs&&... configs) {
             auto scheduler = std::make_unique<
-                helios::gameplay::spawn::scheduling::DefaultSpawnScheduler<THandle>>();
+                helios::gameplay::spawn::scheduling::DefaultSpawnScheduler<THandle, TWorld>>();
 
             addRules(*scheduler, std::forward<Configs>(configs)...);
 
@@ -90,7 +90,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders {
             constexpr std::size_t N = sizeof...(Configs);
 
             auto scheduler = std::make_unique<
-                helios::gameplay::spawn::scheduling::CyclicSpawnScheduler<THandle, N>>();
+                helios::gameplay::spawn::scheduling::CyclicSpawnScheduler<THandle, TWorld, N>>();
 
             addRules(*scheduler, std::forward<Configs>(configs)...);
 
@@ -103,7 +103,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders {
          * @param scheduler Ownership is transferred.
          */
         void customScheduler(
-            std::unique_ptr<helios::gameplay::spawn::scheduling::SpawnScheduler<THandle>> scheduler
+            std::unique_ptr<helios::gameplay::spawn::scheduling::SpawnScheduler<THandle, TWorld>> scheduler
         ) {
             spawnManager_.addScheduler(std::move(scheduler));
         }

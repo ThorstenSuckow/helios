@@ -13,7 +13,7 @@ export module helios.runtime.world.System;
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
 
-import helios.runtime.concepts;
+import helios.runtime.world.concepts;
 
 using namespace helios::runtime::world;
 using namespace helios::runtime::world::concepts;
@@ -27,9 +27,8 @@ export namespace helios::runtime::world {
      * system type. Concrete systems are plain classes that satisfy
      * `IsSystemLike<T>` and do not inherit from System.
      *
-     * The internal `Concept` base defines the virtual interface, and
+     * The internal `Concept` base defines the virtual update interface, and
      * `Model<T>` adapts the concrete type T, owning it by value.
-     * `init()` is conditionally forwarded if `HasInit<T>` is satisfied.
      *
      * If a system exposes `CommandBuffer_type`, `System` calls
      * `update(UpdateContext&, CommandBuffer_type&)` and uses the injected
@@ -38,7 +37,6 @@ export namespace helios::runtime::world {
      * System is move-only (non-copyable).
      *
      * @see IsSystemLike
-     * @see HasInit
      * @see SystemRegistry
      *
      * @see https://en.wikibooks.org/wiki/More_C%2B%2B_Idioms/Type_Erasure
@@ -54,7 +52,6 @@ export namespace helios::runtime::world {
 
             virtual ~Concept() = default;
             virtual void update(UpdateContext& updateContext) noexcept = 0;
-            virtual void init(GameWorld& gameWorld) noexcept = 0;
             virtual void* underlying() noexcept = 0;
             virtual const void* underlying() const noexcept = 0;
         };
@@ -79,12 +76,6 @@ export namespace helios::runtime::world {
                     system_.update(ctx, *static_cast<BufT*>(injectedBuffer_));
                 } else {
                     system_.update(ctx);
-                }
-            }
-
-            void init(GameWorld& gameWorld) noexcept override {
-                if constexpr (HasInit<T>) {
-                    system_.init(gameWorld);
                 }
             }
 
@@ -141,20 +132,6 @@ export namespace helios::runtime::world {
             pimpl_->update(updateContext);
         }
 
-        /**
-         * @brief Delegates to the wrapped system's `init()` method, if present.
-         *
-         * @details If the concrete type satisfies `HasInit<T>`, its `init()` is
-         * called. Otherwise this is a no-op.
-         *
-         * @param gameWorld The GameWorld for one-time initialization.
-         *
-         * @pre System must be initialized (pimpl_ != nullptr).
-         */
-        void init(GameWorld& gameWorld) noexcept {
-            assert(pimpl_ && "System not initialized");
-            pimpl_->init(gameWorld);
-        }
 
         /**
          * @brief Returns a type-erased pointer to the wrapped system instance.

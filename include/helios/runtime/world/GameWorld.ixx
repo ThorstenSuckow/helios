@@ -18,11 +18,14 @@ export module helios.runtime.world.GameWorld;
 
 import helios.runtime.world.Session;
 
+import helios.runtime.timing.TimerManager;
+
 import helios.ecs.Entity;
 import helios.runtime.world.RuntimeEnvironment;
 import helios.platform.environment.types;
 
 import helios.runtime.messaging.command.CommandHandlerRegistry;
+import helios.runtime.messaging.command.CommandBufferRegistry;
 
 import helios.runtime.world.ResourceRegistry;
 
@@ -42,11 +45,12 @@ import helios.ecs.EntityManager;
 import helios.ecs.EntityRegistry;
 import helios.ecs.View;
 
-import helios.runtime.concepts;
+import helios.runtime.messaging.command.concepts;
 
 import helios.runtime.world.EngineWorld;
+import helios.runtime.world.concepts;
 
-
+using namespace helios::runtime::timing;
 using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::world::concepts;
@@ -99,8 +103,9 @@ export namespace helios::runtime::world {
          * @brief Registry mapping command types to their handler function pointers.
          *
          * @details Used by TypedCommandBuffer during flush to route commands
-         * to the correct handler. Handlers are registered via
-         * `registerCommandHandler<CommandTypes...>(owner)`.
+         * to the correct handler. Handlers are usually registered by managers
+         * in `init(CommandHandlerRegistry&)`; direct registration via
+         * `registerCommandHandler<CommandTypes...>(owner)` is still supported.
          */
         CommandHandlerRegistry commandHandlerRegistry_;
 
@@ -162,15 +167,22 @@ export namespace helios::runtime::world {
 
 
         /**
-         * @brief Initializes all registered managers.
+         * @brief Initializes managers and command buffers.
          *
-         * @details Should be called after all managers have been added and before
-         * the game loop starts. Each manager's init() method is invoked with a
-         * reference to this GameWorld.
+         * @details Should be called after all resources have been registered and
+         * before the game loop starts. Manager `init()` receives the
+         * `CommandHandlerRegistry` so managers can register command handlers
+         * without a hard GameWorld dependency. Command buffers are initialized
+         * afterward and bound to the same handler registry.
          */
         GameWorld& init() {
             for (auto& mgr :  resourceRegistry_.managers()) {
-                mgr->init(*this);
+                mgr->init(commandHandlerRegistry_);
+            }
+
+            assert(resourceRegistry_.tryGet<TimerManager>() && "TimerManager must be registered before initializing command buffers");
+            for (auto& buff : resourceRegistry_.commandBuffers()) {
+                buff->init(commandHandlerRegistry_, resourceRegistry_.get<TimerManager>());
             }
 
             return *this;
@@ -379,14 +391,14 @@ export namespace helios::runtime::world {
          * @brief Flushes all registered CommandBuffers.
          *
          * @details Iterates over all CommandBuffers in registration order and
-         * invokes `flush(*this, updateContext)` on each. Called by the GameLoop
-         * at commit points before Managers are flushed.
+         * invokes `flush(updateContext)` on each. Called by the GameLoop at
+         * commit points before Managers are flushed.
          *
          * @param updateContext The current frame's update context.
          */
         void flushCommandBuffers(UpdateContext& updateContext) {
             for (auto& buff : resourceRegistry_.commandBuffers()) {
-                buff->flush(*this, updateContext);
+                buff->flush(updateContext);
             }
         }
 
@@ -524,6 +536,15 @@ export namespace helios::runtime::world {
         template<typename THandle>
         [[nodiscard]] auto destroy(const THandle handle) noexcept {
             return engineWorld_.template destroy<THandle>(handle);
+        }
+
+        /**
+         * @brief Returns direct access to the command-buffer registry.
+         *
+         * @return Reference to the internal CommandBufferRegistry.
+         */
+        helios::runtime::messaging::command::CommandBufferRegistry& commandBufferRegistry() noexcept {
+            return resourceRegistry().commandBufferRegistry();
         }
 
     };

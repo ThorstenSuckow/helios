@@ -4,7 +4,8 @@ import helios.ext;
 import helios.examples.ecs_rendering.GameLoop;
 
 #include "Namespaces.h"
-#include <memory>
+
+
 
 int main() {
 
@@ -30,7 +31,7 @@ int main() {
     // ==========================================================
 
     // inputmanager
-    auto deadzoneStrategy = std::make_unique<RadialDeadzoneStrategy>();
+    auto deadzoneStrategy = RadialDeadzoneStrategy();
     /*const auto inputManager = std::make_unique<InputManager>(
         std::make_unique<helios::ext::glfw::input::GLFWInputAdapter>(std::move(deadzoneStrategy))
     );*/
@@ -51,7 +52,9 @@ int main() {
     );
 
     // register additional managers
-    gameWorld.registerManager<GLFWPlatformManager<WindowHandle,  /*InputHandle, */ StateCommandBuffer, EngineCommandBuffer>>();
+    gameWorld.registerManager<GLFWPlatformManager<WindowHandle,  /*InputHandle, */ StateCommandBuffer, PlatformCommandBuffer>>(
+        gameWorld.platformWorld(), gameWorld.resourceRegistry().commandBufferRegistry()
+    );
     gameWorld.registerManager<OpenGLShaderCompileManager<ShaderHandle>>(gameWorld.renderResourceWorld());
     //gameWorld.registerManager<WarmupManager<OpenGLShaderSourcePool>>(shaderSourcePool);
 
@@ -152,12 +155,9 @@ int main() {
     // ========================================
     float DELTA_TIME = 0.0f;
 
-    auto stopwatch = std::make_unique<Stopwatch>();
-    auto framePacer = FramePacer(std::move(stopwatch));
+    auto framePacer = FramePacer();
     framePacer.setTargetFps(0.0f);
     FrameStats frameStats{};
-
-    gameLoop.init(gameWorld.init());
 
     // ----------------------------------------
     // GameLoop Config
@@ -168,12 +168,12 @@ int main() {
                 .addCommitPoint(CommitPoint::Structural)
 
                 .addPass<GameState>(GameState::Booting)
-                .addSystem<PlatformInitSystem<EngineCommandBuffer>>()
+                .addSystem<PlatformInitSystem<PlatformCommandBuffer>>()
                 .addCommitPoint(CommitPoint::Structural)
 
                 .addPass<GameState>(GameState::Booted | GameState::Live)
-                .addSystem<PollEventsSystem<EngineCommandBuffer>>()
-                .addSystem<WindowCreateSystem<WindowHandle, EngineCommandBuffer>>()
+                .addSystem<PollEventsSystem<PlatformCommandBuffer>>()
+                .addSystem<WindowCreateSystem<WindowHandle, PlatformCommandBuffer>>()
                 .addCommitPoint(CommitPoint::Structural)
 
                 .addPass<GameState>(GameState::Warmup)
@@ -201,14 +201,17 @@ int main() {
                  // Clear, bufferswapping
                 .addPass<GameState>(GameState::Live)
                 .addSystem<TransformClearSystem<GameObjectHandle>>()
-                .addSystem<SwapBuffersSystem<WindowHandle, EngineCommandBuffer>>()
-                .addSystem<GLFWWindowCloseSystem<WindowHandle, EngineCommandBuffer>>()
-                .addSystem<WindowBasedShutdownSystem<WindowHandle, EngineCommandBuffer>>()
+                .addSystem<SwapBuffersSystem<WindowHandle, PlatformCommandBuffer>>()
+                .addSystem<GLFWWindowCloseSystem<WindowHandle, PlatformCommandBuffer>>()
+                .addSystem<WindowBasedShutdownSystem<WindowHandle, PlatformCommandBuffer>>()
                 .addCommitPoint(CommitPoint::Structural)
 
                 .addPass<GameState>(GameState::Shutdown)
                 .addSystem<DestroySessionSystem>()
             ;
+
+
+    gameLoop.init(gameWorld.init());
 
 
     while (gameLoop.isRunning(gameWorld)) {

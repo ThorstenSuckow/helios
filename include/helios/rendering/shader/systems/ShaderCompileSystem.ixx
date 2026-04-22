@@ -54,6 +54,7 @@ export namespace helios::rendering::shader::systems {
     public:
 
         using EngineRoleTag = SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         explicit ShaderCompileSystem(size_t capacity = TCapacity) : capacity_(capacity) {
             shaderHandles_.reserve(capacity);
@@ -64,7 +65,7 @@ export namespace helios::rendering::shader::systems {
          *
          * @param updateContext Frame update context.
          */
-        void update(UpdateContext& updateContext) noexcept {
+        void update(UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             for (auto [entity, scc, ac] : updateContext.view<
                 THandle,
@@ -74,10 +75,7 @@ export namespace helios::rendering::shader::systems {
                 shaderHandles_.push_back(entity.handle());
             }
 
-            updateContext.queueCommand<
-                TCommandBuffer,
-                ShaderBatchCompileCommand<THandle>>(std::move(shaderHandles_)
-            );
+            cmdBuffer.template add<ShaderBatchCompileCommand<THandle>>(std::move(shaderHandles_));
 
             shaderHandles_.clear();
             shaderHandles_.reserve(capacity_);

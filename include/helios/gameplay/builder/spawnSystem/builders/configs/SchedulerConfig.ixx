@@ -6,6 +6,7 @@ module;
 
 #include <memory>
 #include <cstddef>
+#include <memory>
 
 export module helios.gameplay.builder.spawnSystem.builders.configs.SchedulerConfig;
 
@@ -115,8 +116,7 @@ export namespace helios::gameplay::builder::spawnSystem::builders::configs {
          * @return Reference to this config for chaining.
          */
         SchedulerConfig& fixedAmount(const size_t count) {
-            amountProvider_ = std::make_unique<
-                helios::gameplay::spawn::policy::amount::FixedSpawnAmount>(count);
+            amountProvider_ = std::make_unique<helios::gameplay::spawn::policy::amount::FixedSpawnAmount<THandle>>(count);
             return *this;
         }
 

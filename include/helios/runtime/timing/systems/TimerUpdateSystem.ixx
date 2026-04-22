@@ -1,14 +1,15 @@
 /**
- * @file GameTimerUpdateSystem.ixx
+ * @file TimerUpdateSystem.ixx
  * @brief System that advances all game timers each frame.
  */
 module;
 
+#include <span>
 
-export module helios.gameplay.timing.systems.GameTimerUpdateSystem;
+export module helios.runtime.timing.systems.TimerUpdateSystem;
 
-import helios.gameplay.timing.GameTimer;
-import helios.gameplay.timing.TimerManager;
+import helios.runtime.timing.Timer;
+import helios.runtime.timing.TimerManager;
 
 import helios.state.Bindings;
 
@@ -19,18 +20,18 @@ import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.runtime.world.tags.SystemRole;
 
-import helios.gameplay.timing.types;
-import helios.gameplay.timing.commands;
+import helios.runtime.timing.types;
+import helios.runtime.timing.commands;
 
-using namespace helios::gameplay::timing;
+using namespace helios::runtime::timing;
 
-using namespace helios::gameplay::timing::types;
-using namespace helios::gameplay::timing::commands;
+using namespace helios::runtime::timing::types;
+using namespace helios::runtime::timing::commands;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::messaging::command::concepts;
 
-export namespace helios::gameplay::timing::systems {
+export namespace helios::runtime::timing::systems {
 
     /**
      * @brief Updates all game timers managed by the TimerManager.
@@ -39,11 +40,11 @@ export namespace helios::gameplay::timing::systems {
      * advances their elapsed time by the current delta time.
      *
      * @see TimerManager
-     * @see GameTimer
+     * @see Timer
      */
     template<typename TCommandBuffer = NullCommandBuffer>
     requires IsCommandBufferLike<TCommandBuffer>
-    class GameTimerUpdateSystem {
+    class TimerUpdateSystem {
 
         /**
          * @brief Reference to the TimerManager owning the timers.
@@ -54,6 +55,7 @@ export namespace helios::gameplay::timing::systems {
 
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
         /**
@@ -61,7 +63,7 @@ export namespace helios::gameplay::timing::systems {
          *
          * @param timerManager The manager whose timers are updated.
          */
-        explicit GameTimerUpdateSystem(TimerManager& timerManager)
+        explicit TimerUpdateSystem(TimerManager& timerManager)
         : timerManager_(timerManager) {}
 
         /**
@@ -69,16 +71,16 @@ export namespace helios::gameplay::timing::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
-            for (auto& gameTimer : timerManager_.gameTimers()) {
-                if (gameTimer.state() == TimerState::Running) {
+            for (auto& timer : timerManager_.timers()) {
+                if (timer.state() == TimerState::Running) {
 
-                    gameTimer.update(updateContext.deltaTime());
+                    timer.update(updateContext.deltaTime());
 
-                    if (gameTimer.duration() != 0.0f && gameTimer.elapsed() >= gameTimer.duration()) {
-                        auto context = TimerControlContext{gameTimer.gameTimerId(), TimerState::Finished};
-                        updateContext.queueCommand<TCommandBuffer, TimerControlCommand>(context);
+                    if (timer.duration() != 0.0f && timer.elapsed() >= timer.duration()) {
+                        auto context = TimerControlContext{timer.timerId(), TimerState::Finished};
+                        cmdBuffer.template add<TimerControlCommand>(context);
                     }
                 }
             }

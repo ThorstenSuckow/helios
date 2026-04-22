@@ -592,8 +592,8 @@ export namespace helios::physics::collision::systems {
             for (size_t i = 0; i < candidates.size(); i++) {
 
                 CollisionCandidate& candidate = candidates[i];
-                CollisionComponent* cc = candidate.collisionComponent;
-                CollisionStateComponent* csc = candidate.collisionStateComponent;
+                CollisionComponent<THandle> * cc = candidate.collisionComponent;
+                CollisionStateComponent<THandle>* csc = candidate.collisionStateComponent;
 
                 auto hitPolicy = cc->hitPolicy();
                 if (hitPolicy == helios::physics::collision::types::HitPolicy::OneHit && csc->hasCollision()) {
@@ -606,8 +606,8 @@ export namespace helios::physics::collision::systems {
 
                     auto& [gameObject, aabbColliderComponent, collisionComponent, collisionStateComponent] = candidates[j];
 
-                    CollisionComponent* matchCC       = collisionComponent;
-                    CollisionStateComponent* matchCSC = collisionStateComponent;
+                    CollisionComponent<THandle>* matchCC       = collisionComponent;
+                    CollisionStateComponent<THandle>* matchCSC = collisionStateComponent;
 
                     const auto collisionStruct = findCollisionType(cc, matchCC);
 

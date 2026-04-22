@@ -6,8 +6,9 @@ module;
 
 #include <cassert>
 #include <memory>
-#include <stdexcept>
+#include <ranges>
 #include <unordered_map>
+
 
 export module helios.gameplay.scoring.ScorePoolManager;
 
@@ -20,7 +21,7 @@ import helios.gameplay.scoring.types.ScorePoolId;
 
 import helios.runtime.world.UpdateContext;
 
-import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 import helios.runtime.pooling.EntityPool;
 
 import helios.core.types;
@@ -106,7 +107,6 @@ export namespace helios::gameplay::scoring {
          * Processes all pending ScoreValueContext entries and adds them to
          * the appropriate score pools based on their scorePoolId.
          *
-         * @param gameWorld Reference to the game world.
          * @param update_context Reference to the update context.
          */
         void flush(
@@ -146,10 +146,10 @@ export namespace helios::gameplay::scoring {
         /**
          * @brief Initializes the manager and registers it as the score command handler.
          *
-         * @param gameWorld Reference to the game world.
+         * @param commandHandlerRegistry The command-handler registry.
          */
-        void init(helios::runtime::world::GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<UpdateScoreCommand>(*this);
+        void init(helios::runtime::messaging::command::CommandHandlerRegistry& commandHandlerRegistry) {
+            commandHandlerRegistry.registerHandler<UpdateScoreCommand>(*this);
         }
 
 

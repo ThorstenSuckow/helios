@@ -11,28 +11,27 @@ module;
 #include <stdexcept>
 #include <ranges>
 
-export module helios.gameplay.timing.TimerManager;
+export module helios.runtime.timing.TimerManager;
 
-import helios.gameplay.timing.types;
-import helios.gameplay.timing.commands;
+import helios.runtime.timing.types;
+import helios.runtime.timing.commands;
 
-import helios.gameplay.timing.GameTimer;
+import helios.runtime.timing.Timer;
 
-import helios.gameplay.timing.types.GameTimerId;
+import helios.runtime.timing.types.TimerId;
 
 import helios.runtime.world.UpdateContext;
-
-import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 
 import helios.core.types;
 import helios.util.Guid;
 import helios.runtime.world.tags.ManagerRole;
 
-using namespace helios::gameplay::timing::commands;
-using namespace helios::gameplay::timing::types;
-using namespace helios::gameplay::timing::types;
+using namespace helios::runtime::timing::commands;
+using namespace helios::runtime::timing::types;
+using namespace helios::runtime::timing::types;
 using namespace helios::runtime::world;
-export namespace helios::gameplay::timing {
+export namespace helios::runtime::timing {
 
     /**
      * @brief Manager that owns game timers and processes timer control commands.
@@ -41,7 +40,7 @@ export namespace helios::gameplay::timing {
      * Pending control commands are collected via submit() and applied during
      * flush() at the beginning of each frame.
      *
-     * @see GameTimer
+     * @see Timer
      * @see TimerCommandHandler
      * @see Manager
      */
@@ -50,7 +49,7 @@ export namespace helios::gameplay::timing {
         /**
          * @brief Collection of game timers managed by this manager.
          */
-        std::vector<GameTimer> gameTimers_;
+        std::vector<Timer> timers_;
 
         /**
          * @brief Pending timer control contexts to be applied during flush.
@@ -64,41 +63,22 @@ export namespace helios::gameplay::timing {
          *
          * @return True if a timer with the given id is registered.
          */
-        [[nodiscard]] bool has(const GameTimerId timerId) noexcept {
-            return getGameTimer(timerId) != nullptr;
+        [[nodiscard]] bool has(const TimerId timerId) noexcept {
+            return getTimer(timerId) != nullptr;
         }
 
-        /**
-         * @brief Looks up a timer by its id.
-         *
-         * @param timerId The id to search for.
-         *
-         * @return Pointer to the timer, or nullptr if not found.
-         */
-        GameTimer* getGameTimer(const GameTimerId timerId) {
-            const auto timer = std::ranges::find_if(
-                gameTimers_,
-                [&](const auto& gameTimer) {
-                    return gameTimer.gameTimerId() == timerId;
-                });
-
-            if (timer == gameTimers_.end()) {
-                return nullptr;
-            }
-            return &*timer;
-        }
 
         /**
          * @brief Creates and appends a new timer.
          *
-         * @param gameTimerId The id for the new timer.
+         * @param timerId The id for the new timer.
          *
          * @return Reference to the newly created timer.
          */
-        GameTimer& add(const GameTimerId gameTimerId) noexcept {
-            gameTimers_.emplace_back(GameTimer(gameTimerId));
+        Timer& add(const TimerId timerId) noexcept {
+            timers_.emplace_back(Timer(timerId));
 
-            return gameTimers_.back();
+            return timers_.back();
         }
 
     public:
@@ -109,34 +89,43 @@ export namespace helios::gameplay::timing {
          *
          * Asserts that no timer with the given id already exists.
          *
-         * @param gameTimerId The unique id for the new timer.
+         * @param timerId The unique id for the new timer.
          *
-         * @return Reference to the newly created GameTimer.
+         * @return Reference to the newly created Timer.
          */
-        GameTimer& addGameTimer(GameTimerId gameTimerId) noexcept {
-            assert(!has(gameTimerId) && "GameTimer with GameTimerId already registered");
+        Timer& addTimer(TimerId timerId) noexcept {
+            assert(!has(timerId) && "Timer with TimerId already registered");
 
-            return add(gameTimerId);
+            return add(timerId);
         }
 
         /**
-         * @brief Returns a pointer to the timer with the given id.
+         * @brief Looks up a timer by its id.
          *
-         * @param gameTimerId The id to look up.
+         * @param timerId The id to search for.
          *
-         * @return Pointer to the GameTimer, or nullptr if not found.
+         * @return Pointer to the timer, or nullptr if not found.
          */
-        [[nodiscard]] GameTimer* gameTimer(const GameTimerId gameTimerId) noexcept {
-            return getGameTimer(gameTimerId);
+        Timer* getTimer(const TimerId timerId) {
+            const auto timerIt = std::ranges::find_if(
+                timers_,
+                [&](const auto& timer) {
+                    return timer.timerId() == timerId;
+                });
+
+            if (timerIt == timers_.end()) {
+                return nullptr;
+            }
+            return &*timerIt;
         }
 
         /**
          * @brief Returns a span over all registered timers.
          *
-         * @return A span of GameTimer instances.
+         * @return A span of Timer instances.
          */
-        [[nodiscard]] std::span<GameTimer> gameTimers() noexcept {
-            return gameTimers_;
+        [[nodiscard]] std::span<Timer> timers() noexcept {
+            return timers_;
         }
 
         /**
@@ -153,7 +142,7 @@ export namespace helios::gameplay::timing {
         ) noexcept {
 
             for (const auto& controlContext : pendingControlContexts_) {
-                auto* timer = gameTimer(controlContext.gameTimerId);
+                auto* timer = getTimer(controlContext.timerId);
                 if (timer) {
                     if (controlContext.resetElapsed) {
                         timer->reset(controlContext.timerState);
@@ -182,16 +171,16 @@ export namespace helios::gameplay::timing {
          *
          * @param gameWorld The game world to register with.
          */
-        void init(helios::runtime::world::GameWorld& gameWorld) {
-            gameWorld.template registerCommandHandler<TimerControlCommand>(*this);
+        void init(helios::runtime::messaging::command::CommandHandlerRegistry& commandHandlerRegistry) {
+            commandHandlerRegistry.registerHandler<TimerControlCommand>(*this);
         }
 
         /**
          * @brief Resets all managed timers.
          */
         void reset() {
-            for (auto& gameTimer : gameTimers_) {
-                gameTimer.reset();
+            for (auto& timer : timers_) {
+                timer.reset();
             }
         }
     };

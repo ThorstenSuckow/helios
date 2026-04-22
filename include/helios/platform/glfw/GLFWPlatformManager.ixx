@@ -13,6 +13,8 @@ module;
 
 export module helios.platform.glfw.GLFWPlatformManager;
 
+import helios.runtime.world.UpdateContext;
+import helios.runtime.world.Session;
 
 import helios.util.log;
 import helios.ecs.types.EntityHandle;
@@ -20,13 +22,16 @@ import helios.core.types;
 import helios.state.Bindings;
 
 
+import helios.runtime.messaging.command.concepts.IsPlatformCommandBuffer;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
+import helios.runtime.messaging.command.CommandBufferRegistry;
+
 import helios.state.commands;
 import helios.state.types;
 import helios.gameplay.gamestate.types;
 
+import helios.runtime.world.EngineWorld;
 import helios.runtime.world.tags.ManagerRole;
-
-import helios.runtime.world;
 
 import helios.platform.environment.commands;
 import helios.platform.lifecycle.commands;
@@ -82,10 +87,8 @@ export namespace helios::platform::glfw {
     template<typename THandle, typename TStateCommandBuffer = NullCommandBuffer, typename TPlatformCommandBuffer = NullCommandBuffer>
     requires IsWindowHandle<THandle>
             && IsCommandBufferLike<TStateCommandBuffer>
-            && IsCommandBufferLike<TPlatformCommandBuffer>
+            && IsPlatformCommandBuffer<TPlatformCommandBuffer>
     class GLFWPlatformManager {
-
-        GameWorld* gameWorld_ = nullptr;
 
         std::vector<WindowResizeCommand<THandle>> pendingResizeCommands_;
 
@@ -110,15 +113,17 @@ export namespace helios::platform::glfw {
         inline static const helios::util::log::Logger& logger_ = helios::util::log::LogManager::loggerForScope(
                    HELIOS_LOG_SCOPE);
 
+        PlatformWorld* platformWorld_;
+
         /**
          * @brief Initializes GLFW and transitions runtime/session from booting to boot request.
          *
          * @param updateContext Frame-local update context.
          */
-        void initPlatform(UpdateContext& updateContext) noexcept {
+        bool initPlatform(UpdateContext& updateContext) noexcept {
 
             if (!shouldInit_ || initialized_) {
-                return;
+                return false;
             }
 
             if (glfwInit() == GLFW_FALSE) {
@@ -126,7 +131,7 @@ export namespace helios::platform::glfw {
             }
 
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
             assert(updateContext.session().state<GameState>() == GameState::Booting &&
@@ -134,15 +139,10 @@ export namespace helios::platform::glfw {
 
             initialized_ = updateContext.session().initialize() &&
                            updateContext.runtimeEnvironment().initialize();
-
-            updateContext.queueCommand<TStateCommandBuffer, StateCommand<GameState>>(
-                StateTransitionRequest<GameState>(
-                    updateContext.session().state<GameState>(),
-                    GameStateTransitionId::BootRequest
-                )
-            );
-
+            
             shouldInit_ = false;
+            
+            return initialized_;
         }
 
 
@@ -155,8 +155,6 @@ export namespace helios::platform::glfw {
          * @return `true` if the window was created and bound successfully; otherwise `false`.
          */
         bool createWindow(UpdateContext& updateContext, const WindowCreateCommand<THandle>& cmd) noexcept {
-
-            assert(gameWorld_ && "GameWorld not initialized");
 
             auto window = updateContext.find(cmd.windowHandle);
 
@@ -203,9 +201,12 @@ export namespace helios::platform::glfw {
             window->template add<CurrentContextComponent<THandle>>();
 
             window->template add<WindowShownComponent<THandle>>();
-            window->template add<GLFWWindowUserPointerComponent<THandle>>(GLFWWindowUserPointer<THandle>(cmd.windowHandle, gameWorld_));
+            window->template add<GLFWWindowUserPointerComponent<THandle, TPlatformCommandBuffer>>(
+                GLFWWindowUserPointer<THandle, TPlatformCommandBuffer>(
+                    cmd.windowHandle, commandBufferRegistry_->template item<TPlatformCommandBuffer>()
+            ));
 
-            installResizeListener(gameWorld_, cmd.windowHandle);
+            installResizeListener(cmd.windowHandle);
 
             return true;
         }
@@ -249,7 +250,7 @@ export namespace helios::platform::glfw {
             for (auto& handle : currentContexts_) {
                 auto go = updateContext.find<THandle> (handle);
                 if (go) {
-                    go->remove<CurrentContextComponent<THandle>>();
+                    go->template remove<CurrentContextComponent<THandle>>();
                 }
             }
         }
@@ -260,23 +261,23 @@ export namespace helios::platform::glfw {
          * @param gameWorld Owning game world used by callback command submission.
          * @param handle Window handle for which the listener is installed.
          */
-        void installResizeListener(GameWorld* gameWorld, THandle handle) noexcept {
+        void installResizeListener(THandle handle) noexcept {
 
-            auto entity = gameWorld->find<THandle>(handle);
+            auto entity = platformWorld_->findEntity<THandle>(handle);
 
             if (!entity) {
                 logger_.warn("Entity was not found");
                 return;
             }
 
-            const auto* glfw = entity->get<GLFWWindowHandleComponent<THandle>>();
+            const auto* glfw = entity->template get<GLFWWindowHandleComponent<THandle>>();
             if (!glfw) {
                 logger_.error("Entity does not have GLFWWindowHandleComponent");
                 assert(false && "Entity does not have GLFWWindowHandleComponent");
                 return;
             }
 
-            auto* wuptrComponent = entity->get<GLFWWindowUserPointerComponent<THandle>>();
+            auto* wuptrComponent = entity->template get<GLFWWindowUserPointerComponent<THandle, TPlatformCommandBuffer>>();
             if (!wuptrComponent) {
                 logger_.error("Entity does not have GLFWWindowUserPointerComponent");
                 assert(false && "Entity does not have GLFWWindowUserPointerComponent");
@@ -289,10 +290,10 @@ export namespace helios::platform::glfw {
             glfwSetFramebufferSizeCallback(
                 glfw->handle,
                 [] (GLFWwindow* nativeHandle, const int width, const int height) {
-                const auto* ptr = static_cast<GLFWWindowUserPointer<THandle>*>(glfwGetWindowUserPointer(nativeHandle));
+                const auto* ptr = static_cast<GLFWWindowUserPointer<THandle, TPlatformCommandBuffer>*>(glfwGetWindowUserPointer(nativeHandle));
 
-                if (ptr && ptr->gameWorld) {
-                    ptr->gameWorld->commandBuffer<TPlatformCommandBuffer>().add<WindowResizeCommand<THandle>>(
+                if (ptr && ptr->platformCommandBuffer) {
+                    ptr->platformCommandBuffer->template add<WindowResizeCommand<THandle>>(
                         ptr->windowHandle,
                         WindowSize(width, height)
                     );
@@ -316,7 +317,7 @@ export namespace helios::platform::glfw {
                 return;
             }
 
-            const auto* glfw = entity->get<GLFWWindowHandleComponent<THandle>>();
+            const auto* glfw = entity->template get<GLFWWindowHandleComponent<THandle>>();
 
             if (!glfw) {
                 logger_.error("Entity does not have GLFWWindowHandleComponent");
@@ -374,7 +375,7 @@ export namespace helios::platform::glfw {
                 auto entity = updateContext.find(windowHandle);
 
                 if (entity) {
-                    if (auto* wc = entity->get<WindowComponent<THandle>>()) {
+                    if (auto* wc = entity->template get<WindowComponent<THandle>>()) {
                         wc->size = windowSize;
                     }
                 }
@@ -431,14 +432,14 @@ export namespace helios::platform::glfw {
                     continue;
                 }
 
-                const auto* glfw = entity->get<GLFWWindowHandleComponent<THandle>>();
+                const auto* glfw = entity->template get<GLFWWindowHandleComponent<THandle>>();
                 if (!glfw) {
                     logger_.warn("Entity does not have GLFWWindowHandleComponent");
                     continue;
                 }
 
                 glfwDestroyWindow(glfw->handle);
-                bool destroyed = gameWorld_->destroy<THandle>(cmd.windowHandle);
+                bool destroyed = platformWorld_->destroy<THandle>(cmd.windowHandle);
                 assert(destroyed && "Failed to destroy entity");
             }
 
@@ -455,7 +456,7 @@ export namespace helios::platform::glfw {
 
             glfwTerminate();
 
-            updateContext.queueCommand<TStateCommandBuffer, StateCommand<GameState>>(
+            commandBufferRegistry_->template item<TStateCommandBuffer>()->template add<StateCommand<GameState>>(
                StateTransitionRequest<GameState>(
                    updateContext.session().state<GameState>(),
                    GameStateTransitionId::ShutdownRequest
@@ -465,7 +466,8 @@ export namespace helios::platform::glfw {
 
         }
 
-
+        CommandBufferRegistry* commandBufferRegistry_ = nullptr;
+        
         public:
 
 
@@ -474,6 +476,9 @@ export namespace helios::platform::glfw {
          */
         using EngineRoleTag = ManagerRole;
 
+        explicit GLFWPlatformManager(PlatformWorld& platformWorld, CommandBufferRegistry& commandBufferRegistry)
+        : platformWorld_(&platformWorld), commandBufferRegistry_(&commandBufferRegistry) {};
+        
 
         /**
          * @brief Processes queued platform/window work for the current frame.
@@ -487,7 +492,14 @@ export namespace helios::platform::glfw {
                 return;
             }
 
-            initPlatform(updateContext);
+            if (initPlatform(updateContext)) {
+                commandBufferRegistry_->template item<TStateCommandBuffer>()->template add<StateCommand<GameState>>(
+                StateTransitionRequest<GameState>(
+                    updateContext.session().state<GameState>(),
+                    GameStateTransitionId::BootRequest
+                )
+            );
+            }
             pollEvents(updateContext);
             const bool isContextAvailable = createWindows(updateContext);
 
@@ -596,11 +608,9 @@ export namespace helios::platform::glfw {
          *
          * @param gameWorld Runtime world used for command-handler registration.
          */
-        void init(helios::runtime::world::GameWorld& gameWorld) noexcept {
+        void init(CommandHandlerRegistry& commandHandlerRegistry) noexcept {
 
-            gameWorld_ = &gameWorld;
-
-            gameWorld.registerCommandHandler<
+            commandHandlerRegistry.handleCommands<
                 WindowCreateCommand<THandle>,
                 PlatformInitCommand,
                 WindowResizeCommand<THandle>,

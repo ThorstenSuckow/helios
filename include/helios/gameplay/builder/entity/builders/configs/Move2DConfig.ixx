@@ -52,7 +52,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         Move2DConfig& speed(const float movementSpeed) {
-            entity_.get<helios::physics::motion::components::Move2DComponent<Handle_type>>()
+            entity_.template get<helios::physics::motion::components::Move2DComponent<Handle_type>>()
                       ->setMovementSpeed(movementSpeed);
 
             return *this;
@@ -66,7 +66,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         Move2DConfig& acceleration(const float movementAcceleration) {
-            entity_.get<helios::physics::motion::components::Move2DComponent<Handle_type>>()
+            entity_.template get<helios::physics::motion::components::Move2DComponent<Handle_type>>()
                       ->setMovementAcceleration(movementAcceleration);
 
             return *this;
@@ -82,7 +82,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         Move2DConfig& instantAcceleration(const bool useInstantAcceleration) {
-            entity_.get<helios::physics::motion::components::Move2DComponent<Handle_type>>()
+            entity_.template get<helios::physics::motion::components::Move2DComponent<Handle_type>>()
                       ->setUseInstantAcceleration(useInstantAcceleration);
 
             return *this;

@@ -16,6 +16,7 @@ import helios.runtime.gameloop;
 import helios.runtime.world;
 
 import helios.state.Bindings;
+import helios.state.types.StateTransitionContext;
 import helios.runtime.messaging.command;
 
 import helios.platform;
@@ -32,7 +33,7 @@ import helios.rendering.registry;
 import helios.runtime.registry;
 
 import helios.gameplay.lifecycle;
-import helios.gameplay.timing;
+import helios.runtime.timing;
 import helios.gameplay.gamestate;
 import helios.gameplay.matchstate;
 
@@ -165,12 +166,13 @@ export namespace helios::bootstrap {
 
         gameWorld->registerManager<helios::gameplay::matchstate::MatchStateManager>(
             helios::gameplay::matchstate::rules::DefaultMatchStateTransitionRules::rules());
-        gameWorld->registerManager<helios::gameplay::timing::TimerManager>();
+        gameWorld->registerManager<helios::runtime::timing::TimerManager>();
 
         gameWorld->session().trackState<helios::gameplay::gamestate::types::GameState>();
         gameWorld->session().trackState<helios::gameplay::matchstate::types::MatchState>();
 
         gameWorld->registerCommandBuffer<RenderCommandBuffer>();
+        gameWorld->registerCommandBuffer<PlatformCommandBuffer>();
         gameWorld->registerCommandBuffer<EngineCommandBuffer>();
         gameWorld->registerCommandBuffer<StateCommandBuffer>();
 

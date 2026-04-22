@@ -7,7 +7,7 @@ module;
 #include <cstdint>
 #include <utility>
 
-export module helios.runtime.gameloop.CommitPoint;
+export module helios.runtime.gameloop:CommitPoint;
 
 
 export namespace helios::runtime::gameloop {

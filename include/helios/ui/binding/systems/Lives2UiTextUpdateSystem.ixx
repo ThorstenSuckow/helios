@@ -16,6 +16,7 @@ import helios.gameplay.matchstate.types;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
+import helios.runtime.world.tags.SystemRole;
 
 
 import helios.ui.widgets;
@@ -26,7 +27,6 @@ import helios.ecs.components.Active;
 using namespace helios::gameplay::matchstate::components;
 using namespace helios::gameplay::matchstate::types;
 
-import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::ui::binding::systems {
 
@@ -65,7 +65,7 @@ export namespace helios::ui::binding::systems {
                     continue;
                 }
 
-                if (auto* lc = go->get<LivesComponent>()) {
+                if (auto* lc = go->template get<LivesComponent>()) {
                     if (lbc->livesRevision() != lc->livesRevision()) {
                         txt->setText(dfc->format(lc->lives()));
                         lbc->setLivesRevision(lc->livesRevision());

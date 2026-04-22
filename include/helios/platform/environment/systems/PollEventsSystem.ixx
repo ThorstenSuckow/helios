@@ -31,6 +31,8 @@ export namespace helios::platform::environment::systems {
 
         public:
 
+        using CommandBuffer_type = TCommandBuffer;
+
         /**
          * @brief Engine role marker used by runtime system registries.
          */
@@ -41,8 +43,8 @@ export namespace helios::platform::environment::systems {
          *
          * @param updateContext Frame-local update context.
          */
-        void update(UpdateContext& updateContext) noexcept {
-            updateContext.queueCommand<TCommandBuffer, PollEventsCommand>();
+        void update(UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
+            cmdBuffer.template add<PollEventsCommand>();
         }
 
     };

@@ -9,7 +9,7 @@ module;
 #include <vector>
 #include <span>
 
-export module helios.runtime.gameloop.GameLoop;
+export module helios.runtime.gameloop:GameLoop;
 
 import helios.runtime.world.GameWorld;
 
@@ -29,15 +29,14 @@ import helios.state.Bindings;
 import helios.gameplay.gamestate.types;
 import helios.gameplay.matchstate.types;
 
-import helios.runtime.gameloop.CommitPoint;
-import helios.runtime.gameloop.Phase;
+import :CommitPoint;
+import :Phase;
+import :PassCommitListener;
 
 import helios.runtime.world.Manager;
 
 import helios.input.InputSnapshot;
 import helios.rendering.viewport.ViewportSnapshot;
-
-import helios.runtime.gameloop.PassCommitListener;
 
 import helios.runtime.world.GameWorld;
 
@@ -378,7 +377,6 @@ export namespace helios::runtime::gameloop {
             totalTime_ += deltaTime;
 
             auto updateContext = UpdateContext(
-                  gameWorld.resourceRegistry(),
                   gameWorld.session(),
                   gameWorld.runtimeEnvironment(),
                   deltaTime,

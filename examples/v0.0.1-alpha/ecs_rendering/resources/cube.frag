@@ -1,8 +1,8 @@
-#version 450 core
+#version 410 core
 
 out vec4 FragColor;
 
-layout (location=4) uniform vec4 color;
+uniform vec4 color;
 
 
 void main() {

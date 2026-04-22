@@ -92,8 +92,8 @@ using namespace helios::platform::opengl;
 using namespace helios::gameplay::scoring;
 using namespace helios::gameplay::scoring::systems;
 using namespace helios::gameplay::scoring::types;
-using namespace helios::gameplay::timing;
-using namespace helios::gameplay::timing::systems;
+using namespace helios::runtime::timing;
+using namespace helios::runtime::timing::systems;
 using namespace helios::gameplay::combat::components;
 using namespace helios::gameplay::combat::systems;
 

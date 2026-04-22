@@ -1,10 +1,10 @@
-#version 450 core
+#version 410 core
 
-layout (location=0) in vec3 aPos;
+in vec3 aPos;
 
-layout (location=1) uniform mat4 modelMatrix;
-layout (location=2) uniform mat4 viewMatrix;
-layout (location=3) uniform mat4 projectionMatrix;
+uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 projectionMatrix;
 
 
 void main() {

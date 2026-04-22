@@ -10,7 +10,7 @@ import helios.gameplay.gamestate.types;
 
 import helios.state.Bindings;
 
-import helios.runtime.concepts;
+import helios.runtime.messaging.command.concepts;
 
 import helios.state.commands;
 import helios.state.types.StateTransitionRequest;

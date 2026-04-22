@@ -1,26 +1,27 @@
 /**
- * @file GameTimerClearSystem.ixx
+ * @file TimerClearSystem.ixx
  * @brief System that resets finished game timers each frame.
  */
 module;
 
+#include <span>
 
-export module helios.gameplay.timing.systems.GameTimerClearSystem;
+export module helios.runtime.timing.systems.TimerClearSystem;
 
-import helios.gameplay.timing.GameTimer;
-import helios.gameplay.timing.TimerManager;
+import helios.runtime.timing.Timer;
+import helios.runtime.timing.TimerManager;
 
 import helios.runtime.world.UpdateContext;
 
 import helios.runtime.world.tags.SystemRole;
 
-import helios.gameplay.timing.types;
+import helios.runtime.timing.types;
 
-using namespace helios::gameplay::timing;
+using namespace helios::runtime::timing;
 
-using namespace helios::gameplay::timing::types;
+using namespace helios::runtime::timing::types;
 
-export namespace helios::gameplay::timing::systems {
+export namespace helios::runtime::timing::systems {
 
     /**
      * @brief Resets finished game timers to an undefined state.
@@ -32,9 +33,9 @@ export namespace helios::gameplay::timing::systems {
      * logic more than once.
      *
      * @see TimerManager
-     * @see GameTimer
+     * @see Timer
      */
-    class GameTimerClearSystem {
+    class TimerClearSystem {
 
         /**
          * @brief Reference to the TimerManager owning the timers.
@@ -51,7 +52,7 @@ export namespace helios::gameplay::timing::systems {
          *
          * @param timerManager The manager whose timers are cleared.
          */
-        explicit GameTimerClearSystem(TimerManager& timerManager)
+        explicit TimerClearSystem(TimerManager& timerManager)
         : timerManager_(timerManager) {}
 
         /**
@@ -61,9 +62,9 @@ export namespace helios::gameplay::timing::systems {
          */
         void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
 
-            for (auto& gameTimer : timerManager_.gameTimers()) {
-                if (gameTimer.state() == TimerState::Finished || gameTimer.state() == TimerState::Cancelled) {
-                    gameTimer.setState(TimerState::Undefined);
+            for (auto& timer : timerManager_.timers()) {
+                if (timer.state() == TimerState::Finished || timer.state() == TimerState::Cancelled) {
+                    timer.setState(TimerState::Undefined);
                 }
             }
         }

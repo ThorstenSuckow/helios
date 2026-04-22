@@ -18,6 +18,7 @@ import helios.state.Bindings;
 import helios.runtime.world.Manager;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
+import helios.runtime.world.tags.SystemRole;
 import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
@@ -44,7 +45,6 @@ using namespace helios::gameplay::health::events;
 using namespace helios::gameplay::spawn::components;
 using namespace helios::gameplay::spawn::commands;
 
-import helios.runtime.world.tags.SystemRole;
 
 export namespace helios::gameplay::lifecycle::systems {
 
@@ -64,13 +64,14 @@ export namespace helios::gameplay::lifecycle::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         /**
          * @brief Processes health depletion events and enqueues despawn commands.
          *
          * @param updateContext Current frame context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             auto events = updateContext.readPass<HealthDepletedEvent<THandle>>();
 
@@ -79,13 +80,13 @@ export namespace helios::gameplay::lifecycle::systems {
 
                 if (go) {
 
-                    auto* hc = go->get<helios::gameplay::health::components::HealthComponent>();
+                    auto* hc = go->template get<helios::gameplay::health::components::HealthComponent>();
                     if (hc) {
                         auto healthDepletedBehavior = hc->healthDepletedBehavior();
                         if (hasHealthDepletedFlag(healthDepletedBehavior, HealthDepletedBehavior::Despawn)) {
                             if (auto* sbp = go->template get<SpawnedByProfileComponent>()) {
                                 assert(sbp->spawnProfileId().value() != 0 && "Entity has no SpawnProfileId.");
-                                updateContext.queueCommand<TCommandBuffer, DespawnCommand<THandle>>(go->handle(), sbp->spawnProfileId());
+                                cmdBuffer.template add<DespawnCommand<THandle>>(go->handle(), sbp->spawnProfileId());
                             } else {
                                 go->setActive(false);
                                 /**

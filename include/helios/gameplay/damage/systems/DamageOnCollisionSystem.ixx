@@ -72,6 +72,7 @@ export namespace helios::gameplay::damage::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
         /**
@@ -79,7 +80,7 @@ export namespace helios::gameplay::damage::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             auto eventPass = updateContext.readPass<
                 helios::physics::collision::events::SolidCollisionEvent<THandle>>();
@@ -92,7 +93,7 @@ export namespace helios::gameplay::damage::systems {
                     continue;
                 }
 
-                auto* ddc = go->get<DamageDealerComponent>();
+                auto* ddc = go->template get<DamageDealerComponent>();
                 if (!ddc) {
                     continue;
                 }
@@ -106,7 +107,7 @@ export namespace helios::gameplay::damage::systems {
                 if (!target) {
                     continue;
                 }
-                auto* hc = target->get<HealthComponent>();
+                auto* hc = target->template get<HealthComponent>();
                 if (!hc) {
                     continue;
                 }
@@ -122,7 +123,7 @@ export namespace helios::gameplay::damage::systems {
                 auto instigator= go->handle();
                 auto causer = go->handle();
 
-                auto* ebc = go->get<EmittedByComponent>();
+                auto* ebc = go->template get<EmittedByComponent>();
                 if (ebc) {
                     // else the source is assigned to the go emitted
                     // by the go
@@ -141,7 +142,7 @@ export namespace helios::gameplay::damage::systems {
                     .damage = damageApplied
                 };
 
-                updateContext.queueCommand<TCommandBuffer, ApplyDamageCommand>(dc);
+                cmdBuffer.template add<ApplyDamageCommand>(dc);
 
             }
 

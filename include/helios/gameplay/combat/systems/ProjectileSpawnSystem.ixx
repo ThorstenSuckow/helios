@@ -32,6 +32,7 @@ import helios.runtime.world.tags.SystemRole;
 
 using namespace helios::gameplay::spawn::types;
 using namespace helios::runtime::messaging::command;
+using namespace helios::runtime::messaging::command::concepts;
 export namespace helios::gameplay::combat::systems {
 
     /**
@@ -74,7 +75,7 @@ export namespace helios::gameplay::combat::systems {
      * @see EmitterContext
      */
     template<typename THandle, typename TCommandBuffer = NullCommandBuffer>
-    requires IsCommandBufferLike<TCommandBuffer>
+    requires helios::runtime::messaging::command::concepts::IsCommandBufferLike<TCommandBuffer>
     class ProjectileSpawnSystem {
 
         /**
@@ -89,6 +90,7 @@ export namespace helios::gameplay::combat::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         /**
          * @brief Constructs a ProjectileSpawnSystem with the specified spawn profile.
@@ -116,7 +118,7 @@ export namespace helios::gameplay::combat::systems {
          *
          * @param updateContext The current frame's update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             for (auto [entity, tsc, ac, sc, active] : updateContext.view<
                 THandle,
@@ -161,9 +163,7 @@ export namespace helios::gameplay::combat::systems {
                 assert(aimDirection.isNormalized() && "Unexpected aimDirection.length()");
 
                 for (unsigned int i = 0; i < amount; i++) {
-                    updateContext.queueCommand<TCommandBuffer,
-                        helios::gameplay::spawn::commands::SpawnCommand
-                    >(
+                    cmdBuffer.template add<helios::gameplay::spawn::commands::SpawnCommand>(
                         spawnProfileId_,
                         SpawnContext{
                             EmitterContext{

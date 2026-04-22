@@ -82,6 +82,7 @@ export namespace helios::gameplay::bounds::systems {
     public:
         using Entity_type = THandle::Entity_type;
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         /**
          * @brief Updates all entities that may have left level bounds.
@@ -92,7 +93,7 @@ export namespace helios::gameplay::bounds::systems {
          *
          * @param updateContext Context containing deltaTime and other frame data.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             using namespace helios::physics::collision::types;
 
@@ -140,7 +141,7 @@ export namespace helios::gameplay::bounds::systems {
                         auto* sbp = entity.template get<helios::gameplay::spawn::components::SpawnedByProfileComponent<THandle>>();
                         assert(sbp && "Unexpected missing SpawnProfile");
 
-                        updateContext.queueCommand<TCommandBuffer, helios::gameplay::spawn::commands::DespawnCommand<THandle>>(
+                        cmdBuffer.template add<helios::gameplay::spawn::commands::DespawnCommand<THandle>>(
                             entity.handle(), sbp->spawnProfileId()
                         );
 

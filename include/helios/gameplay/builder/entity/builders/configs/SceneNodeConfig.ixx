@@ -52,7 +52,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @brief Validates that a RenderableComponent exists.
          */
         void ensureRenderableComponent() {
-            const auto* renderableComponent = entity_.get<helios::rendering::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = entity_.template get<helios::rendering::components::RenderableComponent<Handle_type>>();
             assert(renderableComponent && "Unexpected nullptr for RenderableComponent.");
         }
 
@@ -62,7 +62,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @param shouldBeAvailable Whether the component should exist.
          */
         void ensureSceneNode(const bool shouldBeAvailable) {
-            const auto* snc = entity_.get<helios::scene::components::SceneNodeComponent<Handle_type>>();
+            const auto* snc = entity_.template get<helios::scene::components::SceneNodeComponent<Handle_type>>();
 
             if (shouldBeAvailable) {
                 assert(snc && "Unexpected nullptr for SceneNodeComponent.");
@@ -92,7 +92,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
             ensureSceneNode(false);
             ensureRenderableComponent();
 
-            const auto* renderableComponent = entity_.get<helios::rendering::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = entity_.template get<helios::rendering::components::RenderableComponent<Handle_type>>();
 
             auto renderable = renderableComponent->shareRenderable();
 
@@ -124,13 +124,13 @@ export namespace helios::gameplay::builder::entity::builders::configs {
             parent.template getOrAdd<helios::ecs::components::HierarchyComponent<Handle_type>>().addChild(entity_.handle());
             entity_.template getOrAdd<helios::ecs::components::HierarchyComponent<Handle_type>>().setParent(parent.handle());
 
-            const auto* renderableComponent = entity_.get<helios::rendering::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = entity_.template get<helios::rendering::components::RenderableComponent<Handle_type>>();
 
             auto renderable = renderableComponent->shareRenderable();
 
             auto node = std::make_unique<helios::scene::SceneNode>(renderable);
 
-            auto* psn = parent.get<helios::scene::components::SceneNodeComponent<Handle_type>>();
+            auto* psn = parent.template get<helios::scene::components::SceneNodeComponent<Handle_type>>();
             assert(psn && "Unexpected missing SceneNodeComponent for parent Entity");
             assert(psn->sceneNode() && "Unexpected missing SceneNode for parent Entity");
 
@@ -151,7 +151,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
         SceneNodeConfig& inherit(helios::math::TransformType transformType) {
             ensureSceneNode(true);
 
-            entity_.get<helios::scene::components::SceneNodeComponent<Handle_type>>()
+            entity_.template get<helios::scene::components::SceneNodeComponent<Handle_type>>()
                        ->sceneNode()
                        ->setInheritance(transformType) ;
 

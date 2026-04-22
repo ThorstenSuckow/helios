@@ -14,11 +14,9 @@ import helios.input.types.Gamepad;
 
 import helios.ecs;
 import helios.runtime;
-
-using namespace helios::input::types;
-
 import helios.runtime.world.tags.SystemRole;
 
+using namespace helios::input::types;
 export namespace helios::gameplay::matchstate::systems {
 
     /**

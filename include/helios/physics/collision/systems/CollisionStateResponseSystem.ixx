@@ -35,15 +35,13 @@ import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
 import helios.ecs.components.Active;
 
+import helios.runtime.world.tags.SystemRole;
+
 using namespace helios::physics::collision::components;
 using namespace helios::physics::collision::types;
 using namespace helios::gameplay::spawn::commands;
 using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::messaging::command::concepts;
-
-
-import helios.runtime.world.tags.SystemRole;
-
 export namespace helios::physics::collision::systems {
 
     /**
@@ -69,6 +67,7 @@ export namespace helios::physics::collision::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         /**
          * @brief Processes collision states and issues response commands.
@@ -79,7 +78,7 @@ export namespace helios::physics::collision::systems {
          *
          * @param updateContext Context providing access to the command buffer and world.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             for (auto [entity, csc, sbp, active] : updateContext.view<
                 THandle,
@@ -113,7 +112,7 @@ export namespace helios::physics::collision::systems {
 
 
                 if (hasFlag(collisionBehavior, CollisionBehavior::Despawn)) {
-                    updateContext.queueCommand<TCommandBuffer, DespawnCommand<THandle>>(
+                    cmdBuffer.template add<DespawnCommand<THandle>>(
                         entity.handle(), sbp->spawnProfileId());
                 }
             }

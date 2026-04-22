@@ -58,7 +58,7 @@ export namespace helios::scene::systems {
      * @tparam CullingStrategy
      */
     template<typename THandle, typename CullingStrategy, typename TCommandBuffer = NullCommandBuffer>
-    requires IsFrustumCullerLike<CullingStrategy> && IsCommandBufferLike<TCommandBuffer>
+    requires IsFrustumCullerLike<CullingStrategy, THandle> && IsCommandBufferLike<TCommandBuffer>
     class SceneMemberRenderExtractionSystem {
 
         CullingStrategy cullingStrategy_;
@@ -66,9 +66,10 @@ export namespace helios::scene::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
 
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
 
             for (auto [entity, vc, active] : updateContext.view<
@@ -94,9 +95,9 @@ export namespace helios::scene::systems {
                 >().whereEnabled()) {
                     if (smc->sceneHandle() == sceneHandle) {
 
-                        auto* mcOverride = innerEntity.get<MaterialOverrideComponent>();
+                        auto* mcOverride = innerEntity.template get<MaterialOverrideComponent>();
 
-                        updateContext.queueCommand<TCommandBuffer, RenderCommand>(
+                        cmdBuffer.template add<RenderCommand>(
                             SceneMemberRenderContext{
                                 innerEntity.handle(),
                                 viewportHandle,

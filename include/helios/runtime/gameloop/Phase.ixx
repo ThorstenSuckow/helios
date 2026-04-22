@@ -7,18 +7,18 @@ module;
 #include <memory>
 #include <vector>
 
-export module helios.runtime.gameloop.Phase;
+export module helios.runtime.gameloop:Phase;
 
-import helios.runtime.gameloop.PassCommitListener;
-import helios.runtime.gameloop.Pass;
-import helios.runtime.gameloop.TypedPass;
+import :PassCommitListener;
+import :Pass;
+import :TypedPass;
+import :CommitPoint;
 
 import helios.runtime.world.UpdateContext;
 import helios.runtime.world.GameWorld;
 
 import helios.runtime.world.Session;
 
-import helios.runtime.gameloop.CommitPoint;
 
 import helios.gameplay.gamestate.types;
 

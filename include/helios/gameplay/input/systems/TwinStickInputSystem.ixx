@@ -4,8 +4,6 @@
  */
 module;
 
-#include <memory>
-
 export module helios.gameplay.input.systems.TwinStickInputSystem;
 
 import helios.math.types;
@@ -67,6 +65,7 @@ export namespace helios::gameplay::input::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         /**
          * @brief Constructs a TwinStickInputSystem for the specified Entity.
@@ -81,7 +80,7 @@ export namespace helios::gameplay::input::systems {
          *
          * @param updateContext Context containing input snapshot and command buffer.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             auto& inputSnapshot = updateContext.inputSnapshot();
 
@@ -97,11 +96,11 @@ export namespace helios::gameplay::input::systems {
             float finalFreq = 0.0f;
             auto rdir = helios::math::vec2f{0.0f, 0.0f};
 
-            if (entityHandle_.has<DeadTagComponent>()) {
-                updateContext.queueCommand<TCommandBuffer, helios::physics::motion::commands::Move2DCommand<THandle>>(
+            if (entityHandle_.template has<DeadTagComponent>()) {
+                cmdBuffer.template add<helios::physics::motion::commands::Move2DCommand<THandle>>(
                     entityHandle_, ldir, finalSpeed
                 );
-                updateContext.queueCommand<TCommandBuffer, helios::gameplay::combat::commands::Aim2DCommand<THandle>>(
+                cmdBuffer.template add<helios::gameplay::combat::commands::Aim2DCommand<THandle>>(
                     entityHandle_, rdir, finalFreq
                 );
                 return;
@@ -115,11 +114,11 @@ export namespace helios::gameplay::input::systems {
              * @todo DO NOT POST IF input is already inactive in shootComponent
              * and no input was detected (after normalizing)
              */
-            updateContext.queueCommand<TCommandBuffer, helios::physics::motion::commands::Move2DCommand<THandle>>(
+            cmdBuffer.template add<helios::physics::motion::commands::Move2DCommand<THandle>>(
                 entityHandle_, ldir, finalSpeed
             );
 
-            updateContext.queueCommand<TCommandBuffer, helios::physics::motion::commands::SteeringCommand<THandle>>(
+            cmdBuffer.template add<helios::physics::motion::commands::SteeringCommand<THandle>>(
                 entityHandle_, ldir, finalSpeed
             );
 
@@ -128,7 +127,7 @@ export namespace helios::gameplay::input::systems {
                 finalFreq = freq;
             }
 
-            updateContext.queueCommand<TCommandBuffer, helios::gameplay::combat::commands::Aim2DCommand<THandle>>(
+            cmdBuffer.template add<helios::gameplay::combat::commands::Aim2DCommand<THandle>>(
                 entityHandle_, rdir, finalFreq
             );
 
@@ -136,13 +135,13 @@ export namespace helios::gameplay::input::systems {
                 // right trigger: shooting
                 const auto rightTrigger = inputSnapshot.gamepadState().triggerRight();
                 if (rightTrigger > 0.0f) {
-                    updateContext.queueCommand<TCommandBuffer, helios::gameplay::combat::commands::ShootCommand<THandle>>(
+                    cmdBuffer.template add<helios::gameplay::combat::commands::ShootCommand<THandle>>(
                         entityHandle_, rightTrigger
                     );
                 }
             } else {
                 if (finalFreq > 0.0f) {
-                    updateContext.queueCommand<TCommandBuffer, helios::gameplay::combat::commands::ShootCommand<THandle>>(
+                    cmdBuffer.template add<helios::gameplay::combat::commands::ShootCommand<THandle>>(
                         entityHandle_, finalFreq
                     );
                 }

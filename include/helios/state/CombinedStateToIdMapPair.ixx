@@ -13,6 +13,7 @@ module;
 #include <iterator>
 #include <bit>
 #include <cstddef>
+#include <utility>
 
 export module helios.state.CombinedStateToIdMapPair;
 

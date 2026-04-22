@@ -38,6 +38,8 @@ export namespace helios::platform::lifecycle::systems {
 
         public:
 
+        using CommandBuffer_type = TCommandBuffer;
+
         /**
          * @brief Engine role marker used by runtime system registries.
          */
@@ -48,10 +50,10 @@ export namespace helios::platform::lifecycle::systems {
          *
          * @param updateContext Frame-local update context.
          */
-        void update(UpdateContext& updateContext) noexcept {
+        void update(UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             if (!updateContext.session().isInitialized()) {
-                 updateContext.queueCommand<TCommandBuffer, PlatformInitCommand>();
+                 cmdBuffer.template add<PlatformInitCommand>();
             }
         }
 

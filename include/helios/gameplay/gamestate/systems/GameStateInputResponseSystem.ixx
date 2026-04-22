@@ -48,13 +48,14 @@ export namespace helios::gameplay::gamestate::systems {
     public:
 
         using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using CommandBuffer_type = TCommandBuffer;
 
         /**
          * @brief Processes input and submits state transition commands.
          *
          * @param updateContext The current update context.
          */
-        void update(helios::runtime::world::UpdateContext& updateContext) noexcept {
+        void update(helios::runtime::world::UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             auto gameState = updateContext.session().state<GameState>();
 
@@ -62,13 +63,13 @@ export namespace helios::gameplay::gamestate::systems {
 
                 switch (gameState) {
                     case GameState::Title:
-                        updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
+                        cmdBuffer.template add<StateCommand<GameState>>(
                             StateTransitionRequest<GameState>(GameState::Title, GameStateTransitionId::ReadyMatchRequest)
                         );
                         break;
 
                     case GameState::Running:
-                        updateContext.queueCommand<TCommandBuffer, StateCommand<GameState>>(
+                        cmdBuffer.template add<StateCommand<GameState>>(
                             StateTransitionRequest<GameState>(GameState::Running, GameStateTransitionId::TogglePause)
                         );
                         break;

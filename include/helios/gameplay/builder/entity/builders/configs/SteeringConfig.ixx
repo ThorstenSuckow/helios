@@ -52,7 +52,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         SteeringConfig& instantSteering(const bool useInstantRotation) {
-            entity_.get<helios::physics::motion::components::SteeringComponent<Handle_type>>()
+            entity_.template get<helios::physics::motion::components::SteeringComponent<Handle_type>>()
                       ->setUseInstantRotation(useInstantRotation);
 
             return *this;
@@ -66,7 +66,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         SteeringConfig& steeringSetsDirection(const bool directionFromSteering) {
-            entity_.get<helios::physics::motion::components::SteeringComponent<Handle_type>>()
+            entity_.template get<helios::physics::motion::components::SteeringComponent<Handle_type>>()
                       ->setDirectionFromSteering(directionFromSteering);
 
             return *this;

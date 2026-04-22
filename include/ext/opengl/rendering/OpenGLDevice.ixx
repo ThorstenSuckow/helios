@@ -10,6 +10,7 @@ module;
 #include <stdexcept>
 #include <utility>
 #include <cassert>
+#include <memory>
 
 export module helios.ext.opengl.rendering.OpenGLDevice;
 
@@ -253,7 +254,7 @@ export namespace helios::ext::opengl::rendering {
          *
          * @see OpenGLGlyphTextRenderer::addFontFamily()
          */
-        [[nodiscard]] helios::rendering::text::TextRenderer& textRenderer() const noexcept {
+        [[nodiscard]] helios::rendering::text::TextRenderer& textRenderer() const noexcept override {
             return *textRenderer_;
         }
 

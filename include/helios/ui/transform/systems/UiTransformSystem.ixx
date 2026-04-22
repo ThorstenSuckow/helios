@@ -6,6 +6,7 @@ module;
 
 #include <cassert>
 #include <utility>
+#include <span>
 
 export module helios.ui.transform.systems.UiTransformSystem;
 
@@ -101,6 +102,9 @@ export namespace helios::ui::transform::systems {
 
                 case helios::ui::layout::Anchor::BottomLeft:
                     return unanchored;
+
+                default:
+                    break;
             }
 
             assert(false && "Unreachable!");
@@ -183,7 +187,7 @@ export namespace helios::ui::transform::systems {
 
                         using Handle = typename std::remove_cvref_t<decltype(entity)>::Handle_type;
 
-                        auto* hc = entity.get<helios::ecs::components::HierarchyComponent<Handle>>();
+                        auto* hc = entity.template get<helios::ecs::components::HierarchyComponent<Handle>>();
 
                         if (!hc || !hc->parent()) {
                             continue;
@@ -191,8 +195,8 @@ export namespace helios::ui::transform::systems {
 
                         // we rely on the parent entity so we do not have to wait for the SceneGraph sync
                         if (auto parentGo = updateContext.find(hc->parent().value())) {
-                            auto* pmaabbcc = parentGo->get<rendering::model::components::ModelAabbComponent<Handle>>();
-                            auto* pctc = parentGo->get<spatial::transform::components::ComposeTransformComponent<Handle>>();
+                            auto* pmaabbcc = parentGo->template get<rendering::model::components::ModelAabbComponent<Handle>>();
+                            auto* pctc = parentGo->template get<spatial::transform::components::ComposeTransformComponent<Handle>>();
 
                             auto size = pmaabbcc->aabb().size() * pctc->localScaling();
 

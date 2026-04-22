@@ -28,14 +28,11 @@ import helios.gameplay.spawn.commands.DespawnCommand;
 
 import helios.ecs.components.Active;
 
+import helios.runtime.world.tags.SystemRole;
+
 using namespace helios::physics::collision::components;
 using namespace helios::physics::collision::types;
 using namespace helios::gameplay::spawn::commands;
-
-
-
-import helios.runtime.world.tags.SystemRole;
-
 export namespace helios::physics::collision::systems {
 
     /**

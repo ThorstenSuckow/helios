@@ -20,7 +20,7 @@ import helios.runtime.world.GameObject;
 
 import helios.runtime.world.UpdateContext;
 
-import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 
 import helios.runtime.world.tags.ManagerRole;
 
@@ -68,7 +68,6 @@ export namespace helios::ui {
         /**
          * @brief Processes all pending commands by invoking their registered policies.
          *
-         * @param gameWorld The game world.
          * @param update_context The current update context.
          */
         void flush(
@@ -119,12 +118,12 @@ export namespace helios::ui {
         }
 
         /**
-         * @brief Initializes the manager and registers it with the game world.
+         * @brief Initializes the manager and registers it in the command-handler registry.
          *
-         * @param gameWorld The game world to register with.
+         * @param commandHandlerRegistry The command-handler registry to register with.
          */
-        void init(helios::runtime::world::GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<UiActionCommand<THandle>>(*this);
+        void init(helios::runtime::messaging::command::CommandHandlerRegistry& commandHandlerRegistry) {
+            commandHandlerRegistry.registerHandler<UiActionCommand<THandle>>(*this);
         }
 
     };

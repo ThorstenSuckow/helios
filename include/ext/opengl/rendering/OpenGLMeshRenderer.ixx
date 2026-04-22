@@ -59,11 +59,6 @@ export namespace helios::ext::opengl::rendering {
      */
     class OpenGLMeshRenderer {
 
-
-
-        friend class OpenGLDevice;
-        friend class OpenGLBackend;
-
         /**
          * @brief Cached pointer to the last used shader for state optimization.
          *
@@ -78,6 +73,9 @@ export namespace helios::ext::opengl::rendering {
          * Used to avoid redundant VAO bindings. Reset at the beginning of each render pass.
          */
         mutable unsigned int lastVao_ = 0;
+
+
+    public:
 
         /**
          * @brief Initializes the renderer.
@@ -105,8 +103,6 @@ export namespace helios::ext::opengl::rendering {
             lastShader_ = nullptr;
             lastVao_ = 0;
         }
-
-    public:
 
 
         /**

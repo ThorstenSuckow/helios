@@ -6,12 +6,12 @@ module;
 
 
 
-export module helios.gameplay.timing.types.TimerState;
+export module helios.runtime.timing.types.TimerState;
 
-export namespace helios::gameplay::timing::types {
+export namespace helios::runtime::timing::types {
 
     /**
-     * @brief Represents the state of a GameTimer.
+     * @brief Represents the state of a Timer.
      */
     enum class TimerState {
 

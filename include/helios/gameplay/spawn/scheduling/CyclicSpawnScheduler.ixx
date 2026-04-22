@@ -90,8 +90,8 @@ export namespace helios::gameplay::spawn::scheduling {
      * @see DefaultSpawnScheduler
      * @see RuleConfig
      */
-    template<typename THandle, std::size_t N>
-    class CyclicSpawnScheduler : public SpawnScheduler<THandle> {
+    template<typename THandle, typename TWorld, std::size_t N>
+    class CyclicSpawnScheduler : public SpawnScheduler<THandle, TWorld> {
 
         /**
          * @brief Fixed-size ring buffer of rule configurations.
@@ -119,7 +119,7 @@ export namespace helios::gameplay::spawn::scheduling {
         /**
          * @brief Processor for evaluating individual rules.
          */
-        DefaultRuleProcessor<THandle> ruleProcessor_;
+        DefaultRuleProcessor<THandle, TWorld> ruleProcessor_;
 
     public:
 
@@ -135,20 +135,20 @@ export namespace helios::gameplay::spawn::scheduling {
          * @param spawnContext Context for spawn operations.
          */
         void evaluate(
-            const GameWorld& gameWorld,
+            const TWorld& world,
             const UpdateContext& updateContext,
             const SpawnContext<THandle>& spawnContext ) noexcept override {
 
-            SpawnScheduler<THandle>::scheduledSpawnPlans_.clear();
+            SpawnScheduler<THandle, TWorld>::scheduledSpawnPlans_.clear();
 
             // Process queue
             auto& [spawnProfileId, spawnRule] = ringBuffer_[cursor_];
             auto spawnPlan = ruleProcessor_.processRule(
-                gameWorld, updateContext, spawnContext, spawnProfileId, *spawnRule,
+                world, updateContext, spawnContext, spawnProfileId, *spawnRule,
                 spawnRuleStates_[spawnRule->spawnRuleId()]);
 
             if (spawnPlan.amount  > 0) {
-                SpawnScheduler<THandle>::scheduledSpawnPlans_.push_back({
+                SpawnScheduler<THandle, TWorld>::scheduledSpawnPlans_.push_back({
                     spawnProfileId,
                     std::move(spawnPlan),
                     spawnContext

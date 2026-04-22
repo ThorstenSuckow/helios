@@ -57,7 +57,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& anchor(const helios::ui::layout::Anchor anchor) {
-            entity_.get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
+            entity_.template get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setAnchor(anchor);
             return *this;
         }
@@ -70,7 +70,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& viewport(const helios::rendering::viewport::types::ViewportHandle viewportHandle) {
-            entity_.get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
+            entity_.template get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setViewportHandle(viewportHandle);
             return *this;
         }
@@ -83,7 +83,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& pivot(const helios::ui::layout::Anchor anchor) {
-            entity_.get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
+            entity_.template get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setPivot(anchor);
             return *this;
         }
@@ -96,7 +96,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @return Reference to this config for chaining.
          */
         UiTransformConfig& offsets(const helios::math::vec4f offsets) {
-            entity_.get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
+            entity_.template get<helios::ui::transform::components::UiTransformComponent<Handle_type>>()
                         ->setOffsets(offsets);
             return *this;
         }

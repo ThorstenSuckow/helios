@@ -109,7 +109,7 @@ export namespace helios::ui::widgets::systems {
 
                     if (mc->menuItems().size() > mc->selectedIndex()) {
                         auto menuItem = updateContext.find(mc->menuItems()[mc->selectedIndex()]);
-                        menuItem->getOrAdd<UiFocusComponent>();
+                        menuItem->template getOrAdd<UiFocusComponent>();
                     }
                     break;
                 }
@@ -198,7 +198,7 @@ export namespace helios::ui::widgets::systems {
 
             for (auto& handle : inactiveItems_) {
                 if (auto entity = updateContext.find(handle)) {
-                    entity->remove<UiFocusComponent>();
+                    entity->template remove<UiFocusComponent>();
                 }
             }
 

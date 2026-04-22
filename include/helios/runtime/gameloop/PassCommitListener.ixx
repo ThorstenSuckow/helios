@@ -5,9 +5,9 @@
 module;
 
 
-export module helios.runtime.gameloop.PassCommitListener;
+export module helios.runtime.gameloop:PassCommitListener;
 
-import helios.runtime.gameloop.CommitPoint;
+import :CommitPoint;
 
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;

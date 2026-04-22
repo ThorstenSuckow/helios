@@ -45,7 +45,7 @@ export namespace helios::gameplay::builder::spawnSystem {
      * @see SpawnRuleConfig
      * @see SpawnSystemConfigurator
      */
-    template<typename THandle>
+    template<typename THandle, typename TWorld>
     class SpawnSystemFactory {
 
     public:
@@ -58,11 +58,11 @@ export namespace helios::gameplay::builder::spawnSystem {
          *
          * @return A SpawnSystemConfigurator for chained pool() calls.
          */
-        static helios::gameplay::builder::spawnSystem::builders::configs::SpawnSystemConfigurator<THandle> configure(
+        static helios::gameplay::builder::spawnSystem::builders::configs::SpawnSystemConfigurator<THandle, TWorld> configure(
             helios::runtime::pooling::EntityPoolManager<THandle>& poolManager,
-            helios::gameplay::spawn::SpawnManager<THandle>& spawnManager
+            helios::gameplay::spawn::SpawnManager<THandle, TWorld>& spawnManager
         ) {
-            return helios::gameplay::builder::spawnSystem::builders::configs::SpawnSystemConfigurator<THandle>{
+            return helios::gameplay::builder::spawnSystem::builders::configs::SpawnSystemConfigurator<THandle, TWorld>{
                 poolManager, spawnManager
             };
         }

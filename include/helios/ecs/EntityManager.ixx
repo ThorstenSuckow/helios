@@ -37,6 +37,8 @@ export namespace helios::ecs {
      * - **Entity Destruction:** Removes all components and invalidates the handle.
      * - **Component Storage:** Maintains a vector of `SparseSet` instances, one per
      *   component type, indexed by `TypeIndexer`.
+     * - **Ownership Semantics:** Copy construction/assignment are deleted;
+     *   `EntityManager` is move-enabled only.
      *
      * ## Usage
      *
@@ -78,6 +80,15 @@ export namespace helios::ecs {
         using StrongId_type = Handle_type::StrongId_type;
         using ComponentTypeId_type = ComponentTypeId<Handle_type>;
         using ComponentOpsRegistry_type = ComponentOpsRegistry<Handle_type>;
+
+        /**
+         * @brief Non-copyable: copying an EntityManager is explicitly disabled.
+         */
+        EntityManager(const EntityManager&) = delete;
+        EntityManager& operator=(const EntityManager&) = delete;
+
+        EntityManager(EntityManager&&) noexcept = default;
+        EntityManager& operator=(EntityManager&&) noexcept = default;
 
         /**
          * @brief Constructs an EntityManager with the given capacity.

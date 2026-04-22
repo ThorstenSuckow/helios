@@ -53,6 +53,8 @@ export namespace helios::platform::lifecycle::systems {
 
     public:
 
+        using CommandBuffer_type = TCommandBuffer;
+
         /**
          * @brief Engine role marker used by runtime registries.
          */
@@ -63,7 +65,7 @@ export namespace helios::platform::lifecycle::systems {
          *
          * @param updateContext Frame-local update context.
          */
-        void update(UpdateContext& updateContext) noexcept {
+        void update(UpdateContext& updateContext, TCommandBuffer& cmdBuffer) noexcept {
 
             if (updateContext.view<
                 THandle,
@@ -71,9 +73,7 @@ export namespace helios::platform::lifecycle::systems {
                 Active<THandle>
                 >().whereEnabled().empty()) {
 
-                updateContext.queueCommand<
-                    TCommandBuffer,
-                    StateCommand<GameState>>(
+                cmdBuffer.template add<StateCommand<GameState>>(
                     StateTransitionRequest<GameState>(
                         updateContext.session().state<GameState>(),
                         GameStateTransitionId::WarmupDoneSignal

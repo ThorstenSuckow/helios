@@ -30,7 +30,9 @@ import helios.rendering.shader.commands;
 import helios.platform.opengl.components.OpenGLShaderComponent;
 
 import helios.runtime.world.EngineWorld;
+import helios.runtime.messaging.command.concepts;
 import helios.runtime.messaging.command.NullCommandBuffer;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 import helios.runtime.concepts;
 
 using namespace helios::runtime::world;
@@ -245,14 +247,11 @@ export namespace helios::platform::opengl {
         /**
          * @brief Registers compile command handlers in the runtime world.
          *
-         * @param gameWorld Runtime world used for command-handler registration.
+         * @param commandHandlerRegistry Registry used for command-handler registration.
          */
-        void init(helios::runtime::world::GameWorld& gameWorld) noexcept {
-
-            gameWorld.registerCommandHandler<
-                ShaderCompileCommand<THandle>,
-                ShaderBatchCompileCommand<THandle>
-            >(*this);
+        void init(helios::runtime::messaging::command::CommandHandlerRegistry& commandHandlerRegistry) noexcept {
+            commandHandlerRegistry.registerHandler<ShaderCompileCommand<THandle>>(*this);
+            commandHandlerRegistry.registerHandler<ShaderBatchCompileCommand<THandle>>(*this);
         }
     };
 

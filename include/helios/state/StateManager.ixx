@@ -25,7 +25,7 @@ import helios.runtime.world.GameObject;
 
 import helios.runtime.world.UpdateContext;
 
-import helios.runtime.world.GameWorld;
+import helios.runtime.messaging.command.CommandHandlerRegistry;
 import helios.runtime.world.Session;
 
 import helios.runtime.world.Session;
@@ -255,13 +255,13 @@ export namespace helios::state {
         };
 
         /**
-         * @brief Initializes the manager and registers with GameWorld.
+         * @brief Initializes the manager and registers command handlers.
          *
-         * @param gameWorld The game world to register with.
+         * @param commandHandlerRegistry The command-handler registry to register with.
          */
-        void init(helios::runtime::world::GameWorld& gameWorld) {
-            gameWorld.registerCommandHandler<StateCommand<StateType>>(*this);
-            gameWorld.registerCommandHandler<DelayedStateCommand<StateType>>(*this);
+        void init(helios::runtime::messaging::command::CommandHandlerRegistry& commandHandlerRegistry) {
+            commandHandlerRegistry.registerHandler<StateCommand<StateType>>(*this);
+            commandHandlerRegistry.registerHandler<DelayedStateCommand<StateType>>(*this);
         }
 
         /**

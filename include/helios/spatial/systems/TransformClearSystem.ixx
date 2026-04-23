@@ -6,22 +6,22 @@ module;
 
 
 
-export module helios.spatial.transform.systems.TransformClearSystem;
+export module helios.spatial.systems.TransformClearSystem;
 
 import helios.runtime.world.GameWorld;
 
 import helios.runtime.world.UpdateContext;
 
 import helios.scene.components.SceneNodeComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.components.ComposeTransformComponent;
 
-import helios.spatial.transform.components.ScaleStateComponent;
+import helios.spatial.components.ScaleStateComponent;
 
 import helios.ecs.components.Active;
 
 import helios.runtime.world.tags.SystemRole;
 
-export namespace helios::spatial::transform::systems {
+export namespace helios::spatial::systems {
 
     /**
      * @brief System that clears the dirty state of TransformComponents and ScaleComponents
@@ -38,7 +38,7 @@ export namespace helios::spatial::transform::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
 
         /**
          * @brief Updates the system, clearing dirty flags of Transform- and ScaleStateComponent.
@@ -49,7 +49,7 @@ export namespace helios::spatial::transform::systems {
 
             for (auto [entity, tc, active] : updateContext.view<
                 THandle,
-                helios::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::spatial::components::ComposeTransformComponent<THandle>,
                 helios::ecs::components::Active<THandle>
                 >().whereEnabled()) {
                 tc->clearDirty();
@@ -57,7 +57,7 @@ export namespace helios::spatial::transform::systems {
 
             for (auto [entity, sc, active] : updateContext.view<
                 THandle,
-                helios::spatial::transform::components::ScaleStateComponent<THandle>,
+                helios::spatial::components::ScaleStateComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
                 sc->clearDirty();

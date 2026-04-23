@@ -1,16 +1,19 @@
-
+/**
+ * @file ScaleStateComponent.ixx
+ * @brief Component for managing the dimensions of an entity.
+ */
 module;
 
-export module helios.spatial.transform.components.DimensionComponent;
+export module helios.spatial.components.ScaleStateComponent;
 
 import helios.runtime.world.GameObject;
 import helios.math.types;
 
-import helios.core.spatial.Transform;
+import helios.core.spatial;
 import helios.core.units.Unit;
 
 
-export namespace helios::spatial::transform::components {
+export namespace helios::spatial::components {
 
     /**
      * @brief Component that defines the physical dimensions (scale) of an entity.
@@ -21,7 +24,7 @@ export namespace helios::spatial::transform::components {
      * to react to scale updates.
      */
     template<typename THandle>
-    class DimensionComponent  {
+    class ScaleStateComponent  {
         /**
          * @brief Width of the entity.
          */
@@ -78,23 +81,17 @@ export namespace helios::spatial::transform::components {
         }
 
         /**
-         * @brief Constructs a DimensionComponent with specified dimensions and unit.
+         * @brief Constructs a ScaleStateComponent with specified dimensions and unit.
          *
          * @param width Width of the entity.
          * @param height Height of the entity.
          * @param depth Depth of the entity.
          * @param unit Unit of measurement (default: Meter).
          */
-        explicit DimensionComponent(
-            const float width,
-            const float height,
-            const float depth,
-            const helios::core::units::Unit unit = helios::core::units::Unit::Meter) :
+        explicit ScaleStateComponent(const float width, const float height, const float depth, const helios::core::units::Unit unit) :
         width_(width), height_(height), depth_(depth), unit_(unit) {}
 
-        explicit DimensionComponent(
-            const helios::math::vec3f scale,
-            const helios::core::units::Unit unit = helios::core::units::Unit::Meter) :
+        explicit ScaleStateComponent(const helios::math::vec3f scale, const helios::core::units::Unit unit = helios::core::units::Unit::Meter) :
             width_(scale[0]), height_(scale[1]), depth_(scale[2]), unit_(unit) {}
 
         /**
@@ -102,16 +99,16 @@ export namespace helios::spatial::transform::components {
          *
          * @param other The component to copy from.
          */
-        DimensionComponent(const DimensionComponent& other) :
+        ScaleStateComponent(const ScaleStateComponent& other) :
             width_(other.width_),
             height_(other.height_),
             depth_(other.depth_),
             unit_(other.unit_),
             isDirty_(true) {}
 
-        DimensionComponent& operator=(const DimensionComponent&) = default;
-        DimensionComponent(DimensionComponent&&) noexcept = default;
-        DimensionComponent& operator=(DimensionComponent&&) noexcept = default;
+        ScaleStateComponent& operator=(const ScaleStateComponent&) = default;
+        ScaleStateComponent(ScaleStateComponent&&) noexcept = default;
+        ScaleStateComponent& operator=(ScaleStateComponent&&) noexcept = default;
 
 
 
@@ -177,7 +174,7 @@ export namespace helios::spatial::transform::components {
          * @param depth New depth.
          * @param unit New unit of measurement (default: Meter).
          */
-        void setDimensions(const float width, const float height, const float depth,
+        void setScale(const float width, const float height, const float depth,
                       const helios::core::units::Unit unit = helios::core::units::Unit::Meter
         ) noexcept {
 

@@ -1,27 +1,27 @@
 /**
- * @file LocalTransformComponent.ixx
- * @brief Component for managing local transformations of a GameObject.
+ * @file ComposeTransformComponent.ixx
+ * @brief Component for managing local and world transformations of a GameObject.
  */
 module;
 
-export module helios.spatial.transform.components.LocalTransformComponent;
+export module helios.spatial.components.ComposeTransformComponent;
 
 import helios.math.types;
 
-import helios.core.spatial.Transform;
+import helios.core.spatial;
 
-export namespace helios::spatial::transform::components {
+export namespace helios::spatial::components {
 
     /**
      * @brief Component that holds transformation data (position, rotation, scale).
      *
-     * @details The LocalTransformComponent manages the spatial state of a GameObject.
+     * @details The ComposeTransformComponent manages the spatial state of a GameObject.
      * It stores the local transform (relative to parent) and the computed world transform.
      * Changes to local properties mark the component as dirty, signaling systems to
      * recompute the world transform.
      */
     template<typename THandle>
-    class LocalTransformComponent {
+    class ComposeTransformComponent {
 
         /**
          * @brief The local transformation (translation, rotation, scale).
@@ -32,6 +32,11 @@ export namespace helios::spatial::transform::components {
          * @brief Flag indicating if the transform has changed since the last update.
          */
         bool isDirty_= true;
+
+        /**
+         * @brief The computed world transformation matrix.
+         */
+        helios::math::mat4f worldTransform_ = helios::math::mat4f::identity();
 
         /**
          * @brief Whether this component is enabled.
@@ -66,20 +71,21 @@ export namespace helios::spatial::transform::components {
         /**
          * @brief Default constructor.
          */
-        LocalTransformComponent() = default;
+        ComposeTransformComponent() = default;
 
         /**
          * @brief Copy constructor.
          *
          * @param other The component to copy from.
          */
-        LocalTransformComponent(const LocalTransformComponent& other) :
+        ComposeTransformComponent(const ComposeTransformComponent& other) :
             transform_(other.transform_),
+            worldTransform_(other.worldTransform_),
             isDirty_(true){}
 
-        LocalTransformComponent& operator=(const LocalTransformComponent&) = default;
-        LocalTransformComponent(LocalTransformComponent&&) noexcept = default;
-        LocalTransformComponent& operator=(LocalTransformComponent&&) noexcept = default;
+        ComposeTransformComponent& operator=(const ComposeTransformComponent&) = default;
+        ComposeTransformComponent(ComposeTransformComponent&&) noexcept = default;
+        ComposeTransformComponent& operator=(ComposeTransformComponent&&) noexcept = default;
 
         /**
          * @brief Checks if the transform is dirty.
@@ -120,7 +126,7 @@ export namespace helios::spatial::transform::components {
          *
          * @return The 4x4 matrix representing local translation, rotation, and scale.
          */
-        [[nodiscard]] helios::math::mat4f transform() const noexcept {
+        [[nodiscard]] helios::math::mat4f localTransform() const noexcept {
             return transform_.transform();
         }
 
@@ -131,7 +137,7 @@ export namespace helios::spatial::transform::components {
          * @param scale The new scale vector.
          * @return Reference to this component for chaining.
          */
-        LocalTransformComponent& setScale(const helios::math::vec3f& scale) noexcept {
+        ComposeTransformComponent& setLocalScale(const helios::math::vec3f& scale) noexcept {
             transform_.setScale(scale);
             isDirty_ = true;
             return *this;
@@ -144,7 +150,7 @@ export namespace helios::spatial::transform::components {
          * @param rotation The new rotation matrix.
          * @return Reference to this component for chaining.
          */
-        LocalTransformComponent& setRotation(const helios::math::mat4f& rotation) noexcept {
+        ComposeTransformComponent& setLocalRotation(const helios::math::mat4f& rotation) noexcept {
             transform_.setRotation(rotation);
             isDirty_ = true;
             return *this;
@@ -157,7 +163,7 @@ export namespace helios::spatial::transform::components {
          * @param translation The new position vector.
          * @return Reference to this component for chaining.
          */
-        LocalTransformComponent& setTranslation(const helios::math::vec3f& translation) noexcept {
+        ComposeTransformComponent& setLocalTranslation(const helios::math::vec3f& translation) noexcept {
             transform_.setTranslation(translation);
             isDirty_ = true;
             return *this;
@@ -169,7 +175,7 @@ export namespace helios::spatial::transform::components {
          * @param translation The vector to add to the current position.
          * @return Reference to this component for chaining.
          */
-        LocalTransformComponent& translateBy(const helios::math::vec3f& translation) noexcept {
+        ComposeTransformComponent& translateLocalBy(const helios::math::vec3f& translation) noexcept {
             transform_.setTranslation(transform_.translation() + translation);
             isDirty_ = true;
             return *this;
@@ -180,7 +186,7 @@ export namespace helios::spatial::transform::components {
          *
          * @return The position relative to the parent.
          */
-        [[nodiscard]] helios::math::vec3f translation() const noexcept {
+        [[nodiscard]] helios::math::vec3f localTranslation() const noexcept {
             return transform_.translation();
         }
 
@@ -190,7 +196,7 @@ export namespace helios::spatial::transform::components {
          *
          * @return The rotation relative to the parent.
          */
-        [[nodiscard]] helios::math::mat4f rotation() const noexcept {
+        [[nodiscard]] helios::math::mat4f localRotation() const noexcept {
             return transform_.rotation();
         }
 
@@ -200,10 +206,37 @@ export namespace helios::spatial::transform::components {
          *
          * @return The scale relative to the parent.
          */
-        [[nodiscard]] helios::math::vec3f scaling() const noexcept {
+        [[nodiscard]] helios::math::vec3f localScaling() const noexcept {
             return transform_.scaling();
         }
 
+        /**
+         * @brief Sets the world transform matrix directly.
+         *
+         * @param m The new world transform matrix.
+         */
+        void setWorldTransform(const helios::math::mat4f& m) noexcept {
+            isDirty_ = true;
+            worldTransform_ = m;
+        }
+
+        /**
+         * @brief Returns the current world transform matrix.
+         *
+         * @return Const reference to the world transform.
+         */
+        const helios::math::mat4f& worldTransform() noexcept {
+            return worldTransform_;
+        }
+
+        /**
+         * @brief Extracts the world translation from the world transform.
+         *
+         * @return The global position vector.
+         */
+        helios::math::vec3f worldTranslation() noexcept {
+            return worldTransform_.translation();
+        }
     };
 
 }

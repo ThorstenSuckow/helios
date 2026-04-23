@@ -6,7 +6,7 @@ module;
 
 
 
-export module helios.spatial.transform.systems.ScaleSystem;
+export module helios.spatial.systems.ScaleSystem;
 
 
 import helios.math;
@@ -19,8 +19,8 @@ import helios.runtime.world.GameObject;
 import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 
-import helios.spatial.transform.components.ScaleStateComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.components.ScaleStateComponent;
+import helios.spatial.components.ComposeTransformComponent;
 
 import helios.rendering.model.components.ModelAabbComponent;
 
@@ -34,7 +34,7 @@ using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::messaging::command::concepts;
 
 using namespace helios::ecs::concepts;
-export namespace helios::spatial::transform::systems {
+export namespace helios::spatial::systems {
 
     /**
      * @brief System that applies scaling to entities based on their ScaleStateComponent.
@@ -56,7 +56,7 @@ export namespace helios::spatial::transform::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Updates scale for all entities with dirty ScaleComponents.
          *
@@ -71,8 +71,8 @@ export namespace helios::spatial::transform::systems {
             for (auto [entity, mab, sc, tc, active] : updateContext.view<
                 THandle,
                 helios::rendering::model::components::ModelAabbComponent<THandle>,
-                helios::spatial::transform::components::ScaleStateComponent<THandle>,
-                helios::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::spatial::components::ScaleStateComponent<THandle>,
+                helios::spatial::components::ComposeTransformComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 

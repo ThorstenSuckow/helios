@@ -6,7 +6,7 @@ module;
 
 #include <cmath>
 
-export module helios.spatial.transform.components.RotationStateComponent;
+export module helios.spatial.components.RotationStateComponent;
 
 
 
@@ -15,7 +15,7 @@ import helios.math;
 /**
  * @todo move to spatial transform
  */
-export namespace helios::spatial::transform::components {
+export namespace helios::spatial::components {
 
     /**
      * @brief Component that manages composite rotation from heading and spin rotations.

@@ -1,4 +1,4 @@
-# helios::spatial::transform::components
+# helios::spatial::components
 
 Transform state components for spatial management.
 
@@ -29,7 +29,7 @@ translation.setTranslation({0.0f, 0.0f, -5.0f});
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::spatial::transform::components
+@namespace helios::spatial::components
 @brief Transform state components for spatial management.
 @details This namespace contains components that store individual aspects of an entity's spatial state including position, scale, and composed transform matrices. These are processed by transform systems to produce final world transforms.
 </p></details>

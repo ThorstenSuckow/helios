@@ -4,13 +4,13 @@
  */
 module;
 
-export module helios.spatial.transform.components.WorldTransformStateComponent;
+export module helios.spatial.components.WorldTransformStateComponent;
 
 import helios.math.types;
 
-import helios.core.spatial.Transform;
+import helios.core.spatial;
 
-export namespace helios::spatial::transform::components {
+export namespace helios::spatial::components {
 
 
     template<typename THandle>

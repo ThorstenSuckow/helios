@@ -4,4 +4,6 @@
  */
 export module helios.spatial;
 
-export import helios.spatial.transform;
+export import helios.spatial.components;
+export import helios.spatial.systems;
+

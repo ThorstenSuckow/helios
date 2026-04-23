@@ -1,4 +1,4 @@
-# helios::spatial::transform::systems
+# helios::spatial::systems
 
 Transform composition systems.
 
@@ -7,7 +7,7 @@ Transform composition systems.
 
 <details>
 <summary>Doxygen</summary><p>
-@namespace helios::spatial::transform::systems
+@namespace helios::spatial::systems
 @brief Transform composition systems.
 @details This namespace contains systems that compose individual transform state components into final world transforms. These systems run each frame to update entity positions.
 </p></details>

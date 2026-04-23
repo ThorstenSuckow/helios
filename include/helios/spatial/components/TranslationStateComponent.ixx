@@ -6,13 +6,13 @@ module;
 
 #include <cmath>
 
-export module helios.spatial.transform.components.TranslationStateComponent;
+export module helios.spatial.components.TranslationStateComponent;
 
 
 
 import helios.math;
 
-export namespace helios::spatial::transform::components {
+export namespace helios::spatial::components {
 
     /**
      * @brief Component that holds the current translation (position) state.

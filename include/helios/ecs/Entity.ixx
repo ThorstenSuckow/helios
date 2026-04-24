@@ -98,7 +98,6 @@ export namespace helios::ecs {
         using ComponentTypeId_type = ComponentTypeId<Handle_type>;
         using ComponentOpsRegistry_type = ComponentOpsRegistry<Handle_type>;
         using HierarchyComponent_type = components::HierarchyComponent<Handle_type>;
-        using InactiveComponent_type = components::Inactive<Handle_type>;
         using ActiveComponent_type = components::Active<Handle_type>;
         
         /**
@@ -292,7 +291,6 @@ export namespace helios::ecs {
          * @brief Sets the activation state of this Entity.
          *
          * @details When deactivated:
-         * - An `Inactive` tag component is added
          * - The `Active` tag component is removed
          * - `onDeactivate()` is called on components that support it
          * - If a `HierarchyComponent` is present, it is marked dirty for propagation
@@ -311,26 +309,24 @@ export namespace helios::ecs {
          * @see HierarchyPropagationSystem
          */
         void setActive(const bool active) {
-            bool isActive = entityManager_->template  has<ActiveComponent_type>(entityHandle_);
-            bool isInActive = entityManager_->template  has<InactiveComponent_type>(entityHandle_);
+            bool isActive = entityManager_->template has<ActiveComponent_type>(entityHandle_);
+            bool isInActive = !isActive;
 
             if (!isActive && active) {
-                auto* hc =  entityManager_->template  get<HierarchyComponent_type>(entityHandle_);
+                auto* hc =  entityManager_->template get<HierarchyComponent_type>(entityHandle_);
                 if (hc) {
                     hc->markDirty();
                 }
 
-                entityManager_->template  remove<InactiveComponent_type>(entityHandle_);
-                entityManager_->template  emplaceOrGet<ActiveComponent_type>(entityHandle_);
+                entityManager_->template emplaceOrGet<ActiveComponent_type>(entityHandle_);
             }
 
             if (!isInActive && !active) {
-                auto* hc =  entityManager_->template  get<HierarchyComponent_type>(entityHandle_);
+                auto* hc = entityManager_->template get<HierarchyComponent_type>(entityHandle_);
                 if (hc) {
                     hc->markDirty();
                 }
 
-                entityManager_->template  emplaceOrGet<InactiveComponent_type>(entityHandle_);
                 entityManager_->template  remove<ActiveComponent_type>(entityHandle_);
             }
 
@@ -355,7 +351,7 @@ export namespace helios::ecs {
          * @return True if the entity has the Active tag component.
          */
         [[nodiscard]] bool isActive() const {
-            return entityManager_->template  has<ActiveComponent_type>(entityHandle_);
+            return entityManager_->template has<ActiveComponent_type>(entityHandle_);
         }
 
         /**

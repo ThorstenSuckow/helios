@@ -42,14 +42,29 @@ export namespace helios::ecs {
      * @tparam TEntityManager The concrete `EntityManager` specialisation to
      *                        iterate over. Determines the handle type and
      *                        component storage used.
-     * @tparam Components The component types to query for.
+     * @tparam TRequiredComponents Tuple of required component types.
+     * @tparam TOptionalComponents Tuple of optional component types.
      *
      * @see EntityManager
      * @see SparseSet
      * @see TypedHandleWorld
      */
-    template<typename TEntityManager, typename... Components>
-    class View {
+    template<typename TEntityManager, typename TRequiredComponents, typename TOptionalComponents>
+    class PartialView;
+
+    /**
+     * @brief Convenience alias for a view with required components only.
+     *
+     * Optional components can be attached fluently via `withOptional<...>()`.
+     *
+     * @tparam TEntityManager Concrete entity manager type.
+     * @tparam TRequired Required component types that must be present.
+     */
+    template<typename TEntityManager, typename... TRequired>
+    using View = PartialView<TEntityManager, std::tuple<TRequired...>, std::tuple<>>;
+
+    template<typename TEntityManager, typename... TRequired, typename... TOptional>
+    class PartialView<TEntityManager, std::tuple<TRequired...>, std::tuple<TOptional...>> {
 
     private:
         TEntityManager* em_;
@@ -57,7 +72,10 @@ export namespace helios::ecs {
         /**
          * @brief Pointers to the SparseSets of the included components.
          */
-        std::tuple<SparseSet<Components>*... > includeSets_;
+        std::tuple<SparseSet<TRequired>*... > includeSets_;
+
+
+        std::tuple<SparseSet<TOptional>*... > optionalSets_;
 
         /**
          * @brief List of exclusion predicates.
@@ -71,7 +89,6 @@ export namespace helios::ecs {
          */
         bool filterEnabledOnly_ = false;
 
-        bool filterActiveOnly_ = false;
 
     public:
         /**
@@ -79,10 +96,51 @@ export namespace helios::ecs {
          *
          * @param em Pointer to the EntityManager to retrieve sets and construct Entities.
          */
-        explicit View(TEntityManager* em) : em_(em) {
+
+        explicit PartialView(TEntityManager* em) : em_(em) {
             // Retrieve pointers to the specific component sets immediately.
-            includeSets_ = std::make_tuple(em_->template getSparseSet<Components>()...);
+            includeSets_ = std::make_tuple(em_->template getSparseSet<TRequired>()...);
+            optionalSets_ = std::make_tuple(em_->template getSparseSet<TOptional>()...);
         };
+
+        explicit PartialView(
+            TEntityManager* em,
+            std::tuple<SparseSet<TRequired>*...> includeSets,
+            std::vector<std::function<bool(EntityId)>> excludeChecks,
+            const bool filterEnabledOnly
+        ) : em_(em), includeSets_(includeSets), excludeChecks_(std::move(excludeChecks)), filterEnabledOnly_(filterEnabledOnly) {
+            static_assert(sizeof...(TOptional) == 0, "withOptional() should provide all optional components types in a single call.");
+            optionalSets_ = std::make_tuple(em_->template getSparseSet<TOptional>()...);
+        }
+
+        /**
+         * @brief Adds optional component types to the current view.
+         *
+         * @details Optional components do not participate in entity filtering.
+         * For each optional type, iteration yields either a component pointer or
+         * `nullptr` if the entity does not own that component.
+         *
+         * This method is intended to be called once with all optional types:
+         *
+         * ```cpp
+         * for (auto [e, transform, velocity, maybeHealth, maybeShield] : world
+         *     .view<EntityManager, TransformComponent, VelocityComponent>()
+         *     .withOptional<HealthComponent, ShieldComponent>()) {
+         *     // maybeHealth / maybeShield may be nullptr
+         * }
+         * ```
+         *
+         * @tparam TNewOptional Optional component types to expose in iteration.
+         *
+         * @return A new `PartialView` with unchanged required components and
+         *         the provided optional component types.
+         */
+        template<typename... TNewOptional>
+        PartialView<TEntityManager, std::tuple<TRequired...>, std::tuple<TNewOptional...>> withOptional() {
+            return PartialView<TEntityManager, std::tuple<TRequired...>, std::tuple<TNewOptional...>>(
+                em_, includeSets_, excludeChecks_, filterEnabledOnly_
+            );
+        }
 
         /**
          * @brief Excludes entities that have a specific component.
@@ -104,7 +162,7 @@ export namespace helios::ecs {
          * @return Reference to this View for method chaining.
          */
         template<typename T>
-        View& exclude() {
+        PartialView& exclude() {
             auto* set = em_->template getSparseSet<T>();
 
             if (set) {
@@ -131,7 +189,7 @@ export namespace helios::ecs {
          *
          * @return Reference to this View for method chaining.
          */
-        View& whereEnabled() {
+        PartialView& whereEnabled() {
             filterEnabledOnly_ = true;
             return *this;
         }
@@ -150,7 +208,7 @@ export namespace helios::ecs {
             /**
              * @brief The first component type determines iteration order.
              */
-            using LeadComponent = std::tuple_element_t<0, std::tuple<Components...>>;
+            using LeadComponent = std::tuple_element_t<0, std::tuple<TRequired...>>;
 
             /**
              * @brief Iterator type from the lead component's SparseSet.
@@ -159,7 +217,7 @@ export namespace helios::ecs {
 
             LeadIterator current_;
             LeadIterator end_;
-            const View* view_;
+            const PartialView* view_;
 
             /**
              * @brief Default constructor creating an invalid iterator.
@@ -173,7 +231,7 @@ export namespace helios::ecs {
              * @param end Iterator to the end position.
              * @param view Pointer to the owning View for filter access.
              */
-            Iterator(LeadIterator current, LeadIterator end, const View* view)
+            Iterator(LeadIterator current, LeadIterator end, const PartialView* view)
                 : current_(current), end_(end), view_(view) {}
 
             /**
@@ -201,7 +259,7 @@ export namespace helios::ecs {
 
                 // 2. INCLUDE CHECK (Do we have all other required components?)
                 // We iterate over the tuple of sets and check 'contains' for each.
-                bool hasAllIncludes = std::apply([entityId](auto*... sets) {
+                const bool hasAllIncludes = std::apply([entityId](auto*... sets) {
                     return ((sets && sets->contains(entityId)) && ...);
                 }, view_->includeSets_);
 
@@ -234,7 +292,7 @@ export namespace helios::ecs {
                     }
 
                     // Check all other included components
-                    bool allEnabled = std::apply([&](auto*... sets) {
+                    const bool allEnabled = std::apply([&](auto*... sets) {
                         // sets->get(id) returns a pointer, *ptr gives the reference.
                         return (isComponentEnabled(*sets->get(entityId)) && ...);
                     }, view_->includeSets_);
@@ -283,13 +341,19 @@ export namespace helios::ecs {
             /**
              * @brief Dereference operator.
              *
-             * @return A tuple containing {GameObject, Component*...}.
+             * @return A tuple containing:
+             *         1) `Entity_type`,
+             *         2) pointers to all required components,
+             *         3) pointers to all optional components.
              *
-             * @note Returns by value to support C++17 Structured Binding (auto [go, comp] : view).
+             * Optional component pointers may be `nullptr` when the current
+             * entity does not own the respective component (or it is filtered by
+             * `whereEnabled()` when `isEnabled()` is available).
+             *
+             * @note Returns by value to support C++17 structured binding.
              */
             [[nodiscard]] auto operator*() const {
                 EntityId entityId = current_.entityId();
-
                 auto handle = view_->em_->handle(entityId);
 
 
@@ -297,7 +361,29 @@ export namespace helios::ecs {
                     std::make_tuple(Entity_type(handle, view_->em_)),
                     std::apply([entityId](auto*... sets) {
                         return std::make_tuple(sets->get(entityId)...);
-                    }, view_->includeSets_)
+                    }, view_->includeSets_),
+
+                    std::apply([entityId, filterEnabledOnly = view_->filterEnabledOnly_](auto*... sets) {
+                        return std::make_tuple(
+                        ([filterEnabledOnly, entityId, &sets]() {
+                            if (!sets || !sets->contains(entityId)) {
+                                return nullptr;
+                            }
+
+                            auto* component = sets->get(entityId);
+
+                            if constexpr (requires {component->isEnabled(); }) {
+                                if (filterEnabledOnly && !component->isEnabled()) {
+                                    return nullptr;
+                                }
+                            }
+
+                            return component;
+                        }())...
+
+                        );
+                    }, view_->optionalSets_)
+
                 );
             }
 

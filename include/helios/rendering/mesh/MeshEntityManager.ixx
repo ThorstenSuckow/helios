@@ -24,7 +24,7 @@ export namespace helios::rendering::mesh {
     /**
      * @brief Entity registry used for mesh resources.
      */
-    using MeshEntityRegistry = EntityRegistry<MeshId, HashedLookupStrategy, true, MESH_SIZE>;
+    using MeshEntityRegistry = EntityRegistry<MeshDomainTag, HashedLookupStrategy, true, MESH_SIZE>;
 
     /**
      * @brief Entity manager used for mesh handles and mesh components.

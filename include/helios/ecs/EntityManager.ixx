@@ -56,7 +56,7 @@ export namespace helios::ecs {
      * manager.destroy(entity);                     // Destroy entity and all components
      * ```
      *
-     * @tparam THandle       Handle type used to identify entities (e.g. `EntityHandle<StrongId>`).
+     * @tparam THandle       Handle type used to identify entities (e.g. `EntityHandle<GameDomainTag>`).
      * @tparam TEntityRegistry Registry type that manages handle allocation and versioning.
      * @tparam TCapacity     Default initial capacity for the registry and sparse sets.
      *

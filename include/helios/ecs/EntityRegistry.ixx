@@ -11,6 +11,7 @@ module;
 
 export module helios.ecs.EntityRegistry;
 
+import helios.core.types.StrongId;
 import helios.core.types.TypeDefs;
 import helios.core.concepts.IsStrongIdLike;
 import helios.ecs.types.TypeDefs;
@@ -32,8 +33,8 @@ export namespace helios::ecs {
      * `EntityRegistry` serves as the authoritative source for entity lifecycle
      * management. It is responsible for:
      *
-     * - **Handle Creation:** Generates unique `EntityHandle` instances with versioned IDs
-     *   and domain-specific strong IDs.
+     * - **Handle Creation:** Generates unique `EntityHandle<TDomainTag>` instances
+     *   with versioned IDs and domain-specific strong IDs.
      * - **Validation:** Determines whether a given handle refers to a currently alive entity.
      * - **Destruction:** Marks entities as destroyed by incrementing their version and
      *   recycling the index for future use (when `TAllowRemoval` is true).
@@ -56,7 +57,7 @@ export namespace helios::ecs {
      * which tracks which strong IDs are currently in use. The default strategy
      * (`HashedLookupStrategy`) provides O(1) amortized lookups.
      *
-     * @tparam TStrongId       A strong ID type carrying domain semantics.
+     * @tparam TDomainTag      Domain tag used to derive `StrongId<TDomainTag>`.
      * @tparam TLookupStrategy The strategy used for strong ID collision detection.
      * @tparam TAllowRemoval   If false, `destroy()` triggers an assertion instead of removing.
      * @tparam TCapacity       Default initial capacity for pre-allocation.
@@ -66,13 +67,12 @@ export namespace helios::ecs {
      * @see LinearLookupStrategy
      */
     template<
-        typename TStrongId,
+        typename TDomainTag,
         typename TLookupStrategy = HashedLookupStrategy,
         bool TAllowRemoval = true,
         size_t TCapacity = DEFAULT_ENTITY_MANAGER_CAPACITY
     >
-    requires helios::core::concepts::IsStrongIdLike<TStrongId> &&
-    helios::ecs::concepts::IsStrongIdCollisionResolverLike<TLookupStrategy>
+    requires helios::ecs::concepts::IsStrongIdCollisionResolverLike<TLookupStrategy>
     class EntityRegistry {
 
 
@@ -136,7 +136,7 @@ export namespace helios::ecs {
          *
          * @return A valid `EntityHandle` for the newly created entity.
          */
-        EntityHandle<TStrongId> create(TStrongId strongId = TStrongId{}) {
+        EntityHandle<TDomainTag> create(StrongId<TDomainTag> strongId = StrongId<TDomainTag>{}) {
 
             EntityId idx;
             VersionId version;
@@ -155,7 +155,7 @@ export namespace helios::ecs {
             }
 
             if (!strongId.isValid()) {
-                strongId = TStrongId{static_cast<StrongId_t>(++strongIdCounter_)};
+                strongId = StrongId<TDomainTag>(++strongIdCounter_);
             }
             assert(strongId.isValid() && "EntityRegistry: invalid strongId");
 
@@ -191,13 +191,13 @@ export namespace helios::ecs {
          * @param entityId The entity index to retrieve the strong ID for.
          *
          * @return The strong ID for the entity, or a default-constructed
-         *         (invalid) `TStrongId` if out of bounds.
+         *         (invalid) `StrongId<TDomainTag>` if out of bounds.
          */
-        [[nodiscard]] TStrongId strongId(const EntityId entityId) const {
+        [[nodiscard]] StrongId<TDomainTag> strongId(const EntityId entityId) const {
             if (entityId >= static_cast<EntityId>(strongIds_.size())) {
-                return TStrongId{};
+                return StrongId<TDomainTag>{};
             }
-            return static_cast<TStrongId>(strongIds_[entityId]);
+            return static_cast<StrongId<TDomainTag>>(strongIds_[entityId]);
         }
 
 
@@ -212,7 +212,7 @@ export namespace helios::ecs {
          *
          * @return True if the handle is valid and the entity is alive.
          */
-        [[nodiscard]] bool isValid(const EntityHandle<TStrongId> handle) const noexcept {
+        [[nodiscard]] bool isValid(const EntityHandle<TDomainTag> handle) const noexcept {
             const auto index = handle.entityId;
 
             if (index >= static_cast<EntityId>(versions_.size())) {
@@ -239,7 +239,7 @@ export namespace helios::ecs {
          * @return True if the entity was successfully destroyed, false if the handle
          *         was already invalid.
          */
-        bool destroy(const EntityHandle<TStrongId> handle) {
+        bool destroy(const EntityHandle<TDomainTag> handle) {
 
             if constexpr (!TAllowRemoval) {
                 assert(false && "EntityRegistry: Entity removal is not allowed");

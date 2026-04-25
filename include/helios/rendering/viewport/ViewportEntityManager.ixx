@@ -24,7 +24,7 @@ export namespace helios::rendering::viewport {
     /**
      * @brief Entity registry used for viewport resources.
      */
-    using ViewportEntityRegistry = EntityRegistry<ViewportId, LinearLookupStrategy<VIEWPORT_SIZE>, true, VIEWPORT_SIZE>;
+    using ViewportEntityRegistry = EntityRegistry<ViewportDomainTag, LinearLookupStrategy<VIEWPORT_SIZE>, true, VIEWPORT_SIZE>;
 
     /**
      * @brief Entity manager used for viewport handles and viewport components.

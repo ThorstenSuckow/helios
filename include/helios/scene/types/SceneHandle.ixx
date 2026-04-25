@@ -9,14 +9,13 @@ export module helios.scene.types.SceneHandle;
 
 import helios.ecs.types;
 
-import helios.scene.types.SceneId;
+import helios.scene.types.SceneDomainTag;
 
-using namespace helios::ecs::types;
 export namespace helios::scene::types {
 
     /**
      * @brief ECS handle type referencing scene entities.
      */
-    using SceneHandle = helios::ecs::types::EntityHandle<SceneId>;
+    using SceneHandle = helios::ecs::types::EntityHandle<SceneDomainTag>;
 
 }

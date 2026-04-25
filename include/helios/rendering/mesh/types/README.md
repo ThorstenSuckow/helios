@@ -4,6 +4,7 @@ Type layer for mesh resources and payloads.
 
 | Type | Description |
 |------|-------------|
+| `MeshDomainTag` | Domain tag used for mesh IDs and handles |
 | `MeshId`, `MeshHandle` | Strong id + ECS handle for mesh resources |
 | `MeshConfig` | Mesh draw configuration (primitive topology) |
 | `MeshData` | Raw vertex/index payload |

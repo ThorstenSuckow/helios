@@ -1,18 +1,19 @@
 # helios::rendering::framebuffer::types
 
-Strong id and handle aliases for framebuffer resources.
+Strong ID and handle aliases for framebuffer resources.
 
 | Type | Description |
 |------|-------------|
-| `FramebufferIdTag` | Tag type for strong-id specialization |
+| `FramebufferDomainTag` | Domain tag used for framebuffer IDs and handles |
 | `FramebufferId` | Strong id for framebuffer resources |
-| `FramebufferHandle` | ECS entity handle bound to `FramebufferId` |
+| `FramebufferHandle` | ECS entity handle bound to `FramebufferDomainTag` |
 
 ---
 <details>
 <summary>Doxygen</summary><p>
 @namespace helios::rendering::framebuffer::types
-@brief Strong id and handle aliases for framebuffer resources.
-@details Defines identity and handle types for framebuffer ECS registries and managers.
+@brief Strong ID and handle aliases for framebuffer resources.
+@details Defines a shared domain tag used by both StrongId and EntityHandle
+for framebuffer ECS registries and managers.
 </p></details>
 

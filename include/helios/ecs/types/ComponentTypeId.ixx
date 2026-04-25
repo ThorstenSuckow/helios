@@ -27,7 +27,7 @@ export namespace helios::ecs::types {
      * ## Domain Scoping
      *
      * The class is templated on `THandle` so that each domain (identified by its
-     * `EntityHandle<TStrongId>` specialisation) has its own independent type-ID
+     * `EntityHandle<TDomainTag>` specialization) has its own independent type-ID
      * counter via `TypeIndexer<THandle>`. This means the same component type `T`
      * can receive different IDs in different domains.
      *
@@ -43,7 +43,7 @@ export namespace helios::ecs::types {
      * **Thread Safety:** The static ID generation is thread-safe due to C++11 static
      * initialization guarantees.
      *
-     * @tparam THandle The concrete `EntityHandle<TStrongId>` specialisation
+     * @tparam THandle The concrete `EntityHandle<TDomainTag>` specialization
      *                 scoping this type-ID counter.
      *
      * @see TypeIndexer

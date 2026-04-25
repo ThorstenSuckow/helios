@@ -6,20 +6,14 @@ module;
 
 export module helios.rendering.mesh.types.MeshId;
 
-import helios.core.types.FuncDefs;
-import helios.core.types;
-import helios.ecs.types;
+import helios.core.types.StrongId;
+import helios.rendering.mesh.types.MeshDomainTag;
 
 export namespace helios::rendering::mesh::types {
 
     /**
-     * @brief Tag type for MeshId.
-     */
-    struct MeshIdTag{};
-
-    /**
      * @brief Strongly-typed identifier for mesh resources.
      */
-    using MeshId = helios::core::types::StrongId<MeshIdTag>;
+    using MeshId = helios::core::types::StrongId<MeshDomainTag>;
 
 }

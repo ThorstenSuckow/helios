@@ -8,14 +8,13 @@ export module helios.rendering.viewport.types.ViewportHandle;
 
 
 import helios.ecs.types;
-import helios.rendering.viewport.types.ViewportId;
+import helios.rendering.viewport.types.ViewportDomainTag;
 
-using namespace helios::ecs::types;
 export namespace helios::rendering::viewport::types {
 
     /**
      * @brief Handle type used to reference viewport entities.
      */
-    using ViewportHandle = helios::ecs::types::EntityHandle<ViewportId>;
+    using ViewportHandle = helios::ecs::types::EntityHandle<ViewportDomainTag>;
 
 }

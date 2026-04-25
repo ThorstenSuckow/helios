@@ -6,19 +6,15 @@ module;
 
 export module helios.scene.types.SceneId;
 
-import helios.core.types;
+import helios.core.types.StrongId;
+import helios.scene.types.SceneDomainTag;
 
 using namespace helios::core::types;
 export namespace helios::scene::types {
 
     /**
-     * @brief Tag type used to specialize `StrongId` for scenes.
-     */
-    struct SceneIdTag{};
-
-    /**
      * @brief Strong id identifying scene entities.
      */
-    using SceneId = StrongId<SceneIdTag>;
+    using SceneId = StrongId<SceneDomainTag>;
 
 }

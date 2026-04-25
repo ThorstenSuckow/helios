@@ -25,7 +25,7 @@ export namespace helios::ecs {
      * ## Domain Scoping
      *
      * The registry is templated on `THandle` so that each domain
-     * (identified by its `EntityHandle<TStrongId>` specialisation) has its
+     * (identified by its `EntityHandle<TDomainTag>` specialization) has its
      * own independent, `inline static` ops storage. This prevents lifecycle
      * hooks registered for one domain from interfering with another.
      *
@@ -44,7 +44,7 @@ export namespace helios::ecs {
      *
      * @note Not thread-safe. All registration must complete before concurrent access.
      *
-     * @tparam THandle The concrete `EntityHandle<TStrongId>` specialisation
+     * @tparam THandle The concrete `EntityHandle<TDomainTag>` specialization
      *                 scoping this registry instance.
      *
      * @see ComponentOps

@@ -22,6 +22,6 @@ export namespace helios::ecs::concepts {
     template<typename T>
     concept IsEntityHandle =
         requires{typename T::StrongId_type;} &&
-        std::same_as<T, helios::ecs::types::EntityHandle<typename T::StrongId_type>> &&
+        std::same_as<T, helios::ecs::types::EntityHandle<typename T::DomainTag_type>> &&
         IsStrongIdLike<typename T::StrongId_type>;
 }

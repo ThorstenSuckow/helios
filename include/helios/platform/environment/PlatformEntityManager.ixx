@@ -24,7 +24,7 @@ export namespace helios::platform::environment {
     /**
      * @brief Registry type for runtime platform entity lifecycle management.
      */
-    using PlatformEntityRegistry = EntityRegistry<PlatformId, LinearLookupStrategy<PLATFORM_SIZE>, false, PLATFORM_SIZE>;
+    using PlatformEntityRegistry = EntityRegistry<PlatformDomainTag, LinearLookupStrategy<PLATFORM_SIZE>, false, PLATFORM_SIZE>;
 
     /**
      * @brief Entity manager type for runtime platform components.

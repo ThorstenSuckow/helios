@@ -61,7 +61,7 @@ export namespace helios::ecs {
      * - `HasClone` - `onClone(const T&)` method
      * - `HasActivatable` - `onActivate()` and `onDeactivate()` methods
      *
-     * @tparam THandle The concrete `EntityHandle<TStrongId>` specialisation.
+     * @tparam THandle The concrete `EntityHandle<TDomainTag>` specialization.
      *                 Used to scope `ComponentTypeId` and `ComponentOpsRegistry`.
      * @tparam TEntityManager The concrete `EntityManager` specialisation.
      *                        Used by the clone function to emplace components

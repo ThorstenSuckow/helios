@@ -86,8 +86,8 @@ export namespace helios::ecs {
      *
      * ```cpp
      * // Define domain-specific handle types
-     * using GameHandle = EntityHandle<GameStrongId>;
-     * using UiHandle   = EntityHandle<UiStrongId>;
+     * using GameHandle = EntityHandle<GameDomainTag>;
+     * using UiHandle   = EntityHandle<UiDomainTag>;
      *
      * // Configure managers
      * using GameEM = EntityManager<GameHandle, GameRegistry, 4096>;

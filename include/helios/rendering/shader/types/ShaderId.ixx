@@ -6,20 +6,14 @@ module;
 
 export module helios.rendering.shader.types.ShaderId;
 
-import helios.core.types.FuncDefs;
-import helios.core.types;
-import helios.ecs.types;
+import helios.rendering.shader.types.ShaderDomainTag;
+import helios.core.types.StrongId;
 
 export namespace helios::rendering::shader::types {
 
     /**
-     * @brief Tag type for ShaderId.
-     */
-    struct ShaderIdTag{};
-
-    /**
      * @brief Strongly-typed identifier for shader resources.
      */
-    using ShaderId = helios::core::types::StrongId<ShaderIdTag>;
+    using ShaderId = helios::core::types::StrongId<ShaderDomainTag>;
 
 }

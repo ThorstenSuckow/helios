@@ -6,6 +6,7 @@ Strong ids and handles for runtime platform entities.
 
 | Type | Purpose |
 |------|---------|
+| `PlatformDomainTag` | Shared domain tag for platform IDs and handles |
 | `PlatformId` | Strong id type for runtime platform entities |
 | `PlatformHandle` | ECS entity handle type for runtime platform entities |
 

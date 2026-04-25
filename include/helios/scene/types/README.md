@@ -11,6 +11,7 @@ used across scene extraction, culling, and rendering integration.
 
 | Type | Purpose |
 |------|---------|
+| `SceneDomainTag` | Shared domain tag for scene IDs and handles |
 | `SceneId` | Strong id for scene entities |
 | `SceneHandle` | ECS handle alias for scene entities |
 | `PerspectiveCameraContext` | Perspective projection parameters used by culling/rendering |

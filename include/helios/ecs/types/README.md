@@ -11,7 +11,7 @@ structures used by registries, managers, and reflectors.
 
 | Type | Purpose |
 |------|---------|
-| `EntityHandle<TStrongId>` | Versioned entity reference scoped by strong-id domain |
+| `EntityHandle<TDomainTag>` | Versioned entity reference scoped by domain tag |
 | `ComponentTypeId<THandle>` | Domain-scoped component type id generator |
 | `ComponentOps` | Type-erased lifecycle callback function set |
 | `TypeDefs` (`EntityId`, `VersionId`, `EntityTombstone`) | ECS primitive typedefs and sentinel values |

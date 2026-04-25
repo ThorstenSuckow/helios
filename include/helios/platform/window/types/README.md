@@ -6,6 +6,7 @@ Strong ids, handles, and value types for windows.
 
 | Type | Purpose |
 |------|---------|
+| `WindowDomainTag` | Shared domain tag for window IDs and handles |
 | `WindowId` | Strong id for window entities |
 | `WindowHandle` | ECS handle for window entities |
 | `WindowSize` | Typed value object for width/height |

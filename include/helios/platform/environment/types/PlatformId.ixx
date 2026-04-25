@@ -7,18 +7,14 @@ module;
 export module helios.platform.environment.types.PlatformId;
 
 import helios.core.types.StrongId;
+import helios.platform.environment.types.PlatformDomainTag;
 
 using namespace helios::core::types;
 export namespace helios::platform::environment::types {
 
     /**
-     * @brief Tag type used to specialize `StrongId` for runtime platform entities.
-     */
-    struct PlatformTag{};
-
-    /**
      * @brief Strong id identifying runtime platform entities.
      */
-    using PlatformId = StrongId<PlatformTag>;
+    using PlatformId = StrongId<PlatformDomainTag>;
 
 }

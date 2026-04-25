@@ -24,7 +24,7 @@ export namespace helios::rendering::framebuffer {
     /**
      * @brief Entity registry used for framebuffer resources.
      */
-    using FramebufferEntityRegistry = EntityRegistry<FramebufferId, LinearLookupStrategy<FRAMEBUFFER_SIZE>, true, FRAMEBUFFER_SIZE>;
+    using FramebufferEntityRegistry = EntityRegistry<FramebufferDomainTag, LinearLookupStrategy<FRAMEBUFFER_SIZE>, true, FRAMEBUFFER_SIZE>;
 
     /**
      * @brief Entity manager used for framebuffer handles and framebuffer components.

@@ -12,7 +12,7 @@ time (handle shape, lookup strategy API, lifecycle hooks).
 
 | Concept | Purpose |
 |---------|---------|
-| `IsEntityHandle<T>` | Constrains types matching `EntityHandle<TStrongId>` |
+| `IsEntityHandle<T>` | Constrains types matching `EntityHandle<TDomainTag>` |
 | `IsStrongIdCollisionResolverLike<T>` | Constrains registry lookup strategies (`add/remove/has`) |
 
 > **Note:** Strong-id validation now lives in `helios::core::concepts::IsStrongIdLike`.

@@ -5,5 +5,6 @@
 export module helios.rendering.framebuffer.types;
 
 
+export import helios.rendering.framebuffer.types.FramebufferDomainTag;
 export import helios.rendering.framebuffer.types.FramebufferHandle;
 export import helios.rendering.framebuffer.types.FramebufferId;

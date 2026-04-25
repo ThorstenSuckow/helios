@@ -25,7 +25,7 @@ export namespace helios::platform::window {
     /**
      * @brief Entity registry type used to allocate and validate window entities.
      */
-    using WindowEntityRegistry = EntityRegistry<WindowId, LinearLookupStrategy<WINDOW_SIZE>>;
+    using WindowEntityRegistry = EntityRegistry<WindowDomainTag, LinearLookupStrategy<WINDOW_SIZE>>;
 
     /**
      * @brief Entity manager type used to store window-domain components.

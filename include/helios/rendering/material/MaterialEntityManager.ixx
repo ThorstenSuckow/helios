@@ -24,7 +24,7 @@ export namespace helios::rendering::material {
     /**
      * @brief Entity registry used for material resources.
      */
-    using MaterialEntityRegistry = EntityRegistry<MaterialId, HashedLookupStrategy, true, MATERIAL_SIZE>;
+    using MaterialEntityRegistry = EntityRegistry<MaterialDomainTag, HashedLookupStrategy, true, MATERIAL_SIZE>;
 
     /**
      * @brief Entity manager used for material handles and material components.

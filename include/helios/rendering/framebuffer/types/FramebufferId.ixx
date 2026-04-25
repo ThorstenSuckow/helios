@@ -6,20 +6,14 @@ module;
 
 export module helios.rendering.framebuffer.types.FramebufferId;
 
-import helios.core.types.FuncDefs;
-import helios.core.types;
-import helios.ecs.types;
+import helios.core.types.StrongId;
+import helios.rendering.framebuffer.types.FramebufferDomainTag;
 
 export namespace helios::rendering::framebuffer::types {
 
     /**
-     * @brief Tag type for FramebufferId.
-     */
-    struct FramebufferIdTag{};
-
-    /**
      * @brief Strongly-typed identifier for framebuffer resources.
      */
-    using FramebufferId = helios::core::types::StrongId<FramebufferIdTag>;
+    using FramebufferId = helios::core::types::StrongId<FramebufferDomainTag>;
 
 }

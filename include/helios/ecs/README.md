@@ -15,8 +15,8 @@ platform/runtime entities.
 
 | Type | Purpose |
 |------|---------|
-| `EntityHandle<TStrongId>` | Versioned, strongly-typed entity reference |
-| `EntityRegistry<TStrongId, TLookupStrategy, TAllowRemoval, TCapacity>` | Handle allocation, version tracking, validation |
+| `EntityHandle<TDomainTag>` | Versioned, strongly-typed entity reference |
+| `EntityRegistry<TDomainTag, TLookupStrategy, TAllowRemoval, TCapacity>` | Handle allocation, version tracking, validation |
 | `EntityManager<THandle, TEntityRegistry, TCapacity>` | Entity creation, destruction, component storage |
 | `Entity<TManager>` | Lightweight entity facade (handle + manager pointer) |
 | `EntityResolver<TEntityManager>` | Callable handle-to-entity resolver |
@@ -49,7 +49,7 @@ platform/runtime entities.
 
 | Type | Purpose |
 |------|---------|
-| `IsEntityHandle` | Constraint for `EntityHandle<TStrongId>` shapes |
+| `IsEntityHandle` | Constraint for `EntityHandle<TDomainTag>` shapes |
 | `IsStrongIdCollisionResolverLike` | Constraint for registry lookup strategies |
 | `traits::HasOnAcquire`, `traits::HasOnRelease`, `traits::HasOnRemove` | Optional pool/remove hooks |
 | `traits::HasToggleable`, `traits::HasClone`, `traits::HasActivatable` | Optional component lifecycle hooks |
@@ -60,8 +60,8 @@ platform/runtime entities.
 calls by handle type at compile time:
 
 ```cpp
-using GameHandle = EntityHandle<GameStrongId>;
-using UiHandle   = EntityHandle<UiStrongId>;
+using GameHandle = EntityHandle<GameDomainTag>;
+using UiHandle   = EntityHandle<UiDomainTag>;
 
 using GameEM = EntityManager<GameHandle, GameRegistry, 4096>;
 using UiEM   = EntityManager<UiHandle, UiRegistry, 512>;

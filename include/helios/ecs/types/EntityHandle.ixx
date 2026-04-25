@@ -12,9 +12,9 @@ module;
 export module helios.ecs.types.EntityHandle;
 
 import helios.ecs.types.TypeDefs;
-import helios.core.concepts.IsStrongIdLike;
+import helios.core.types.StrongId;
 
-using namespace helios::core::concepts;
+using namespace helios::core::types;
 export namespace helios::ecs::types {
 
     /**
@@ -39,15 +39,12 @@ export namespace helios::ecs::types {
      * registered entities. The version ensures that handles to removed
      * entities are detected as stale.
      *
-     * @tparam TStrongId A strong ID type carrying domain semantics.
+     * @tparam TDomainTag Domain tag used to derive `StrongId<TDomainTag>`.
      *
      * @see EntityRegistry
      */
-    template<typename TStrongId>
-    requires IsStrongIdLike<TStrongId>
+    template<typename TDomainTag>
     struct EntityHandle {
-
-        using StrongId_type = TStrongId;
 
         /**
          * @brief The unique identifier for the entity within the registry.
@@ -64,12 +61,16 @@ export namespace helios::ecs::types {
         /**
          * @brief The domain-specific strong ID associated with this handle.
          */
-        TStrongId strongId{};
+        StrongId<TDomainTag> strongId{};
+
+        using DomainTag_type = TDomainTag;
+
+        using StrongId_type = StrongId<TDomainTag>;
 
         /**
          * @brief Compares two handles for equality.
          */
-        bool operator==(const EntityHandle&) const = default;
+        bool operator==(const EntityHandle<TDomainTag>&) const = default;
 
         /**
          * @brief Compares two handles by entity ID (less-than).
@@ -78,7 +79,7 @@ export namespace helios::ecs::types {
          *
          * @return True if this handle's entity ID is less than the other.
          */
-        constexpr bool operator<(const EntityHandle& entityHandle) const noexcept {
+        constexpr bool operator<(const EntityHandle<TDomainTag>& entityHandle) const noexcept {
             return entityId < entityHandle.entityId;
         }
 
@@ -89,7 +90,7 @@ export namespace helios::ecs::types {
          *
          * @return True if this handle's entity ID is greater than the other.
          */
-        constexpr bool operator>(const EntityHandle& entityHandle) const noexcept {
+        constexpr bool operator>(const EntityHandle<TDomainTag>& entityHandle) const noexcept {
             return entityId > entityHandle.entityId;
         }
 
@@ -113,9 +114,9 @@ export namespace helios::ecs::types {
  *
  * Packs entityId and versionId into a 64-bit value for hashing.
  */
-template<typename TStrongId>
-struct std::hash<helios::ecs::types::EntityHandle<TStrongId>> {
-    std::size_t operator()(const helios::ecs::types::EntityHandle<TStrongId>& handle) const noexcept {
+template<typename TDomainTag>
+struct std::hash<helios::ecs::types::EntityHandle<TDomainTag>> {
+    std::size_t operator()(const helios::ecs::types::EntityHandle<TDomainTag>& handle) const noexcept {
 
         const uint64_t packed = (static_cast<uint64_t>(handle.entityId) << 32) |
                                 static_cast<uint64_t>(handle.versionId);

@@ -1,0 +1,131 @@
+\documentclass[a4paper,abstract=true]{scrartcl}
+
+% ----- Encoding & Fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+
+\usepackage[english]{babel}
+
+% ----- Zitate/Anführungen
+\usepackage{csquotes}
+
+% ----- Grafik & Layout
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx,ragged2e}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+% ----- URL/Links
+\usepackage[hyphens,spaces,obeyspaces]{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{orcidlink}
+
+\usepackage{cleveref}
+
+% ----- biblatex (nach babel, csquotes, hyperref)
+\usepackage[backend=biber,style=acmnumeric,doi=true,url=true]{biblatex}
+\addbibresource{helios_master.bib}
+
+
+
+
+% ----- Boxen, Listings etc.
+\usepackage[most]{tcolorbox}
+\newtcolorbox{summarybox}{
+    enhanced, breakable, sharp corners,
+    boxrule=0.3pt, colback=white, colframe=black!40,
+    coltitle=black, fonttitle=\bfseries,
+    toptitle=2mm, bottomtitle=2mm, colbacktitle=white,
+}
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegray}{gray}{0.9}
+\definecolor{commentgreen}{rgb}{0,0.6,0}
+\definecolor{keywordblue}{rgb}{0.2,0.2,0.8}
+
+\lstdefinestyle{c++style}{
+    backgroundcolor=\color{white},
+    commentstyle=\color{commentgreen}\itshape,
+    keywordstyle=\color{keywordblue}\bfseries,
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{red},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false, showstringspaces=false, showtabs=false,
+    tabsize=2, language=C++
+}
+
+% ----- Anhang
+\usepackage[titletoc,title,page,header]{appendix}
+\renewcommand{\appendixname}{Anhang}
+\renewcommand{\appendixtocname}{Anhänge}
+\renewcommand{\appendixpagename}{Anhänge}
+
+% ----- Sonstiges
+\usepackage{dirtree}
+\renewcommand*\DTstyle{\ttfamily}
+
+% Silbentrennungen
+\hyphenation{
+    Ren-de-ring-Back-end
+    Game-Loop
+    Smart-Poin-ter
+    Kol-li-sions-be-hand-lung
+    er-strek-ken
+}
+
+
+\begin{document}
+
+    \title{\textbf{helios: Design and prototypical implementation of a C++ game framework}}
+
+
+    \author{
+        Thorsten Suckow-Homberg\thanks{%
+            Technical report on the first milestone of the project work
+            to develop a \textit{Geometry Wars} clone in the distance learning program in Computer Science,
+            Trier University of Applied Sciences, Department of Computer Science.
+            English version of the original German report
+            \textit{``helios: Konzeption und prototypische Umsetzung eines C++ Game Frameworks``, DOI:  \href{https://doi.org/10.5281/zenodo.xxxxx}{10.5281/zenodo.xxxxxx}
+            }. \newline
+            \textcopyright\ 2025~Thorsten Suckow-Homberg,
+            \href{mailto:thorsten@suckow-homberg.de}{thorsten@suckow-homberg.de},
+            ORCID: \url{https://orcid.org/0009-0002-3389-8606}. \newline
+            This work is licensed under the
+            \href{https://creativecommons.org/licenses/by/4.0/}{CC~BY~4.0} license. \newline
+            \textit{Geometry Wars} is a trademark of Activision Publishing,~Inc.;
+            this work is not affiliated with Activision. \newline
+            DOI: \href{https://doi.org/10.5281/zenodo.xxxxxx}{10.5281/zenodo.xxxxxx}.
+        }%
+    }
+
+
+
+    \date{March 2026}
+
+    %2025-11-09: initial publication (1.0.0)%
+    \maketitle
+
+
+
+
+
+    \input{index_en}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \clearpage
+    \sloppy
+    \printbibliography
+    \fussy
+
+
+\end{document}

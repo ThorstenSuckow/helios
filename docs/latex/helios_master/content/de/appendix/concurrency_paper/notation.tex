@@ -1,0 +1,133 @@
+\section{Notation}
+
+Im Folgenden greifen wir die von Redmond et al. definierte Notation ihres formalen Modells auf und überführen diese in die Form, die auch im Rest dieser Arbeit verwendet wird, damit dem Leser ein einheitliches Notationskonzept zur Verfügung steht.
+
+\subsection{Komponenten}
+Komponenten erlauben die Speicherung und Modifikation domänenspezifischer Werte.\\
+
+\noindent
+Sei $K$ ein Komponentenschema.\\
+
+\noindent
+Stehe weiter mit $I$ eine Indexmenge von Bezeichnern (\textit{Labels}) zur Verfügung
+Wir fassen damit $K_i$ als Familie auf, die über $i \in I$ indexiert ist.\\
+
+\noindent
+Bezeichne $k_i \in K_i$ einen beliebigen Term des Typs $K_i$.\footnote{``Each $K_i$ is a type in the sub-language, \ldots ``}
+Redmond et al. definieren hierzu -- informell -- eine Abbildung:\footnote{
+``The component types come to us in a mapping from component label $i \in I$ to component type $K_i$, \ldots ``
+}
+
+\[
+    k: I \rightarrow K_i
+\]
+
+\noindent
+wobei $K_i$ durch das Label $i \in I$ determiniert ist.
+Wie in der zitierten Arbeit nutzen auch wir im Folgenden die Indexnotation $k_i$ anstelle $k(i)$:
+
+\[
+    k_i \in K_i
+\]
+
+\noindent
+Hierdurch wird mit $k_i$ ein beliebiger, isolierter, zustandsloser Wert aus dem Wertebereich der durch den Komponententypen repräsentierten Domäne $K_i$ dargestellt.
+Entsprechend kann ein beliebiger Term $k_i$ formal mit mehreren Entitäten assoziiert sein, ohne, dass es eines zusätzlichen Index bedarf.\footnote{
+    In der Praxis wirkt sich dies als Kopie der entsprechenden Werte aus (Redmond et al.: ``Component values``).
+}\\
+
+\subsubsection*{Beispiel}
+Redmond et al. notieren in ihrer Arbeit beispielhaft ein Komponentenschema $K$, das folgende Paare $i \mapsto K_i$ beinhaltet:
+\[
+    K \coloneqq \{ i_1 \mapsto K_{i_1}, i_2 \mapsto K_{i_2} \}
+\]
+
+\noindent
+mit
+\[
+    \begin{align}
+        i_1 \coloneqq \text{Pos}\\
+        i_2 \coloneqq \text{Vel}\\
+        K_{i_1}, K_{i_2} \coloneq \mathbb{Z}
+    \end{align}
+\]
+
+\noindent
+Für einen Komponententyp $K_\texttt{Position} \subseteq \mathbb{R}^2$ können wir also schreiben:
+
+\[
+    k_{\texttt{Position}} = (1.0, 1.0) \in K_\texttt{Position}
+\]
+
+
+
+\begin{tcolorbox}[title={Komponenten als Informationsträger für Referenzen}]
+Für Anwendungsfälle, in denen eine Komponente eine Referenz auf eine Objektinstanz $t$ vom Typ $T$ verwaltet, kann in diesem Kontext das Label
+
+\[
+    \text{Ref(T)} \in I
+\]
+
+\noindent
+eingeführt werden.\\
+
+\noindent
+Hierzu sei
+
+\[
+    \mathcal{A} \colon \text{Inst}(T) \rightarrow \mathbb{N}
+\]
+
+\noindent
+eine Abbildung, die eine Instanz eines Typs $T$ auf einen numerischen Wert abbildet -- den Speicherort der Instanz im \textit{Adressraum}.\\
+
+\noindent
+Ein Term $k_{\text{Ref(T)}}$ speichert dann diesen numerischen Wert für $t \in \text{Inst}(T)$
+
+\[
+    k_{\text{Ref(T)}} = \mathcal{A}(t) \in \mathbb{N}
+\]
+
+
+\noindent
+Dadurch ist die Frage, wie mit diesem Komponentenwert im ECS-Programm umgegangen wird, zunächst semantischer Natur, und unabhängig von der Tatsache, dass der Term tatsächlich einen Speicherort repräsentiert.
+\end{tcolorbox}
+
+\subsection{Entitäten}
+
+Sei mit $E$ ein Typ gegeben, der eine Wertemenge\footnote{
+    Beispielswiese \texttt{uint32\_t} in \texttt{C++}.
+} zur Identifikation zusammengehöriger Komponentenbündel ermöglicht.\\
+
+\noindent
+Wenn der Term $e$ einen bestimmten Wert des Typs $E$ repräsentiert, dann ist
+\[
+    \mathcal{P} \coloneqq E \times \bigcup_{i \in I} K_i = \{(e, k_i) \mid e \in E, i \in I, k_i \in K_i\}
+\]
+die Menge der möglichen Entität-Komponenten-Paare.\\
+
+\noindent
+Eine bestimmte, eindeutige Ausprägung einer Entität $\mathcal{C}_e$ und die damit verbundene mögliche Menge von Entität-Komponenten-Paaren kann dann als partielle Abbildung definiert werden:\footnote{Eine genauere Definition der verwendeten Notation folgt. Wir weisen an dieser Stelle darauf hin, dass die ``Entitätszentrische`` Darstellung über $\mathcal{C}_e$ bei Redmond et al. nicht gefunden wird. Ganz im Sinne der Datenorientierung ist die Zuordnung der Entitäten zu Komponenten über Zustände definiert, die eine Menge von Abbildungen der Komponenten-Typen auf eine Menge von partiellen Abbildungen $e_m \rightarrow k_i$ enthält.}
+\[
+    \mathcal{C}_e :  I \rightharpoonup \bigcup_{i \in I} K_i, \quad i \mapsto k_i \in K_i
+\]
+Hierbei gilt mit der Definition einer partiellen Abbildung:
+\[
+    \mathcal{C}_e(i) \neq \bot \Leftrightarrow \exists{!} k_i \in K_i : \mathcal{C}_e(i) = k_i
+\]
+Als Beispiel für den Entitätsterm $e_1$:
+\[
+    \mathcal{C}_{e_1} = \{i_1 \mapsto k_{i_1}, i_2 \mapsto k_{i_2}, \ldots, i_n \mapsto  k_{i_n}\}
+\]
+und damit
+\[
+    \{(e_1, k_{i_1}), (e_1, k_{i_2}), \ldots, (e_1, k_{i_n})\} \subseteq \mathcal{P}
+\]
+
+\begin{theorem}
+    Seien die Entitäten $e_1$ und $e_2$ gegeben.
+    Dann besitzen die beiden Entitäten keine gleichen Komponenten.
+\end{theorem}
+
+
+\subsection{Systeme}

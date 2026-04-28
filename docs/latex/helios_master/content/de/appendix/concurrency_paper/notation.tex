@@ -107,7 +107,6 @@ Wenn der Term $e$ einen bestimmten Wert des Typs $E$ repräsentiert, dann ist
 die Menge der möglichen Entität-Komponenten-Paare.\\
 
 \bigskip
-\begin{tcolorbox}[title={Entitätszentrische Darstellung, assoziierte Komponentenmenge}]
 Eine bestimmte, eindeutige Ausprägung einer Entität vom Typ $E$, die wir mit $\mathcal{E}_m, m \in \mathbb{N}$ notieren, und die damit verbundene mögliche Menge von Entität-Komponenten-Paaren kann mithilfe folgender partiellen Abbildung hergeleitet werden:
 \[
     \mathcal{E}_m :  I \rightharpoonup \bigcup_{i \in I} K_i, \quad i \mapsto k_i \in K_i, m \in \mathbb{N}
@@ -139,9 +138,8 @@ Hiermit lässt sich die \textit{assoziierte Komponentenmenge} definieren:
 Mit der Definition von $\mathcal{E}_m$ gilt für verschiedene $m, n$ trivialerweise, dass zwei verschiedene Entitäten dieselbe Menge von Termen besitzen können -- damit lässt sich die Eindeutigkeit einer Entität nicht über ihre entsprechende Komponentenmenge feststellen.\\
 
 Aus diesem Grund wird bei Redmond et al. diese Darstellung nicht verwendet.
-Ganz im Sinne der Datenorientierung ist die Zuordnung der Entitäten zu Komponenten über Zustände definiert, die eine Menge von Abbildungen der Komponenten-Typen auf eine Menge von partiellen Abbildungen $e_m \rightarrow k_i$ enthält.
+Ganz im Sinne der Datenorientierung ist die Zuordnung der Entitäten zu Komponenten über Zustände definiert, die eine Menge von Abbildungen der Komponenten-Typen auf eine Menge von partiellen Abbildungen $e_m \rightarrow k_i$ enthält (siehe Abschnitt~\ref{sec:zustand}).
 Dies erleichtert auch die formale Herleitung der Identität von Entitäten: Somit exitiert in dem späteren Modell immer nur genau eine eindeutig identifizierbare Entität-Komponentent-Konstellation.
-\end{tcolorbox}
 \bigskip
 
 \noindent
@@ -238,6 +236,37 @@ Eine weitere wichtige Abgrenzung nehmen Redmond et al. bzgl. der assoziierten Ko
 \noindent
 Eine Entität ist also mit höchstens einem Term $k_i$ pro Komponententyp $K_i$ assoziiert.
 Davon unberührt bleiben die Werte der Terme: So kann auch weiterhin $k_i = k_j, i \neq j$ gelten.
+
+\subsection{Zustand}
+Den Begriff \textit{Zustand} (\textit{state}) führen Redmond et {al.} ein, um die zuvor erwähnte Eindeutigkeit von Entität-Komponenten-Konstellationen zu formalisieren.
+Hierzu gilt wie bislang festgehalten, dass eine Entität aus Assoziationen zu unterschiedlichen, niemals paarweise gleichen Komponententypen besteht.\\
+
+Um den Zustand eines \textit{Core ECS} Programms zu definieren, führen die Autoren $c$ ein: Eine über $i \in I$ indexierte Famielle von partiellen Abbildungen, die eine Entität mit einem Komponententerm vom Typ $K_i$ assoziieren:
+
+\[
+    c \coloneqq \{c_i : E \rightharpoonup K_i\}_{i \in I}
+\]
+
+\noindent
+So lässt sich für eine Entität $e_m$ der derzeitige Wert des Komponententerms $k_i$ notieren über
+
+\[
+  c_i(e_m) = k_i
+\]
+
+\noindent
+was äquivalent zu der oben hilfsweise eingeführten Definition von $\mathcal{E}_m$ ist:
+
+\[
+    c_i(e_m) = k_i = \mathcal{E}_m(i)
+\]
+
+\noindent
+Wir behalten im weiteren die Notation von Redmond et {al.} bei, da sie im Sinne der Datenorientierung von einem Typ ausgehend den Wert für eine bestimmte Entität, die mit diesem Typ assoziert ist, abfragt\footnote{
+    und gegebenefalls $\bot$ liefert, falls diese Entität mit dem Typ nicht assoziert ist
+}.\\
+Die Notation $\mathcal{E}_{m}$ geht -- als entitätszentrische Darstellung im gegensatz zu der komponentenzentrierten Darstellung von Redmond et al. -- zunächst einmal von der Existenz einer Entität aus, was im Sinne des Entity-Component-Systems nicht idiomatisch ist.
+Außerdem sieht die Definition von \textit{Core ECS} gerade vor, dass ein Programm parametrisiert wird mit dem Typ $E$ und dem Komponentenschema $K$ - somit sind alle $i \in I$ bekannt, wobei während der Programmausführung weitere $e_m$ hinzukommen, und damit auch $E_m$ erweitert werden müsset.
 
 
 \subsection{Systeme}

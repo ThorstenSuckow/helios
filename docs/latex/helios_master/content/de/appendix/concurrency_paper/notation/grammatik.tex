@@ -40,6 +40,15 @@ bestehend aus folgenden Symbolen $\Sigma$, Nichtterminalen $N$, Produktionsregel
     & && \text{``nil``}, \\
     & \text{mutation} && \Coloneqq \text{mutation\_command, \{ ``$\circ$``, mutation\_command\}}, \\
     & \text{system} && \Coloneqq \text{``(``, $\vec{q}$, ``,``, ``E``, ``$^\text{dim}$``, ``$^\text{(}$``, $^\vec{q}$, ``$^\text{)}$``, ``$\times$``, ``(``, ``|``, $\vec{q}$, ``|``, ``)``, ``$\rightarrow$``, ``M``, ``)``},\\
+    & \text{schedule\_command} && \Coloneqq \text{``conc``, ``(``, system, ``)``} | \text{``seq``, ``(``, system, ``)``},\\
+    & \text{schedule} && \Coloneqq \text{schedule\_command, \{``||``, schedule\_command\}} |\\
+                &    &&\text{schedule\_command, \{``$\fatsemi$``, schedule\_command \} },\\
     &\}
+    \end{alignat}
+\]
+
+\[
+    \begin{alignat}{3}
+    S &\coloneqq \text{schedule}
     \end{alignat}
 \]

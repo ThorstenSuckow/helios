@@ -42,6 +42,7 @@
 ]{biblatex}
 
 
+
 \DefineBibliographyStrings{ngerman}{
   retrieved = {abgerufen am},
   from      = {von},
@@ -96,6 +97,7 @@
 \usepackage{dirtree}
 \usepackage{amsfonts}
 \usepackage{mathtools}
+\usepackage{amsmath}
 \renewcommand*\DTstyle{\ttfamily}
 
 % Silbentrennungen
@@ -109,6 +111,39 @@
   Tem-plate
   Me-ta-pro-gram-mie-rung
 }
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\usepackage{stmaryrd}
+\tcbuselibrary{breakable,skins}
+
+\tcbset{
+    excursusbox/.style={
+        enhanced jigsaw,
+        breakable,
+        colback=gray!10,
+        colframe=black!70,
+        boxrule=0.4pt,
+        arc=2pt,
+        left=2mm,
+        right=2mm,
+        top=1mm,
+        bottom=1mm,
+        boxsep=1mm,
+        toprule at break=0pt,
+        bottomrule at break=0pt,
+        pad at break=1mm,
+        segmentation hidden
+    }
+}
+
+
+
+\newcommand{\tm}[1]{\ensuremath{\mathtt{\textcolor{blue!90!black}{#1}}}}
+\newcommand{\nt}[1]{\ensuremath{\mathit{#1}}}
+\newcommand{\metaexpr}[1]{\colorbox{blue!8}{\ensuremath{#1}}}
+
+
+
 
 
 \begin{document}

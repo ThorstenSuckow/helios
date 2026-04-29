@@ -1,0 +1,19 @@
+\section{Eine erste Annäherung an die inhärente Nebenläufigkeit von ECS-Programmen}
+
+
+\subsection*{Abgrenzung Nebenläufigkeit und Paralellität}
+Wie Oechsle in~\cite{Oec22} anmerkt, wird in der Literatur oft nicht genau zwischen \textit{Nebenläufigkeit} und \textit{Paralellität} unterschieden.
+Wir weisen deshalb an dieser Stelle auf das im Allgemeinen mit diesen Begriffen verbundene Verständnis hin: Als \textit{nebenläufig ausgeführt} verstehen wir Programmteile, die unabhängig voneinander \textit{quasi-parallel}\footnote{
+    auch: Zeitverschachtelt oder \textit{interleaved}.
+} ausgeführt werden, bei denen das zugrundeliegende Betriebssystem also zwischen den einzelnen \textit{Thread-Kontexten} auf einem Ein-Prozessorsystem umschaltet um die jeweilige Ausführung eines Programmteils voranzutreiben.
+Unter \textit{(echt) parallel} verstehen wir die Ausführung von Programmteilen auf einem Computersystem, bei denen die Programme gleichzeitig, auf mehreren Prozessorkernen verteilt, ausgeführt werden.
+
+Im Weiteren nutzen wir die Begriffe synonym, da für unsere Betrachtungen nicht die konkrete Ausführungsstrategie der Hardware bzw. des Betriebssystems relevant ist und diese für das formale Modell ohnehin keine Rolle spielt.
+
+Auch Redmond et al. nehmen hierzu im weiteren Verlauf keine weitere Abgrenzung vor.
+
+
+Bevor wir weiter auf die in der Arbeit vorgestellten Formalisieren eingehen, wollen wir zunächst die ``ìnhärente Nebenläufigkeit`` verstehen, die die Autoren einführend anmerken, aber nicht weiter ausführen.
+
+Hierzu müssen wir zunächst informell festhalten, dass sich die fachliche Spezifikät einer Entität in eine ECS erst durch die Summe seiner Komponenten ergibt.
+

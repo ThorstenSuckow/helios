@@ -1,0 +1,143 @@
+\subsection{Entitäten}
+
+Sei mit $E$ ein Typ gegeben, der eine Wertemenge\footnote{
+    Beispielswiese \texttt{uint32\_t} in \texttt{C++}.
+} zur Identifikation zusammengehöriger Komponentenbündel ermöglicht.\\
+
+\noindent
+Wenn der Term $e$ einen bestimmten Wert des Typs $E$ repräsentiert, dann ist
+\[
+    \mathcal{P} \coloneqq E \times \bigcup_{i \in I} K_i = \{(e, k_i) \mid e \in E, i \in I, k_i \in K_i\}
+\]
+die Menge der möglichen Entität-Komponenten-Paare.\\
+
+\bigskip
+Eine bestimmte, eindeutige Ausprägung einer Entität vom Typ $E$, die wir mit $\mathcal{E}_m, m \in \mathbb{N}$ notieren, und die damit verbundene mögliche Menge von Entität-Komponenten-Paaren kann mithilfe folgender partiellen Abbildung hergeleitet werden:
+\[
+    \mathcal{E}_m :  I \rightharpoonup \bigcup_{i \in I} K_i, \quad i \mapsto k_i \in K_i, m \in \mathbb{N}
+\]
+Hierbei gilt mit der Definition der partiellen Abbildung:
+\[
+    \mathcal{E}_m(i) \neq \bot \Leftrightarrow \exists{!} k_i \in K_i : \mathcal{E}_m(i) = k_i
+\]
+
+\noindent
+Hiermit lässt sich die \textit{assoziierte Komponentenmenge} definieren:
+
+\[
+    \mathcal{E}^K_m \coloneqq \{k_i \mid k_i = \mathcal{E}_m(i), k_i \in K_i, i \in I \}
+\]
+
+\noindent
+\textbf{Beispiel}:
+
+\[
+    \begin{alignat}{3}
+        \mathcal{E}^K_{1} &= \{\mathcal{E}_{1}(i_1), \mathcal{E}_{1}(i_2), \ldots, \mathcal{E}_{1}(i_n)\}\\
+        &= \{k_{i_1}, k_{i_2}, \ldots, k_{i_n}\}
+    \end{alignat}
+\]
+
+\vspace{5mm}
+\noindent
+Mit der Definition von $\mathcal{E}_m$ gilt für verschiedene $m, n$ trivialerweise, dass zwei verschiedene Entitäten dieselbe Menge von Termen besitzen können -- damit lässt sich die Eindeutigkeit einer Entität nicht über ihre entsprechende Komponentenmenge feststellen.\\
+
+Aus diesem Grund wird bei Redmond et al. diese Darstellung nicht verwendet.
+Ganz im Sinne der Datenorientierung ist die Zuordnung der Entitäten zu Komponenten über Zustände definiert, die eine Menge von Abbildungen der Komponenten-Typen auf eine Menge von partiellen Abbildungen $e_m \rightarrow k_i$ enthält (siehe Abschnitt~\ref{sec:zustand}).
+Dies erleichtert auch die formale Herleitung der Identität von Entitäten: Somit exitiert in dem späteren Modell immer nur genau eine eindeutig identifizierbare Entität-Komponentent-Konstellation.
+\bigskip
+
+\noindent
+Redmond et al. binden deshalb die Eindeutigkeit einer Entität an den Term $e \in E$:
+
+\[
+    E \coloneqq \{e_1, e_2, \ldots\}
+\]
+
+\noindent
+so dass alle Tupel in $\mathcal{P}$, die den Term $e_m$ enthalten, über die Familie
+
+\[
+    \mathcal{P}_{e_m} \coloneqq \{(e_m, k_i) \mid e_m \in E, \mathcal{E}_m(i) = k_i \in K_i\}, m \in \mathbb{N}
+\]
+
+\noindent
+definiert werden kann.
+
+\bigskip
+\begin{theorem}\label{th:entity_id1}
+    Gegeben sei $\mathcal{P}_{e_m}$ und $\mathcal{P}_{e_n}$, $e_n, e_m \in E$.
+    Dann gilt:
+    \[
+        e_m \neq e_n \Rightarrow \mathcal{P}_{e_m} \neq \mathcal{P}_{e_n}
+    \]
+\end{theorem}
+\bigskip
+
+\begin{proof}
+    Seien beliebige $x = (e_m, k_{i}) \in P_{e_m}, y = (e_n, k_j) \in P_{e_n}, k_i \in K_i, j \in K_j, i, j \in I$ gegeben.\\
+
+    \noindent
+    Mit der Voraussetzung $e_m \neq e_n$ gilt
+    \[
+        e_m \neq e_n \land (k_i = k_j \lor k_i \neq k_j)
+    \]
+
+    \begin{itemize}
+        \item \textbf{Fall 1} - $e_m \neq e_n \land k_i = k_j$: Es ist $x(1) \neq y(1) \land x(2) = y(2)$ und damit $x \neq y$.
+        \item \textbf{Fall 2} - $e_m \neq e_n \land k_i \neq k_j$: Es ist $x(1) \neq y(1) \land x(2) \neq y(2)$ und damit $x \neq y$.
+    \end{itemize}
+
+    \noindent
+    In beiden Fällen ist  $\mathcal{P}_{e_n} \neq \mathcal{P}_{e_m}$ erfüllt.
+\end{proof}
+\bigskip
+
+\noindent
+Theorem~\ref{th:entity_id2} folgt direkt als Kontraposition zu Theorem~\ref{th:entity_id1}:\footnote{
+    $A \Rightarrow B \equiv \neg B \Rightarrow \neg A$.
+    Wir geben den Beweis trotzdem formal an, um die Bindung der Komponenten-Terme an den Entitätsterm zu verdeutlichen.
+}
+
+\begin{theorem}\label{th:entity_id2}
+    Gegeben sei $\mathcal{P}_{e_m}$ und $\mathcal{P}_{e_n}$, $e_n, e_m \in E$.
+    Dann gilt:
+    \[
+        \mathcal{P}_{e_m} = \mathcal{P}_{e_n} \Rightarrow e_m = e_n
+    \]
+\end{theorem}
+\bigskip
+
+\begin{proof}
+    Seien beliebige $x = (e_m, k_{i}) \in P_{e_m}, y = (e_n, k_j) \in P_{e_n}, k_i \in K_i, j \in K_j, i, j \in I$ gegeben.\\
+
+    \noindent
+    Mit der Voraussetzung $\mathcal{P}_{e_m} = \mathcal{P}_{e_n}$ gilt
+    \[
+        \forall x \in \mathcal{P}_{e_m} : y \in \mathcal{P}_{e_n}
+    \]
+
+    \noindent
+    Damit folgt direkt
+    \[
+        \begin{alignat}{3}
+            x = y &\Leftrightarrow (e_m, k_i) = (e_n, k_j) \\
+            &\Leftrightarrow e_m = e_n \land k_i = k_j
+        \end{alignat}
+    \]
+\end{proof}
+\bigskip
+
+\noindent
+Wir haben damit eine triviale, aber wichtige Eigenschaft gezeigt: Die Identität einer Entität-Komponenten-Konstellation kann erst mit $e \in E$ definiert werden.
+Dies wird später relevant, wenn es darum geht, den nebenläufigen Zugriff auf Entitäten und ihre Komponenten zu formalisieren.\\
+
+Eine weitere wichtige Abgrenzung nehmen Redmond et al. bzgl. der assoziierten Komponententypen vor:
+
+\[
+    \forall (e_m, k_i), (e_m, k_j) \in \mathcal{P}_{e_m} : k_i \neq k_j \Rightarrow i \neq j
+\]
+
+\noindent
+Eine Entität ist also mit höchstens einem Term $k_i$ pro Komponententyp $K_i$ assoziiert.
+Davon unberührt bleiben die Werte der Terme: So kann auch weiterhin $k_i = k_j, i \neq j$ gelten.

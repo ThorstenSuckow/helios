@@ -1,0 +1,90 @@
+\subsection{Komponenten}
+Komponenten erlauben die Speicherung und Modifikation domänenspezifischer Werte.\\
+
+\noindent
+Sei $K$ ein Komponentenschema.\\
+
+\noindent
+Stehe weiter mit $I$ eine Indexmenge von Bezeichnern (\textit{Labels}) zur Verfügung
+Wir fassen damit $K_i$ als Familie auf, die über $i \in I$ indexiert ist.\\
+
+\noindent
+Bezeichne $k_i \in K_i$ einen beliebigen Term des Typs $K_i$.\footnote{``Each $K_i$ is a type in the sub-language, \ldots ``}
+Redmond et al. definieren hierzu -- informell -- eine Abbildung:\footnote{
+    ``The component types come to us in a mapping from component label $i \in I$ to component type $K_i$, \ldots ``
+}
+
+\[
+    k: I \rightarrow K_i
+\]
+
+\noindent
+wobei $K_i$ durch das Label $i \in I$ determiniert ist.
+Wie in der zitierten Arbeit nutzen auch wir im Folgenden die Indexnotation $k_i$ anstelle $k(i)$:
+
+\[
+    k_i \in K_i
+\]
+
+\noindent
+Hierdurch wird mit $k_i$ ein beliebiger, isolierter, zustandsloser Wert aus dem Wertebereich der durch den Komponententypen repräsentierten Domäne $K_i$ dargestellt.
+Entsprechend kann ein beliebiger Term $k_i$ formal mit mehreren Entitäten assoziiert sein, ohne, dass es eines zusätzlichen Index bedarf.\footnote{
+    In der Praxis wirkt sich dies als Kopie der entsprechenden Werte aus (Redmond et al.: ``Component values``).
+}\\
+
+\subsubsection*{Beispiel}
+Redmond et al. notieren in ihrer Arbeit beispielhaft ein Komponentenschema $K$, das folgende Paare $i \mapsto K_i$ beinhaltet:
+\[
+    K \coloneqq \{ i_1 \mapsto K_{i_1}, i_2 \mapsto K_{i_2} \}
+\]
+
+\noindent
+mit
+\[
+    \begin{align}
+        i_1 \coloneqq \text{Pos}\\
+        i_2 \coloneqq \text{Vel}\\
+        K_{i_1}, K_{i_2} \coloneq \mathbb{Z}
+    \end{align}
+\]
+
+\noindent
+Für einen Komponententyp $K_\texttt{Position} \subseteq \mathbb{R}^2$ können wir also schreiben:
+
+\[
+    k_{\texttt{Position}} = (1.0, 1.0) \in K_\texttt{Position}
+\]
+
+
+
+\begin{tcolorbox}[title={Komponenten als Informationsträger für Referenzen}]
+    Für Anwendungsfälle, in denen eine Komponente eine Referenz auf eine Objektinstanz $t$ vom Typ $T$ verwaltet, kann in diesem Kontext das Label
+
+    \[
+        \text{Ref(T)} \in I
+    \]
+
+    \noindent
+    eingeführt werden.\\
+
+    \noindent
+    Hierzu sei
+
+    \[
+        \mathcal{A} \colon \text{Inst}(T) \rightarrow \mathbb{N}
+    \]
+
+    \noindent
+    eine Abbildung, die eine Instanz eines Typs $T$ auf einen numerischen Wert abbildet -- den Speicherort der Instanz im \textit{Adressraum}.\\
+
+    \noindent
+    Ein Term $k_{\text{Ref(T)}}$ speichert dann diesen numerischen Wert für $t \in \text{Inst}(T)$
+
+    \[
+        k_{\text{Ref(T)}} = \mathcal{A}(t) \in K_{\text{Ref(T)}} = \mathbb{N}
+    \]
+
+
+    \noindent
+    Dadurch ist die Frage, wie mit diesem Komponentenwert im ECS-Programm umgegangen wird, zunächst semantischer Natur, und unabhängig von der Tatsache, dass der Term tatsächlich einen Speicherort repräsentiert.
+\end{tcolorbox}

@@ -11,73 +11,43 @@ Zudem soll es dem Leser eine greifbare Einführung in die dort beschriebenen abs
 Das ECS-Muster besteht im wesentlichen aus folgenden drei Teilen:
 
 \begin{itemize}
-    \item \textbf{Komponenten} (\textit{Component}/\textit{Components}, $K$):
+    \item \textbf{Komponenten} (\textit{Component}/\textit{Components}):
     Erlaubt die Speicherung und Modifikation domänenspezifischer Werte.
-    $K$ ist ein Komponentenschema.
-    Zur Identifikation von Komponenten steht die Menge $I$ zur Verfügung, wobei $i \in I$ ein Label zur Identifizierung einer Komponente darstellt, realisiert über die Abbildung
-    \[
-        \tau: I \rightarrow K
-    \]Í
-    Damit ist $k_i$ ein \textit{Term} des Typs $\tau(i) = K_i$, also beispielsweise
-    \[
-        k_{\texttt{Position}} = (1.0, 1.0) \in K_\texttt{Position}
-    \]
-
-
-
-    \item \textbf{Entitäten} (\textit{Entity} / \textit{Entities}, $E$): Ein Typ $E$, der eine Wertemenge (beispielswiese \texttt{uint32\_t}) zur Identifikation von zusammengehörigen Komponenten ermöglicht.
-    Wenn der Term $e$ einen bestimmten Wert des Typs $E$ repräsentiert, dann ist
-    \[
-        \mathcal{P} \coloneqq E \times \bigcup_{i \in I} K_i = \{(e, k_i) \mid e \in E, i \in I, k_i \in K_i\}
-    \]
-    die Menge der möglichen Entität-Komponenten-Paare.\\
-    Eine bestimmte, eindeutige Ausprägung einer Entität $\mathcal{C}_e$ und die damit verbundene mögliche Menge von Entität-Komponenten-Paaren kann dann als partielle Abbildung definiert werden:\footnote{Eine genauere Definition der verwendeten Notation folgt. Wir weisen an dieser Stelle darauf hin, dass die ``Entitätszentrische`` Darstellung über $\mathcal{C}_e$ bei Redmond et al. nicht gefunden wird. Ganz im Sinne der Datenorientierung ist die Zuordnung der Entitäten zu Komponenten über Zustände definiert, die eine Menge von Abbildungen der Komponenten-Typen auf eine Menge von partiellen Abbildungen $e_m \rightarrow k_i$ enthält.}
-    \[
-        \mathcal{C}_e :  I \rightharpoonup \bigcup_{i \in I} K_i, \quad i \mapsto k_i \in K_i
-    \]
-    Hierbei gilt mit der Definition einer partiellen Abbildung:
-    \[
-        \mathcal{C}_e(i) \neq \bot \Leftrightarrow \exists{!} k_i \in K_i : \mathcal{C}_e(i) = k_i
-    \]
-    Als Beispiel für den Entitätsterm $e_1$:
-    \[
-        \mathcal{C}_{e_1} = \{i_1 \mapsto k_{i_1}, i_2 \mapsto k_{i_2}, \ldots, i_n \mapsto  k_{i_n}\}
-    \]
-    und damit
-    \[
-         \{(e_1, k_{i_1}), (e_1, k_{i_2}), \ldots, (e_1, k_{i_n})\} \subseteq \mathcal{P}
-    \]
-    \item \textbf{Systeme} (\textit{System}/\textit{Systems}, $S$): Funktionen {bzw.} Programmteile, die einzelne Komponenten lesend/schreiben nutzen.
+    \item \textbf{Entitäten} (\textit{Entity} / \textit{Entities}): Ein Typ $E$, der eine Wertemenge (beispielswiese \texttt{uint32\_t}) zur Identifikation von zusammengehörigen Komponenten ermöglicht.
+    Eine Entität definiert sich über die Menge der ihr zugeordneten Komponenten und lässt sich über den Entitätswert identifizieren:\footnote{
+    Der Entitätsidentifikator beschreibt die Daten und damit das repräsentierte Domänenobjekt. ``A truly component bsed object is nothing more but the sum of its parts.``~\ref[S. 85]{Fab18}
+    }
+    \item \textbf{Systeme} (\textit{System}/\textit{Systems}): Funktionen {bzw.} Programmteile, die einzelne Komponenten lesend/schreiben nutzen.
+    Systeme verändern den Zustand der Komponenten und damit den Zustand der Entität und dadurch auch gleichzeitig den Weltzustand (siehe unten).
 \end{itemize}
 
 Als weitere Bestandteile des ECS-Musters nennen die Autoren:
 
 \begin{itemize}
     \item \textbf{Abfragen} (\textit{query}/ \textit{queries}, $q$): Abfragen dienen dazu, auf bestimmte Komponentenkonstellationen gebündelt Zugriff zu erhalten.
-    Zur gezielten Steuerung von Abfragen können diese so gestaltet werden, dass entweder nur solche Komponentenbündel zurückgegeben werden, die der Schnittmenge von Komponenten entsprechen ()
-    \item \textbf{Zustand} (\textit{state}/ \textit{states}, $c$): Der Zustand des zugrundeliegenden Programms ändert sich mit der Anpassung der über die Komponenten bereitgestellten Daten, bzw. dem Hinzufügen oder Entfernen von Entitäten oder Komponenten.
+    Zur gezielten Steuerung von Abfragen können diese so gestaltet werden, dass entweder nur solche Komponentenbündel zurückgegeben werden, die einer Schnittmenge angefragter Komponententypen entsprechen (\textit{inclusive}) oder diese Komponententypen nicht enthalten (\textit{exclusive}).
+    Zusätzlich können Abfragen derart gestaltet werden, dass die angefragten Komponententypen nicht zwingend vorhanden sein müssen\footnote{
+    Redmond et al. bezeichnen diese Operation als \textit{anyway}. In \textit{helios} kann diese Abfrage über ein \texttt{withOptional()} erreicht werden.
+    }
+    \item \textbf{Zustand} (\textit{state}/ \textit{states}, $c$): Der Zustand des zugrundeliegenden Programms ändert sich mit der Anpassung der über die Komponenten bereitgestellten Daten, {bzw.} dem Hinzufügen oder Entfernen von Entitäten oder Komponenten.
+    \item \textbf{Programm} (\textit{ECS-Program}): Das eigentliche ECS-Program (nicht notwendigerweise die kapselnde Anwendung) besteht aus Entitäten, einer \textbf{vordefinierten Menge} von Komponententypen und Systemen sowie einer \textbf{variierenden Anzahl} von 1:N-Assoziationen zwischen Entitäten und Komponenten.
 \end{itemize}
+
+\begin{tcolorbox}[title={Core ECS als parametrisiertes Programm},colback=white]
+    Redmond et al. beschreiben \textit{Core ECS} als ein durch den Entitätstyp $E$ sowie ein Komponentenschema $K$ parametrisiertes Programm.
+    Eine C++-nahe Umsetzung sähe wie folgt aus:
+    \vspace{2mm}
+    \begin{lstlisting}[style=c++style,
+        label=lst:statemapping]
+    template<typename E, typename ...K>
+    class CoreECS {
+    ...
+    }
+    \end{lstlisting}
+\end{tcolorbox}
 
 Der Einsatz des ECS-Paradigmas begünstigt in der Regel auch schnellere Zugriffszeiten durch eine optimale Anordnung der Daten im Speicher, was die Leistungsfähigkeit der betreffenden Anwendungen erhöht~\cite{Fab18}~\cite{SRSS+23}.
 Darüber hinaus sorgt der dem Paradigma innewohnende datenorientierte Ansatz durch eine flache Datenhierarchie für eine stärkere Entkopplung von Datenhaltung sowie der Systeme, die auf diesen Daten arbeiten.\\
 
 Auf diese Vorteile gehen auch Redmond et al. ein.
 Dabei betonen Sie direkt in der Einführung, dass ECS-Systeme inhärent nebenläufig seien (``inherently concurrent`) und sich diese Eigenschaft für die parallele Bearbeitung unterschiedlicher Aufgaben nutzen lässt.
-
-\subsection*{Abgrenzung Nebenläufigkeit und Paralellität}
-Wie Oechsle in~\cite{Oec22} anmerkt, wird in der Literatur oft nicht genau zwischen \textit{Nebenläufigkeit} und \textit{Paralellität} unterschieden.
-Wir weisen deshalb an dieser Stelle auf das im Allgemeinen mit diesen Begriffen verbundene Verständnis hin: Als \textit{nebenläufig ausgeführt} verstehen wir Programmteile, die unabhängig voneinander \textit{quasi-parallel}\footnote{
-auch: Zeitverschachtelt oder \textit{interleaved}.
-} ausgeführt werden, bei denen das zugrundeliegende Betriebssystem also zwischen den einzelnen \textit{Thread-Kontexten} auf einem Ein-Prozessorsystem umschaltet um die jeweilige Ausführung eines Programmteils voranzutreiben.
-Unter \textit{(echt) parallel} verstehen wir die Ausführung von Programmteilen auf einem Computersystem, bei denen die Programme gleichzeitig, auf mehreren Prozessorkernen verteilt, ausgeführt werden.
-
-Im Weiteren nutzen wir die Begriffe synonym, da für unsere Betrachtungen nicht die konkrete Ausführungsstrategie der Hardware bzw. des Betriebssystems relevant ist und diese für das formale Modell ohnehin keine Rolle spielt.
-
-Auch Redmond et al. nehmen hierzu im weiteren Verlauf keine weitere Abgrenzung vor.
-
-\section{Eine erste Annäherung an die inhärente Nebenläufigkeit von ECS-Programmen}
-
-Bevor wir weiter auf die in der Arbeit vorgestellten Formalisieren eingehen, wollen wir zunächst die ``ìnhärente Nebenläufigkeit`` verstehen, die die Autoren einführend anmerken, aber nicht weiter ausführen.
-
-Hierzu müssen wir zunächst informell festhalten, dass sich die fachliche Spezifikät einer Entität in eine ECS erst durch die Summe seiner Komponenten ergibt.
-

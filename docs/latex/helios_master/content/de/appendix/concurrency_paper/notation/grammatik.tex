@@ -1,0 +1,45 @@
+\section{Grammatik}
+
+Die Autoren definieren in ihrem Papier eine Grammatik, die wir in ein formaleres Gerüst entsprechend der EBNF überführen.
+
+Hier definieren wir eine kontextfreie Grammatik
+\[
+ G_{\text{CoreECS}} = \{\Sigma, N, P, S\}
+\]
+
+\noindent
+bestehend aus folgenden Symbolen $\Sigma$, Nichtterminalen $N$, Produktionsregeln $P$ und dem Startsymbol $S$:
+\[
+    \begin{alignat}{3}
+    \Sigma &\coloneqq \{\\
+    &\text{``incl``}, \text{``excl``}, \text{``anyway``},\\
+    &\text{``attach``}, \text{``conc``}, \text{``seq``},\\
+    &\text{``v``}, $_i$, \land, \mid, \rightarrow, E, M, e, k, m, (, ),\\
+    &\}
+    \end{alignat}
+\]
+\[
+    \begin{alignat}{3}
+    N &\coloneqq \{\\
+    & \text{query}, \text{query\_command}, \text{mutation},\\
+    & \text{system}, \text{schedule}, \text{label}\\
+    &\}
+    \end{alignat}
+\]
+
+\[
+    \begin{alignat}{3}
+    P &\coloneqq \{\\
+    & \text{query\_command} &&\Coloneqq \text{``incl``} | \text{``excl``}  | \text{``anyway``}, \\
+    & \text{constraint} &&\Coloneqq \text{query\_command}, \text{``$_i$``},\\
+    & \text{query} &&\Coloneqq \text{constraint}, \{\text{``$\land$``},  \text{constraint}\},\\
+    & \vec{q} && \Coloneqq \text{query},\\
+    & \text{mutation\_command} && \Coloneqq \text{``attach``, ``$_i$``, ``(``, ``e``, ``k``, ``$_i$``,``)``} | \\
+    & && \text{``deattach``, ``$_i$``, ``(``, ``e``,``)``} | \\
+    & && \text{``v``, ``(``, ``E``, ``$\rightarrow$``, ``M``,``)``} | \\
+    & && \text{``nil``}, \\
+    & \text{mutation} && \Coloneqq \text{mutation\_command, \{ ``$\circ$``, mutation\_command\}}, \\
+    & \text{system} && \Coloneqq \text{``(``, $\vec{q}$, ``,``, ``E``, ``$^\text{dim}$``, ``$^\text{(}$``, $^\vec{q}$, ``$^\text{)}$``, ``$\times$``, ``(``, ``|``, $\vec{q}$, ``|``, ``)``, ``$\rightarrow$``, ``M``, ``)``},\\
+    &\}
+    \end{alignat}
+\]

@@ -1,0 +1,45 @@
+\subsection{Zustand}
+Den Begriff \textit{Zustand} (\textit{state}) führen Redmond et {al.} ein, um die zuvor erwähnte Eindeutigkeit von Entität-Komponenten-Konstellationen zu formalisieren.
+Hierzu gilt wie bislang festgehalten, dass eine Entität aus Assoziationen zu unterschiedlichen, niemals paarweise gleichen Komponententypen besteht.\\
+
+Um den Zustand eines \textit{Core ECS} Programms zu definieren, führen die Autoren $c$ ein: Eine über $i \in I$ indexierte Famielle von partiellen Abbildungen, die eine Entität mit einem Komponententerm vom Typ $K_i$ assoziieren:
+
+\[
+    c \coloneqq \{c_i : E \rightharpoonup K_i\}_{i \in I}
+\]
+
+\noindent
+So lässt sich für eine Entität $e_m$ der derzeitige Wert des Komponententerms $k_i$ notieren über
+
+\[
+    c_i(e_m) = k_i
+\]
+
+\noindent
+was äquivalent zu der oben hilfsweise eingeführten Definition von $\mathcal{E}_m$ ist:
+
+\[
+    c_i(e_m) = k_i = \mathcal{E}_m(i)
+\]
+
+\noindent
+Wir behalten im weiteren die Notation von Redmond et {al.} bei, da sie die komponentenzentrische Darstellung repräsentiert.
+Damit wird auch das Paradigma der Datenorientierung in den Vordergrund gestellt: ein eigentliches ``Entitäts-Objekt`` existiert ja gerade nicht, da die Entität $e_m$ nur eine Identität darstellt, unter der ein Komponententerm $k_i = c_i(e_m)$ abgefragt werden kann.\\
+
+\noindent
+Statt also
+
+\begin{displayquote}
+    gib mir für die Entität $E_m$ den Wert der Komponente $i$
+\end{displayquote}
+
+\noindent
+ist die Lesart der Notation
+
+\begin{displayquote}
+    gib mir für die Komponente $i$ den Wert, den sie für die Komponente $e_m$ besitzt
+\end{displayquote}
+
+\noindent
+Des weiteren sieht die Definition von \textit{Core ECS} gerade vor, dass ein Programm parametrisiert wird mit dem Typ $E$ und dem Komponentenschema $K$ - somit auch sind alle $i \in I$ zu Programmstart bekannt, während Entitäten beliebig während der Programmausführung erzeugt werden können.
+Unsere ursprünglich eingeführte Hilfsdefinitionen würden für das Modell hingegen komplexere Formalisierungen bedeuten.

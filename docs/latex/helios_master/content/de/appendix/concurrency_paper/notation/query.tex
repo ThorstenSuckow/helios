@@ -1,0 +1,122 @@
+\section{Query}
+
+Im folgenden führen wir in den von Redmond et al. verwendeten Query-Begriff ein.
+Hierbei betrachten wir dessen Notation als auch Auswertung.\\
+Zunächst motivieren wir die idiomatische ECS-Datenstruktur unter Anwendung des Funktionalen Abhängigkeits-Begriffs, um auf dieser Grundlage im späteren Verlauf einige Operationen exemplarisch darzustellen.\\
+
+\subsection*{Relationales Schema des ECS}
+Ein erster Entwurf eines relationalen Schemas der bislang behandelten zentralen Begriffe \textit{Entitäten} und \textit{Komponenten} führt zu dem in Abbildung~\ref{fig:relation} dargestellten Schema, der den Entitätstyp $E$ als auch zwei  Komponententypen $K_i$, $K_j$ enthält.\\
+Hierbei wird der  Entitätstyp $E$ mit den Komponententypen in binäre Relationen überführt -- die Darstellung entspricht damit einer in vorherigen Abschnitten bereits erwähnten \textit{entitätszentrischen} Darstellung.
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation}
+    \caption{ER-Modell von Entität und Komponenten als entitätszentrischer Entwurf. Bei der Notation folgen wir Chen~\cite{Che76}. (Quelle: eigene Darstellung)}
+    \label{fig:relation}
+\end{figure}
+
+In den folgenden Schritten überführen wir den Entwurf in die ECS-idiomatische komponentenzentrische Darstellung, wobei wir uns bei Begriffen und Vorgehen an Elmasri und Navathe orientieren~\cite{EN11}.\\
+
+Relation und Attributmengen sind hierbei wie folgt gegeben:
+
+\[
+    \begin{alignat}{3}
+     E &= \{e\}\\
+     K_i &= \{e, k_i\}\\
+     K_i &= \{e, k_j\}\\
+    \end{alignat}
+\]
+
+\noindent
+Wir identifizieren den Primärschlüssels $e$, der in der Relation $E$ eine triviale funktionale Abhängigkeit $e \rightarrow e$ aufweist, sowie in den anderen Relationen jeweils $e \rightarrow k_i$ bzw. $e \rightarrow k_j$.\\
+
+\noindent
+Die funktionale Abhängigkeitsmenge $F$ lautet damit entsprechend
+
+\[
+    \begin{alignat}{3}
+    F = &\{\\
+        &e \rightarrow \{k_i, k_j\}\\
+    & \}\\
+    \end{alignat}\ ,
+\]
+
+\noindent
+woraus sich die Hülle von $e$ unter $F$ ableiten lässt:
+
+\[
+    e^+ =\{e, k_i, k_j\}
+\]
+
+\noindent
+Damit können wir die Menge der minimalen funktionalen Abhängigkeitsmenge $F_\text{min}$ bestimmen, um redundante Informationen zu entfernen:
+\[
+    \begin{alignat}{3}
+    F_\text{min} = &\{
+        &e \rightarrow {k_i},
+        &e \rightarrow {k_j}
+    &\}
+    \end{alignat}
+\]
+
+\noindent
+Die resultierenden funktionalen Abhängigkeiten können in ein Relationschema
+
+\[
+    K\ (e,\ k_i,\ k_j)
+\]
+
+\noindent
+überführt werden, die nicht weiter normalisiert werden braucht.
+Es ist sofort klar, dass eine solche Relation möglicherweise NULL-Werte für $k_i$ oder $k_i$ enthalten wird.\footnote{
+    Codd diskutiert die Auswirkungen von NULL-Werten -- auch im Hinblick auf Normalisierung -- in~\cite{Cod86}.
+}\\
+Damit würde für jedes $k_i$, das für $e \in E$ erstellt wird, auch ein $k_j$ erstellt werden und umgekehrt.
+Für das formale Modell spielt dies keine Rolle - hätte aber in einer entsprechenden Anwendungsnahen Implementierung den Effekt, dass nicht auf Vorhandensein einer Assooziation $e \mapsto k_j$ geprüft werden muss, sondern der enthaltene Wert.\\
+
+Aus diesem Grund dekomponieren wir die Relation und erhalten das Relationsschema wie in Abbildung~\ref{fig:relation_ecs}
+dargestellt.\footnote{
+Eine formale Grundlage für diese Form liefert die 6ste Normalform~\cite[S. 176]{DDL03}
+}
+
+\[
+    \begin{alignat}{3}
+    K_i(e,\ k_i)\\
+    K_j(e,\ k_j)\\
+    \end{alignat}
+\]
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation_ecs}
+    \caption{Nach bestimmung der funktionalen Abhängigkeiten können wir mit hilfe der minimalen funktionalen Abhängigkeitsmenge auf ein normalisiertes Schema zuückgreifen, dass die komponentenzentrische, idiomatische Datenverwaltung in einem ECS repräsentiert..  (Quelle: eigene Darstellung)}
+    \label{fig:relation_ecs}
+\end{figure}
+
+
+
+%query ist ein n ärer join (q \land q`)
+
+
+\subsection*{Auswertung von Ausdrücken}
+
+
+Zur Auswertung von Ausdrücken führen Redmond et al. die Notation
+
+\[
+    (\mid - \mid)
+\]
+
+\noindent
+ein. Hierbei ist wie folgt definiert:
+
+\[
+    \begin{alignat}{3}
+    (\mid \tm{incl_i}\mid) &\coloneqq K_i\\
+    (\mid \tm{excl_i}\mid) &\coloneqq \top \\
+    (\mid \tm{anyway_i}\mid) &\coloneqq K_i \lor \top\\
+    (\mid \nt{q}\ \tm{\land}\ \nt{q'} \mid) &\coloneqq (\mid \nt{q} \mid) \times (\mid \nt{q'} \mid)
+    \end{alignat}
+\]

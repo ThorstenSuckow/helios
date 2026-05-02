@@ -12,7 +12,7 @@ Hierbei wird der  Entitätstyp $E$ mit den Komponententypen in binäre Relatione
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation}
-    \caption{ER-Modell von Entität und Komponenten als entitätszentrischer Entwurf. Bei der Notation folgen wir Chen~\cite{Che76}. (Quelle: eigene Darstellung)}
+    \caption{ER-Modell von Entität und Komponenten als entitätszentrischer Entwurf. Die Relationen sind als identifizierende Relationen modelliert, da eine Komponente nicht ohne eine Eltern-Entität existieren kann. Entsprechend sind $K_i, K_j, \ldots$ als schwache Entitätstypen modelliert, die über $E$ identifiziert werden. Bei der Notation folgen wir Chen~\cite{Che76}. (Quelle: eigene Darstellung)}
     \label{fig:relation}
 \end{figure}
 
@@ -53,22 +53,233 @@ woraus sich die Hülle von $e$ unter $F$ ableiten lässt:
 Damit können wir die Menge der minimalen funktionalen Abhängigkeitsmenge $F_\text{min}$ bestimmen, um redundante Informationen zu entfernen:
 \[
     \begin{alignat}{3}
-    F_\text{min} = &\{
-        &e \rightarrow {k_i},
-        &e \rightarrow {k_j}
+    F_\text{min} = &\{\\
+        &e \rightarrow {k_i},\\
+        &e \rightarrow {k_j}\\
     &\}
     \end{alignat}
 \]
 
 \noindent
-Die resultierenden funktionalen Abhängigkeiten können in ein Relationschema
+Die resultierenden funktionalen Abhängigkeiten können in ein breites Relationsschema
 
 \[
     K\ (e,\ k_i,\ k_j)
 \]
 
 \noindent
-überführt werden, die nicht weiter normalisiert werden braucht.
+überführt werden.
+Hierbei erlauben wir für die einzelnen Spalten $k_i, k_j$ die Abwesenheit konkreter Komponententerme und übernehmen hierfür den Unit-Wert * vom Typ $\top$ von Redmond et al. -- entsprechend schreiben wir hierfür im Folgenden
+\[
+    K^{\top}(e, \ k_i^\top, k_j^\top)
+\]
+
+\noindent
+mit
+\[
+    \begin{alignedat}{3}
+    \text{dom}(k_i^\top) = \text{dom}(k_i) + \top\,,\\
+    \text{dom}(k_j^\top) = \text{dom}(k_j) + \top
+    \end{alignedat}
+\]
+
+\noindent
+(Ergänzend können wir eine Integritätsbedingung definieren, die verhindert, dass eine Entität nur aus unit-Werten für die Komponententerme besteht: Ein Tupel der Relation $K^\top$ im Relationszustand $\pi_{K^\top}(r)$ muss mindestens einen konkreten Komponententerm besitzen:
+
+\[
+  \forall (e, k^\top_i, k^\top_j) \in \pi_{K^\top}(r): (k^\top_i \neq *) \lor (k^\top_j \neq *)
+\]
+\noindent
+Dies wird im weiteren Verlauf jedoch keine Rolle spielen.)
+
+\bigskip
+\noindent
+Wir führen $K^\top$ hilfsweise ein, um daraus für nachfolgende Operationen ein Relationsschema $R_\text{live}$ abzuleiten.
+Hierzu benötigen wir für einzelne Komponenten, die nicht mit einer Entität $e \in E$ assoziiert sind, einen Wert, der die Abwesenheit dieser Komponenten ausdrückt.
+Um im folgenden nicht mit expliziten NULL-Werten arbeiten müssen, nutzen wir den Unit-Wert vom Typ $\top$, der auch bei Redmond et al. verwendet wird.
+Damit können wir eine Brücke hin zu der Typ-Semantik als auch der Funktionssemantik des konjunktiven Anfragesystems bauen, ohne weitere Konventionen oder Voraussetzungen für das im nachfolgenden verwendete relationale Modell erzwingen zu müssen.\footnote{Während das relationale Modell NULL-Werte durchaus berücksichtigt~\cite[136]{EN11}, geht die Theorie verlustfreier JOIN-Abhängigkeiten von einer Abwesenheit von Nullwerten aus~\cite[S. 347--348]{EN11}.
+}
+
+\bigskip
+\begin{theorem}\label{K_lossy}
+    Das Relationsschema $K^\top$ lässt sich verlustfrei in die Relationen $K^\top_i, K^\top_j$ mit $K^\top = K^\top_i \cup K^\top_j$ zerlegen.
+\end{theorem}
+
+\medskip
+\begin{proof}
+    Sei $K^{\top}_i = \pi_{(e, k^{\top}_i)}(K),\ K^{\top}_j = \pi_{e, k^{\top}_j}(K)$.
+
+    \noindent
+    Wir zeigen, dass
+    \[
+        \pi_{K^{\top}_i}(r)\ \bowtie_{K^{\top}_i.e = K^{\top}_j.e}\ \pi_{K^{\top}_j}(r) = *(\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r))
+    \]
+
+    \bigskip
+    \noindent
+    Da es sich um eine binäre Zerlegung handelt, kann der Beweis anhand der funktionalen Eigenschaften erfolgen~\cite[S. 343]{EN11}:
+    \[
+        \begin{alignedat}{3}
+        ((K^{\top}_i \cap K^{\top}_j) &\rightarrow (K^{\top}_i - K^{\top}_j)) = (e \rightarrow k^{\top}_i\ ) \in e^+\\
+        (K^{\top}_i \cap K^{\top}_j) &\rightarrow (K^{\top}_j - K^{\top}_i)) = (e \rightarrow k^{\top}_j) \in e^+\\
+        \end{alignedat}
+    \]
+\end{proof}
+
+
+\bigskip
+\noindent
+Um das Theorem auf n-äre Zerlegungen ausweiten zu können (für Komponententypen $K^{\top}_i, K^{\top}_j, K^{\top}_k, \ldots$) betrachten wir eine Zerlegung in drei Relationen.
+Hierzu erweitern wir $K$ um die Spalte $k^{\top}_k$, und zeigen im Folgenden:
+\[
+    \pi_{K^{\top}}(r) = *(\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r), \pi_{K^{\top}_k}(r))
+\]
+
+\noindent
+Wir wenden hierzu Verfahren~\cite[Algorithmus 10.2, S. 342]{EN11} an und weisen darüber die verlustfreie Zerlegung nach:
+
+\bigskip
+Schritt 1 und 2:
+\[
+    \begin{array}{c|cccc}
+        & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+        \hline
+        K^{\top}_i     & b_{11} & b_{12} & b_{13} & b_{14} \\
+        K^{\top}_j     & b_{21} & b_{22} & b_{23} & b_{24} \\
+        K^{\top}_k     & b_{31} & b_{32} & b_{33} & b_{34}
+    \end{array}
+\]
+
+\medskip
+Schritt 3:
+\[
+    \begin{array}{c|cccc}
+        & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+        \hline
+        K^{\top}_i     & a_e & a_i & b_{13} & b_{14} \\
+        K^{\top}_j     & a_e & b_{22} & a_j & b_{24} \\
+        K^{\top}_k     & a_e & b_{32} & b_{33} & a_k
+    \end{array}
+\]
+
+\medskip
+Schritt 4:
+\[
+    \begin{array}{c|cccc}
+        & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+        \hline
+        K^{\top}_i     & a_e & a_i & b_{13} & b_{14} \\
+        K^{\top}_j     & a_e & a_i & a_j & b_{24} \\
+        K^{\top}_k     & a_e & a_i & b_{33} & a_k
+    \end{array}
+\]
+
+\medskip
+Schritt 5 (Ende):
+\[
+    \begin{array}{c|cccc}
+        & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+        \hline
+        K^{\top}_i     & a_e & a_i & a_j & b_{14} \\
+        K^{\top}_j     & a_e & a_i & a_j & b_{24} \\
+        K^{\top}_k     & a_e & a_i & a_j & a_k
+    \end{array}
+\]
+
+\bigskip
+\noindent
+Nach Schritt 5 existiert eine Zeile, die durchgehend mit den Symbolen $a$ besetzt ist.
+Damit ist gezeigt, dass sich $K$ verlustlos nach $K^{\top}_i, K^{\top}_j$ und weiter nach $K^{\top}_k$ zerlegen lässt.
+
+
+\noindent
+Analog ist der Beweis für mehr Spalten und daraus folgenden Zerlegungen zu führen, die der gleichen Form genügen.
+
+\begin{theorem}\label{f_min_norm}
+    Das Relationsschema $K$ erfüllt die Bedingungen der 1., 2., 3., BCNF-, 4., 5, -Normalform.
+\end{theorem}
+
+\begin{proof}
+    Für den Nachweis greifen wir auf die minimale funktionale Abhängigkeitsmenge zurück
+
+    \[
+    \begin{alignat}{3}
+    F_\text{min} = &\{\\
+    &e \rightarrow {k_i},\\
+    &e \rightarrow {k_j}\\
+    &\}
+    \end{alignat}
+    \]
+
+    Im Folgenden weisen wir der Reihe die 5 Normalformen sowie die BCNF schrittweise nach, und erfüllen damit implizit den Nachweis der Erfüllung aller NF $< n$ für eine NF $n, n \geq 1$\footnote{
+        Für die BCNF gilt, dass sie in 3.NF ist; als verschärfte Bedigung der 3. NF gilt dies aber nicht im umgekehrten Fall~\cite[S. 328]{EN11}.
+    }\\
+
+    \noindent
+    Um die Beweise einfacher zu gestalten, wiesen wir zunächst nach, dass sich $K$ nicht weiter zerlegen lässt, ohne, dass die Bedingung für einen verlustfreien JOIN erfüllt ist.\\
+
+
+    \textbf{nicht} die Eigenschaft eines verlustfreien JOINs sowie keine mehrwertigen Attribute aufweist.\\
+    Da $e$ der einzige Kandidatenschlüssel in den Relationen ist sowie alle anderen Attribute $A \in R, A \neq e$ nicht-prim sind,
+
+
+    \noindent
+    Außerdem zeigen wir, dass keine mehrwertige Abhängigkeit existiert:  Gäbe es eine solche Abhängigkeit, müsste $K$ mindestens zwei unabhängige 1:N Beziehungen A:C, A:D aufweisen, was aufgrund des Primärschlüssels $e$ als einziges Prime-Attribut nicht möglich ist.
+
+    \medskip
+    \begin{itemize}
+        \item 1. Normalform: Erfüllt, da $K$ keine mehrwertigen Atribute enthält.
+        \item 2. Normalform: Erfüllt, da $K$ als Kandiatenschlüssel nur $e$ enthält, und somit keine partiellen Abhängigkeiten existieren.
+        \item 3. Normalform: Erfüllt, da $K$ keine transitiven Abhängigkeiten enthält, was anhand $F_\text{min}$ zu sehen ist.
+        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $X \rightarrow A\ \in F_\text{min}$ $X$ der Kandidatenschlüssel ist.
+        \item 4. Normalform: Erfüllt, da $K$ keine mehrwertigen Abhängigkeiten besitzt.
+        \item 5.Normalform: Erfüllt, da $K$ mit $JD(K) \equiv *(\pi_{K}(r)) = r$ eine einzelne, triviale Join-Abhängigkeit aufweist. $K$ weist bereits eine verlustfreie Join-Zerlegung auf, und damit per Defintion in Project-Join-Normalform ist.
+    \end{itemize}
+\end{proof}
+
+womit sich eine Relation wie in Abbildung~\ref{fig:k_rel} ergibt, auf die wir im weiteren -- stellvertretend als Repräsentation von dem vorher eingeführten
+
+\[
+    \text{live(c)}
+\]
+
+bezug nehmen werden: Die Relation repräsentiert den Weltzustand, besitzt als Attribute alle Komponententypen
+
+\[
+    R_\text{live} \coloneqq
+\]
+
+\begin{example}
+    Da die Menge der unterschiedlichen KOmponententypen zur Parametrisierung des Programms genutzt wird und damit zur Kompilierzeit zur Verfügung steht, kann eine Datenstruktur in C++, die $R_\text{live}$ implementiert, beispielsweise wie folgt implementiert werden:
+    \vspace{2mm}
+    \begin{lstlisting}[style=cppframed,
+        label=lst:liverel_cpp]
+template<typename... K>
+class LiveRelation {
+    std::vector<
+        std::unordered_map<
+            std::type_index, std::variant<K...>
+        >
+    > mapppings;
+}
+    \end{lstlisting}
+    Dabei gehen wir davon aus, dass Entitäten vom Typ $E$ einen skalaren, numerischen Typ repräsentierten.
+    Für die \texttt{unordered\_map} nutzen wir als Schlüssel die Typ-Info (\texttt{std::type\_info}) eines Komponententyps $K_i$.
+\end{example}
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/k_rel}
+    \caption{Das Universalschema $R_\text{live}$ enthält als Attribute den Kandiatenschlüssel $e$ sowie $k_i, k_j, \ldots$ die jeweils den Komponententyp $K_i, K_j \ldots$ repräsentieren. (Quelle: eigene Darstellung)}
+    \label{fig:live_rel}
+\end{figure}
+
+
+\bigskip
+, die nicht weiter normalisiert werden braucht.
+
+
 Es ist sofort klar, dass eine solches Schema möglicherweise NULL-Werte für $k_i$ oder $k_i$ enthalten wird.\footnote{
     Codd diskutiert die Auswirkungen von NULL-Werten -- auch im Hinblick auf Normalisierung -- in~\cite{Cod86}; weitere Betrachtung und formalen und semantischen Aspekten bei Franconi und Tessaris~\cite{FT22}.
 }\\
@@ -76,6 +287,7 @@ Damit würde für jedes $k_i$, das für $e \in E$ erstellt wird, auch ein $k_j$ 
 Für das formale Modell spielt dies keine Rolle - hätte aber in einer entsprechenden Anwendungsnahen Implementierung den Effekt, dass nicht auf Vorhandensein einer Assooziation $e \mapsto k_j$ geprüft werden muss, sondern der enthaltene Wert.
 Außerdem trägt ein Schema zwei domänenspezifische Typen, was die Semantik des Datenmodells abschwächt.
 \\
+Auch hier gilt die Voraussetzung, dass \bot nicht in $k_i$ auftreten darf, da ansonsten die Komponentenzuordnung nicht existiert un $K_i$ sonst in einem undefinierten Zustand wäre.\\
 
 Aus diesem Grund dekomponieren wir die Relation und erhalten das Relationsschema wie in Abbildung~\ref{fig:relation_ecs}
 dargestellt.\footnote{
@@ -248,9 +460,15 @@ Entsprechend kann eine Projektion, die nur den Entitätsterm des Anfrageergebnis
 
 \bigskip
 \noindent
-Um $\tm{excl_i}$ als Selektion anzuwenden,
+Um $\tm{excl_i}$ als Selektion anzuwenden, genügt es, in $R_{live}$ alle Tupel anzufragen, für die $k_i = \bot$ ist.
 \[
-    \sigma_{R_\text{live}.\mathcal{E}_\text{Position}\ \notin \ \text{dom}(c_\text{Position}) } (R_\text{Live}) = \{(e_i, k_i) \mid e_i \in E, k_i \in I, I \neq \text{Position} \}
+    \llbracket \ \tm{excl_i} \ \rrbracket \equiv \sigma_{k_i = \bot} (R_\text{live})
+\]
+
+bzw. in einer komponentenzentrischen Aufbau über das Tupelkalkül
+
+\[
+    \llbracket \ \tm{excl_i} \ \rrbracket \equiv  \{t <\}
 \]
 
 \begin{example}[Verschachtelte binäre Query]

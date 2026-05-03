@@ -1,0 +1,499 @@
+\section{ECS als relationales Modell}
+
+Im folgenden Abschnitt motivieren wir die idiomatische ECS-Datenstruktur auf Grundlage des relationalen Modells.\\
+Mit Hilfe von funktionalen Abhängigkeiten weisen wir die Normalenformen nach, um im Weiteren mit Normalformtheorien zusammenhängende Lösch- und Aktualisierungsanomalien formal ausschließen zu können.\\
+Ausgehend von einem breiten Relationsschema überführen wir den Entwurf in ein ECS-idiomatisches komponentenzentrisches Modell und weisen hierfür die 6te Normalform nach.
+
+\subsubsection*{Hinweise zur Notation}
+Bei Begriffen und Notation folgen wir der üblichen Fachliteratur, insbesondere Elmasri und Navathe~\cite{EN11}.\\
+Mit Blick auf die Relationen zwischen Entität und Komponenten bezeichnen wir das relationale Modell des ECS im Folgenden als \textit{ECS-Modell}.
+Wo sich die Erweiterungen des Modells nicht aus dem Kontext ergeben, wird entsprechend erklärend darauf hingewiesen.\\
+Um der übrigen Notation in dieser Arbeit gerecht zu bleiben, verwenden wir auch in diesem Abschnitt für die Subskripte der Komponententypen Buchstaben.
+Wo der Zusammenhang erfordert, ersetzen wir die Buchstaben durch Ziffern, um beispielsweise deutlicher auf eine endliche Menge von Komponentenassoziationen hinzuweisen; diese setzen wir aber stets -- unabhängig von der Schreibweise -- implizit voraus.
+Der binäre Natural-Join-Operator $\njoin$ wird im Kontext von Relationszuständen $\pi_{R_n}(r)$ in der Form
+\[
+    \njoin (\pi_{R_1}(r), \ldots, \pi_{R_n}(r)),\ n \in \mathbb{N}
+\]
+\noindent
+genutzt, um den durch die Join Operation
+\[
+     \pi_{R_1}(r) \njoin \ldots \njoin \pi_{R_n}(r))
+\]
+\noindent
+ergebenden Relationszustand $r$ zu notieren.
+
+\subsection{Das relationale Schema}
+Ein erster Entwurf eines relationalen Schemas, dass die Beziehungen zwischen \textit{Entität} und \textit{Komponenten} ausdrückt, führt zu dem in Abbildung~\ref{fig:relation} dargestellten Modell.
+Der Entitätstyp $E$ ist dort mit zwei Komponententypen $K_i$, $K_j$ dargestellt, wobei die Beziehungen als  binäre Relationen modelliert sind -- die Darstellung entspricht damit dem \textit{entitätszentrischen} Ansatz und wird schematisch in ähnlicher Form bei Redmond et {al.} verwendet~\cite[Fig.1, 272:3]{RCCM+25}.
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation}
+    \caption{Entitätszentrischer Entwurf eines Entity-Relationship-Modells von Entität und Komponenten.
+    Relationen sind identifizierend modelliert, da ein Komponententerm $k_i$ nicht ohne eine besitzende Entität existieren kann.
+    Entsprechend sind $K_i, K_j, \ldots$ als schwache Typen modelliert, die über $E$ identifiziert werden. Die Notation folgt der Chen-Notation~\cite{Che76}. (Quelle: eigene Darstellung)}
+    \label{fig:relation}
+\end{figure}
+
+\subsection{Funktionale Abhängigkeiten im ECS-Modell}
+
+Relation und Attributmengen des ECS-Modells ergeben sich wie folgt:
+
+\[
+    \begin{alignat}{3}
+        &E   &&= \{e\}\\
+        &K_i &&= \{e, k_i\}\\
+        &K_i &&= \{e, k_j\}\\
+        &K_k &&= \{e, k_k\}\\
+        & \ldots
+    \end{alignat}
+\]
+
+\noindent
+Als Primärschlüssel für $E$ identifizieren wir das Attribut $e$.
+In den Relationen $K_i, K_j, \ldots$ ist $e$ der Fremdschlüssel; zusammen mit der 1:1 Kardinalität der Relationen auch gleichzeitig der Primärschlüssel.\\
+
+\noindent
+Die funktionalen Abhängigkeiten der Relationen lauten:
+
+\[
+    \begin{alignat}{3}
+        F_E = &\{ e \rightarrow e\}\\
+        F_{K_i} = &\{ e \rightarrow k_i\}\\
+        F_{K_j} = &\{ e \rightarrow k_j\}\\
+        \ldots
+    \end{alignat}\
+\]
+\medskip
+
+\noindent
+Mit diesen Informationen können wir das Universalrelationsschema
+
+\[
+ K(e, k_i, k_j, k_k, \ldots)
+\]
+\smallskip
+
+\noindent
+ableiten, das in Abbildung~\ref{fig:universalrelation_k} dargestellt ist.\\
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/universalrelation_k}
+    \caption{Komponenten und Entität zusammengeführt in der Relation $K$. (Quelle: eigene Darstellung)}
+    \label{fig:universalrelation_k}
+\end{figure}
+
+\noindent
+Die funktionalen Abhängigkeiten $F_K$ von $K$ ergeben sich damit zu
+
+\[
+    \begin{alignat}{3}
+        F_K &= F_E \cup F_{K_i} \cup F_{K_j} \cup \ldots =
+            &\{ e \rightarrow k_i, \ e \rightarrow k_j, \ \ldots\}
+    \end{alignat}
+\]
+
+\noindent
+Die Hülle von $e$ unter $F_K$ lautet:
+
+\[
+    e^+ =\{e, k_i, k_j, k_k, \ldots\}
+\]
+
+\noindent
+Folglich ergibt sich die minimale funktionale Abhängigkeitsmenge $F^\text{min}_{K}$ zu:
+\[
+    \begin{alignat}{3}
+        F^\text{min}_{K} = &\{e \rightarrow {k_i},\ e \rightarrow {k_j}, \ e \rightarrow {k_k}, \ \ldots  \}
+    \end{alignat}
+\]
+
+\subsection*{Darstellung fehlender Komponenten im Universalrelationsschema}
+
+In dem breiten Relationsschema $K$ ist es nicht möglich, ohne speziellen Wert die Abwesenheit einer Komponente für eine Entität darzustellen: So kann im Relationszustand $r$ ein Tupel
+\[
+    t \in \pi_{K}(r)
+\]
+\noindent
+nur existieren, wenn folgendes erfüllt ist:
+
+\[
+    \forall v_i \in \{t[A_i] \mid t \in \pi_{K}(r)\}: v_i \in dom(A_i)
+\]
+
+\noindent
+mit
+\[
+    A_i \in K\backslash \{e\}, i \in I
+\]
+
+\noindent
+Damit kann eine Entität, die eine Assoziation zu $K_\text{Position}$ hat, aber keine Assoziation zu $K_\text{Velocity}$, nicht Teil des Relationszustands $\pi_{K}(r)$ sein.\\
+
+\noindent
+Anstatt einen \text{NULL}-Wert für diese Fälle einzuführen, übernehmen wir in Anlehnung an Redmond et {al.} den Unit-Wert $\unitval$ vom Typ $\top$.\footnote{
+    Damit können wir eine Brücke hin zu der Typ- als auch der Funktionssemantik des bei Redmond et {al.} verwendeten konjunktiven Anfragesystems bauen, ohne weitere Konventionen oder Voraussetzungen, die mit \text{NULL}-Werten einhergehen könnten, für das relationale Modell zu erzwingen.
+}
+Damit erweitern wir die Wertebereiche auf $K_i + \top,\ K_j + \top, \ldots$, so dass für die Attribute auf eine erweiterte Wertemenge zurückgegriffen werden kann:
+
+\[
+\begin{alignedat}{3}
+  \text{dom}(k_i) &= \text{dom}(k_i) \cup \{\unitval\}\\
+  \text{dom}(k_j) &= \text{dom}(k_j) \cup \{\unitval\}\\
+    \ldots
+\end{alignedat}
+\]
+
+\noindent
+Die um $\top$ erweiterten Komponententypen, Relationen und Attribute notieren wir im Folgenden mit einem Superscript $^\top$:\\
+
+\[
+    K^{\top}(e, \ k_i^\top, k_j^\top, \ldots)
+\]
+
+\noindent
+Die im vorherigen Abschnitt angegebenen funktionalen Abhängigkeiten und Abhängigkeitsmengen ändern sich damit nicht, abgesehen der geringfügig abweichenden Notation.
+
+\bigskip
+\begin{tcolorbox}[title={Zusätzliche Integritätsbedingung für $K^{\top}$}]
+Als zusätzliche Integritätsbedingung kann vereinbart werden, dass eine Entität nicht ausschließlich $\unitval$-Werte in den Komponentenattributen aufweisen darf.
+Ein Tupel der Relation $K^\top$ im Relationszustand $\pi_{K^\top}(r)$ muss mindestens einen konkreten Komponententerm aufweisen.
+\[
+    \forall t \in \pi_{K^\top}(r): \exists t[A_i]: t[A_i] \neq \unitval
+\]
+\end{tcolorbox}
+
+\subsection*{Axiome und Theoreme}
+
+Wir führen im folgenden einige Axiome und Theoreme ein, um den Nachweis der Normalformen zu erleichtern.
+
+\bigskip
+\begin{axiom}\label{ax:nur_atomar}
+    Die Wertemengen der Attribute von $K^\top$ lassen nur einzelne, untrennbare (und damit atomare) Werte zu.
+\end{axiom}
+
+\bigskip
+\begin{theorem}\label{th:K_ist_verlustfrei}
+    Das Relationsschema $K_{ij}^\top = K(e, k^\top_i, k^\top_j)$ lässt sich verlustfrei in die Relationen $K^\top_i, K^\top_j$ zerlegen.
+\end{theorem}
+
+\medskip
+\begin{proof}
+    Sei $K^{\top}_i = \pi_{(e, k^{\top}_i)}(K_{ij}^\top),\ K^{\top}_j = \pi_{e, k^{\top}_j}(K_{ij}^\top)$.\\
+
+    \noindent
+    Wir zeigen, dass
+    \[
+        \pi_{K^{\top}_i}(r)\ \bowtie_{K^{\top}_i.e = K^{\top}_j.e}\ \pi_{K^{\top}_j}(r) = *(\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r)) = \pi_{K_ij^\top}(r)
+    \]
+
+    \bigskip
+    \noindent
+    Da es sich um eine binäre Zerlegung handelt, kann der Beweis anhand der funktionalen Eigenschaften erfolgen~\cite[S. 343]{EN11}:
+    \[
+        \begin{alignedat}{3}
+            ((K^{\top}_i \cap K^{\top}_j) &\rightarrow (K^{\top}_i - K^{\top}_j)) = (e \rightarrow k^{\top}_i\ ) \in e^{+\top}\\
+            (K^{\top}_i \cap K^{\top}_j) &\rightarrow (K^{\top}_j - K^{\top}_i)) = (e \rightarrow k^{\top}_j) \in e^{+\top}\\
+        \end{alignedat}
+    \]
+\end{proof}
+
+\bigskip
+\begin{theorem}\label{th:Kplus_ist_verlustfrei}
+    Das Relationsschema $K^\top = K(e, k^\top_1, k^\top_2, \ldots, k^\top_n), n \in \mathbb{N}$ lässt sich verlustfrei in die Relationen $K^\top_1, K^\top_2, \ldots, K^\top_\n$ zerlegen.
+\end{theorem}
+
+\medskip
+\begin{proof}
+    Um das Theorem auf n-äre Zerlegungen von $K^\top$ auszuweiten, ist zu zeigen:
+    \[
+        \pi_{{K^\top}}(r) =\ \njoin (\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_n}(r))
+    \]
+
+    Hierzu wenden wir das Chase-Tableaux-Verfahren an~\cite[Chapter 8]{Mai83}~\cite[Algorithmus 10.2, S. 342]{EN11}.
+    Für eine bessere Lesbarkeit verzichten wir in der Matrixdarstellung auf die $b$-Symbole und nutzen stattdessen Unterstriche $\_$ in entsprechenden Zellen.\\
+
+    Sei zunächst wie in dem Verfahren angegeben die Matrix wie folgt aufgebaut:
+    Spalten entsprechend den Attributnamen von $K^\top$, in der Reihenfolge $e, k_1^{\top}, \ldots, k_n^\top$.
+    Die Zeilen sind mit den Relationsnamen $K^\top_1, K^\top_2, \ldots, K^\top_n$ der Zerlegung markiert.
+    Wir erhalten dadurch folgende Matrix:\\
+
+    \[
+        \begin{array}{c|cccccc}
+            & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
+            \hline
+            K^{\top}_1      & \_     & \_         & \_         & \_         & \dots  & \_         \\
+            K^{\top}_2      & \_     & \_         & \_         & \_         & \dots  & \_         \\
+            K^{\top}_3      & \_     & \_         & \_         & \_         & \dots  & \_         \\
+            \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
+            K^{\top}_n      & \_     & \_         & \_         & \_         & \dots  & \_
+        \end{array}
+    \]
+\medskip
+
+    \noindent
+    Für jede Relation, die in der Matrix hinzukommt, ist die Spalte $e$ komplett mit Symbolen $a_e$ besetzt, da $e$ Attribut jeder Relation ist.
+    Gleichzeitig können wir für jede neu hinzukommende Relation $K_x^\top(e, k^\top_x)$ auch den Eintrag in der Zelle $(m, n)$, indiziert durch $(K_x^\top, k^\top_x)$, durch das Symbol $a$ mit entsprechendem Index ersetzen, was zu folgender Matrix führt:
+
+    \[
+        \begin{array}{c|cccccc}
+            & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
+            \hline
+            K^{\top}_1      & $a_e$     & $a_1$         & \_         & \_         & \dots  & \_         \\
+            K^{\top}_2      & $a_e$     & \_         & $a_2$         & \_         & \dots  & \_         \\
+            K^{\top}_3      & $a_e$     & \_         & \_         & $a_3$        & \dots  & \_         \\
+            \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
+            K^{\top}_n      & $a_e$     & \_         & \_         & \_         & \dots  & $a_n$
+        \end{array}
+    \]
+    \medskip
+
+    \noindent
+    Damit ist die Matrix für den iterativen Teil des Verfahrens vorbereitet.\\
+
+    \noindent
+    Nun wird jede funktionale Abhängigkeit $X \rightarrow Y \in F^\text{min}_{K^\top}$ iterativ betrachtet: Für alle Zeilen, die in den Spalten, die durch $X$ repräsentiert werden, einen gleichen Eintrag haben, werden die Spalten, die $Y$ repräsentieren, zeilenweise auf das gleiche Symbol gesetzt:\footnote{
+        Da mit den gegebenen $F^\text{min}_{K^\top}$ in jedem Fall so eine Spalte existiert, brauchen wir den anderen Fall nicht berücksichtigen: In diesem Fall würde die Spalte mit $b$-Symbolen gefüllt.
+    }\\
+    Ausgehend von der minimalen funktionalen Abhängigkeitsmenge
+    \[
+        F^\text{min}_{K^\top} = \{e \rightarrow k^\top_1, e \rightarrow k^\top_2, \ldots e \rightarrow k^\top_n \}
+    \]
+    \noindent
+    können wir somit für jede $(e \rightarrow k^\top_x) \in F^\text{min}_{K^\top}, 1 \leq x \leq n$ die Spalte mit dem Index $_x$ mit $a_x$-Symbolen füllen, da $e$ als Superschlüssel in jeder FD auftaucht und jedes in $K^\top$ vorkommende Attribut von $e$ funktional abhängig ist.\\
+
+    \noindent
+    Nach Beendigung des Verfahrens ist in unserem Fall die Matrix komplett mit $a$-Symbolen besetzt.
+    \[
+        \begin{array}{c|cccccc}
+            & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
+            \hline
+            K^{\top}_1      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$         \\
+            K^{\top}_2      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$         \\
+            K^{\top}_3      & $a_e$     & $a_1$         & $a_2$         & $a_3$        & \dots  & $a_n$         \\
+            \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
+            K^{\top}_n      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$
+        \end{array}
+    \]
+    \medskip
+
+    \noindent
+    Da das Verfahren zum Nachweis der verlustfreien Zerlegung mindestens eine vollständig $a$-besetzte Zeile fordert, haben wir gezeigt, dass sich $K^\top$ verlustfrei in die Relationen $K^\top_1, K^\top_2, K^\top_3, \ldots, K^\top_n$ zerlegen lässt.
+
+\end{proof}
+
+\bigskip
+\begin{tcolorbox}[excursusbox,title={Nachweis der verlustfreien Zerlegung anhand $K^\top_i, K^\top_j, K^\top_k$}]
+Wir betrachten eine Zerlegung $K_{ijk}^\top$ in die drei Relationen  $K^\top_i, K^\top_j, K^\top_k$.
+    Es ist zu zeigen:
+    \[
+        \pi_{K_{ijk}^{\top}}(r) = *(\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r), \pi_{K^{\top}_k}(r))
+    \]
+
+    \noindent
+    Wir wenden hierzu das Verfahren an, das wir zum Nachweis von Theorem~\ref{th:Kplus_ist_verlustfrei} angewendet haben,und weisen darüber die verlustfreie Zerlegung nach:
+
+    \bigskip
+    Schritt 1 und 2:
+    \[
+        \begin{array}{c|cccc}
+            & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+            \hline
+            K^{\top}_i     & b_{11} & b_{12} & b_{13} & b_{14} \\
+            K^{\top}_j     & b_{21} & b_{22} & b_{23} & b_{24} \\
+            K^{\top}_k     & b_{31} & b_{32} & b_{33} & b_{34}
+        \end{array}
+    \]
+
+    \medskip
+    Schritt 3:
+    \[
+        \begin{array}{c|cccc}
+            & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+            \hline
+            K^{\top}_i     & a_e & a_i & b_{13} & b_{14} \\
+            K^{\top}_j     & a_e & b_{22} & a_j & b_{24} \\
+            K^{\top}_k     & a_e & b_{32} & b_{33} & a_k
+        \end{array}
+    \]
+
+    \medskip
+    Schritt 4:
+    \[
+        \begin{array}{c|cccc}
+            & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+            \hline
+            K^{\top}_i     & a_e & a_i & b_{13} & b_{14} \\
+            K^{\top}_j     & a_e & a_i & a_j & b_{24} \\
+            K^{\top}_k     & a_e & a_i & b_{33} & a_k
+        \end{array}
+    \]
+
+    \medskip
+    Schritt 5 (Ende):
+    \[
+        \begin{array}{c|cccc}
+            & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+            \hline
+            K^{\top}_i     & a_e & a_i & a_j & a_k \\
+            K^{\top}_j     & a_e & a_i & a_j & a_k \\
+            K^{\top}_k     & a_e & a_i & a_j & a_k
+        \end{array}
+    \]
+
+    \bigskip
+    \noindent
+    Da wenigstens eine Zeile mit $a$-Symbolen besetzt ist, ist in diesem Fall gezeigt, dass sich $K^\top_{ijk}$ verlustlos nach $K^{\top}_i, K^{\top}_j$, $K^{\top}_k$ zerlegen lässt.
+\end{tcolorbox}
+
+
+\bigskip
+\noindent
+Mit Theorem~\ref{th:Kplus_ist_verlustfrei} und dem zuvor erbrachten Nachweis, dass auch zusätzliche Komponenten-Spalten $K_k^\top, K_l^\top, \ldots$ nicht die Bedingungen für eine verlustfreie Zerlegung von $K_{+}^\top$ verletzen, können wir zusätzlich noch die JOIN-Abhängigkeiten (JD) für eine solche Zerlegung nachweisen.
+
+\bigskip
+\begin{theorem}\label{th:k_joinabhaengigkeiten}
+    Die Zerlegung von $K_{+}^\top$ in $K_i^\top, K_j^\top, K_k^\top, \ldots$ ergibt eine JOIN-Abhängigkeit
+    \[
+        \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)
+    \]
+\end{theorem}
+\begin{proof}
+    Zu zeigen ist, dass
+    \[
+        *(\pi_{K_i^\top}(r), \pi_{K_j^\top}(r), \pi_{K_k^\top}(r)\ldots) = r
+    \]
+    gilt, was durch den Nachweis der verlustfreien Zerlegung bereits erfolgt ist.
+\end{proof}
+
+
+\bigskip
+\begin{theorem}\label{th:k_abhaengigkeitserhalten}
+    Die Zerlegung von $K^\top$ in $K_i^\top, K_j^\top$ ist abhängigkeitserhaltend.
+\end{theorem}
+\begin{proof}
+    Wir betrachten die FDs der einzelnen Relationen und sehen direkt, dass sie den einzelnen Einträgen von $F_{\text{min}}$ entsprechen:
+    Damit ergibt die Vereinigung der FDs wiederum $e^+$, was der Hülle der FDs von $K^\top$ entspricht.
+\end{proof}
+
+\bigskip
+\begin{theorem}\label{th:k_merwertige_attribute}
+    Das Relationsschema $K$ besitzt keine mehrwertigen Attribute.
+\end{theorem}
+\begin{proof}
+    Mit $e^+$ haben wir gezeigt, dass es nur ein Prime-Attribut $e$ in der Relation gibt, das gleichzeitig der Schlüsselkandidat ist.
+    Jedes Nicht-Prime-Attribut ist funktional abhängig von $e$.
+    Damit gilt für zwei beliebige Tupel $t_1, t_2 \in \pi_{K}(r), t_1 \neq t_2: t_1[e] \neq t_2[e]$.
+    Mit der Definition mehrwertiger Attribute folgt direkt, dass es keine solche in $K$ geben kann.
+\end{proof}
+
+\noindent
+Der Beweis lässt sich analog für beliebige weitere Komponentenspalten $k_k, k_l, \ldots$ führen.
+
+\bigskip
+\begin{theorem}\label{f_min_norm}
+    Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., BCNF-, 4., 5, -Normalform.
+\end{theorem}
+
+\begin{proof}
+    \medskip
+    {\ }
+    \begin{itemize}
+        \item 1. Normalform: Erfüllt, da mit Axiom~\ref{ax:nur_atomar} alle Attribute in $K^\top$ als atomare Attribute definiert sind.
+        \item 2. Normalform: Erfüllt, da $K^\top$ das Attribut $e$ als alleinigen Kandiatenschlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
+        \item 3. Normalform: Erfüllt, da $K^\top$ keine transitiven Abhängigkeiten enthält: $e+$ weist nach, dass jedes Attribut  die alleinige funktionale Abhängigkeit der Attribute von $e$ nach.
+        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $X \rightarrow A\ \in F_\text{min}$ die linke Seite der FD  der Superschlüssel von $K^\top$ ist.
+        \item 4. Normalform: Erfüllt mit Theorem~\ref{th:k_merwertige_attribute}.
+        \item 5.Normalform: Erfüllt.
+        Mit Theorem~\ref{th:k_joinabhaengigkeiten} haben wir die Join-Abhängigkeit $\text{JD}(K_i^\top, K_j^\top, K_k^\top, \ldots)$ nachgewiesen.
+        Die einzelnen Zerlegungen $R_i \in \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)$ weisen FDs wie folgt auf:
+        \[
+            \begin{alignedat}{3}
+                K^\top_{FD_i} &= e \rightarrow k^\top_i,\\
+                K^\top_{FD_j} &= e \rightarrow k^\top_j,\\
+                K^\top_{FD_k} &= e \rightarrow k^\top_k,\\
+                \ldots
+            \end{alignedat}
+        \]
+
+        \noindent
+        Damit taucht der Superschlüssel $e$ der Relation $K^\top$ in jedem $R_i \in \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)$ auf, womit der Nachweis erbracht ist.
+    \end{itemize}
+\end{proof}
+
+womit sich eine Relation wie in Abbildung~\ref{fig:k_rel} ergibt, auf die wir im weiteren -- stellvertretend als Repräsentation von dem vorher eingeführten
+
+\[
+    \text{live(c)}
+\]
+
+bezug nehmen werden: Die Relation repräsentiert den Weltzustand, besitzt als Attribute alle Komponententypen
+
+\[
+    R_\text{live} \coloneqq
+\]
+
+\begin{example}
+    Da die Menge der unterschiedlichen KOmponententypen zur Parametrisierung des Programms genutzt wird und damit zur Kompilierzeit zur Verfügung steht, kann eine Datenstruktur in C++, die $R_\text{live}$ implementiert, beispielsweise wie folgt implementiert werden:
+    \vspace{2mm}
+    \begin{lstlisting}[style=cppframed,
+        label=lst:liverel_cpp]
+template<typename... K>
+class LiveRelation {
+    std::vector<
+        std::unordered_map<
+            std::type_index, std::variant<K...>
+        >
+    > mapppings;
+}
+    \end{lstlisting}
+    Dabei gehen wir davon aus, dass Entitäten vom Typ $E$ einen skalaren, numerischen Typ repräsentierten.
+    Für die \texttt{unordered\_map} nutzen wir als Schlüssel die Typ-Info (\texttt{std::type\_info}) eines Komponententyps $K_i$.
+\end{example}
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/k_rel}
+    \caption{Das Universalschema $R_\text{live}$ enthält als Attribute den Kandiatenschlüssel $e$ sowie $k_i, k_j, \ldots$ die jeweils den Komponententyp $K_i, K_j \ldots$ repräsentieren. (Quelle: eigene Darstellung)}
+    \label{fig:live_rel}
+\end{figure}
+
+
+\bigskip
+, die nicht weiter normalisiert werden braucht.
+
+
+Es ist sofort klar, dass eine solches Schema möglicherweise NULL-Werte für $k_i$ oder $k_i$ enthalten wird.\footnote{
+    Codd diskutiert die Auswirkungen von NULL-Werten -- auch im Hinblick auf Normalisierung -- in~\cite{Cod86}; weitere Betrachtung und formalen und semantischen Aspekten bei Franconi und Tessaris~\cite{FT22}.
+}\\
+Damit würde für jedes $k_i$, das für $e \in E$ erstellt wird, auch ein $k_j$ erstellt werden und umgekehrt.
+Für das formale Modell spielt dies keine Rolle - hätte aber in einer entsprechenden Anwendungsnahen Implementierung den Effekt, dass nicht auf Vorhandensein einer Assooziation $e \mapsto k_j$ geprüft werden muss, sondern der enthaltene Wert.
+Außerdem trägt ein Schema zwei domänenspezifische Typen, was die Semantik des Datenmodells abschwächt.
+\\
+Auch hier gilt die Voraussetzung, dass \bot nicht in $k_i$ auftreten darf, da ansonsten die Komponentenzuordnung nicht existiert un $K_i$ sonst in einem undefinierten Zustand wäre.\\
+
+Aus diesem Grund dekomponieren wir die Relation und erhalten das Relationsschema wie in Abbildung~\ref{fig:relation_ecs}
+dargestellt.\footnote{
+    Eine formale Grundlage für diese Form liefert die 6ste Normalform~\cite[S. 176]{DDL03}
+}
+
+\[
+    \begin{alignat}{3}
+        K_i(e,\ k_i)\\
+        K_j(e,\ k_j)\\
+    \end{alignat}
+\]
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation_ecs}
+    \caption{Nach bestimmung der funktionalen Abhängigkeiten können wir mit hilfe der minimalen funktionalen Abhängigkeitsmenge auf ein normalisiertes Schema zuückgreifen, dass die komponentenzentrische, idiomatische Datenverwaltung in einem ECS repräsentiert..  (Quelle: eigene Darstellung)}
+    \label{fig:relation_ecs}
+\end{figure}
+
+
+

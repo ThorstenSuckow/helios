@@ -2,7 +2,8 @@
 
 Im folgenden führen wir in den von Redmond et al. verwendeten Query-Begriff ein.
 Hierbei betrachten wir dessen Notation als auch Auswertung.\\
-Zunächst motivieren wir die idiomatische ECS-Datenstruktur unter Anwendung des Funktionalen Abhängigkeits-Begriffs, um auf dieser Grundlage im späteren Verlauf einige Operationen exemplarisch darzustellen.\\
+Zunächst motivieren wir die idiomatische ECS-Datenstruktur unter Anwendung des Funktionalen Abhängigkeits-Begriffs, um auf dieser Grundlage im späteren Verlauf einige Operationen exemplarisch darzustellen.
+Indem wir die Normalform des Modells nachweisen, können wir außerdem Lösch und Updateanomalien formal ausschließen.\\
 
 \subsection*{Relationales Schema des ECS}
 Ein erster Entwurf eines relationalen Schemas der bislang behandelten zentralen Begriffe \textit{Entitäten} und \textit{Komponenten} führt zu dem in Abbildung~\ref{fig:relation} dargestellten Schema, der den Entitätstyp $E$ als auch zwei  Komponententypen $K_i$, $K_j$ enthält.\\
@@ -101,7 +102,12 @@ Damit können wir eine Brücke hin zu der Typ-Semantik als auch der Funktionssem
 }
 
 \bigskip
-\begin{theorem}\label{K_lossy}
+\begin{axiom}\label{ax:nur_atomar}
+Die Wertemengen der Attribute von $K^\top$ sind atomar; das heißt, sie lassen nur einzelne, untrennbare Werte zu.
+\end{axiom}
+
+\bigskip
+\begin{theorem}\label{th:K_ist_verlustfrei}
     Das Relationsschema $K^\top$ lässt sich verlustfrei in die Relationen $K^\top_i, K^\top_j$ mit $K^\top = K^\top_i \cup K^\top_j$ zerlegen.
 \end{theorem}
 
@@ -191,49 +197,79 @@ Schritt 5 (Ende):
 Nach Schritt 5 existiert eine Zeile, die durchgehend mit den Symbolen $a$ besetzt ist.
 Damit ist gezeigt, dass sich $K$ verlustlos nach $K^{\top}_i, K^{\top}_j$ und weiter nach $K^{\top}_k$ zerlegen lässt.
 
+\noindent
+Analog ist der Beweis für mehr Spalten des Relationsschemas $K_{+}^\top$ und daraus folgenden Zerlegungen zu führen, die der gleichen Form genügen.
 
 \noindent
-Analog ist der Beweis für mehr Spalten und daraus folgenden Zerlegungen zu führen, die der gleichen Form genügen.
+Mit Theorem~\ref{th:K_ist_verlustfrei} und dem zuvor erbrachten Nachweis, dass auch zusätzliche Komponenten-Spalten $K_k^\top, K_l^\top, \ldots$ nicht die Bedingungen für eine verlustfreie Zerlegung von $K_{+}^\top$ verletzen, können wir zusätzlich noch die JOIN-Abhängigkeiten (JD) für eine solche Zerlegung nachweisen.
 
+\bigskip
+\begin{theorem}\label{th:k_joinabhaengigkeiten}
+    Die Zerlegung von $K_{+}^\top$ in $K_i^\top, K_j^\top, K_k^\top, \ldots$ ergibt eine JOIN-Abhängigkeit
+    \[
+        \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)
+    \]
+\end{theorem}
+\begin{proof}
+    Zu zeigen ist, dass
+    \[
+        *(\pi_{K_i^\top}(r), \pi_{K_j^\top}(r), \pi_{K_k^\top}(r)\ldots) = r
+    \]
+    gilt, was durch den Nachweis der verlustfreien Zerlegung bereits erfolgt ist.
+\end{proof}
+
+
+\bigskip
+\begin{theorem}\label{th:k_abhaengigkeitserhalten}
+    Die Zerlegung von $K^\top$ in $K_i^\top, K_j^\top$ ist abhängigkeitserhaltend.
+\end{theorem}
+\begin{proof}
+    Wir betrachten die FDs der einzelnen Relationen und sehen direkt, dass sie den einzelnen Einträgen von $F_{\text{min}}$ entsprechen:
+    Damit ergibt die Vereinigung der FDs wiederum $e^+$, was der Hülle der FDs von $K^\top$ entspricht.
+\end{proof}
+
+\bigskip
+\begin{theorem}\label{th:k_merwertige_attribute}
+    Das Relationsschema $K$ besitzt keine mehrwertigen Attribute.
+\end{theorem}
+\begin{proof}
+    Mit $e^+$ haben wir gezeigt, dass es nur ein Prime-Attribut $e$ in der Relation gibt, das gleichzeitig der Schlüsselkandidat ist.
+    Jedes Nicht-Prime-Attribut ist funktional abhängig von $e$.
+    Damit gilt für zwei beliebige Tupel $t_1, t_2 \in \pi_{K}(r), t_1 \neq t_2: t_1[e] \neq t_2[e]$.
+    Mit der Definition mehrwertiger Attribute folgt direkt, dass es keine solche in $K$ geben kann.
+\end{proof}
+
+\noindent
+Der Beweis lässt sich analog für beliebige weitere Komponentenspalten $k_k, k_l, \ldots$ führen.
+
+\bigskip
 \begin{theorem}\label{f_min_norm}
-    Das Relationsschema $K$ erfüllt die Bedingungen der 1., 2., 3., BCNF-, 4., 5, -Normalform.
+    Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., BCNF-, 4., 5, -Normalform.
 \end{theorem}
 
 \begin{proof}
-    Für den Nachweis greifen wir auf die minimale funktionale Abhängigkeitsmenge zurück
-
-    \[
-    \begin{alignat}{3}
-    F_\text{min} = &\{\\
-    &e \rightarrow {k_i},\\
-    &e \rightarrow {k_j}\\
-    &\}
-    \end{alignat}
-    \]
-
-    Im Folgenden weisen wir der Reihe die 5 Normalformen sowie die BCNF schrittweise nach, und erfüllen damit implizit den Nachweis der Erfüllung aller NF $< n$ für eine NF $n, n \geq 1$\footnote{
-        Für die BCNF gilt, dass sie in 3.NF ist; als verschärfte Bedigung der 3. NF gilt dies aber nicht im umgekehrten Fall~\cite[S. 328]{EN11}.
-    }\\
-
-    \noindent
-    Um die Beweise einfacher zu gestalten, wiesen wir zunächst nach, dass sich $K$ nicht weiter zerlegen lässt, ohne, dass die Bedingung für einen verlustfreien JOIN erfüllt ist.\\
-
-
-    \textbf{nicht} die Eigenschaft eines verlustfreien JOINs sowie keine mehrwertigen Attribute aufweist.\\
-    Da $e$ der einzige Kandidatenschlüssel in den Relationen ist sowie alle anderen Attribute $A \in R, A \neq e$ nicht-prim sind,
-
-
-    \noindent
-    Außerdem zeigen wir, dass keine mehrwertige Abhängigkeit existiert:  Gäbe es eine solche Abhängigkeit, müsste $K$ mindestens zwei unabhängige 1:N Beziehungen A:C, A:D aufweisen, was aufgrund des Primärschlüssels $e$ als einziges Prime-Attribut nicht möglich ist.
-
     \medskip
+    {\ }
     \begin{itemize}
-        \item 1. Normalform: Erfüllt, da $K$ keine mehrwertigen Atribute enthält.
-        \item 2. Normalform: Erfüllt, da $K$ als Kandiatenschlüssel nur $e$ enthält, und somit keine partiellen Abhängigkeiten existieren.
-        \item 3. Normalform: Erfüllt, da $K$ keine transitiven Abhängigkeiten enthält, was anhand $F_\text{min}$ zu sehen ist.
-        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $X \rightarrow A\ \in F_\text{min}$ $X$ der Kandidatenschlüssel ist.
-        \item 4. Normalform: Erfüllt, da $K$ keine mehrwertigen Abhängigkeiten besitzt.
-        \item 5.Normalform: Erfüllt, da $K$ mit $JD(K) \equiv *(\pi_{K}(r)) = r$ eine einzelne, triviale Join-Abhängigkeit aufweist. $K$ weist bereits eine verlustfreie Join-Zerlegung auf, und damit per Defintion in Project-Join-Normalform ist.
+        \item 1. Normalform: Erfüllt, da mit Axiom~\ref{ax:nur_atomar} alle Attribute in $K^\top$ als atomare Attribute definiert sind.
+        \item 2. Normalform: Erfüllt, da $K^\top$ das Attribut $e$ als alleinigen Kandiatenschlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
+        \item 3. Normalform: Erfüllt, da $K^\top$ keine transitiven Abhängigkeiten enthält: $e+$ weist nach, dass jedes Attribut  die alleinige funktionale Abhängigkeit der Attribute von $e$ nach.
+        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $X \rightarrow A\ \in F_\text{min}$ die linke Seite der FD  der Superschlüssel von $K^\top$ ist.
+        \item 4. Normalform: Erfüllt mit Theorem~\ref{th:k_merwertige_attribute}.
+        \item 5.Normalform: Erfüllt. 
+        Mit Theorem~\ref{th:k_joinabhaengigkeiten} haben wir die Join-Abhängigkeit $\text{JD}(K_i^\top, K_j^\top, K_k^\top, \ldots)$ nachgewiesen.
+        Die einzelnen Zerlegungen $R_i \in \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)$ weisen FDs wie folgt auf:
+        \[
+            \begin{alignedat}{3}
+            K^\top_{FD_i} &= e \rightarrow k^\top_i,\\
+            K^\top_{FD_j} &= e \rightarrow k^\top_j,\\
+            K^\top_{FD_k} &= e \rightarrow k^\top_k,\\
+            \ldots
+            \end{alignedat}
+        \]
+
+        \noindent
+        Damit taucht der Superschlüssel $e$ der Relation $K^\top$ in jedem $R_i \in \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)$ auf, womit der Nachweis erbracht ist.
     \end{itemize}
 \end{proof}
 

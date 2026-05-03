@@ -1,0 +1,520 @@
+\section{Query}
+
+Im folgenden führen wir in den von Redmond et al. verwendeten Query-Begriff ein.
+Hierbei betrachten wir dessen Notation als auch Auswertung.\\
+Zunächst motivieren wir die idiomatische ECS-Datenstruktur unter Anwendung des Funktionalen Abhängigkeits-Begriffs, um auf dieser Grundlage im späteren Verlauf einige Operationen exemplarisch darzustellen.
+Indem wir die Normalform des Modells nachweisen, können wir außerdem Lösch und Updateanomalien formal ausschließen.\\
+
+\subsection*{Relationales Schema des ECS}
+Ein erster Entwurf eines relationalen Schemas der bislang behandelten zentralen Begriffe \textit{Entitäten} und \textit{Komponenten} führt zu dem in Abbildung~\ref{fig:relation} dargestellten Schema, der den Entitätstyp $E$ als auch zwei  Komponententypen $K_i$, $K_j$ enthält.\\
+Hierbei wird der  Entitätstyp $E$ mit den Komponententypen in binäre Relationen überführt -- die Darstellung entspricht damit einer in vorherigen Abschnitten bereits erwähnten \textit{entitätszentrischen} Darstellung und wird schematisch in ähnlicher Form genutzt~\cite[Fig.1, 272:3]{RCCM+25}.
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation}
+    \caption{ER-Modell von Entität und Komponenten als entitätszentrischer Entwurf. Die Relationen sind als identifizierende Relationen modelliert, da eine Komponente nicht ohne eine Eltern-Entität existieren kann. Entsprechend sind $K_i, K_j, \ldots$ als schwache Entitätstypen modelliert, die über $E$ identifiziert werden. Bei der Notation folgen wir Chen~\cite{Che76}. (Quelle: eigene Darstellung)}
+    \label{fig:relation}
+\end{figure}
+
+In den folgenden Schritten überführen wir den Entwurf in die ECS-idiomatische komponentenzentrische Darstellung, wobei wir uns bei Begriffen und Vorgehen an Elmasri und Navathe orientieren~\cite{EN11}.\\
+
+Relation und Attributmengen sind hierbei wie folgt gegeben:
+
+\[
+    \begin{alignat}{3}
+     E &= \{e\}\\
+     K_i &= \{e, k_i\}\\
+     K_i &= \{e, k_j\}\\
+    \end{alignat}
+\]
+
+\noindent
+Wir identifizieren den Primärschlüssels $e$, der in der Relation $E$ eine triviale funktionale Abhängigkeit $e \rightarrow e$ aufweist, sowie in den anderen Relationen jeweils $e \rightarrow k_i$ bzw. $e \rightarrow k_j$.\\
+
+\noindent
+Die funktionale Abhängigkeitsmenge $F$ lautet damit entsprechend
+
+\[
+    \begin{alignat}{3}
+    F = &\{\\
+        &e \rightarrow \{k_i, k_j\}\\
+    & \}\\
+    \end{alignat}\ ,
+\]
+
+\noindent
+woraus sich die Hülle von $e$ unter $F$ ableiten lässt:
+
+\[
+    e^+ =\{e, k_i, k_j\}
+\]
+
+\noindent
+Damit können wir die Menge der minimalen funktionalen Abhängigkeitsmenge $F_\text{min}$ bestimmen, um redundante Informationen zu entfernen:
+\[
+    \begin{alignat}{3}
+    F_\text{min} = &\{\\
+        &e \rightarrow {k_i},\\
+        &e \rightarrow {k_j}\\
+    &\}
+    \end{alignat}
+\]
+
+\noindent
+Die resultierenden funktionalen Abhängigkeiten können in ein breites Relationsschema
+
+\[
+    K\ (e,\ k_i,\ k_j)
+\]
+
+\noindent
+überführt werden.
+Hierbei erlauben wir für die einzelnen Spalten $k_i, k_j$ die Abwesenheit konkreter Komponententerme und übernehmen hierfür den Unit-Wert * vom Typ $\top$ von Redmond et al. -- entsprechend schreiben wir hierfür im Folgenden
+\[
+    K^{\top}(e, \ k_i^\top, k_j^\top)
+\]
+
+\noindent
+mit
+\[
+    \begin{alignedat}{3}
+    \text{dom}(k_i^\top) = \text{dom}(k_i) + \top\,,\\
+    \text{dom}(k_j^\top) = \text{dom}(k_j) + \top
+    \end{alignedat}
+\]
+
+\noindent
+(Ergänzend können wir eine Integritätsbedingung definieren, die verhindert, dass eine Entität nur aus unit-Werten für die Komponententerme besteht: Ein Tupel der Relation $K^\top$ im Relationszustand $\pi_{K^\top}(r)$ muss mindestens einen konkreten Komponententerm besitzen:
+
+\[
+  \forall (e, k^\top_i, k^\top_j) \in \pi_{K^\top}(r): (k^\top_i \neq *) \lor (k^\top_j \neq *)
+\]
+\noindent
+Dies wird im weiteren Verlauf jedoch keine Rolle spielen.)
+
+\bigskip
+\noindent
+Wir führen $K^\top$ hilfsweise ein, um daraus für nachfolgende Operationen ein Relationsschema $R_\text{live}$ abzuleiten.
+Hierzu benötigen wir für einzelne Komponenten, die nicht mit einer Entität $e \in E$ assoziiert sind, einen Wert, der die Abwesenheit dieser Komponenten ausdrückt.
+Um im folgenden nicht mit expliziten NULL-Werten arbeiten müssen, nutzen wir den Unit-Wert vom Typ $\top$, der auch bei Redmond et al. verwendet wird.
+Damit können wir eine Brücke hin zu der Typ-Semantik als auch der Funktionssemantik des konjunktiven Anfragesystems bauen, ohne weitere Konventionen oder Voraussetzungen für das im nachfolgenden verwendete relationale Modell erzwingen zu müssen.\footnote{Während das relationale Modell NULL-Werte durchaus berücksichtigt~\cite[136]{EN11}, geht die Theorie verlustfreier JOIN-Abhängigkeiten von einer Abwesenheit von Nullwerten aus~\cite[S. 347--348]{EN11}.
+}
+
+\bigskip
+\begin{axiom}\label{ax:nur_atomar}
+Die Wertemengen der Attribute von $K^\top$ sind atomar; das heißt, sie lassen nur einzelne, untrennbare Werte zu.
+\end{axiom}
+
+\bigskip
+\begin{theorem}\label{th:K_ist_verlustfrei}
+    Das Relationsschema $K^\top$ lässt sich verlustfrei in die Relationen $K^\top_i, K^\top_j$ mit $K^\top = K^\top_i \cup K^\top_j$ zerlegen.
+\end{theorem}
+
+\medskip
+\begin{proof}
+    Sei $K^{\top}_i = \pi_{(e, k^{\top}_i)}(K),\ K^{\top}_j = \pi_{e, k^{\top}_j}(K)$.
+
+    \noindent
+    Wir zeigen, dass
+    \[
+        \pi_{K^{\top}_i}(r)\ \bowtie_{K^{\top}_i.e = K^{\top}_j.e}\ \pi_{K^{\top}_j}(r) = *(\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r))
+    \]
+
+    \bigskip
+    \noindent
+    Da es sich um eine binäre Zerlegung handelt, kann der Beweis anhand der funktionalen Eigenschaften erfolgen~\cite[S. 343]{EN11}:
+    \[
+        \begin{alignedat}{3}
+        ((K^{\top}_i \cap K^{\top}_j) &\rightarrow (K^{\top}_i - K^{\top}_j)) = (e \rightarrow k^{\top}_i\ ) \in e^+\\
+        (K^{\top}_i \cap K^{\top}_j) &\rightarrow (K^{\top}_j - K^{\top}_i)) = (e \rightarrow k^{\top}_j) \in e^+\\
+        \end{alignedat}
+    \]
+\end{proof}
+
+
+\bigskip
+\noindent
+Um das Theorem auf n-äre Zerlegungen ausweiten zu können (für Komponententypen $K^{\top}_i, K^{\top}_j, K^{\top}_k, \ldots$) betrachten wir eine Zerlegung in drei Relationen.
+Hierzu erweitern wir $K$ um die Spalte $k^{\top}_k$, und zeigen im Folgenden:
+\[
+    \pi_{K^{\top}}(r) = *(\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r), \pi_{K^{\top}_k}(r))
+\]
+
+\noindent
+Wir wenden hierzu Verfahren~\cite[Algorithmus 10.2, S. 342]{EN11} an und weisen darüber die verlustfreie Zerlegung nach:
+
+\bigskip
+Schritt 1 und 2:
+\[
+    \begin{array}{c|cccc}
+        & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+        \hline
+        K^{\top}_i     & b_{11} & b_{12} & b_{13} & b_{14} \\
+        K^{\top}_j     & b_{21} & b_{22} & b_{23} & b_{24} \\
+        K^{\top}_k     & b_{31} & b_{32} & b_{33} & b_{34}
+    \end{array}
+\]
+
+\medskip
+Schritt 3:
+\[
+    \begin{array}{c|cccc}
+        & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+        \hline
+        K^{\top}_i     & a_e & a_i & b_{13} & b_{14} \\
+        K^{\top}_j     & a_e & b_{22} & a_j & b_{24} \\
+        K^{\top}_k     & a_e & b_{32} & b_{33} & a_k
+    \end{array}
+\]
+
+\medskip
+Schritt 4:
+\[
+    \begin{array}{c|cccc}
+        & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+        \hline
+        K^{\top}_i     & a_e & a_i & b_{13} & b_{14} \\
+        K^{\top}_j     & a_e & a_i & a_j & b_{24} \\
+        K^{\top}_k     & a_e & a_i & b_{33} & a_k
+    \end{array}
+\]
+
+\medskip
+Schritt 5 (Ende):
+\[
+    \begin{array}{c|cccc}
+        & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+        \hline
+        K^{\top}_i     & a_e & a_i & a_j & b_{14} \\
+        K^{\top}_j     & a_e & a_i & a_j & b_{24} \\
+        K^{\top}_k     & a_e & a_i & a_j & a_k
+    \end{array}
+\]
+
+\bigskip
+\noindent
+Nach Schritt 5 existiert eine Zeile, die durchgehend mit den Symbolen $a$ besetzt ist.
+Damit ist gezeigt, dass sich $K$ verlustlos nach $K^{\top}_i, K^{\top}_j$ und weiter nach $K^{\top}_k$ zerlegen lässt.
+
+\noindent
+Analog ist der Beweis für mehr Spalten des Relationsschemas $K_{+}^\top$ und daraus folgenden Zerlegungen zu führen, die der gleichen Form genügen.
+
+\noindent
+Mit Theorem~\ref{th:K_ist_verlustfrei} und dem zuvor erbrachten Nachweis, dass auch zusätzliche Komponenten-Spalten $K_k^\top, K_l^\top, \ldots$ nicht die Bedingungen für eine verlustfreie Zerlegung von $K_{+}^\top$ verletzen, können wir zusätzlich noch die JOIN-Abhängigkeiten (JD) für eine solche Zerlegung nachweisen.
+
+\bigskip
+\begin{theorem}\label{th:k_joinabhaengigkeiten}
+    Die Zerlegung von $K_{+}^\top$ in $K_i^\top, K_j^\top, K_k^\top, \ldots$ ergibt eine JOIN-Abhängigkeit
+    \[
+        \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)
+    \]
+\end{theorem}
+\begin{proof}
+    Zu zeigen ist, dass
+    \[
+        *(\pi_{K_i^\top}(r), \pi_{K_j^\top}(r), \pi_{K_k^\top}(r)\ldots) = r
+    \]
+    gilt, was durch den Nachweis der verlustfreien Zerlegung bereits erfolgt ist.
+\end{proof}
+
+
+\bigskip
+\begin{theorem}\label{th:k_abhaengigkeitserhalten}
+    Die Zerlegung von $K^\top$ in $K_i^\top, K_j^\top$ ist abhängigkeitserhaltend.
+\end{theorem}
+\begin{proof}
+    Wir betrachten die FDs der einzelnen Relationen und sehen direkt, dass sie den einzelnen Einträgen von $F_{\text{min}}$ entsprechen:
+    Damit ergibt die Vereinigung der FDs wiederum $e^+$, was der Hülle der FDs von $K^\top$ entspricht.
+\end{proof}
+
+\bigskip
+\begin{theorem}\label{th:k_merwertige_attribute}
+    Das Relationsschema $K$ besitzt keine mehrwertigen Attribute.
+\end{theorem}
+\begin{proof}
+    Mit $e^+$ haben wir gezeigt, dass es nur ein Prime-Attribut $e$ in der Relation gibt, das gleichzeitig der Schlüsselkandidat ist.
+    Jedes Nicht-Prime-Attribut ist funktional abhängig von $e$.
+    Damit gilt für zwei beliebige Tupel $t_1, t_2 \in \pi_{K}(r), t_1 \neq t_2: t_1[e] \neq t_2[e]$.
+    Mit der Definition mehrwertiger Attribute folgt direkt, dass es keine solche in $K$ geben kann.
+\end{proof}
+
+\noindent
+Der Beweis lässt sich analog für beliebige weitere Komponentenspalten $k_k, k_l, \ldots$ führen.
+
+\bigskip
+\begin{theorem}\label{f_min_norm}
+    Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., BCNF-, 4., 5, -Normalform.
+\end{theorem}
+
+\begin{proof}
+    \medskip
+    {\ }
+    \begin{itemize}
+        \item 1. Normalform: Erfüllt, da mit Axiom~\ref{ax:nur_atomar} alle Attribute in $K^\top$ als atomare Attribute definiert sind.
+        \item 2. Normalform: Erfüllt, da $K^\top$ das Attribut $e$ als alleinigen Kandiatenschlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
+        \item 3. Normalform: Erfüllt, da $K^\top$ keine transitiven Abhängigkeiten enthält: $e+$ weist nach, dass jedes Attribut  die alleinige funktionale Abhängigkeit der Attribute von $e$ nach.
+        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $X \rightarrow A\ \in F_\text{min}$ die linke Seite der FD  der Superschlüssel von $K^\top$ ist.
+        \item 4. Normalform: Erfüllt mit Theorem~\ref{th:k_merwertige_attribute}.
+        \item 5.Normalform: Erfüllt. 
+        Mit Theorem~\ref{th:k_joinabhaengigkeiten} haben wir die Join-Abhängigkeit $\text{JD}(K_i^\top, K_j^\top, K_k^\top, \ldots)$ nachgewiesen.
+        Die einzelnen Zerlegungen $R_i \in \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)$ weisen FDs wie folgt auf:
+        \[
+            \begin{alignedat}{3}
+            K^\top_{FD_i} &= e \rightarrow k^\top_i,\\
+            K^\top_{FD_j} &= e \rightarrow k^\top_j,\\
+            K^\top_{FD_k} &= e \rightarrow k^\top_k,\\
+            \ldots
+            \end{alignedat}
+        \]
+
+        \noindent
+        Damit taucht der Superschlüssel $e$ der Relation $K^\top$ in jedem $R_i \in \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)$ auf, womit der Nachweis erbracht ist.
+    \end{itemize}
+\end{proof}
+
+womit sich eine Relation wie in Abbildung~\ref{fig:k_rel} ergibt, auf die wir im weiteren -- stellvertretend als Repräsentation von dem vorher eingeführten
+
+\[
+    \text{live(c)}
+\]
+
+bezug nehmen werden: Die Relation repräsentiert den Weltzustand, besitzt als Attribute alle Komponententypen
+
+\[
+    R_\text{live} \coloneqq
+\]
+
+\begin{example}
+    Da die Menge der unterschiedlichen KOmponententypen zur Parametrisierung des Programms genutzt wird und damit zur Kompilierzeit zur Verfügung steht, kann eine Datenstruktur in C++, die $R_\text{live}$ implementiert, beispielsweise wie folgt implementiert werden:
+    \vspace{2mm}
+    \begin{lstlisting}[style=cppframed,
+        label=lst:liverel_cpp]
+template<typename... K>
+class LiveRelation {
+    std::vector<
+        std::unordered_map<
+            std::type_index, std::variant<K...>
+        >
+    > mapppings;
+}
+    \end{lstlisting}
+    Dabei gehen wir davon aus, dass Entitäten vom Typ $E$ einen skalaren, numerischen Typ repräsentierten.
+    Für die \texttt{unordered\_map} nutzen wir als Schlüssel die Typ-Info (\texttt{std::type\_info}) eines Komponententyps $K_i$.
+\end{example}
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/k_rel}
+    \caption{Das Universalschema $R_\text{live}$ enthält als Attribute den Kandiatenschlüssel $e$ sowie $k_i, k_j, \ldots$ die jeweils den Komponententyp $K_i, K_j \ldots$ repräsentieren. (Quelle: eigene Darstellung)}
+    \label{fig:live_rel}
+\end{figure}
+
+
+\bigskip
+, die nicht weiter normalisiert werden braucht.
+
+
+Es ist sofort klar, dass eine solches Schema möglicherweise NULL-Werte für $k_i$ oder $k_i$ enthalten wird.\footnote{
+    Codd diskutiert die Auswirkungen von NULL-Werten -- auch im Hinblick auf Normalisierung -- in~\cite{Cod86}; weitere Betrachtung und formalen und semantischen Aspekten bei Franconi und Tessaris~\cite{FT22}.
+}\\
+Damit würde für jedes $k_i$, das für $e \in E$ erstellt wird, auch ein $k_j$ erstellt werden und umgekehrt.
+Für das formale Modell spielt dies keine Rolle - hätte aber in einer entsprechenden Anwendungsnahen Implementierung den Effekt, dass nicht auf Vorhandensein einer Assooziation $e \mapsto k_j$ geprüft werden muss, sondern der enthaltene Wert.
+Außerdem trägt ein Schema zwei domänenspezifische Typen, was die Semantik des Datenmodells abschwächt.
+\\
+Auch hier gilt die Voraussetzung, dass \bot nicht in $k_i$ auftreten darf, da ansonsten die Komponentenzuordnung nicht existiert un $K_i$ sonst in einem undefinierten Zustand wäre.\\
+
+Aus diesem Grund dekomponieren wir die Relation und erhalten das Relationsschema wie in Abbildung~\ref{fig:relation_ecs}
+dargestellt.\footnote{
+Eine formale Grundlage für diese Form liefert die 6ste Normalform~\cite[S. 176]{DDL03}
+}
+
+\[
+    \begin{alignat}{3}
+    K_i(e,\ k_i)\\
+    K_j(e,\ k_j)\\
+    \end{alignat}
+\]
+
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation_ecs}
+    \caption{Nach bestimmung der funktionalen Abhängigkeiten können wir mit hilfe der minimalen funktionalen Abhängigkeitsmenge auf ein normalisiertes Schema zuückgreifen, dass die komponentenzentrische, idiomatische Datenverwaltung in einem ECS repräsentiert..  (Quelle: eigene Darstellung)}
+    \label{fig:relation_ecs}
+\end{figure}
+
+
+
+\subsection*{Semantik und Auswertung von Queries}
+
+Im Zusammenhang mit Queries führen die Autoren folgende Notationen ein:\footnote{
+ Sogenannte ``Denotation Brackets``~\cite{Rab17}.
+}
+
+\[
+    \llbracket - \rrbracket_c
+\]
+\bigskip
+
+Dabei ist $\llbracket\ - \rrbracket_c$ eine Funktion, die im Zustand $c$ des \textit{Core ECS}-Programms als Parameter eine Query beziehungsweise einen Query-Constraint erhält und dabei eine oder mehrere partielle Abbildungen zurückgibt, die die Query-Bedingungen erfüllen.
+Dabei enthält der Definitionsbereich stets eine Teilmenge von Entitätsterme vom Typ \ty{E}; der Wertebereich wird über die Query-Bedingung vorgegeben:
+
+\bisgskip
+\[
+    \begin{alignedat}{3}
+        \llbracket\ \tm{incl}_i\ \rrbracket_c &\coloneqq c_i
+        \\[1mm]
+        \llbracket\ \tm{excl}_i\ \rrbracket_c &\coloneqq \{*\}_{\ty{e} \in \text{live}(c)\backslash\text{dom}(c_i)}
+        \\[1mm]
+        \llbracket\ \tm{anyway}_i\ \rrbracket_c &\coloneqq c_i\  \dot\cup\ \{*\}_{\ty{e} \in \text{live}(c)\backslash\text{dom}(c_i)}
+        \\[1mm]
+        \llbracket\ \nt{q} \land \nt{q'}\ \rrbracket_c &\coloneqq \{ (\ \llbracket \nt{q} \rrbracket_c(\ty{e}),\ \llbracket \nt{q'} \rrbracket_c(\ty{e})\ ) \}_{e \in \text{live}(c)}
+        \\[1mm]
+    \end{alignedat}
+\]
+\bigskip
+
+\noindent
+Hierbei ist \texttt{*} definiert als \textit{unit}, und hat den Typ $\top$~\cite[S.118--119]{Pie02}.
+Er wird genutzt, um partielle Abbildungen zu repräsentieren, die als Ergebnis einer Query keine konkrete Komponentenassoziation repräsentieren, beispielsweise bei \tm{excl}:
+
+\[
+    E \rightharpoonup \top, e \mapsto *
+\]
+
+
+
+\noindent
+Die Semantik der Funktionen bezüglich des Zustandes $c$ lässt sich damit wie folgt beschreiben:
+
+\begin{itemize}
+    \itemsep0.5em
+    \item $\llbracket\ \tm{incl}_i\ \rrbracket_c$: Die Menge der partiellen Abbildungen der Entitätsterme, die eine Assoziation zu dem Komponententyp $K_i$ haben.
+    \item $\llbracket\ \tm{excl}_i\ \rrbracket_c $: Die Menge der Abbildungen von Entitätsterme, bei denen $e \in E$ eine Assoziation zu einem beliebigen komponententerm besitzen,  aber keine zu dem Komponententyp $K_i$ besitzen.
+    Da diese Abbildungen keinen assoziierten Komponententypen haben, nutzen die Autoren hierzu \texttt{*} vom Typ $\top$.
+    \item $\llbracket\ \tm{anyway}_i\ \rrbracket_c$: Die Menge der Abbildungen von Entitätsterme, die entweder eine Assoziation zu dem Komponententyp $K_i$ besitzen, oder nicht.
+    In letztem Fall wird wieder \texttt{*} zur Repräsentation der Assoziationen genutzt.
+    \item $\llbracket\ \nt{q} \land \nt{q'}\ \rrbracket_c$: Die Menge der Abbildungen von Entitätsterme, bei denen \ty{e} die über \nt{q} als auch \nt{q'} vorgegebenen Einschränkungen erfüllen.
+    Die Semantik ist damit an eine existierende, beliebige Komponentenassoziation von \ty{e} gebunden.
+\end{itemize}
+
+\noindent
+Die Notation
+
+\[
+    \llparenthesis - \rrparenthesis
+\]
+
+
+\noindent
+wird verwendet, um den Typ der Rückgabe zu notieren.
+Zusammen mit der Semantik der einzelnen Queries ergibt sicht damit\footnote{
+Redmon et al. verwenden in $\llparenthesis \tm{anyway_i}\ \rrparenthesis  \coloneqq K_i \cup \top$ anstelle des Vereinigungsoperators $\cup$ das Symbol $+$.
+}
+
+
+\[
+    \begin{alignat}{3}
+    \llparenthesis\ \tm{incl_i}\ \rrparenthesis  &\coloneqq K_i\\
+    \llparenthesis\  \tm{excl_i}\ \rrparenthesis  &\coloneqq \top \\
+    \llparenthesis\  \tm{anyway_i}\ \rrparenthesis  &\coloneqq K_i \cup \top\\
+    \llparenthesis\  \nt{q}\ \tm{\land}\ \nt{q'} \ \rrparenthesis  &\coloneqq \llparenthesis\  \nt{q} \ \rrparenthesis  \times \llparenthesis\  \nt{q'} \ \rrparenthesis 
+    \end{alignat}
+\]
+
+\bigskip
+\noindent
+Hierbei is
+
+\[
+    \llparenthesis\  \nt{q} \ \rrparenthesis  \times \llparenthesis\  \nt{q'} \ \rrparenthesis 
+\]
+
+\noindent
+das kartesische Produkt der durch $\tm{q}$ und $\tm{q'}$ bestimmten Ergebnistypen, beispielsweise für $\llparenthesis \ \tm{incl_i} \land \tm{excl_j} \ \rrparenthesis$
+
+\[
+    K_i \times \top
+\]
+
+\noindent
+oder, bei verschachtelten Queries wie  $\llparenthesis \ (\tm{incl_i} \land \tm{excl_j}) \land \tm{incl_k} \ \rrparenthesis $,
+
+
+\[
+     (K_i \times \top) \times  K_k
+\]
+
+\subsection*{Relationale Operationen}
+
+Redmond et {al.} charakterisieren das Anfragesystem von \textit{Core ECS} als ein \textit{konjunktives Anfragesystem}~\cite[S.37--63]{AHV95},
+das Selektion $\sigma$, Projektion $\pi$ und binäre Joins $\bowtie$ unterstützt.\\
+
+\noindent
+Wir geben im Folgenden ergänzend die Notation für die einzelnen Operationen im Kontext eines auf \textit{Core ECS}-basierenden Systems an und stützen uns dabei auf die geläufige Schreibweise, ohne detailliert darauf einzugehen, legen aber in Anlehnung an Elmasri und Navathe~\cite[S. 137--140]{EN11} wie folgt fest:
+
+\begin{itemize}
+    \item Ein Relationsschema $R$ wird als Tupelmenge $R(A_1, A_2, \ldots, A_n)$ definiert, wobei $A_1, \ldots A_n$ die Attributnamen der Relation bezeichnen.
+    \item Der Relationszustand $r(R)$ ist definiert als $r(R) \subseteq (\text{dom}(A_1) \times \text{dom}(A_2) \times \ldots \times \text{dom}(A_n))$
+    \item Das Relationsschema $R_{K_i}$ ist definiert als
+    \[
+         R_{K_i} \coloneqq R(\mathcal{E}_i, \mathcal{I}), i \in I
+    \]
+    mit
+    \[
+        r(R_{K_i}) \subseteq (\text{dom}(c_i) = \text{dom}(\mathcal{E}_i) \times \text{dom}(\mathcal{I}))
+    \]
+    \item Das Relationsschema $R_\text{live}$ ist definiert als die Vereinigung aller Relationschemas
+    \[
+        R_\text{live} \coloneqq R^{\mid K \mid}, R(0) = \mathcal{E}, R(n + 1) = R_{K_i}(2), 0 \leq n \leq \mid K \mid
+    \]
+\end{itemize}
+
+\noindent
+Wir definieren hierzu im Folgenden ein Relationsschema $R_{K_i}$, wobei $R$ als Symbol für \textit{Relationsschema} verwendet wird:
+
+
+\subsubsection*{Selektion}
+
+Redmond et al. nennen \tm{incl_i} und \tm{excl_i} als Selektionsoperatoren.\\
+
+Zur Ermittlung der Tupel $(e_\text{Position}, k_i)$ für die $e_\text{Position} \in \text{dom}(c_\text{Position}), k_i \in K_i$ gilt, kann geschrieben werden:
+
+\[
+    \sigma_{\mathcal{E}_\text{Position} \in \text{live}(c) } (R_{K_\text{Position}}) = \{ (e_i, k_i) \mid e_i \in E, k_i \in K_i, i =\text{Position}  \}
+\]
+
+\noindent
+Entsprechend kann eine Projektion, die nur den Entitätsterm des Anfrageergebnisses liefert, formuliert werden als
+
+
+\[
+    \pi_{\mathcal{E}_\text{Position}} (\ \sigma (R_{K_\text{Position}})\ ) = \{ e_i \mid e_i in E, i =\text{Position}  \}
+\]
+
+\bigskip
+\noindent
+Um $\tm{excl_i}$ als Selektion anzuwenden, genügt es, in $R_{live}$ alle Tupel anzufragen, für die $k_i = \bot$ ist.
+\[
+    \llbracket \ \tm{excl_i} \ \rrbracket \equiv \sigma_{k_i = \bot} (R_\text{live})
+\]
+
+bzw. in einer komponentenzentrischen Aufbau über das Tupelkalkül
+
+\[
+    \llbracket \ \tm{excl_i} \ \rrbracket \equiv  \{t <\}
+\]
+
+\begin{example}[Verschachtelte binäre Query]
+
+    Sei eine Query gegeben, die alle Entitäten $e \in E$ ermittelt, die die Komponente \texttt{Position} sowie \texttt{Collider},
+    aber nicht \texttt{Velocity} haben.folgende binäre Query gegeben:
+
+    \[
+
+    \]
+
+    \label{ex:bin_query}
+\end{example}

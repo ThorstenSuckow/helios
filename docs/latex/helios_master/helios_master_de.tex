@@ -113,8 +113,13 @@
 }
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}
+\newtheorem{axiom}{Axiom}
+
 \usepackage{stmaryrd}
 \tcbuselibrary{breakable,skins}
+
+\newcommand{\unitval}{\ensuremath{\ast}}
+\newcommand{\njoin}{\mathbin{\bowtie_{\mathcal{N}}}}
 
 \tcbset{
     excursusbox/.style={
@@ -138,12 +143,34 @@
 
 
 
+\newcommand{\ty}[1]{\ensuremath{\mathsf{\textcolor{red!70!black}{#1}}}}
 \newcommand{\tm}[1]{\ensuremath{\mathtt{\textcolor{blue!90!black}{#1}}}}
 \newcommand{\nt}[1]{\ensuremath{\mathit{#1}}}
 \newcommand{\metaexpr}[1]{\colorbox{blue!8}{\ensuremath{#1}}}
 
+\usepackage{mdframed}
+\newtheorem{example}{Beispiel}[chapter]
 
+\surroundwithmdframed[
+    linewidth=0.5pt,
+    roundcorner=1pt,
+    innerleftmargin=8pt,
+    innerrightmargin=8pt,
+    innertopmargin=6pt,
+    innerbottommargin=6pt,
+    skipabove=1em,
+    skipbelow=1em
+]{example}
 
+\lstdefinestyle{cppframed}{
+    style=c++style,
+    frame=none,
+    framerule=0.5pt,
+    basicstyle=\normalfont\ttfamily\small,
+    framesep=6pt,
+    xleftmargin=2em,
+    framexleftmargin=2em
+}
 
 
 \begin{document}

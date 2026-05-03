@@ -1,50 +1,56 @@
 \section{Grammatik}
 
-Die Autoren definieren in ihrem Papier eine Grammatik, die wir in ein formaleres Gerüst heben.
-Bei der Notation orientieren wir uns hierbei an Vossen und Witt~\cite{VW16} und nutzen die eine Notation, bei der die kontextfreie Grammatik
+Die Autoren definieren in ihrem Papier eine Grammatik, die wir im Folgenden in eine EBNF-nahe Hilfsdarstellung überführen.\footnote{
+    Für eine bessere Lesbarkeit verzichten wir auf eine Anwendung von Anführungszeichen für das Terminalalphabet $\Sigma$.
+    Unterschiede zwischen Metasymbolen und Grammatikelementen sind außerdem farblich hervorgehoben.
+}
+Bei der Notation orientieren wir uns hierbei an der Definition kontextfreier Grammatiken von Vossen und Witt~\cite{VW16}:
 
 \[
- G_{\text{CoreECS}} = \{\Sigma, N, P, S\}
+ G_{\text{CoreECS}} = (\Sigma, N, P, S)
 \]
 
 \noindent
-aus der Mege von Terminalen $\Sigma$, Nichtterminalen $N$, Produktionen $P$ sowie dem Startsymbol $S$ besteht:\footnote{
-Für eine formale Herleitung der Symbole sei auf die entsprechende Literatur verwiesen.
-}
+Typbindungen und Ausdrücke der darunterliegenden Sprache fleißen auch bei uns in Anlehnung an Redmond et al. in die Definition ein.
+Auf diese gehen wir nachfolgend gesondert ein.
 
 
 \[
     \begin{alignedat}{3}
 \Sigma &\coloneqq{}&
 \{&
+\\[-1mm]
+&&&
 \tm{a}, \tm{b}, \ldots, \tm{z},\\
 &&&
 \tm{incl}, \tm{excl}, \tm{anyway},\\
 &&&
-\tm{attach}, \tm{detach}, \tm{v}, \tm{nil},\\
+\tm{attach}, \tm{detach}, \tm{\nu}, \tm{nil},\\
 &&&
 \tm{conc}, \tm{seq},\\
 &&&
-\tm{(}, \tm{)}, \tm{,}, \tm{|}, \tm{||},\\
+\tm{(}, \tm{)}, \tm{,}, \tm{||},\\
 &&&
-\tm{\land}, \tm{\bullet}, \tm{\fatsemi}, \tm{\rightarrow}, \tm{\times}
+\tm{\land}, \tm{\bullet}, \tm{\fatsemi}
+\\[-1mm]
+&&&
 \}
 \\[2mm]
 N &\coloneqq{}&
 \{&
+\\[-1mm]
+&&&
 \nt{char}, \nt{label},\\
 &&&
 \nt{query\_command}, \nt{constraint}, \nt{query},\\
-&&&
-\nt{entity\_type}, \nt{mutation\_type},\\
-&&&
-\nt{entity\_term}, \nt{component\_term},\\
 &&&
 \nt{mutation\_command}, \nt{mutation},\\
 &&&
 \nt{system},\\
 &&&
 \nt{schedule\_command}, \nt{schedule}
+\\[-1mm]
+&&&
 \}
 \\[2mm]
 P &\coloneqq{}&
@@ -77,35 +83,16 @@ P &\coloneqq{}&
     \nt{constraint}\ \{\tm{\land}\ \nt{constraint}\}
     \\[1mm]
 
-    \nt{entity\_type}
-    &\Coloneqq&
-    E
-    \\[1mm]
-
-    \nt{mutation\_type}
-    &\Coloneqq&
-    M
-    \\[1mm]
-
-    \nt{entity\_term}
-    &\Coloneqq&
-    e
-    \\[1mm]
-
-    \nt{component\_term}
-    &\Coloneqq&
-    k\ label
-    \\[1mm]
 
     \nt{mutation\_command}
     &\Coloneqq&
-    \tm{attach}\ \nt{label}\ \tm{(}\ \nt{entity\_term}\ \tm{,}\ \nt{component\_term}\ \tm{)}
+    \tm{attach}\ \nt{label}\ \tm{(}\ \ty{e}\ \tm{,}\ \ty{k_i}\ \tm{)}
     \\
     &\mid&
-    \tm{detach}\ \nt{label}\ \tm{(}\ \nt{entity\_term}\ \tm{)}
+    \tm{detach}\ \nt{label}\ \tm{(}\ \ty{e}\ \tm{)}
     \\
     &\mid&
-    \tm{v}\ \tm{(}\ \metaexpr{entity\_type\ \rightarrow\ mutation\_type}\ \tm{)}
+    \tm{\nu}\ \tm{(}\ \metaexpr{\ty{E}\ \ty{\rightarrow}\ \ty{M}}\ \tm{)}
     \\
     &\mid&
     \tm{nil}
@@ -118,9 +105,9 @@ P &\coloneqq{}&
 
     \nt{system}
     &\Coloneqq&
-    \tm{(}\ \nt{query}\ \tm{,}\ \metaexpr{\nt{entity\_type}^{\mathrm{dim}(\nt{query})}
-    \ \tm{\times}\ \tm{(}\tm{|}\nt{query}\tm{|}\tm{)}
-    \ \tm{\rightarrow}\ \nt{mutation\_type}}\ \tm{)}
+    \tm{(}\ \nt{query}\ \tm{,}\ \metaexpr{\ty{E}^{\ty{\mathrm{dim}}\ty{(}\nt{query}\ty{)}}
+    \ \ty{\times}\ \ty{(}\ty{|}\nt{query}\ty{|}\ty{)}
+    \ \ty{\rightarrow}\ \ty{M}}\ \tm{)}
     \\[1mm]
 
     \nt{schedule\_command}
@@ -133,10 +120,14 @@ P &\coloneqq{}&
 
     \nt{schedule}
     &\Coloneqq&
-    \nt{schedule\_command}\ \{\tm{||}\ \nt{schedule\_command}\}
+    \nt{schedule\_command}\
     \\
     &\mid&
-    \nt{schedule\_command}\ \{\tm{\fatsemi}\ \nt{schedule\_command}\}
+    \nt{schedule}\ \{\tm{||}\ \nt{schedule}\}
+    \\
+    &\mid&
+    \nt{schedule}\ \{\tm{\fatsemi}\ \nt{schedule}\}
+
 \end{array}
 \\[-1mm]
 &&&
@@ -145,14 +136,108 @@ P &\coloneqq{}&
 S &\coloneqq{}& \nt{schedule}
     \end{alignedat}
 \]
+
 \bigskip
-Zu beachten hierbei ist, dass wir für eine bessere Lesbarkeit auf eine Anwendung von Anführungszeichen für einzelne Terminalsymbole verzichtet haben.
-Stattdessen nutzen wir eine andere Fontfamilie und Einfärbung der Symbole, um die Unterscheidung zu den Metasymbolen der Notation kenntlich zu machen.\\
+\noindent
+Es gelten in Anlehnung an Remdond et al. darüber hinaus weitere folgende Typeinschränkungen:
 
-Des Weiteren haben wir Nichtterminale $entity_type, mutation:type, entity term und componentterm$ eingeführt, die als Metavariablen zu verstehen sind: Von dem darunterliegenden Programm, dass Core ECS implenentiert, sind dies entsprechend konkrete Werte der repräsentierten Typen, bzw. der zu verwendenden Werte.\\
+\begin{itemize}
+    \item \nt{query :}\ \ty{Q} (\nt{query} erzeugt Terme vom Typ \ty{Q})
+    \item \nt{mutation :}\ \ty{M} (\nt{mutation} erzeugt Terme vom Typ \ty{M})
+    \item \nt{system :}\ \ty{S} (\nt{system} erzeugt Terme vom Typ \ty{S})
+    \item \nt{schedule :}\ \ty{Z} (\nt{schedule} erzeugt Terme vom Typ \ty{Z})
+\end{itemize}
 
-Außerdem soll ncoh auf eine sematische bedingung hingewiesen werdne, dass nämlich, für jede Produktion, die $label$ enthält, dieses Label für jedes Vorkommen gleich sein muss. Als gedankliches Modell kann man sich hier vorstellen, dass die entsprechenden  Produktionen an den Komponententyp - vertreten durch das Label in der Grammatik - gebunden sind.\\
+\noindent
+Des Weiteren nutzen wir Symbole, die nicht Bestandteile der Grammatik sind.
+Hier greift eine von Redmond et al. implizite, nicht formalisierte Anforderung, dass diese konkreten Typen beziehungsweise Terme von der darunterliegenden Programmiersprache zur Verfügung gestellt werden sollen.
 
-Farblich hervorgehobene Einträge in den Produktionen bezeichnen keinen Teil der GRammatik, sondern durch das unterliegende Programma usgedrückte Typsystem.
+\begin{itemize}
+    \item \ty{E}: Entspricht einem konkreten Entitätstyp $E$.
+    \item \ty{e}: Entspricht einem Entitätsterm $e$ vom Typ \ty{E}.
+    \item \ty{k_i}: Entspricht einem Komponententerm vom Typ $K_i$.
+\end{itemize}
 
+\noindent
+Eine semantische Bedingung im Zusammenhang mit der Verwendung von \ty{k_i} und \nt{label} ist, dass für jede Produktion, die diese Symbole enthält, dieses Label als auch \ty{k_i} übereinstimmen müssen: Als gedankliches Modell kann man sich hier vorstellen, dass diese Produktionen an den Komponententyp - vertreten durch das Label beziehungsweise \ty{k_i} in der Grammatik - gebunden sind.\\
+
+\noindent
+Weiterhin sind durch einen andersfarbigen Hintergrund hervorgehobene Ausdrücke wie beispielsweise
+
+\[
+    \metaexpr{\ty{E}\ \ty{\rightarrow}\ \ty{M}}
+\]
+
+\noindent
+wiederum Teil der darunterliegenden Programmiersprache und drücken aus, dass dies typgebundene Terme sind.
+In diesem Fall wird von der darunterliegenden Programmiersprache eine Funktion erwartet, die eine Eingabe vom Typ \ty{E} entgegennimmt und einen Wert vom Typ \ty{M} zurückliefert.\\
+
+
+\bigskip
+\noindent
+Damit schließen wir diesen Abschnitt mit der Angabe der von Redmond et {al.} angegebenen Grammatik, auf die wir uns im weiteren Verlauf größtenteils beziehen werden.
+Einige Formatierungen haben wir aus unserer Hilfsdefinition zur einfacheren Gegenüberstellung wiederverwendet.
+
+\[
+    \begin{array}{@{}rcll@{}}
+        q : \ty{Q}
+        &\Coloneqq&
+        \tm{incl}_{i}
+        \mid
+        \tm{excl}_{i}
+        \mid
+        \tm{anyway}_{i}
+        \mid
+        (q \land q')
+        &
+        \text{Query}
+        \\[1mm]
+
+        m : \ty{M}
+        &\Coloneqq&
+        \tm{attach}_{i}(\ty{e},\ty{k_i})
+        \mid
+        \tm{detach}_{i}(\ty{e})
+        \mid
+        (m \tm{\bullet} m')
+        \mid
+        \nu\!\left(\metaexpr{\ty{E} \rightarrow \ty{M}}\right)
+        \mid
+        \tm{nil}
+        &
+        \text{Mutation}
+        \\[1mm]
+
+        s : \ty{S}
+        &\Coloneqq&
+        \left(
+            \vec{q},
+            \metaexpr{
+                \ty{E}^{\ty{\mathrm{dim}(}\vec{q}\ty{)}}
+                \ty{\times}
+                \ty{(|}\vec{q}\ty{|)}
+                \ty{\rightarrow}
+                \ty{M}
+            }
+        \right)
+        &
+        \text{System}
+        \\[1mm]
+
+        z : \ty{Z}
+        &\Coloneqq&
+        \tm{conc}(s)
+        \mid
+        \tm{seq}(s)
+        \mid
+        (z \tm{||} z')
+        \mid
+        (z \tm{\fatsemi} z')
+        &
+        \text{Schedule}
+    \end{array}
+\]
+
+\noindent
+Mit den Details beschäftigen sich die Abschnitte, die sich den jeweiligen Produktionen widmen.
 

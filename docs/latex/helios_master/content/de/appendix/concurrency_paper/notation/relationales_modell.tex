@@ -20,7 +20,12 @@ genutzt, um den durch die Join Operation
      \pi_{R_1}(r) \njoin \ldots \njoin \pi_{R_n}(r))
 \]
 \noindent
-ergebenden Relationszustand $r$ zu notieren.
+ergebenden Relationszustand $r$ zu notieren.\\
+
+\noindent
+Im Folgenden schließt \textit{verlustfrei} im Zusammenhang mit Joins und Zerlegung auch immer die Eigenschaft \texti{nicht-additiv} mit ein.\\
+Funktionale Abhängigkeit(en) wird im Folgendem mit FD(s) abgekürzt.\\
+Mehrwertige Abhängigkeiten werden mit MVD abgekürzt.
 
 \subsection{Das relationale Schema}
 Ein erster Entwurf eines relationalen Schemas, dass die Beziehungen zwischen \textit{Entität} und \textit{Komponenten} ausdrückt, führt zu dem in Abbildung~\ref{fig:relation} dargestellten Modell.
@@ -90,10 +95,11 @@ Die funktionalen Abhängigkeiten $F_K$ von $K$ ergeben sich damit zu
 
 \[
     \begin{alignat}{3}
-        F_K &= F_E \cup F_{K_i} \cup F_{K_j} \cup \ldots =
-            &\{ e \rightarrow k_i, \ e \rightarrow k_j, \ \ldots\}
+        F^+_K = F_K &= F_E \cup F_{K_i} \cup F_{K_j} \cup \ldots =
+            &\{e \rightarrow e, e \rightarrow k_i, \ e \rightarrow k_j, \ \ldots\}
     \end{alignat}
 \]
+\medskip
 
 \noindent
 Die Hülle von $e$ unter $F_K$ lautet:
@@ -106,7 +112,7 @@ Die Hülle von $e$ unter $F_K$ lautet:
 Folglich ergibt sich die minimale funktionale Abhängigkeitsmenge $F^\text{min}_{K}$ zu:
 \[
     \begin{alignat}{3}
-        F^\text{min}_{K} = &\{e \rightarrow {k_i},\ e \rightarrow {k_j}, \ e \rightarrow {k_k}, \ \ldots  \}
+        F^\text{min}_{K} = &\{e \rightarrow {k_i},\ e \rightarrow {k_j}, \ e \rightarrow {k_k}, \ \ldots  \} = F^+_K \backslash \{e \rightarrow e\}
     \end{alignat}
 \]
 
@@ -154,20 +160,33 @@ Die um $\top$ erweiterten Komponententypen, Relationen und Attribute notieren wi
 \]
 
 \noindent
-Die im vorherigen Abschnitt angegebenen funktionalen Abhängigkeiten und Abhängigkeitsmengen ändern sich damit nicht, abgesehen der geringfügig abweichenden Notation.
+Die im vorherigen Abschnitt angegebenen funktionalen Abhängigkeiten und Abhängigkeitsmengen ändern sich damit nicht, abgesehen der geringfügig abweichenden Notation, beispielsweise für $F^\text{min}_{K^\top}$:
+
+\[
+    F^\text{min}_{K^\top} = \{e \rightarrow k^\top_1, e \rightarrow k^\top_2, \ldots e \rightarrow k^\top_n \}
+\]
 
 \bigskip
 \begin{tcolorbox}[title={Zusätzliche Integritätsbedingung für $K^{\top}$}]
 Als zusätzliche Integritätsbedingung kann vereinbart werden, dass eine Entität nicht ausschließlich $\unitval$-Werte in den Komponentenattributen aufweisen darf.
 Ein Tupel der Relation $K^\top$ im Relationszustand $\pi_{K^\top}(r)$ muss mindestens einen konkreten Komponententerm aufweisen.
 \[
-    \forall t \in \pi_{K^\top}(r): \exists t[A_i]: t[A_i] \neq \unitval
+    \forall t \in \pi_{K^\top}(r), A_i \neq e: \exists t[A_i]: t[A_i] \neq \unitval
 \]
 \end{tcolorbox}
 
-\subsection*{Axiome und Theoreme}
+\subsection*{Nachweis der Normalformen}
 
-Wir führen im folgenden einige Axiome und Theoreme ein, um den Nachweis der Normalformen zu erleichtern.
+Wir führen im folgenden den Nachweis der 1., 2., 3., 4., und 5. sowie der Boyce-Codd-Normalform.
+Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
+Wir gehen in allen Fällen davon aus, dass gilt:
+
+\[
+    \mid K^\top \mid > 2
+\]
+
+\noindent
+Damit kann eine Entität mindestens zwei Komponenten-Assoziationen aufweisen.
 
 \bigskip
 \begin{axiom}\label{ax:nur_atomar}
@@ -175,9 +194,9 @@ Wir führen im folgenden einige Axiome und Theoreme ein, um den Nachweis der Nor
 \end{axiom}
 
 \bigskip
-\begin{theorem}\label{th:K_ist_verlustfrei}
+\begin{lemma}\label{lem:K_bin_ist_verlustfrei}
     Das Relationsschema $K_{ij}^\top = K(e, k^\top_i, k^\top_j)$ lässt sich verlustfrei in die Relationen $K^\top_i, K^\top_j$ zerlegen.
-\end{theorem}
+\end{lemma}
 
 \medskip
 \begin{proof}
@@ -186,7 +205,7 @@ Wir führen im folgenden einige Axiome und Theoreme ein, um den Nachweis der Nor
     \noindent
     Wir zeigen, dass
     \[
-        \pi_{K^{\top}_i}(r)\ \bowtie_{K^{\top}_i.e = K^{\top}_j.e}\ \pi_{K^{\top}_j}(r) = *(\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r)) = \pi_{K_ij^\top}(r)
+        \pi_{K^{\top}_i}(r)\ \bowtie_{K^{\top}_i.e = K^{\top}_j.e}\ \pi_{K^{\top}_j}(r) = \njoin\ (\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r)) = \pi_{K_ij^\top}(r)
     \]
 
     \bigskip
@@ -201,41 +220,45 @@ Wir führen im folgenden einige Axiome und Theoreme ein, um den Nachweis der Nor
 \end{proof}
 
 \bigskip
-\begin{theorem}\label{th:Kplus_ist_verlustfrei}
+\begin{lemma}\label{lem:K_plus_ist_verlustfrei}
     Das Relationsschema $K^\top = K(e, k^\top_1, k^\top_2, \ldots, k^\top_n), n \in \mathbb{N}$ lässt sich verlustfrei in die Relationen $K^\top_1, K^\top_2, \ldots, K^\top_\n$ zerlegen.
-\end{theorem}
+\end{lemma}
 
 \medskip
 \begin{proof}
-    Um das Theorem auf n-äre Zerlegungen von $K^\top$ auszuweiten, ist zu zeigen:
+    Um Lemma~\ref{lem:K_bin_ist_verlustfrei} auf n-äre Zerlegungen $\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_n$ von $K^\top$ auszuweiten, ist zu zeigen:
     \[
         \pi_{{K^\top}}(r) =\ \njoin (\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_n}(r))
     \]
 
-    Hierzu wenden wir das Chase-Tableaux-Verfahren an~\cite[Chapter 8]{Mai83}~\cite[Algorithmus 10.2, S. 342]{EN11}.
-    Für eine bessere Lesbarkeit verzichten wir in der Matrixdarstellung auf die $b$-Symbole und nutzen stattdessen Unterstriche $\_$ in entsprechenden Zellen.\\
+    Hierzu wenden wir das Chase-Verfahren an~\cite{ABU79}~\cite[Algorithmus 10.2, S. 342]{EN11}.
+    Für eine bessere Lesbarkeit verzichten wir in der Tableaudarstellung auf die $b$-Symbole und nutzen stattdessen Unterstriche $\_$ in entsprechenden Zellen.\\
 
-    Sei zunächst wie in dem Verfahren angegeben die Matrix wie folgt aufgebaut:
+    Sei zunächst wie in dem Verfahren angegeben das Tableau wie folgt aufgebaut:
     Spalten entsprechend den Attributnamen von $K^\top$, in der Reihenfolge $e, k_1^{\top}, \ldots, k_n^\top$.
     Die Zeilen sind mit den Relationsnamen $K^\top_1, K^\top_2, \ldots, K^\top_n$ der Zerlegung markiert.
-    Wir erhalten dadurch folgende Matrix:\\
+    Wir erhalten dadurch folgende Tableau, wobei $\circ$ als Platzhalter für die jeweiligen Zelleninhalte steht:\\
 
     \[
         \begin{array}{c|cccccc}
             & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
             \hline
-            K^{\top}_1      & \_     & \_         & \_         & \_         & \dots  & \_         \\
-            K^{\top}_2      & \_     & \_         & \_         & \_         & \dots  & \_         \\
-            K^{\top}_3      & \_     & \_         & \_         & \_         & \dots  & \_         \\
+            K^{\top}_1      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
+            K^{\top}_2      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
+            K^{\top}_3      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
             \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
-            K^{\top}_n      & \_     & \_         & \_         & \_         & \dots  & \_
+            K^{\top}_n      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ
         \end{array}
     \]
 \medskip
 
-    \noindent
-    Für jede Relation, die in der Matrix hinzukommt, ist die Spalte $e$ komplett mit Symbolen $a_e$ besetzt, da $e$ Attribut jeder Relation ist.
-    Gleichzeitig können wir für jede neu hinzukommende Relation $K_x^\top(e, k^\top_x)$ auch den Eintrag in der Zelle $(m, n)$, indiziert durch $(K_x^\top, k^\top_x)$, durch das Symbol $a$ mit entsprechendem Index ersetzen, was zu folgender Matrix führt:
+    Entsprechend der Vorschrift des Verfahrens gilt in unserem Fall, dass für jede Relation, die in das Tableau übernommen wird, die Spalte $e$ der neu hinzugefügten Zeile mit dem Symbol $a_e$ besetzt wird: $e$ ist Attribut und Schlüssel jeder Relation $K_x^\top, x \leq n$ und taucht dementsprechend in der linken Seite aller FDs auf:
+    \[
+        \forall (X \rightarrow A) \in F^\text{min}_{K^\top}: X = e \land  A \in K^{\top} \backslash \{e\}
+    \]
+    \medskip
+
+    Damit folgt, dass wir für jede Relation $K_x^\top(e, k^\top_x)$ auch den Eintrag in der Zelle $(K_x^\top, k^\top_x)$\footnote{\textit{(Zeile, Spalte)}} durch das Symbol $a$ mit entsprechendem Index ersetzen können, was zu folgendem Tableau führt:
 
     \[
         \begin{array}{c|cccccc}
@@ -251,21 +274,16 @@ Wir führen im folgenden einige Axiome und Theoreme ein, um den Nachweis der Nor
     \medskip
 
     \noindent
-    Damit ist die Matrix für den iterativen Teil des Verfahrens vorbereitet.\\
+    Damit ist das Tableau für den iterativen Teil des Verfahrens vorbereitet.\\
 
     \noindent
     Nun wird jede funktionale Abhängigkeit $X \rightarrow Y \in F^\text{min}_{K^\top}$ iterativ betrachtet: Für alle Zeilen, die in den Spalten, die durch $X$ repräsentiert werden, einen gleichen Eintrag haben, werden die Spalten, die $Y$ repräsentieren, zeilenweise auf das gleiche Symbol gesetzt:\footnote{
         Da mit den gegebenen $F^\text{min}_{K^\top}$ in jedem Fall so eine Spalte existiert, brauchen wir den anderen Fall nicht berücksichtigen: In diesem Fall würde die Spalte mit $b$-Symbolen gefüllt.
     }\\
-    Ausgehend von der minimalen funktionalen Abhängigkeitsmenge
-    \[
-        F^\text{min}_{K^\top} = \{e \rightarrow k^\top_1, e \rightarrow k^\top_2, \ldots e \rightarrow k^\top_n \}
-    \]
-    \noindent
-    können wir somit für jede $(e \rightarrow k^\top_x) \in F^\text{min}_{K^\top}, 1 \leq x \leq n$ die Spalte mit dem Index $_x$ mit $a_x$-Symbolen füllen, da $e$ als Superschlüssel in jeder FD auftaucht und jedes in $K^\top$ vorkommende Attribut von $e$ funktional abhängig ist.\\
+    Ausgehend von der minimalen funktionalen Abhängigkeitsmenge $F^\text{min}_{K^\top}$ können wir somit für jede $(e \rightarrow k^\top_x) \in F^\text{min}_{K^\top}, x \leq n$ die Spalte mit dem Index $x$ mit $a_x$-Symbolen füllen, da jedes in $K^\top$ vorkommende Attribut von $e$ funktional abhängig ist.\\
 
     \noindent
-    Nach Beendigung des Verfahrens ist in unserem Fall die Matrix komplett mit $a$-Symbolen besetzt.
+    Nach Beendigung des Verfahrens ist in unserem Fall das Tableau komplett mit $a$-Symbolen besetzt.
     \[
         \begin{array}{c|cccccc}
             & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
@@ -289,11 +307,11 @@ Wir führen im folgenden einige Axiome und Theoreme ein, um den Nachweis der Nor
 Wir betrachten eine Zerlegung $K_{ijk}^\top$ in die drei Relationen  $K^\top_i, K^\top_j, K^\top_k$.
     Es ist zu zeigen:
     \[
-        \pi_{K_{ijk}^{\top}}(r) = *(\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r), \pi_{K^{\top}_k}(r))
+        \pi_{K_{ijk}^{\top}}(r) = \njoin\ (\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r), \pi_{K^{\top}_k}(r))
     \]
 
     \noindent
-    Wir wenden hierzu das Verfahren an, das wir zum Nachweis von Theorem~\ref{th:Kplus_ist_verlustfrei} angewendet haben,und weisen darüber die verlustfreie Zerlegung nach:
+    Wir wenden hierzu das Verfahren an, das wir zum Nachweis von Lemma~\ref{lem:K_plus_ist_verlustfrei} angewendet haben,und weisen darüber die verlustfreie Zerlegung nach:
 
     \bigskip
     Schritt 1 und 2:
@@ -351,48 +369,67 @@ Wir betrachten eine Zerlegung $K_{ijk}^\top$ in die drei Relationen  $K^\top_i, 
 
 \bigskip
 \noindent
-Mit Theorem~\ref{th:Kplus_ist_verlustfrei} und dem zuvor erbrachten Nachweis, dass auch zusätzliche Komponenten-Spalten $K_k^\top, K_l^\top, \ldots$ nicht die Bedingungen für eine verlustfreie Zerlegung von $K_{+}^\top$ verletzen, können wir zusätzlich noch die JOIN-Abhängigkeiten (JD) für eine solche Zerlegung nachweisen.
+Aufbauend auf Lemma~\ref{lem:K_plus_ist_verlustfrei} können wir die JOIN-Abhängigkeiten (JD) für die Zerlegung in $\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_n$ nachweisen.
 
 \bigskip
-\begin{theorem}\label{th:k_joinabhaengigkeiten}
-    Die Zerlegung von $K_{+}^\top$ in $K_i^\top, K_j^\top, K_k^\top, \ldots$ ergibt eine JOIN-Abhängigkeit
+\begin{corollary}\label{cor:k_joinabhaengigkeiten}
+    Die Zerlegung von $K^\top$ in $K_1^\top, K_2^\top, \ldots, K_n^\top$ induziert eine JOIN-Abhängigkeit
     \[
-        \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)
+        \text{JD}(K^\top_1, K^\top_2, \ldots, K^\top_n)
     \]
-\end{theorem}
+    \noindent
+    bezüglich $K^\top$
+\end{corollary}
 \begin{proof}
     Zu zeigen ist, dass
     \[
-        *(\pi_{K_i^\top}(r), \pi_{K_j^\top}(r), \pi_{K_k^\top}(r)\ldots) = r
+        \njoin\ (\pi_{K_i^\top}(r), \pi_{K_j^\top}(r), \pi_{K_k^\top}(r)\ldots) = r
     \]
-    gilt, was durch den Nachweis der verlustfreien Zerlegung bereits erfolgt ist.
+    \noindent
+    für jeden Zustand $r$ von $K^\top$ gilt.\\
+
+    \noindent
+    Nach Lemma~\ref{lem:K_plus_ist_verlustfrei} besitzt die Zerlegung $K^\top_x, x \leq n$ die verlustfreie Join-Eigenschaft.
+    Damit gilt die obige Gleichung für jeden legalen Relationszustand $\pi_{K^\top}(r)$.
+    Folglich gilt die behauptete Join-Abhängigkeit.
 \end{proof}
 
 
 \bigskip
-\begin{theorem}\label{th:k_abhaengigkeitserhalten}
-    Die Zerlegung von $K^\top$ in $K_i^\top, K_j^\top$ ist abhängigkeitserhaltend.
-\end{theorem}
+Wir zeigen außerdem, dass die Zerlegung abhängigkeitserhaltend ist:
+
+\begin{lemma}\label{lem:k_abhaengigkeitserhalten}
+    Die Zerlegung von $K^\top$ in $K_1^\top, K_2^\top, \ldots, K_n^\top$ ist abhängigkeitserhaltend.
+\end{lemma}
 \begin{proof}
-    Wir betrachten die FDs der einzelnen Relationen und sehen direkt, dass sie den einzelnen Einträgen von $F_{\text{min}}$ entsprechen:
-    Damit ergibt die Vereinigung der FDs wiederum $e^+$, was der Hülle der FDs von $K^\top$ entspricht.
+    Zu zeigen ist, dass die Vereinigung der Projektionen von $F_{K^\top}$ auf jede $K^\top_x, x \leq n$ äquivalent zu $F_{K^\top}$ ist.\\
+
+    \noindent
+    Zunächst können wir feststellen, dass für jede funktionale Abhängigkeitsmenge $F_{K^\top_x}$ einer Relation $K^\top_x, x \leq n$, gilt:
+
+    \[
+        F_{K^\top_x} = \{e \rightarrow k^\top_x\}
+    \]
+    \medskip
+    \noindent
+    woraus wir unmittelbar
+    \[
+        \pi_{K_x^\top}(F_{K^\top}) = F_{K^\top_x}
+    \]
+    \noindent
+    ableiten können.\\
+
+    \noindent
+    Da mit den Inferenzregeln aus der minimalen Abhängigkeitsmenge $F^{\text{min}}$ die Hülle der FDs $F^+_{K^\top}$ abgeleitet werden kann, gilt insgesamt
+
+    \[
+        (\bigcup_{x=1}^n F_{K^{\top}_x})^+ = (F^{\text{min}}_{K^\top})^+ = F^+_{K^\top}
+    \]
 \end{proof}
-
 \bigskip
-\begin{theorem}\label{th:k_merwertige_attribute}
-    Das Relationsschema $K$ besitzt keine mehrwertigen Attribute.
-\end{theorem}
-\begin{proof}
-    Mit $e^+$ haben wir gezeigt, dass es nur ein Prime-Attribut $e$ in der Relation gibt, das gleichzeitig der Schlüsselkandidat ist.
-    Jedes Nicht-Prime-Attribut ist funktional abhängig von $e$.
-    Damit gilt für zwei beliebige Tupel $t_1, t_2 \in \pi_{K}(r), t_1 \neq t_2: t_1[e] \neq t_2[e]$.
-    Mit der Definition mehrwertiger Attribute folgt direkt, dass es keine solche in $K$ geben kann.
-\end{proof}
 
-\noindent
-Der Beweis lässt sich analog für beliebige weitere Komponentenspalten $k_k, k_l, \ldots$ führen.
+Nun weisen wir die Erfüllung der Normalformen nach,
 
-\bigskip
 \begin{theorem}\label{f_min_norm}
     Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., BCNF-, 4., 5, -Normalform.
 \end{theorem}
@@ -402,98 +439,40 @@ Der Beweis lässt sich analog für beliebige weitere Komponentenspalten $k_k, k_
     {\ }
     \begin{itemize}
         \item 1. Normalform: Erfüllt, da mit Axiom~\ref{ax:nur_atomar} alle Attribute in $K^\top$ als atomare Attribute definiert sind.
-        \item 2. Normalform: Erfüllt, da $K^\top$ das Attribut $e$ als alleinigen Kandiatenschlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
-        \item 3. Normalform: Erfüllt, da $K^\top$ keine transitiven Abhängigkeiten enthält: $e+$ weist nach, dass jedes Attribut  die alleinige funktionale Abhängigkeit der Attribute von $e$ nach.
-        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $X \rightarrow A\ \in F_\text{min}$ die linke Seite der FD  der Superschlüssel von $K^\top$ ist.
-        \item 4. Normalform: Erfüllt mit Theorem~\ref{th:k_merwertige_attribute}.
-        \item 5.Normalform: Erfüllt.
-        Mit Theorem~\ref{th:k_joinabhaengigkeiten} haben wir die Join-Abhängigkeit $\text{JD}(K_i^\top, K_j^\top, K_k^\top, \ldots)$ nachgewiesen.
-        Die einzelnen Zerlegungen $R_i \in \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)$ weisen FDs wie folgt auf:
+        \item 2. Normalform: Erfüllt, da $K^\top$ das Attribut $e$ als alleinigen Schlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
+        \item 3. Normalform: Erfüllt, da $K^\top$ keine transitiven Abhängigkeiten enthält: Alle Nicht-Prime-Attribute sind funktional voll abhängig von dem einzigen Prime-Attribut $e$.
+        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $(X \rightarrow A)\ \in (F^\text{min}_{K^\top})^+$ die linke Seite der FD der Primärschlüssel von $K^\top$ ist.
+        \item 4. Normalform: Zu zeigen ist, dass $X$ für jede nichttriviale mehrwertige Abhängigkeit $X \twoheadrightarrow Y \in (F^{\text{min}}_{K^\top})^+$ ein Superschlüssel von $K^\top$ ist.\\[2mm]
+        Sei hierzu $C_K^\top \coloneqq \{k^\top_1, k^\top_2, \ldots, k^\top_n \}$.\\[2mm]
+        Wir betrachten im Folgenden alle aus $F^\text{min}_{K^\top}$ induzierten mehrwertigen Abhängigkeiten der Form
+        \[
+            e \twoheadrightarrow Y,\qquad \text{mit}\ \emptyset \neq Y \subset (K^\top \setminus \{e\})
+        \]
+        \noindent
+        Mit der Voraussetzung $n \geq 2$ sind diese Abhängigkeiten nichttrivial, da
+        \[
+             Y \nsubseteq \{e\}
+        \]
+        und
+        \[
+            \{e\} \cup Y \neq K^\top
+        \]
+        gilt.\\
+        Da jede funktionale Abhängigkeit in $F^\text{min}_{K^\top}$ auch eine mehrwertige Abhängigkeit ist\footnote{\cite[S 353]{EN11}} und wir mit dem gegebenen Fall ausschließlich nichttriviale MVDs betrachten, bei denen der Primärschlüssel als einziges Prime-Attribut auf der linken Seite jeder MVD steht, ist der geforderte Nachweis erbracht.
+        \item 5.Normalform: Zu zeigen ist, dass jede Relation $R_i$ einer nichttrivialen Join-Abhängigkeit auch Superschlüssel von $K^\top$ ist.
+        Mit Korollar~\ref{cor:k_joinabhaengigkeiten} haben wir die Join-Abhängigkeit $D \coloneqq \text{JD}(K_1^\top, K_2^\top, \ldots, K_n^\top)$ nachgewiesen.
+        mit $\forall R_i \in D : R_i \neq K^\top$ ist die Join-Abhängigkeit nichttrivial.
+        Weiterhin sind die FDs der jeweiligen Relationen von $D$ wie folgt:
         \[
             \begin{alignedat}{3}
-                K^\top_{FD_i} &= e \rightarrow k^\top_i,\\
-                K^\top_{FD_j} &= e \rightarrow k^\top_j,\\
-                K^\top_{FD_k} &= e \rightarrow k^\top_k,\\
-                \ldots
+                F_{K^{\top}_1} &= e \rightarrow k^\top_1,\\
+                F_{K^\top_2} &= e \rightarrow k^\top_2,\\
+                \ldots\\
+                F_{K^\top_n} &= e \rightarrow k^\top_n
             \end{alignedat}
         \]
 
         \noindent
-        Damit taucht der Superschlüssel $e$ der Relation $K^\top$ in jedem $R_i \in \text{JD}(K^\top_i, K^\top_j, K^\top_k, \ldots)$ auf, womit der Nachweis erbracht ist.
+        Damit taucht der Superschlüssel $e$ der Relation $K^\top$ in jeder einzelnen Relation $R_i \in D$ auf, wodurch jedes $R_i$ auch ein Superschlüssel für $K^\top$ ist.
     \end{itemize}
 \end{proof}
-
-womit sich eine Relation wie in Abbildung~\ref{fig:k_rel} ergibt, auf die wir im weiteren -- stellvertretend als Repräsentation von dem vorher eingeführten
-
-\[
-    \text{live(c)}
-\]
-
-bezug nehmen werden: Die Relation repräsentiert den Weltzustand, besitzt als Attribute alle Komponententypen
-
-\[
-    R_\text{live} \coloneqq
-\]
-
-\begin{example}
-    Da die Menge der unterschiedlichen KOmponententypen zur Parametrisierung des Programms genutzt wird und damit zur Kompilierzeit zur Verfügung steht, kann eine Datenstruktur in C++, die $R_\text{live}$ implementiert, beispielsweise wie folgt implementiert werden:
-    \vspace{2mm}
-    \begin{lstlisting}[style=cppframed,
-        label=lst:liverel_cpp]
-template<typename... K>
-class LiveRelation {
-    std::vector<
-        std::unordered_map<
-            std::type_index, std::variant<K...>
-        >
-    > mapppings;
-}
-    \end{lstlisting}
-    Dabei gehen wir davon aus, dass Entitäten vom Typ $E$ einen skalaren, numerischen Typ repräsentierten.
-    Für die \texttt{unordered\_map} nutzen wir als Schlüssel die Typ-Info (\texttt{std::type\_info}) eines Komponententyps $K_i$.
-\end{example}
-
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/k_rel}
-    \caption{Das Universalschema $R_\text{live}$ enthält als Attribute den Kandiatenschlüssel $e$ sowie $k_i, k_j, \ldots$ die jeweils den Komponententyp $K_i, K_j \ldots$ repräsentieren. (Quelle: eigene Darstellung)}
-    \label{fig:live_rel}
-\end{figure}
-
-
-\bigskip
-, die nicht weiter normalisiert werden braucht.
-
-
-Es ist sofort klar, dass eine solches Schema möglicherweise NULL-Werte für $k_i$ oder $k_i$ enthalten wird.\footnote{
-    Codd diskutiert die Auswirkungen von NULL-Werten -- auch im Hinblick auf Normalisierung -- in~\cite{Cod86}; weitere Betrachtung und formalen und semantischen Aspekten bei Franconi und Tessaris~\cite{FT22}.
-}\\
-Damit würde für jedes $k_i$, das für $e \in E$ erstellt wird, auch ein $k_j$ erstellt werden und umgekehrt.
-Für das formale Modell spielt dies keine Rolle - hätte aber in einer entsprechenden Anwendungsnahen Implementierung den Effekt, dass nicht auf Vorhandensein einer Assooziation $e \mapsto k_j$ geprüft werden muss, sondern der enthaltene Wert.
-Außerdem trägt ein Schema zwei domänenspezifische Typen, was die Semantik des Datenmodells abschwächt.
-\\
-Auch hier gilt die Voraussetzung, dass \bot nicht in $k_i$ auftreten darf, da ansonsten die Komponentenzuordnung nicht existiert un $K_i$ sonst in einem undefinierten Zustand wäre.\\
-
-Aus diesem Grund dekomponieren wir die Relation und erhalten das Relationsschema wie in Abbildung~\ref{fig:relation_ecs}
-dargestellt.\footnote{
-    Eine formale Grundlage für diese Form liefert die 6ste Normalform~\cite[S. 176]{DDL03}
-}
-
-\[
-    \begin{alignat}{3}
-        K_i(e,\ k_i)\\
-        K_j(e,\ k_j)\\
-    \end{alignat}
-\]
-
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation_ecs}
-    \caption{Nach bestimmung der funktionalen Abhängigkeiten können wir mit hilfe der minimalen funktionalen Abhängigkeitsmenge auf ein normalisiertes Schema zuückgreifen, dass die komponentenzentrische, idiomatische Datenverwaltung in einem ECS repräsentiert..  (Quelle: eigene Darstellung)}
-    \label{fig:relation_ecs}
-\end{figure}
-
-
-

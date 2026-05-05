@@ -182,7 +182,7 @@ Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 Wir gehen in allen Fällen davon aus, dass gilt:
 
 \[
-    \mid K^\top \mid > 2
+    \lvert K^\top \rvert > 2
 \]
 
 \noindent
@@ -301,6 +301,126 @@ Damit kann eine Entität mindestens zwei Komponenten-Assoziationen aufweisen.
     Da das Verfahren zum Nachweis der verlustfreien Zerlegung mindestens eine vollständig $a$-besetzte Zeile fordert, haben wir gezeigt, dass sich $K^\top$ verlustfrei in die Relationen $K^\top_1, K^\top_2, K^\top_3, \ldots, K^\top_n$ zerlegen lässt.
 
 \end{proof}
+\bigskip
+
+Die folgenden Lemma nutzen die Notation $D^n_{m_l}$ für eine Zerlegung von $K^\top$ mit $n$ Komponentenattributen und $m$ Relationen:
+\medskip
+
+\begin{definition}\label{def:zerlegung}
+    Sei $K^\top(e, k^\top_1, k^\top_2, \ldots, k^\top_n),\quad n > 1$ gegeben, mit $e$ als Primärschlüssel und $k^\top_x, x \leq n$ als Nicht-Prime-Attribut.\\
+
+    \noindent
+    Dann ist
+    \[
+        D^n_{m_l} = (R_1, \ldots, R_m),\quad 1 < m \leq \lvert K^\top \setminus \{e\} \rvert,\quad 1 < n \leq \lvert K^\top \setminus \{e\} \rvert
+    \]
+    mit
+    \[
+        \begin{alignedat}{3}
+        &K^{\top} = R_1 \cup R_2 \cup \ldots \cup R_m,\\[2mm]
+        &\forall R_x \in  D^n_{m_l}: e \in R^\top_x
+        \end{alignedat}
+    \]
+    \smallskip
+    eine Zerlegungen von $K^\top$.
+
+\end{definition}
+
+Das Subscript $l$ bezeichnet in Definition~\ref{def:zerlegung} einen Index, der eine der möglichen Zerlegungen in $m$ Relationen indiziert.
+Eine Ordnungsrelation für $l$ ist in unserem Kontext nicht relevant.\\
+\medskip
+
+\begin{example}
+Die Zerlegungen $D^3_{2_l}, 1 \leq l \leq 3$ beschreiben Zerlegungen der Relation $K^\top$ mit den drei Komponentenattributen $k^\top_1, k^\top_2, k^\top_3$. Jede Zerlegung beinhaltet $m=2$ Relationen:
+\[
+    \begin{alignedat}{3}
+        D^3_{2_1} = \{ \{e, k^\top_1\}, \{e, k^\top_2, k^\top_3 \} \}\\
+        D^3_{2_2} = \{ \{e, k^\top_2\}, \{e, k^\top_1, k^\top_3 \} \}\\
+        D^3_{2_3} = \{ \{e, k^\top_3\}, \{e, k^\top_1, k^\top_2 \} \}
+    \end{alignedat}
+\]
+\end{example}
+\medskip
+
+\begin{example}
+Die komponentenzentrische Zerlegung von $K^\top$ nach $K^\top_x(e, k^\top_x), x \leq n$ ist als Sonderfall einer solchen Zerlegung zu betrachten:
+
+\[
+    K^\top_x(e, k^\top_x) \in D^n_{n_l}, n = \lvert K^\top \setminus \{e\} \rvert,\quad 1 \leq x \leq \lvert K^\top \setminus \{e\} \rvert
+\]
+\end{example}
+\bigskip
+
+\begin{lemma}\label{lem:k_abhaengigkeitserhalten}
+    Jede Zerlegung $D^n_{m_l}$ ist abhängigkeitserhaltend,
+\end{lemma}
+\begin{proof}
+    Zu zeigen ist, dass die Vereinigung der Projektionen von $F_{K^\top}$ auf jede $R_x \in D^n_{m_l}$ äquivalent zu $F_{K^\top}$ ist:
+    \[
+        (\pi_{R_1}(F_{K^\top}) \cup \pi_{R_2}(F_{K^\top})  \cup \ldots \cup \pi_{R_m}(F_{K^\top}))^+ = (F_{K^\top})^+
+    \]
+    \smallskip
+
+    \noindent
+    Für jede funktionale Abhängigkeitsmenge $F_{R_x}$ einer Relation $R_x \in D^n_{m_l}, x \leq m$, gilt:
+
+    \[
+        F_{R_x} = \{e \rightarrow k^\top_y \mid k^\top_y \in R_x \setminus \{e\} \}
+    \]
+    \medskip
+    \noindent
+    Daraus können wir unmittelbar
+    \[
+        \pi_{R_x}(F_{K^\top}) = F_{R_x}
+    \]
+    \noindent
+    ableiten.\\
+
+    \noindent
+    Da mit Definition~\ref{def:zerlegung}
+    \[
+        \bigcup_{x=1}^{m} R_x = K^\top
+    \]
+    gilt, sind alle Komponentenattribute $k^\top_x$ entlang den Relationen verteilt, womit keine funktionale Abhängigkeit mit einer Zerlegung $D^n_{m_l}$ verlorengeht.
+    Damit gilt insgesamt
+
+    \[
+        (\bigcup_{x=1}^m F_{R_x})^+ = (F_{K^\top})^+
+    \]
+\end{proof}
+\bigskip
+
+\bigskip
+\begin{lemma}\label{lem:jede_K_zerlegung_ist_verlustfrei}
+    Jede Zerlegung $D^n_{m_l}$ auf Basis der funktionalen Abhängigkeiten $F_{K^\top}$ ist verlustfrei.
+\end{lemma}
+
+\medskip
+\begin{proof}
+    Mit Lemma~\ref{lem:k_abhaengigkeitserhalten} haben wir nachgewiesen, dass jede Zerlegung $D^n_{m_l}$ abhängigkeitserhaltend bezüglich $F_{K^\top}$ ist.
+    Damit ist sichergestellt, dass die für das Chase-Verfahren und den Aufbau des Tableaus benötigten funktionalen Abhängigkeiten zum Nachweis der Verlustlosigkeit nicht verloren gehen.\\
+
+    \noindent
+    Damit kann unter Anwendung des in Lemma~\ref{lem:K_plus_ist_verlustfrei} beschriebenen Verfahrens ein Tableau für eine Zerlegung wie folgt beschrieben werden: Die Zeilenbeschriftungen eines jeden solchen Tableaus bestehen aus den Relationen
+    \[
+    R_x \in D^n_{m_l},\quad \bigcup_{x=1}^m R_x = K^\top
+    \]
+    \smallskip
+    Die Spaltenüberschriften bestehen aus den Attributen
+    \[
+    e, k^\top_1, k^\top_2, \ldots, k^\top_n
+    \]
+    \medskip
+    \noindent
+    Bei der Anwendung des Verfahrens (siehe Beweis zu~\ref{lem:K_plus_ist_verlustfrei}) erhält nun jede Zeile in der $e$-Spalte ein $a$-Symbol, da mit der Definition von $D^n_{m_l}$ das Attribut in jeder Relation vorkommt. .
+    Da jede Zeile ein $a$-Symbol in der $e$-Spalte aufweist, enthält jede Zeile $R_x$ mit der funktionalen Abhängigkeit
+    \[
+        e \rightarrow k^{\top}_y, k^{\top}_y \in R_x
+    \]
+     in einer Zelle $(R_x, k^\top_y), k^\top_y \in R_x$ ein $a$-Symbol: Da alle funktionalen Abhängigkeiten und die Komponentenattribute ebenfalls vollständig in der Zerlegung enthalten sind, besitzt jede Spalte einer entsprechenden Zeile ein solches Symbol.
+    Mit der Vorschrift, dass die linke Seite der FD in dem Verfahren Spalten zeilenweise vereinheitlicht -- in diesem Fall ausgehend von der $e$-Spalte als linke Seite einer jeden FD -- ist nach Beendigung des Verfahrens die hinreichende Bedingung erfüllt, dass zum Nachweis der verlustfreien Join-Eigenschaft mindestens eine Zeile nur aus aus $a$-Symbolen besteht.
+    Tatsächlich besteht das Tableau dann ausschließlich aus $a$-Symbolen.
+\end{proof}
 
 \bigskip
 \begin{tcolorbox}[excursusbox,title={Nachweis der verlustfreien Zerlegung anhand $K^\top_i, K^\top_j, K^\top_k$}]
@@ -369,13 +489,13 @@ Wir betrachten eine Zerlegung $K_{ijk}^\top$ in die drei Relationen  $K^\top_i, 
 
 \bigskip
 \noindent
-Aufbauend auf Lemma~\ref{lem:K_plus_ist_verlustfrei} können wir die JOIN-Abhängigkeiten (JD) für die Zerlegung in $\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_n$ nachweisen.
+Aufbauend auf den vorangehenden Hilfssätzen können wir nun die JOIN-Abhängigkeiten (JD) für eine Zerlegung $D^n_{m_l}$ zeigen.
 
 \bigskip
 \begin{corollary}\label{cor:k_joinabhaengigkeiten}
-    Die Zerlegung von $K^\top$ in $K_1^\top, K_2^\top, \ldots, K_n^\top$ induziert eine JOIN-Abhängigkeit
+    Jede Zerlegung $D^n_{m_l}$ induziert eine JOIN-Abhängigkeit
     \[
-        \text{JD}(K^\top_1, K^\top_2, \ldots, K^\top_n)
+        \text{JD}(R_1, R_2, \ldots, R_m),\quad \text{mit } R_1 \cup R_2 \cup \ldots \cup R_m = K^\top
     \]
     \noindent
     bezüglich $K^\top$
@@ -383,52 +503,21 @@ Aufbauend auf Lemma~\ref{lem:K_plus_ist_verlustfrei} können wir die JOIN-Abhän
 \begin{proof}
     Zu zeigen ist, dass
     \[
-        \njoin\ (\pi_{K_i^\top}(r), \pi_{K_j^\top}(r), \pi_{K_k^\top}(r)\ldots) = r
+        \njoin\ (\pi_{R_1}(r), \pi_{R_2}(r), \ldots, \pi_{R_m}(r)) = r
     \]
     \noindent
     für jeden Zustand $r$ von $K^\top$ gilt.\\
 
     \noindent
-    Nach Lemma~\ref{lem:K_plus_ist_verlustfrei} besitzt die Zerlegung $K^\top_x, x \leq n$ die verlustfreie Join-Eigenschaft.
+    Nach Lemma~\ref{lem:jede_K_zerlegung_ist_verlustfrei} besitzt jede Zerlegung $D^n_{m_l}$ die verlustfreie Join-Eigenschaft.
     Damit gilt die obige Gleichung für jeden legalen Relationszustand $\pi_{K^\top}(r)$.
     Folglich gilt die behauptete Join-Abhängigkeit.
 \end{proof}
 
 
-\bigskip
-Wir zeigen außerdem, dass die Zerlegung abhängigkeitserhaltend ist:
 
-\begin{lemma}\label{lem:k_abhaengigkeitserhalten}
-    Die Zerlegung von $K^\top$ in $K_1^\top, K_2^\top, \ldots, K_n^\top$ ist abhängigkeitserhaltend.
-\end{lemma}
-\begin{proof}
-    Zu zeigen ist, dass die Vereinigung der Projektionen von $F_{K^\top}$ auf jede $K^\top_x, x \leq n$ äquivalent zu $F_{K^\top}$ ist.\\
-
-    \noindent
-    Zunächst können wir feststellen, dass für jede funktionale Abhängigkeitsmenge $F_{K^\top_x}$ einer Relation $K^\top_x, x \leq n$, gilt:
-
-    \[
-        F_{K^\top_x} = \{e \rightarrow k^\top_x\}
-    \]
-    \medskip
-    \noindent
-    woraus wir unmittelbar
-    \[
-        \pi_{K_x^\top}(F_{K^\top}) = F_{K^\top_x}
-    \]
-    \noindent
-    ableiten können.\\
-
-    \noindent
-    Da mit den Inferenzregeln aus der minimalen Abhängigkeitsmenge $F^{\text{min}}$ die Hülle der FDs $F^+_{K^\top}$ abgeleitet werden kann, gilt insgesamt
-
-    \[
-        (\bigcup_{x=1}^n F_{K^{\top}_x})^+ = (F^{\text{min}}_{K^\top})^+ = F^+_{K^\top}
-    \]
-\end{proof}
-\bigskip
-
-Nun weisen wir die Erfüllung der Normalformen nach,
+Nun kann der Nachweis für die Normalformen erfolgen:
+\medskip
 
 \begin{theorem}\label{f_min_norm}
     Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., BCNF-, 4., 5, -Normalform.
@@ -458,21 +547,24 @@ Nun weisen wir die Erfüllung der Normalformen nach,
             \{e\} \cup Y \neq K^\top
         \]
         gilt.\\
-        Da jede funktionale Abhängigkeit in $F^\text{min}_{K^\top}$ auch eine mehrwertige Abhängigkeit ist\footnote{\cite[S 353]{EN11}} und wir mit dem gegebenen Fall ausschließlich nichttriviale MVDs betrachten, bei denen der Primärschlüssel als einziges Prime-Attribut auf der linken Seite jeder MVD steht, ist der geforderte Nachweis erbracht.
-        \item 5.Normalform: Zu zeigen ist, dass jede Relation $R_i$ einer nichttrivialen Join-Abhängigkeit auch Superschlüssel von $K^\top$ ist.
-        Mit Korollar~\ref{cor:k_joinabhaengigkeiten} haben wir die Join-Abhängigkeit $D \coloneqq \text{JD}(K_1^\top, K_2^\top, \ldots, K_n^\top)$ nachgewiesen.
-        mit $\forall R_i \in D : R_i \neq K^\top$ ist die Join-Abhängigkeit nichttrivial.
-        Weiterhin sind die FDs der jeweiligen Relationen von $D$ wie folgt:
+        Jede funktionale Abhängigkeit in $F^\text{min}_{K^\top}$ ist auch eine nichttriviale mehrwertige Abhängigkeit~\cite[S. 353]{EN11}.\\
+        In jeder MVD ist der Primärschlüssel $X=e$ das einzige Prime-Attribut auf der linken Seite.
+        Damit ist die geforderte Bedingung insgesamt erfüllt.
+        \item 5.Normalform: Zu zeigen ist, dass für jede nichttriviale Join-Abhängigkeit
         \[
-            \begin{alignedat}{3}
-                F_{K^{\top}_1} &= e \rightarrow k^\top_1,\\
-                F_{K^\top_2} &= e \rightarrow k^\top_2,\\
-                \ldots\\
-                F_{K^\top_n} &= e \rightarrow k^\top_n
-            \end{alignedat}
+            \text{JD}(R_1, R_2, \ldots, R_m)
         \]
-
-        \noindent
-        Damit taucht der Superschlüssel $e$ der Relation $K^\top$ in jeder einzelnen Relation $R_i \in D$ auf, wodurch jedes $R_i$ auch ein Superschlüssel für $K^\top$ ist.
+        bezüglich $(F_{K^\top})^+$ jedes $R_x$ ein Superschlüssel für $K^{\top}$ ist.\\
+        Mit Korrolar~\ref{cor:k_joinabhaengigkeiten} haben wir gezeigt, dass jede Zerlegung $D^n_{m_l}$ eine Join-Abhängigkeit bezüglich $K^\top$ induziert.\\
+        Jede Zerlegung dieser Art ist nichttrivial, da mit Definition~\ref{def:zerlegung} gilt:
+        \[
+            \forall R_x \in D^n_{m_l}: R_x \neq K^{\top}
+        \]
+        Die FDs der Relationen jeder Zerlegung sind von der Form
+        \[
+            F_{R_x} = \{e  \rightarrow k^\top_x \mid k^\top_x \in R_x \setminus \{e\}\}
+        \]
+        wobei $e$ der Primärschlüssel von $K^\top$ ist -- damit ist jedes $R_x$ auch ein Superschlüssel für $K^\top$.
+        Der Superschlüssel stellt außerdem als identifizierendes Attribut sicher, dass in jeder von $(F_{K^\top})^+$ abgeleiteten Zerlegung, die eine nichttriviale JD aufweist, jede Relation dieser Zerlegung auch ein Superschlüssel von $K^\top$ ist.
     \end{itemize}
 \end{proof}

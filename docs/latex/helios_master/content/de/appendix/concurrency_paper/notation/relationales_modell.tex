@@ -95,7 +95,7 @@ Die funktionalen Abhängigkeiten $F_K$ von $K$ ergeben sich damit zu
 
 \[
     \begin{alignat}{3}
-        F^+_K = F_K &= F_E \cup F_{K_i} \cup F_{K_j} \cup \ldots =
+         F_K &= F_E \cup F_{K_i} \cup F_{K_j} \cup \ldots =
             &\{e \rightarrow e, e \rightarrow k_i, \ e \rightarrow k_j, \ \ldots\}
     \end{alignat}
 \]
@@ -112,9 +112,18 @@ Die Hülle von $e$ unter $F_K$ lautet:
 Folglich ergibt sich die minimale funktionale Abhängigkeitsmenge $F^\text{min}_{K}$ zu:
 \[
     \begin{alignat}{3}
-        F^\text{min}_{K} = &\{e \rightarrow {k_i},\ e \rightarrow {k_j}, \ e \rightarrow {k_k}, \ \ldots  \} = F^+_K \backslash \{e \rightarrow e\}
+        F^\text{min}_{K} = &\{e \rightarrow {k_i},\ e \rightarrow {k_j}, \ e \rightarrow {k_k}, \ \ldots  \}
     \end{alignat}
 \]
+
+\noindent
+Daraus folgt
+\[
+    \begin{alignat}{3}
+        (F^\text{min}_{K})^+ = (F_{K^\top})^+
+    \end{alignat}
+\]
+
 
 \subsection*{Darstellung fehlender Komponenten im Universalrelationsschema}
 
@@ -326,8 +335,8 @@ Die folgenden Lemma nutzen die Notation $D^n_{m_l}$ für eine Zerlegung von $K^\
 
 \end{definition}
 
-Das Subscript $l$ bezeichnet in Definition~\ref{def:zerlegung} einen Index, der eine der möglichen Zerlegungen in $m$ Relationen indiziert.
-Eine Ordnungsrelation für $l$ ist in unserem Kontext nicht relevant.\\
+Das Subscript $1 \leq l \leq m$ bezeichnet in Definition~\ref{def:zerlegung} einen Index, der eine der möglichen Zerlegungen in $m$ Relationen indiziert.
+Eine Ordnungsrelation für $l$ bezüglich der indizierten Zerlegungen ist im weiteren Kontext nicht relevant.
 \medskip
 
 \begin{example}
@@ -516,11 +525,11 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun die JOIN-Abhängigk
 
 
 
-Nun kann der Nachweis für die Normalformen erfolgen:
+Nun kann der Nachweis für die Normalformen erfolgen.
 \medskip
 
 \begin{theorem}\label{f_min_norm}
-    Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., BCNF-, 4., 5, -Normalform.
+    Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., BCNF- und 4. Normalform.
 \end{theorem}
 
 \begin{proof}
@@ -550,21 +559,40 @@ Nun kann der Nachweis für die Normalformen erfolgen:
         Jede funktionale Abhängigkeit in $F^\text{min}_{K^\top}$ ist auch eine nichttriviale mehrwertige Abhängigkeit~\cite[S. 353]{EN11}.\\
         In jeder MVD ist der Primärschlüssel $X=e$ das einzige Prime-Attribut auf der linken Seite.
         Damit ist die geforderte Bedingung insgesamt erfüllt.
-        \item 5.Normalform: Zu zeigen ist, dass für jede nichttriviale Join-Abhängigkeit
-        \[
-            \text{JD}(R_1, R_2, \ldots, R_m)
-        \]
-        bezüglich $(F_{K^\top})^+$ jedes $R_x$ ein Superschlüssel für $K^{\top}$ ist.\\
-        Mit Korrolar~\ref{cor:k_joinabhaengigkeiten} haben wir gezeigt, dass jede Zerlegung $D^n_{m_l}$ eine Join-Abhängigkeit bezüglich $K^\top$ induziert.\\
-        Jede Zerlegung dieser Art ist nichttrivial, da mit Definition~\ref{def:zerlegung} gilt:
-        \[
-            \forall R_x \in D^n_{m_l}: R_x \neq K^{\top}
-        \]
-        Die FDs der Relationen jeder Zerlegung sind von der Form
-        \[
-            F_{R_x} = \{e  \rightarrow k^\top_x \mid k^\top_x \in R_x \setminus \{e\}\}
-        \]
-        wobei $e$ der Primärschlüssel von $K^\top$ ist -- damit ist jedes $R_x$ auch ein Superschlüssel für $K^\top$.
-        Der Superschlüssel stellt außerdem als identifizierendes Attribut sicher, dass in jeder von $(F_{K^\top})^+$ abgeleiteten Zerlegung, die eine nichttriviale JD aufweist, jede Relation dieser Zerlegung auch ein Superschlüssel von $K^\top$ ist.
     \end{itemize}
 \end{proof}
+\bigskip
+
+Für die {5.} Normalform führen wir den Nachweis ausschließlich auf Grundlage von Definition~\ref{def:zerlegung}, um nicht alle syntaktisch möglichen Zerlegungen der Join-Abhängigkeiten betrachten zu müssen.\\
+
+Relationen, die das Schlüsselattribut $e$ nicht enthalten, werden nicht als Zerlegungsziele des ECS-Modell betrachtet.
+Damit berücksichtigen wir ausschließlich nicht-redundante Zerlegungen der Form $D^n_{m_l}$, und erbringen für diese den Nachweis, dass sie die Bedingungen der {5.} Normalform erfüllen: Streng-formal erfolgt also kein Nachweis der {5.} Normalform für $K^\top$, was für die die weiteren Betrachtungen allerdings auch nicht von Relevanz ist.
+
+\begin{theorem}\label{th:fifth}
+    Die mit Definition~\ref{def:zerlegung} eingeführten Zerlegungen erfüllen die Bedingungen der {5.} Normalform.\footnote{
+        Wir verwenden hier die Lehrbuchdefinition von Elmasri und Navathe~\cite[S. 356]{EN11}. Die Definition der 5. Normalform geht auf Fagin~\cite{Fag79} zurück.
+    }
+\end{theorem}
+
+\begin{proof}
+    Zu zeigen ist, dass für jede nichttriviale Join-Abhängigkeit
+    \[
+        \text{JD}(R_1, R_2, \ldots, R_m),\quad \exists D^n_{m_l}: R_1 \cup R_2 \cup \ldots R_m = D^n_{m_l}
+    \]
+    jedes $R_x$ ein Superschlüssel für $K^{\top}$ ist.\\
+
+    \noindent
+    Mit Korrolar~\ref{cor:k_joinabhaengigkeiten} haben wir gezeigt, dass jede solche Zerlegung $D^n_{m_l}$ eine Join-Abhängigkeit bezüglich $K^\top$ induziert.\\
+    Jede Zerlegung dieser Art ist aber auch nichttrivial, da mit Definition~\ref{def:zerlegung} gilt:
+    \[
+        \forall R_x \in D^n_{m_l}: R_x \neq K^{\top}
+    \]
+    Dabei ist der Superschlüssel $e$ der Relation $K^\top$ mit Definition~\ref{def:zerlegung} in jeder Relation $R_x$ enthalten:
+    \[
+        \forall R_x \in D^n_{m_l}: e \in R_x
+    \]
+    Folglich ist jedes $R_x$ ein Superschlüssel von $K^\top$, womit der Nachweis für alle nicht-redundanten Zerlegungen, in der $e$ als identifizierendes Attribut in jeder Relation enthalten ist, erbracht ist.
+\end{proof}
+
+
+

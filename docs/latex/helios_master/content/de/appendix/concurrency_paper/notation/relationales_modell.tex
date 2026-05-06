@@ -23,7 +23,7 @@ genutzt, um den durch die Join Operation
 ergebenden Relationszustand $r$ zu notieren.\\
 
 \noindent
-Im Folgenden schließt \textit{verlustfrei} im Zusammenhang mit Joins und Zerlegung auch immer die Eigenschaft \texti{nicht-additiv} mit ein.\\
+Im Folgenden schließt \textit{verlustfrei} im Zusammenhang mit Joins und Zerlegung auch immer die Eigenschaft \textit{nicht-additiv} mit ein.\\
 Funktionale Abhängigkeit(en) wird im Folgendem mit FD(s) abgekürzt.\\
 Mehrwertige Abhängigkeiten werden mit MVD abgekürzt.
 
@@ -49,7 +49,7 @@ Relation und Attributmengen des ECS-Modells ergeben sich wie folgt:
     \begin{alignat}{3}
         &E   &&= \{e\}\\
         &K_i &&= \{e, k_i\}\\
-        &K_i &&= \{e, k_j\}\\
+        &K_j &&= \{e, k_j\}\\
         &K_k &&= \{e, k_k\}\\
         & \ldots
     \end{alignat}
@@ -120,7 +120,7 @@ Folglich ergibt sich die minimale funktionale Abhängigkeitsmenge $F^\text{min}_
 Daraus folgt
 \[
     \begin{alignat}{3}
-        (F^\text{min}_{K})^+ = (F_{K^\top})^+
+        (F^\text{min}_{K})^+ = (F_{K})^+
     \end{alignat}
 \]
 
@@ -155,8 +155,8 @@ Damit erweitern wir die Wertebereiche auf $K_i + \top,\ K_j + \top, \ldots$, so 
 
 \[
 \begin{alignedat}{3}
-  \text{dom}(k_i) &= \text{dom}(k_i) \cup \{\unitval\}\\
-  \text{dom}(k_j) &= \text{dom}(k_j) \cup \{\unitval\}\\
+  \text{dom}(k_i) &= K_i + \{\unitval\}\\
+  \text{dom}(k_j) &= K_j + \{\unitval\}\\
     \ldots
 \end{alignedat}
 \]
@@ -230,12 +230,12 @@ Damit kann eine Entität mindestens zwei Komponenten-Assoziationen aufweisen.
 
 \bigskip
 \begin{lemma}\label{lem:K_plus_ist_verlustfrei}
-    Das Relationsschema $K^\top = K(e, k^\top_1, k^\top_2, \ldots, k^\top_n), n \in \mathbb{N}$ lässt sich verlustfrei in die Relationen $K^\top_1, K^\top_2, \ldots, K^\top_\n$ zerlegen.
+    Das Relationsschema $K^\top = K(e, k^\top_1, k^\top_2, \ldots, k^\top_n), n \in \mathbb{N}$ lässt sich verlustfrei in die Relationen $K^\top_1, K^\top_2, \ldots, K^\top_n$ zerlegen.
 \end{lemma}
 
 \medskip
 \begin{proof}
-    Um Lemma~\ref{lem:K_bin_ist_verlustfrei} auf n-äre Zerlegungen $\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_n$ von $K^\top$ auszuweiten, ist zu zeigen:
+    Um Lemma~\ref{lem:K_bin_ist_verlustfrei} auf n-äre Zerlegungen $\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_n}$ von $K^\top$ auszuweiten, ist zu zeigen:
     \[
         \pi_{{K^\top}}(r) =\ \njoin (\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_n}(r))
     \]
@@ -273,11 +273,11 @@ Damit kann eine Entität mindestens zwei Komponenten-Assoziationen aufweisen.
         \begin{array}{c|cccccc}
             & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
             \hline
-            K^{\top}_1      & $a_e$     & $a_1$         & \_         & \_         & \dots  & \_         \\
-            K^{\top}_2      & $a_e$     & \_         & $a_2$         & \_         & \dots  & \_         \\
-            K^{\top}_3      & $a_e$     & \_         & \_         & $a_3$        & \dots  & \_         \\
+            K^{\top}_1      & a_e     & a_1         & \_         & \_         & \dots  & \_         \\
+            K^{\top}_2      & a_e     & \_         & a_2         & \_         & \dots  & \_         \\
+            K^{\top}_3      & a_e     & \_         & \_         & a_3        & \dots  & \_         \\
             \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
-            K^{\top}_n      & $a_e$     & \_         & \_         & \_         & \dots  & $a_n$
+            K^{\top}_n      & a_e     & \_         & \_         & \_         & \dots  & a_n
         \end{array}
     \]
     \medskip
@@ -312,40 +312,59 @@ Damit kann eine Entität mindestens zwei Komponenten-Assoziationen aufweisen.
 \end{proof}
 \bigskip
 
-Die folgenden Lemma nutzen die Notation $D^n_{m_l}$ für eine Zerlegung von $K^\top$ mit $n$ Komponentenattributen und $m$ Relationen:
+
+\begin{definition}\label{def:redundanzfrei}
+Eine Zerlegung
+    \[
+        D = (R_1, R_2, \ldots, R_n), \text{ mit } K^\top = R_1 \cup R_2 \cup \ldots \cup R_n
+    \]
+     heißt redundanzfrei, wenn für alle $R_i \in D$ gilt:
+    \[
+        (\bigcup_{j=1, j \neq i}^n R_j) \neq K^{\top}
+    \]
+    \medskip
+    Damit schließt ``redundanzfrei`` in diesem Kontext eine mehrfach vorkommende, gleiche Attributabdeckung aus, während nicht-disjunkte Teilmengenbeziehungen $R_i \cap R_j \neq \emptyset$ zulässig sind.
+\end{definition}
+\bigskip
+
+Die folgenden Lemma nutzen die Notation $D^n_{m_l}$ für eine redundanzfreie Zerlegung von $K^\top$ mit $n$ Komponentenattributen und $m$ Relationen:
 \medskip
 
 \begin{definition}\label{def:zerlegung}
-    Sei $K^\top(e, k^\top_1, k^\top_2, \ldots, k^\top_n),\quad n > 1$ gegeben, mit $e$ als Primärschlüssel und $k^\top_x, x \leq n$ als Nicht-Prime-Attribut.\\
+    Sei $n = \lvert K^\top \setminus \{e\} \rvert, n > 1$.
+    $e$ ist der Primärschlüssel der Relation $K^\top(e, k^\top_1, k^\top_2, \ldots, k^\top_n)$.\\
+    $k^\top_x, x \leq n$ ist Nicht-Prime-Attribut.\\
 
     \noindent
-    Dann ist
+    Dann bezeichnet
     \[
-        D^n_{m_l} = (R_1, \ldots, R_m),\quad 1 < m \leq \lvert K^\top \setminus \{e\} \rvert,\quad 1 < n \leq \lvert K^\top \setminus \{e\} \rvert
+        D^n_{m_l} = (R_1, \ldots, R_m),\quad 1 < m \leq \lvert K^\top \setminus \{e\} \rvert
     \]
     mit
     \[
         \begin{alignedat}{3}
         &K^{\top} = R_1 \cup R_2 \cup \ldots \cup R_m,\\[2mm]
-        &\forall R_x \in  D^n_{m_l}: e \in R^\top_x
+        &\forall R_x \in  D^n_{m_l}: e \in R_x
         \end{alignedat}
     \]
     \smallskip
-    eine Zerlegungen von $K^\top$.
-
+    eine redundanzfreie Zerlegung von $K^\top$.
 \end{definition}
-
-Das Subscript $1 \leq l \leq m$ bezeichnet in Definition~\ref{def:zerlegung} einen Index, der eine der möglichen Zerlegungen in $m$ Relationen indiziert.
-Eine Ordnungsrelation für $l$ bezüglich der indizierten Zerlegungen ist im weiteren Kontext nicht relevant.
 \medskip
+Das Subscript $l \in \mathbb{N}$ bezeichnet in Definition~\ref{def:zerlegung} einen Index, der eine der möglichen Zerlegungen in $m$ Relationen indiziert.
+Eine Ordnungsrelation für $l$ bezüglich der indizierten Zerlegungen ist im weiteren Kontext nicht relevant.
+\bigskip
 
 \begin{example}
-Die Zerlegungen $D^3_{2_l}, 1 \leq l \leq 3$ beschreiben Zerlegungen der Relation $K^\top$ mit den drei Komponentenattributen $k^\top_1, k^\top_2, k^\top_3$. Jede Zerlegung beinhaltet $m=2$ Relationen:
+Die Zerlegungen $D^3_{2_l}$ beschreiben Zerlegungen der Relation $K^\top$ mit den drei Komponentenattributen $k^\top_1, k^\top_2, k^\top_3$. Jede Zerlegung beinhaltet $m=2$ Relationen:
 \[
     \begin{alignedat}{3}
-        D^3_{2_1} = \{ \{e, k^\top_1\}, \{e, k^\top_2, k^\top_3 \} \}\\
-        D^3_{2_2} = \{ \{e, k^\top_2\}, \{e, k^\top_1, k^\top_3 \} \}\\
-        D^3_{2_3} = \{ \{e, k^\top_3\}, \{e, k^\top_1, k^\top_2 \} \}
+        D^3_{2_1} &= \{ \{e, k^\top_1\}, \{e, k^\top_2, k^\top_3 \} \}\\
+        D^3_{2_2} &= \{ \{e, k^\top_2\}, \{e, k^\top_1, k^\top_3 \} \}\\
+        D^3_{2_3} &= \{ \{e, k^\top_3\}, \{e, k^\top_1, k^\top_2 \} \}\\
+        D^3_{2_4} &= \{ \{e, k^\top_1, k^\top_3\}, \{e, k^\top_1, k^\top_2 \} \}\\
+        D^3_{2_5} &= \{ \{e, k^\top_2, k^\top_3\}, \{e, k^\top_1, k^\top_2 \} \}\\
+        &\vdots
     \end{alignedat}
 \]
 \end{example}
@@ -361,7 +380,7 @@ Die komponentenzentrische Zerlegung von $K^\top$ nach $K^\top_x(e, k^\top_x), x 
 \bigskip
 
 \begin{lemma}\label{lem:k_abhaengigkeitserhalten}
-    Jede Zerlegung $D^n_{m_l}$ ist abhängigkeitserhaltend,
+    Jede redundanzfreie Zerlegung $D^n_{m_l}$ ist abhängigkeitserhaltend,
 \end{lemma}
 \begin{proof}
     Zu zeigen ist, dass die Vereinigung der Projektionen von $F_{K^\top}$ auf jede $R_x \in D^n_{m_l}$ äquivalent zu $F_{K^\top}$ ist:
@@ -401,7 +420,7 @@ Die komponentenzentrische Zerlegung von $K^\top$ nach $K^\top_x(e, k^\top_x), x 
 
 \bigskip
 \begin{lemma}\label{lem:jede_K_zerlegung_ist_verlustfrei}
-    Jede Zerlegung $D^n_{m_l}$ auf Basis der funktionalen Abhängigkeiten $F_{K^\top}$ ist verlustfrei.
+    Jede redundanzfreie Zerlegung $D^n_{m_l}$ auf Basis der funktionalen Abhängigkeiten $F_{K^\top}$ ist verlustfrei.
 \end{lemma}
 
 \medskip
@@ -429,6 +448,29 @@ Die komponentenzentrische Zerlegung von $K^\top$ nach $K^\top_x(e, k^\top_x), x 
      in einer Zelle $(R_x, k^\top_y), k^\top_y \in R_x$ ein $a$-Symbol: Da alle funktionalen Abhängigkeiten und die Komponentenattribute ebenfalls vollständig in der Zerlegung enthalten sind, besitzt jede Spalte einer entsprechenden Zeile ein solches Symbol.
     Mit der Vorschrift, dass die linke Seite der FD in dem Verfahren Spalten zeilenweise vereinheitlicht -- in diesem Fall ausgehend von der $e$-Spalte als linke Seite einer jeden FD -- ist nach Beendigung des Verfahrens die hinreichende Bedingung erfüllt, dass zum Nachweis der verlustfreien Join-Eigenschaft mindestens eine Zeile nur aus aus $a$-Symbolen besteht.
     Tatsächlich besteht das Tableau dann ausschließlich aus $a$-Symbolen.
+\end{proof}
+\bigskip
+
+\begin{lemma}\label{lem:k_alle_zerlegungen_einer_klasse}
+    Jede redundanzfreie, verlustfreie Zerlegung von $K^\top, \lvert K^\top \rvert > 2$ bezüglich $F_{K^\top}$ gehört zu der Klasse $D^n_{m_l}$.
+\end{lemma}
+\begin{proof}
+    Zu zeigen ist:
+    \[
+        \forall R_i \in D: e \in R_i
+    \]
+    \medskip
+    Da $D$ nach Voraussetzung eine Zerlegung von $K^\top$ ist, gilt nach Definition~\ref{def:zerlegung}:
+    \[
+        K^{\top} = D = R_1 \cup R_2 \cup \ldots \cup R_n
+    \]
+    \medskip
+    Angenommen, $\exists R_i \in D: e \notin R_i$.
+    Dann gibt es für das Chase-Verfahren mindestens eine Zeile, die in der $e$-Spalte kein $a$-Symbol enthält.
+    Da $D$ redundanzfrei ist, existiert außerdem in dieser Zeile mindestens eine Komponentenspalte $k_i$, die nicht über eine andere Relation mit einem $a$-Symbol besetzt ist.\\
+    Damit verbleibt nach der Anwendung des Chase-Verfahrens mindestens eine Spalte, die nicht mit $a$-Symbolen besetzt ist, und damit kann keine Zeile existieren, die vollständig mit $a$-Symbolen besetzt ist.
+    Damit ist die Zerlegung nicht verlustlos, im Gegensatz zur Annahme.\\
+    Also muss in jeder Relation auch das $e$-Attribut vorkommen, womit $D$ insgesamt zu der Klasse $D^n_{m_l}$ gehört.
 \end{proof}
 
 \bigskip
@@ -522,14 +564,51 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun die JOIN-Abhängigk
     Damit gilt die obige Gleichung für jeden legalen Relationszustand $\pi_{K^\top}(r)$.
     Folglich gilt die behauptete Join-Abhängigkeit.
 \end{proof}
+\bigskip
 
+\begin{tcolorbox}[excursusbox, title={Definition der 5. Normalform in der Literatur}]
+    Die {5.} Normalform geht zurück auf Fagin, der sie 1979 mit~\cite{Fag79} als \textit{Project-Join-Normalform} (\textit{PJ/NF}) einführt.
+    In Anlehnung daran wird sie von Vossen wie folgt angegeben:
+    \begin{displayquote}
+        Ein Relationenschema $R$ ist in \textit{fünfter Normalform} (5NF) (bzw. in \textit{Project-Join-Normalform}, PJ/NF), falls jede JD von $R$ allein von den Schlüsselabhängigkeiten von $R$ impliziert wird.
+        \par\hfill\cite[Definition 8.12, S. 273, Hervorhebung i.O.]{Vos08}
+    \end{displayquote}
+
+    Diese Definition findet sich ebenfalls in der Arbeit von Darwen et {al.}~\cite[Definition 2.3]{Dar12}.
+    Dort gehen die Autoren auch auf inkorrekte Definitionen der 5NF ein, wie die folgende von einem der Mitautoren:
+
+    \begin{displayquote}
+        A relvar $R$ is in 5NF -- also called project-join normal form (PJ/NF) -- if, and only if, every nontrivial join dependency that is satisfied by $R$ is implied by the candidate key(s) of $R$, where:
+        \begin{itemize}
+            \item[] a. The join dependency $\{A, B, \ldots, Z\}$ on $R$ is trivial if and only if at least one of $A, B, \ldots, Z$ is the set of all attributes of $R$.
+            \item[] b. The join dependency $*\{A, B, \ldots, Z\}$ on $R$ is implied by the candidate key(s) of $R$ if and only if each of $A, B, \ldots, Z$ is a superkey for $R$.
+        \end{itemize}
+        \par\hfill\cite[S. 389--390]{Dat03}
+    \end{displayquote}
+
+    Die Autoren merken an, dass die so formulierte Definition eher der \textit{Superkey Normal Form}-Definition entspricht (\textit{SKNF}).\footnote{
+        ``[\ldots] many textbooks [\ldots] incorrectly give the deﬁnition of SKNF as a deﬁnition of 5NF.`` (ebd.)
+    }\\
+
+    In ähnlicher Form findet sich diese Definition allerdings auch bei Elmasri und Navathe:
+    \begin{displayquote}
+        A relation schema $R$ is in \textbf{fifth normal form} (\textbf{5NF}) (or \textbf{project-join normal form} (\textbf{PJNF})) with respect to a set $F$ of functional, multivalued, and join dependencies if, for every nontrivial join dependency $\text{JD}(R_1, R_2, \ldots, R_n)$ in $F^+$ (that is, implied by $F$), every $R_i$ is a superkey of $R$.
+        \par\hfill~\cite[S. 494, Hervorhebung i.O.]{EN16}
+    \end{displayquote}
+
+    Darwen et {al.} zeigen in der zitierten Arbeit, dass die SKNF nicht äquivalent zu der 5NF ist -- sie ist sogar schwächer.
+    Im Kontext dieser Arbeit nehmen wir deshalb für die 5NF implizit die Definition von Fagin {bzw.} Vossen an.
+\end{tcolorbox}
+\bigskip
 
 
 Nun kann der Nachweis für die Normalformen erfolgen.
 \medskip
 
+
+
 \begin{theorem}\label{f_min_norm}
-    Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., BCNF- und 4. Normalform.
+    Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., 4. und 5. sowie der Boyce-Codd-Normalform.
 \end{theorem}
 
 \begin{proof}
@@ -539,7 +618,7 @@ Nun kann der Nachweis für die Normalformen erfolgen.
         \item 1. Normalform: Erfüllt, da mit Axiom~\ref{ax:nur_atomar} alle Attribute in $K^\top$ als atomare Attribute definiert sind.
         \item 2. Normalform: Erfüllt, da $K^\top$ das Attribut $e$ als alleinigen Schlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
         \item 3. Normalform: Erfüllt, da $K^\top$ keine transitiven Abhängigkeiten enthält: Alle Nicht-Prime-Attribute sind funktional voll abhängig von dem einzigen Prime-Attribut $e$.
-        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $(X \rightarrow A)\ \in (F^\text{min}_{K^\top})^+$ die linke Seite der FD der Primärschlüssel von $K^\top$ ist.
+        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $(X \rightarrow A)\ \in (F^\text{min}_{K^\top})^+$ die linke Seite der FD der Superschlüssel von $K^\top$ ist.
         \item 4. Normalform: Zu zeigen ist, dass $X$ für jede nichttriviale mehrwertige Abhängigkeit $X \twoheadrightarrow Y \in (F^{\text{min}}_{K^\top})^+$ ein Superschlüssel von $K^\top$ ist.\\[2mm]
         Sei hierzu $C_K^\top \coloneqq \{k^\top_1, k^\top_2, \ldots, k^\top_n \}$.\\[2mm]
         Wir betrachten im Folgenden alle aus $F^\text{min}_{K^\top}$ induzierten mehrwertigen Abhängigkeiten der Form
@@ -559,40 +638,21 @@ Nun kann der Nachweis für die Normalformen erfolgen.
         Jede funktionale Abhängigkeit in $F^\text{min}_{K^\top}$ ist auch eine nichttriviale mehrwertige Abhängigkeit~\cite[S. 353]{EN11}.\\
         In jeder MVD ist der Primärschlüssel $X=e$ das einzige Prime-Attribut auf der linken Seite.
         Damit ist die geforderte Bedingung insgesamt erfüllt.
+        \item 5. Normalform: Zu zeigen ist, dass jede JD von $K^\top$ allein von den Schlüsselabhängigkeiten von $R$ impliziert wird.\\
+        Mit Lemma~\ref{lem:k_alle_zerlegungen_einer_klasse} haben wir gezeigt, dass jede redundanzfreie, verlustfreie Zerlegung von $K^\top$ zu der Klasse $D^n_{m_l}$ gehört.
+        Mit Korollar~\ref{cor:k_joinabhaengigkeiten} haben wir gezeigt, das eine jede solche Zerlegung auch eine Join-Abhängigkeit induziert, die mit der Definition $D^n_{m_l}$ aus Relationen $R_i$ besteht, für die gilt:
+        \[
+            \forall R_i \in D^n_{m_l}: e \in R_i
+        \]
+        Damit enthält eine jede solche Relation den Primärschlüssel $e$ mit $e^+ = K^\top$.
+        Damit folgt insgesamt, dass jede JD allein von den Schlüsselabhängigkeiten von $K^\top$ impliziert wird.\footnote{
+        Alternativ folgt die 5NF auch aus~\cite[Theorem 4.1]{DF92}, falls $K^\top$ in 3NF ist, und jeder Schlüssel ein einfacher Schlüssel ist.
+        Dass $K^\top$ diese Bedingungen erfüllt, ergibt sich aus dem Text.
+        }
+
     \end{itemize}
 \end{proof}
 \bigskip
-
-Für die {5.} Normalform führen wir den Nachweis ausschließlich auf Grundlage von Definition~\ref{def:zerlegung}, um nicht alle syntaktisch möglichen Zerlegungen der Join-Abhängigkeiten betrachten zu müssen.\\
-
-Relationen, die das Schlüsselattribut $e$ nicht enthalten, werden nicht als Zerlegungsziele des ECS-Modell betrachtet.
-Damit berücksichtigen wir ausschließlich nicht-redundante Zerlegungen der Form $D^n_{m_l}$, und erbringen für diese den Nachweis, dass sie die Bedingungen der {5.} Normalform erfüllen: Streng-formal erfolgt also kein Nachweis der {5.} Normalform für $K^\top$, was für die die weiteren Betrachtungen allerdings auch nicht von Relevanz ist.
-
-\begin{theorem}\label{th:fifth}
-    Die mit Definition~\ref{def:zerlegung} eingeführten Zerlegungen erfüllen die Bedingungen der {5.} Normalform.\footnote{
-        Wir verwenden hier die Lehrbuchdefinition von Elmasri und Navathe~\cite[S. 356]{EN11}. Die Definition der 5. Normalform geht auf Fagin~\cite{Fag79} zurück.
-    }
-\end{theorem}
-
-\begin{proof}
-    Zu zeigen ist, dass für jede nichttriviale Join-Abhängigkeit
-    \[
-        \text{JD}(R_1, R_2, \ldots, R_m),\quad \exists D^n_{m_l}: R_1 \cup R_2 \cup \ldots R_m = D^n_{m_l}
-    \]
-    jedes $R_x$ ein Superschlüssel für $K^{\top}$ ist.\\
-
-    \noindent
-    Mit Korrolar~\ref{cor:k_joinabhaengigkeiten} haben wir gezeigt, dass jede solche Zerlegung $D^n_{m_l}$ eine Join-Abhängigkeit bezüglich $K^\top$ induziert.\\
-    Jede Zerlegung dieser Art ist aber auch nichttrivial, da mit Definition~\ref{def:zerlegung} gilt:
-    \[
-        \forall R_x \in D^n_{m_l}: R_x \neq K^{\top}
-    \]
-    Dabei ist der Superschlüssel $e$ der Relation $K^\top$ mit Definition~\ref{def:zerlegung} in jeder Relation $R_x$ enthalten:
-    \[
-        \forall R_x \in D^n_{m_l}: e \in R_x
-    \]
-    Folglich ist jedes $R_x$ ein Superschlüssel von $K^\top$, womit der Nachweis für alle nicht-redundanten Zerlegungen, in der $e$ als identifizierendes Attribut in jeder Relation enthalten ist, erbracht ist.
-\end{proof}
 
 
 

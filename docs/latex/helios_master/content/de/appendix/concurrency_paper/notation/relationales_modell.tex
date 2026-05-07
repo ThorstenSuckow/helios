@@ -320,14 +320,46 @@ Eine Zerlegung
     \]
      heißt redundanzfrei, wenn für alle $R_i \in D$ gilt:
     \[
-        (\bigcup_{j=1, j \neq i}^n R_j) \neq K^{\top}
+        (\bigcup_{i=1, i \neq j}^n R_i) \neq K^{\top}, \quad 1 \leq j \leq n
     \]
     \medskip
     Damit schließt ``redundanzfrei`` in diesem Kontext eine mehrfach vorkommende, gleiche Attributabdeckung aus, während nicht-disjunkte Teilmengenbeziehungen $R_i \cap R_j \neq \emptyset$ zulässig sind.
 \end{definition}
 \bigskip
 
-Die folgenden Lemma nutzen die Notation $D^n_{m_l}$ für eine redundanzfreie Zerlegung von $K^\top$ mit $n$ Komponentenattributen und $m$ Relationen:
+
+\begin{lemma}\label{lem:redundanzfreier_kern}
+    Jede Zerlegung
+    \[
+        D = (R_1, R_2, \ldots, R_n), \text{ mit } K^\top = R_1 \cup R_2 \cup \ldots \cup R_n
+    \]
+    lässt sich auf eine redundanzfreie Zerlegung $D'$ reduzieren.
+\end{lemma}
+\begin{proof}
+    Sei $D$ eine beliebige Zerlegung von $K^\top$, sei $D' = D$.\\
+
+    Falls $D'$ nicht redundanzfrei ist, existiert mindestens ein $1 \leq j \leq n$, so dass
+
+    \[
+        \bigcup_{i=1, i \neq j} R_i = K^\top
+    \]
+    Dieses $R_j$ wird aus $D'$ entfernt.
+    Die Schritte werden so lange wiederholt, bis $D'$ redundanzfrei ist, und damit gilt
+    \[
+        (\bigcup_{i=1, i \neq j}^n R_i) \neq K^{\top}, \quad 1 \leq j \leq n
+    \]
+    Es ist sichergestellt, dass das Verfahren terminiert, da mit der Voraussetzung $D'$ eine Zerlegung von $K^\top$ ist.
+    Ist die Bedingung der Redundanzfreiheit verletzt, kann aber auch mindestens ein redundantes Element entfernt, ohne dass
+    \[
+        (\bigcup_{i=1}^n R_i) = K^{\top}, R_i \in D'
+    \]
+    verletzt wird -- somit kann die Zerlegung auch nicht leer sein.
+ end{proof}
+
+\bigskip
+Wir gehen im Folgenden implizit davon aus, dass jede Zerlegung im Sinne von~\ref{lem:redundanzfreier_kern} auch redundanzfrei ist.\\
+
+Die folgenden Lemma nutzen die Notation $D^n_{m_l}$ für eine Zerlegung von $K^\top$ mit $n$ Komponentenattributen und $m$ Relationen:
 \medskip
 
 \begin{definition}\label{def:zerlegung}
@@ -348,11 +380,30 @@ Die folgenden Lemma nutzen die Notation $D^n_{m_l}$ für eine redundanzfreie Zer
         \end{alignedat}
     \]
     \smallskip
-    eine redundanzfreie Zerlegung von $K^\top$.
+    eine Zerlegung von $K^\top$.
 \end{definition}
 \medskip
 Das Subscript $l \in \mathbb{N}$ bezeichnet in Definition~\ref{def:zerlegung} einen Index, der eine der möglichen Zerlegungen in $m$ Relationen indiziert.
 Eine Ordnungsrelation für $l$ bezüglich der indizierten Zerlegungen ist im weiteren Kontext nicht relevant.
+\bigskip
+
+\begin{lemma}\label{lem:zerlegung_bekommt_schluessel}
+Jede Zerlegung von $K^\top$ kann in eine Zerlegung $D^n_{m_l}$ transformiert werden.
+\end{lemma}
+\begin{proof}
+    Sei $n = \lvert K^\top \setminus \{e\} \rvert$.\\
+    Sei $D = (R_1, R_2, \cup, R_m)$ eine beliebige redundanzfreie Zerlegung von $K^\top$, so dass $K^\top = R_1 \cup R_2 \cup \ldots \cup R_m$.
+    Dann kann zu jeder Relation der Primärschlüssel von $K^\top$ hinzugefügt werden:
+    \[
+        \forall R_i \in D: R_i = R_i \cup \{e\}
+    \]
+    womit nach Definition
+    \[
+        D^n_{m_l} = (R_1, \ldots, R_m)
+    \]
+    gilt.
+    Weitere Möglichkeiten einer Zerlegung $D^n_{m_1}, D^n_{m_2}, \ldost$ ergeben sich durch den gegenseitigen Austausch von Komponentenattributen unter den Relationen.
+\end{proof}
 \bigskip
 
 \begin{example}
@@ -638,8 +689,14 @@ Nun kann der Nachweis für die Normalformen erfolgen.
         Jede funktionale Abhängigkeit in $F^\text{min}_{K^\top}$ ist auch eine nichttriviale mehrwertige Abhängigkeit~\cite[S. 353]{EN11}.\\
         In jeder MVD ist der Primärschlüssel $X=e$ das einzige Prime-Attribut auf der linken Seite.
         Damit ist die geforderte Bedingung insgesamt erfüllt.
-        \item 5. Normalform: Zu zeigen ist, dass jede JD von $K^\top$ allein von den Schlüsselabhängigkeiten von $R$ impliziert wird.\\
-        Mit Lemma~\ref{lem:k_alle_zerlegungen_einer_klasse} haben wir gezeigt, dass jede redundanzfreie, verlustfreie Zerlegung von $K^\top$ zu der Klasse $D^n_{m_l}$ gehört.
+        \item 5. Normalform: Zu zeigen ist, dass jede JD von $K^\top$ allein von den Schlüsselabhängigkeiten von $K^\top$ impliziert wird.\\
+        Jede JD impliziert verlustfreie Relationen $R_1, R_2, \ldots, R_3$.
+        Mit Lemma~\ref{lem:k_alle_zerlegungen_einer_klasse} haben wir gezeigt, dass jede verlustfreie Zerlegung von $K^\top$ zu der Klasse $D^n_{m_l}$ gehört.\\
+        Mit Lemma~\ref{lem:k_alle_zerlegungen_einer_klasse} haben wir gezeigt, dass Zerlegungen der Klasse $D^n_{m_l}$ auch verlustfreie Zerlegung von $K^\top$ repräsentieren.\\
+        \item
+        Mit Lemma~\ref{lem:redundanzfreier_kern} haben wir gezeigt, dass zu jeder Zerlegung von $K^\top$ eine redundanzfreie Zerlegung konstruiert werden kann.\\
+        Mit Lemma~\ref{lem:zerlegung_bekommt_schluessel} haben wir gezeigt, dass zu jeder redundanzfreien Zerlegung von $K^\top$ eine Zerlegung der klasse $D^n_{m_l}$ konstruiert werden kann.\\
+        Mit Lemma~\ref{lem:k_alle_zerlegungen_einer_klasse} haben wir gezeigt, dass Zerlegungen der Klasse $D^n_{m_l}$ auch verlustfreie Zerlegung von $K^\top$ repräsentieren.\\
         Mit Korollar~\ref{cor:k_joinabhaengigkeiten} haben wir gezeigt, das eine jede solche Zerlegung auch eine Join-Abhängigkeit induziert, die mit der Definition $D^n_{m_l}$ aus Relationen $R_i$ besteht, für die gilt:
         \[
             \forall R_i \in D^n_{m_l}: e \in R_i

@@ -511,7 +511,7 @@ Eine Zerlegung
                 \exists k^\top_x \in K^\top_j, K^\top_j \in D \setminus D_e
             \]
             Bei der Anwendung des Chase-Verfahrens verbleibt damit ein $b$-Symbol bei der Attributspalte $e$ in der zugehörigen Zeile $K^\top_j$ und verhindert damit die Vereinheitlichung der Zeile mit den übrigen Zeilen, die ein $a$-Symbol in der $e$-Spalte besitzen:
-            Dass dieses Attribut nicht in den Relationen von $DD_e$ vorkommt, sondern ausschließlich in den Relationen von $D \semtinus D_e$, bedeutet, dass das Chase-Verfahren in diesem Kontext keine Zeile vollständig mit $a$-Symbolen besetzen kann, solange nicht auch $e$ ein Attribut der Relationen von $D \setminus D_e$ ist, und im Chase-Verfahren ein $a$-Symbol erhält.
+            Dass dieses Attribut nicht in den Relationen von $D_e$ vorkommt, sondern in mindestens einer der Relationen von $D \semtinus D_e$, bedeutet, dass das Chase-Verfahren in diesem Kontext keine Zeile vollständig mit $a$-Symbolen besetzen kann, solange nicht auch $e$ ein Attribut der Relationen von $D \setminus D_e$ ist, und im Chase-Verfahren ein $a$-Symbol erhält.
             Im Widerspruch zur Annahme ist die Zerlegung also nicht verlustfrei.
         \end{itemize}
     \end{itemize}
@@ -541,12 +541,8 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhän
     für jeden Zustand $r$ von $K^\top$ gilt, und dass jede Relation der Zerlegung entitätsbezogen ist.\\
 
     \noindent
-    Mit Definition~\ref{def:verlustfrei_redundanzfrei} existiert für $D$ ein verlustfrei-redundanzfreier Kern.\\
-    Sei $D'$ der verlustfrei redundanzfreie Kern von $D$. \\
-    Mit Lemma~\ref{lem:verlustfrei-redundanzfrei-ist-entitätsbezogen} ist $D'$ entitätsbezogen.\\
-    Nach Lemma~\ref{lem:jede_K_zerlegung_ist_verlustfrei} besitzt jede entitätsbezogene verlustfreie Zerlegung $D$ die verlustfreie Join-Eigenschaft.\\
-    Damit gilt die obige Gleichung für jeden legalen Relationszustand $\pi_{K^\top}(r)$.
-    Folglich gilt die behauptete Join-Abhängigkeit.
+    Da die Zerlegung nach Voraussetzung verlustfrei ist, induziert sie eine Join-Abhängigkeit.\\
+    Mit Lemma~\ref{lem:verlustfrei-redundanzfrei-ist-entitätsbezogen} ist die Zerlegung auch entitätsbezogen.
 \end{proof}
 \bigskip
 
@@ -578,7 +574,7 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhän
 
     Die Autoren merken an, dass die so formulierte Definition eher der \textit{Superkey Normal Form}-Definition entspricht (\textit{SKNF}).\footnote{
         ``[\ldots] many textbooks [\ldots] incorrectly give the deﬁnition of SKNF as a deﬁnition of 5NF.`` (ebd.)
-    }, was Normann auch in~\ref{Nor98} diskutiert.\\
+    }, was Normann auch in~\cite{Nor98} diskutiert.\\
 
     Darwen et {al.} zeigen in der zitierten Arbeit, dass die SKNF nicht äquivalent zu der 5NF ist -- sie ist sogar schwächer.
     Im Kontext dieser Arbeit nehmen wir deshalb für die 5NF implizit die Definition von Fagin {bzw.} Vossen an.
@@ -626,7 +622,8 @@ Nun kann der Nachweis für die Normalformen erfolgen.
         \begin{enumerate}
             \item Mit Lemma~\ref{lem:verlustfrei_redundanzfrei_k} haben wir gezeigt, dass jede Zerlegung von $K^\top$ einen verlustfrei-redundanzfreien Kern besitzt.
             Diesen Kern bezüglich JD bezeichnen wir im Folgenden mit $D^{JD}$.
-            \item Mit Korollar~\ref{cor:k_joinabhaengigkeiten} haben wir gezeigt, das eine verlustfrei-redundanzfreie Zerlegung $D$ auch eine Join-Abhängigkeit induziert, die mit der Definition~\ref{def:entitätsbezogen} aus entitätsbezogenen Relationen $K^\top_i$ besteht.
+            Die ursprüngliche JD beinhaltet im Vergleich zu $JD^{JD}$ per Definition~\ref{def:verlustfrei_redundanzfrei} nur redundante Relationen, die keine zusätzlichen Zerlegungsinformationen tragen, weshalb es ausreicht, nur den Kern zu betrachten.
+            \item Mit Lemma~\ref{lem:verlustfrei-redundanzfrei-ist-entitätsbezogen} haben wir gezeigt, dass eine solche Zerlegung aus entitätsbezogenen Relationen $K^\top_i$ besteht.
             \item So gilt ebenfalls für $D^{JD}$:
             \[
                 \forall K^\top_i \in D^{JD}: e \in K^\top_i

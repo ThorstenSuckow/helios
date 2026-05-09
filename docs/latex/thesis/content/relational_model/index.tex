@@ -1,0 +1,59 @@
+\chapter{Normalisierte ECS-Datenmodelle und domänenspezifische Handles zur statischen Konfliktanalyse von Systemen in einer C++-Game-Engine}
+
+\section{Forschungsfrage}
+
+
+\begin{quote}
+    Wie kann normalisierte relationale Modellierung von ECS-Datenstrukturen genutzt werden, um Lese- und Schreibzugriffe von ECS-Systemen statisch zu beschreiben und mithilfe domänenspezifischer Handles Konflikte zwischen Systemen zu erkennen oder auszuschließen?
+\end{quote}
+
+\section{Methodik}
+
+
+Die Arbeit untersucht, ob domänenspezifische Handles im Zusammenhang mit einem relational modellierten ECS-Datenmodell dabei unterstützen, Scheduling-Konflikte auf Komponentenebene statisch zu analysieren.\\
+
+Hierzu werden zunächst Gemeinsamkeiten und Abgrenzungen zwischen dem Query-Modell von Redmond et {al.} und der Implementierung in \texttt{helios::ecs} herausgearbeitet.\\
+
+Der theoretische Teil motiviert anhand der Normalformtheorie im relationalen Modell eine entitätszentrierte
+
+\[
+    K(e, k_1, k_2, \ldots, K_n)
+\]
+\noindent
+sowie eine komponentenzentrische Zerlegung
+
+
+\[
+    K_1(e, k_1),\quad K_2(e, k_2),\quad \ldots, \quad K_n(e, k_n)
+\]
+
+\noindent
+von Entitäten und Komponenten.
+Auf dieser Grundlage wird die komponentenzentrische Speicherung als normalisierte Datenhaltung eingeordnet und die Verwendung von \textit{Sparse Sets} als Speicherstruktur in \texttt{helios::ecs} begründet.\\
+
+Im Anschluss werden ECS-Systeme über ihre Lese- und Schreibzugriffe auf Komponentenrelationen beschrieben.
+Dadurch entsteht ein statisches Zugriffsmodell, mit denen Konflikte zwischen Systemen auf Komponentenebene identifiziert werden können.\\
+
+\noindent
+Domänenspezifische Handles erweitern dieses Modell um typisierte System- und Laufzeitgrenzen.
+Hierüber soll untersucht werden, ob Konflikte bereits durch die Typisierung ausgeschlossen oder zumindest früher sichtbar gemacht werden können.\\
+
+Ein weiterer Teil der Arbeit setzt diese Zugriffe in Beziehung zum formalen Scheduling-Modell von \textit{ECS Core}, das zwischen serieller und nebenläufiger Ausführung unterscheidet.
+Hier soll diskutiert werden, ob sich für die betrachtete ECS-Implementierung Aussagen über konfliktarme beziehungsweise konfliktserialisierbare Systemausführung ableiten lassen.
+
+
+\section{Vorläufige Gliederung}
+
+\begin{enumerate}
+    \item Einleitung und Zielsetzung
+    \item Grundlagen: ECS, ERM, komponentenzentrische Speicherung und Systeme
+    \item Relationales ECS-Modell und Normalformanalyse
+    \item Abbildung auf \texttt{helios::ecs}: Komponenten, Stores und Queries
+    \item Systemzugriffe als Lese-/Schreibmengen
+    \item Domänenspezifische Handles als statische Systemgrenzen
+    \item Konfliktanalyse von ECS-Systemen
+    \item Referenzszenario:l Kollisions- und Partikelsysteme
+    \item Evaluation: Statische Konfliktableitung im Referenzszenario
+    \item Diskussion
+    \item Fazit
+\end{enumerate}

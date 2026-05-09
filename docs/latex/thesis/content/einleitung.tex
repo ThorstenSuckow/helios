@@ -1,0 +1,24 @@
+\chapter{Einleitung}
+
+Die Unterstützung für Nebenläufigkeit und Parallelisierung in Game Engines ermöglicht es, unterschiedliche Gameplay- als auch Ressourcen-verwaltende Systeme verteilt laufen zu lassen, die Anzahl gleichzeitiger Berechnungen zu erhöhen und damit insgesamt zu einer Leistungssteigerung beizutragen.\\
+
+Hierbei ist nicht nur die Unterstützung von Hardware und OS relevant, die Prozesse und Tasks verwaltet.
+Auch der Implementierung der Software kommt eine tragende Rolle zu, denn erst sie entscheidet anhand der Gruppierung und Ausführreihenfolge der Systeme, welche Abhängigkeiten der Systeme untereinander zu berücksichtigen sind, um eine deterministische Ausführungsreihenfolge zu bestimmen.\\
+
+Ein wesentlicher Treiber hochperformanter Spieleengines ist dabei aber nicht nur die parallele Ausführung von Operationen, auch Lese- und Schreibdurchsatz ist relevant, bevor es überhaupt zu der Frage kommt, eob ein geteilter Speicherbereich für den Schreibzugriff gesperrt werden muss.\\
+
+Hier hat sich in den vergangenen Jahren das ECS-Paradigma mit seinem datenorientierte Ansatz hervorgetan. Über das   Structure-of-Arrays-Design profitieren Game Engines und Echtzeitsysteme auf Grundlage moderner CPU- und Cache-Architekturen von dichten Speicherlayouts und nah beineinanderliegender Typ- als auch Kontext-Semantisch-gleichen Daten.
+
+\subsection*{Theoretischer Bezugspunkt}
+Die in diesem Dokument vorgestellten Forschungsfragen beschäftigen sich mit Problemstellungen, die sich aus mit dem Einsatz eines ECS-Systems ergeben. In diesem Zusammenhang haben Redmond et al. 2025 eine Arbeit vorgestellt~\cite{RCCM+25}, indem sie ein als \textit{ECS Core} bezeichnetes formales Modell eines ECS-Systems aufsetzen. Sie zeigen, dass das Model unter bestimmten Voraussetzungen deterministisch, unabhängig von der Ausführungsreihenfolge der Systeme, ist.\\
+
+In allen vorgestellten Forschungsfragen soll diese Arbeit als theoretischer Bezugspunkt dienen; vor allem in Anlehnung an die im Modell beschriebenen Anfrage- und Scheduling-Systeme soll die Beantwortung der Forschungsfragen geschehen.\\
+
+Des Weiteren bezieht sich ein Teild er Arbeit auf das Entity Relationship Model dienen. Fragestellungen zu Ausführungsreihenfolgen und konfliktarmen Scheduling wurden in diesem Bereich bereits erforscht und liefern wertvolles theoretisches Fundament.
+
+\subsection*{Implementierung für die Empirik}
+In diesem Zusammenhang stellen wir \texttt{helios::ecs vor}, eine ECS-Engine, die auf der im Rahmen des Projektstudiums an der Fachhchschule Trier im Fernstudiengang Informatik erarebitet Umsetzung eines Spiels weiterentwickelt wurde.~\cite{Suc26}\\
+
+Sie erlaubt die VErwendung domänenspezifischer Handles, die zur Partitionierung von Systemgrenzen genutzt werden sollen.
+Durch die Einbindung zur kompilierzeit erlaubt es die Engine so, statische Typinformationen zur Ableitung von Fragestellugn rund um Datenanomalien und Scheduling-Strategien zu nutzen.
+nsamkeiten und Abgrenzungen zwischen unserer Implementierung und dem Modell der Autoren auf.

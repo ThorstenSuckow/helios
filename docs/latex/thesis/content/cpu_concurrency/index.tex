@@ -1,0 +1,58 @@
+\chapter{Domänenspezifische Handles zur statischen Partitionierung und konfliktarmen Ausführung einer ECS-basierten C++-Game Engine}
+
+\section{Forschungsfrage}
+
+\begin{quote}
+Inwieweit können domänenspezifische Handles als statisch Partitionierungsgrenzen von Systemen dienen, dadurch unterschiedliche Laufzeitbereiche einteilen und eine laufzeitgünstige und konfliktarme Parallelisierung unterstützen?
+\end{quote}
+
+
+\section{Methodik}
+
+Die Forschungsfrage wird anhand eines Referenzszenarios beantwortet, das aus Kollisionssystemen und Partikelsystem mit einer hohen Objektanzahl besteht.
+
+Die Systeme eignen sich für die empirische Betrachtung, da inbesondere Kollisionssysteme determinismuskritisch sind.
+Beide Systeme modellieren außerdem eine hohe Objektanzahl, was sich insbesondere für einen analytischen Vergleich in Hinsicht Skalierung eignet.
+
+Hierbei betrachten wir die Bereiche Partitionierung, Systemkopplung und Scheduling-Konflikte und gehen dabei folgenden Unterfragen nach:
+
+
+1. Architekturgrenzen
+Wir stellen fest, welche Architekturgrenzen sich durch die domänenspezifischen Handles über das Typsystem abbilden lassen.
+
+2. Sichtbarkeit der Systemgrenzen im Scheduling
+Wir stellen fest, ob über die domänenspezifischen Handles Scheduling-Konflikte bereits statisch sichtbar oder vermeidbar werden.
+
+3. Messung
+Dem empirischen vergleich liegen folgende Messungen zugrunde:
+1. A Unpartitionierte Welt ohne Parallelisierung
+2. B unpartitionierte Welt mit Parallelisierung
+3. C Partitionierte Welt mit Parallelisierung
+
+Wir messen das Szenarium ohne Nebenläufigkeit, mit Nebenläufigkeit, und stellen dies einer domänenspezifischen Implementierung mit Scheduling gegenüber. Wir messen insgesamt
+1. Laufzeitmessungen (FPS/Frametime)
+2. Skalierung der Implementierungen bei wachsender Objektanzahl gemessen
+3. Kompilierzeit
+4. Code-Komplexität anhand statischer Code-Analyse-Tools.
+5. Anzahl von Schedulingkonflikten
+
+\noindent
+
+
+
+\section{Vorläufige Gliederung}
+
+1. Einleitung und Zielsetzung
+2. Grundlagen: ECS, datenorientierte Speicherlayouts und Nebenläufigkeit in Game Engines
+3. \textit{ECS Core} Modell und Abgrenzungen zu helios::ecs
+4. Domänenspezifische Handles als statische Partitionierungsgrenzen
+5. Das Relationale Modell als formales Fundament konfliktarmer ECS-Architekturen
+6. Konfliktmodell für Systeme und Scheduling
+7. Referenzszenario: Kollisions- und Partikelsystem
+8. Implementierung der varianten
+9. Evaluation: Laufzeit, Skalierung, Kompilierzeit, Code-Komplexität
+10. Diskussion
+11. Zusammenfassung und Fazit
+
+
+

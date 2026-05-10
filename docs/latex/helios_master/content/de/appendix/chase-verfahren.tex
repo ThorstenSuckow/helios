@@ -1,0 +1,64 @@
+\chapter{Beispiel zur Anwendung des Chase-Verfahrens}
+
+\begin{tcolorbox}[excursusbox,title={Nachweis der verlustfreien Zerlegung anhand $K^\top_i, K^\top_j, K^\top_k$}]
+Wir betrachten eine Zerlegung $K_{ijk}^\top$ in die drei Relationen  $K^\top_i, K^\top_j, K^\top_k$.
+Es ist zu zeigen:
+    \[
+        \pi_{K_{ijk}^{\top}}(r) = \njoin\ (\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r), \pi_{K^{\top}_k}(r))
+    \]
+
+    \noindent
+    Wir wenden hierzu das Verfahren an, das wir zum Nachweis von Lemma~\ref{lem:K_plus_ist_verlustfrei} angewendet haben,und weisen darüber die verlustfreie Zerlegung nach:
+
+    \bigskip
+    Schritt 1 und 2:
+    \[
+        \begin{array}{c|cccc}
+            & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+            \hline
+            K^{\top}_i     & b_{11} & b_{12} & b_{13} & b_{14} \\
+            K^{\top}_j     & b_{21} & b_{22} & b_{23} & b_{24} \\
+            K^{\top}_k     & b_{31} & b_{32} & b_{33} & b_{34}
+        \end{array}
+    \]
+
+    \medskip
+    Schritt 3:
+    \[
+        \begin{array}{c|cccc}
+            & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+            \hline
+            K^{\top}_i     & a_e & a_i & b_{13} & b_{14} \\
+            K^{\top}_j     & a_e & b_{22} & a_j & b_{24} \\
+            K^{\top}_k     & a_e & b_{32} & b_{33} & a_k
+        \end{array}
+    \]
+
+    \medskip
+    Schritt 4:
+    \[
+        \begin{array}{c|cccc}
+            & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+            \hline
+            K^{\top}_i     & a_e & a_i & b_{13} & b_{14} \\
+            K^{\top}_j     & a_e & a_i & a_j & b_{24} \\
+            K^{\top}_k     & a_e & a_i & b_{33} & a_k
+        \end{array}
+    \]
+
+    \medskip
+    Schritt 5 (Ende):
+    \[
+        \begin{array}{c|cccc}
+            & e & k^{\top}_i & k^{\top}_j & k^{\top}_k \\
+            \hline
+            K^{\top}_i     & a_e & a_i & a_j & a_k \\
+            K^{\top}_j     & a_e & a_i & a_j & a_k \\
+            K^{\top}_k     & a_e & a_i & a_j & a_k
+        \end{array}
+    \]
+
+    \bigskip
+    \noindent
+    Da wenigstens eine Zeile mit $a$-Symbolen besetzt ist, ist in diesem Fall gezeigt, dass sich $K^\top_{ijk}$ verlustlos nach $K^{\top}_i, K^{\top}_j$, $K^{\top}_k$ zerlegen lässt.
+\end{tcolorbox}

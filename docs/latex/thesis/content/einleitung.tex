@@ -1,0 +1,56 @@
+\chapter{Einleitung}
+
+Die Unterstützung von Nebenläufigkeit und Parallelisierung in Game-Engines ermöglicht es, unterschiedliche Gameplay- sowie ressourcenverwaltende Systeme verteilt auszuführen, die Anzahl gleichzeitiger Berechnungen zu erhöhen und damit insgesamt zu einer Leistungssteigerung beizutragen.\\
+
+Hierbei ist nicht nur die Unterstützung durch Hardware und Betriebssystem relevant, die Threads, Tasks und deren Ausführung verwalten.
+Auch der Softwarearchitektur kommt eine tragende Rolle zu, denn erst sie legt anhand der Gruppierung und Ausführungsreihenfolge der Systeme fest, welche Abhängigkeiten zwischen Systemen zu berücksichtigen sind, um deterministische Ergebnisse oder zumindest wohldefinierte Ausführungsbedingungen sicherzustellen.\\
+
+Ein wesentlicher Treiber hochperformanter Game-Engines ist dabei nicht nur die parallele Ausführung von Operationen. Auch Lese- und Schreibdurchsatz sind relevant, noch bevor die Frage beantwortet werden muss, ob ein geteilter Speicherbereich für den Schreibzugriff synchronisiert oder gesperrt werden muss.\\
+
+Hier hat sich in den vergangenen Jahren das ECS-Paradigma mit seinem datenorientierten Ansatz hervorgetan. ECS-Architekturen begünstigen komponentenzentrische und häufig SoA-nahe Speicherlayouts, wodurch Game-Engines und Echtzeitsysteme auf Grundlage moderner CPU- und Cache-Architekturen von dicht gespeicherten, typgleichen und kontextuell zusammengehörigen Daten profitieren können.
+
+\subsection*{Theoretischer Bezugspunkt}
+
+Die in diesem Dokument vorgestellten Forschungsfragen beschäftigen sich mit Problemstellungen, die sich aus dem Einsatz eines ECS-Systems ergeben.
+In diesem Zusammenhang haben Redmond et al. 2025 eine Arbeit vorgestellt~\cite{RCCM+25}, in der sie ein als \textit{ECS Core} bezeichnetes formales Modell eines ECS-Systems entwickeln.
+Sie zeigen, dass das Modell unter bestimmten Voraussetzungen deterministische Ausführung beziehungsweise deterministische Ergebnisse unabhängig von konkreten Ausführungsreihenfolgen der Systeme ermöglicht.\\
+
+In allen vorgestellten Forschungsfragen soll diese Arbeit als theoretischer Bezugspunkt dienen.
+Insbesondere die im Modell beschriebenen Anfrage- und Scheduling-Systeme bilden dabei eine Grundlage für die Beantwortung der Forschungsfragen.\\
+
+Darüber hinaus bezieht sich ein Teil der Arbeit auf das relationale Modell und dessen Normalformtheorie.
+Fragestellungen zu Ausführungsreihenfolgen, Konflikten und Serialisierbarkeit wurden zudem im Bereich der Datenbanktheorie bereits umfassend untersucht und liefern ein wertvolles theoretisches Fundament für die Betrachtung konfliktarmen Schedulings.
+
+\subsection*{Implementierung für die Empirik}
+
+In diesem Zusammenhang soll die \texttt{ecs}-Schicht von \texttt{helios} betrachtet werden.
+\texttt{helios} ist eine ECS-basierte C++-Game-Engine, die auf der im Rahmen des Projektstudiums an der Hochschule Trier im Fernstudiengang Informatik erarbeiteten Umsetzung eines Spiels aufsetzt und weiterentwickelt werden soll~\cite{Suc26}.
+Für die empirische Untersuchung soll die \texttt{ecs}-Schicht um domänenspezifische Handles erweitert und entlang dieser Handles strukturiert werden.\\
+
+\begin{verbatim}
+    auto go = world->add<GameObjectHandle>();
+    go.add<VelocityComponent<GameObjectHandle>>()
+    go.add<PositionComponent<GameObjectHandle>>()
+
+    auto cubeShader = world->add<ShaderHandle>();
+    shader.add<ShaderSourceComponent<ShaderHandle>>(
+        "./resources/cube.vert",
+        "./resources/cube.frag");
+
+    auto cubeMesh = gameWorld.add<MeshHandle>(MeshId("CubeMesh"));
+    auto cubeMaterial = gameWorld.add<MaterialHandle>(MaterialId("CubeMaterial"));
+    ...
+\end{verbatim}
+
+Domänenspezifische Handles werden dabei als statische Domänen- und Partitionsinformation betrachtet.
+Sie beschreiben, in welchem Laufzeitbereich Zugriffe stattfinden, ohne für sich allein bereits die konkreten Lese- und Schreibzugriffe eines Systems vollständig festzulegen.\\
+
+Ziel ist es, diese statischen Typinformationen im Zusammenhang mit einem relational beschriebenen ECS-Datenmodell zu betrachten und zu untersuchen, inwieweit sie zur Beantwortung von Fragestellungen zu Datenanomalien, Systemgrenzen und Scheduling-Strategien beitragen können.
+
+\subsection*{Referenzszenario}
+
+Alle vorgestellten Forschungsfragen sollen anhand eines Referenzszenarios untersucht werden, das aus Kollisionssystemen und Partikelsystemen mit hoher Objektanzahl besteht.\\
+
+Die gewählten Systeme eignen sich für die empirische Betrachtung, da insbesondere Kollisionssysteme determinismuskritisch sind und klare Lese- und Schreibzugriffe auf Komponenten besitzen.
+Partikelsysteme weisen ebenfalls eine hohe Anzahl gleichartiger Komponentenoperationen auf, sind aber weniger gameplay-kritisch und häufig stärker parallelisierbar.
+Dadurch kann sich das Szenario für einen Vergleich hinsichtlich Partitionierung, Systemkopplung, Scheduling-Konflikten und Skalierungsverhalten eignen.

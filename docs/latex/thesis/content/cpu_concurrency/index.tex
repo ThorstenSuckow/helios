@@ -1,0 +1,53 @@
+\chapter{Domänenspezifische Handles zur statischen Partitionierung und konfliktarmen Ausführung einer ECS-basierten C++-Game-Engine}
+
+\section{Forschungsfrage}
+
+\begin{quote}
+    Inwieweit können domänenspezifische Handles als statische Partitionierungsgrenzen von ECS-Systemen dienen, unterschiedliche Laufzeitbereiche typseitig voneinander abgrenzen und dadurch eine laufzeitgünstige sowie konfliktarme parallele Ausführung unterstützen?
+\end{quote}
+
+\section{Methodik}
+
+Die Arbeit betrachtet dabei drei Bereiche:
+
+\begin{enumerate}
+    \item \textbf{Architekturgrenzen:}
+    Es wird betrachtet, welche Architektur- und Laufzeitgrenzen sich durch domänenspezifische Handles im Typsystem abbilden lassen: Welche sind im gegebenen Kontext sinnvoll?
+
+    \item \textbf{Sichtbarkeit von Systemgrenzen im Scheduling:}
+    Es wird untersucht, ob Scheduling-Konflikte durch domänenspezifische Handles bereits statisch sichtbar gemacht oder ausgeschlossen werden können.
+
+    \item \textbf{Messung und Vergleich:}
+    Dem empirischen Vergleich liegen folgende Varianten zugrunde:
+    \begin{enumerate}
+        \item unpartitionierte Welt ohne Parallelisierung,
+        \item unpartitionierte Welt mit Parallelisierung,
+        \item partitionierte Welt mit domänenspezifischen Handles und Parallelisierung.
+    \end{enumerate}
+\end{enumerate}
+
+Für die Varianten werden folgende Mess- und Bewertungskriterien herangezogen:
+
+\begin{enumerate}
+    \item Laufzeitverhalten, insbesondere Frametime und Update-Zeit der betrachteten Systeme,
+    \item Skalierung bei wachsender Objektanzahl,
+    \item Kompilierzeit,
+    \item Code-Komplexität anhand statischer Code-Analyse,
+    \item Anzahl und Art der aus dem statischen Modell ableitbaren Scheduling-Konflikte.
+\end{enumerate}
+
+\section{Vorläufige Gliederung}
+
+\begin{enumerate}
+    \item Einleitung und Zielsetzung
+    \item Grundlagen: ECS, datenorientierte Speicherlayouts und Nebenläufigkeit in Game Engines
+    \item \textit{ECS Core}-Modell und Abgrenzung zu \texttt{helios::ecs}
+    \item Domänenspezifische Handles als statische Partitionierungsgrenzen
+    \item Relationales ECS-Modell als Grundlage komponentenbezogener Lese-/Schreibzugriffe
+    \item Konfliktmodell für Systeme und Scheduling
+    \item Referenzszenario: Kollisions- und Partikelsysteme
+    \item Implementierung der Varianten
+    \item Evaluation: Laufzeit, Skalierung, Kompilierzeit und Code-Komplexität
+    \item Diskussion
+    \item Zusammenfassung und Fazit
+\end{enumerate}

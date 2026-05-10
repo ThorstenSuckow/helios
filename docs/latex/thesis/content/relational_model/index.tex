@@ -1,0 +1,67 @@
+\chapter{Normalisierte ECS-Datenmodelle und domänenspezifische Handles zur statischen Konfliktanalyse von Systemen in einer C++-Game-Engine}
+
+\section{Forschungsfrage}
+
+\begin{quote}
+    Wie kann eine normalisierte relationale Modellierung von ECS-Datenstrukturen genutzt werden, um Lese- und Schreibzugriffe von ECS-Systemen statisch zu beschreiben, und inwieweit tragen domänenspezifische Handles dazu bei, Konflikte zwischen Systemen zu erkennen oder auszuschließen?
+\end{quote}
+
+
+\section{Methodik}
+
+Die Arbeit untersucht, ob domänenspezifische Handles im Zusammenhang mit einem relational modellierten ECS-Datenmodell dabei unterstützen, Scheduling-Konflikte auf Komponentenebene statisch zu analysieren.\\
+
+Hierzu wird zunächst \textit{ECS Core} nach Redmond et {al.} als theoretischer Referenzrahmen herangezogen.
+Die Arbeit stellt Gemeinsamkeiten und Abgrenzungen zwischen dem dort beschriebenen Modell und der Implementierung in \texttt{helios::ecs} heraus.
+Dies betrifft insbesondere das Query-Modell, die Beschreibung von Komponentenzugriffen sowie die Einordnung serieller und nebenläufiger Systemausführung.\\
+
+Der theoretische Teil motiviert anhand der Normalformtheorie im relationalen Modell eine entitätszentrische Relation
+
+\[
+    K(e, k_1, k_2, \ldots, k_n)
+\]
+
+\noindent
+sowie eine komponentenzentrische Zerlegung
+
+\[
+    K_1(e, k_1),\quad K_2(e, k_2),\quad \ldots,\quad K_n(e, k_n)
+\]
+
+\noindent
+von Entitäten und Komponenten.
+Die Verwendung von \textit{Sparse Sets} in \texttt{helios::ecs} wird dabei als konkrete Speicherstruktur für die komponentenzentrische Datenhaltung betrachtet.\\
+
+Im Anschluss werden ECS-Systeme über ihre Lese- und Schreibzugriffe auf Komponentenrelationen beschrieben.\\
+Dabei sollen statische Informationen zur Ableitung möglicher Konflikte beim Scheduling genutzt werden, wobei die Tragfähigkeit dieses Ansatzes im Verlauf der Arbeit geprüft wird: In welchem Umfang erlauben domänenspezifische Handles eine Einordnung möglicher Konflikte auf Komponentenebene?\\
+
+Die Untersuchung erfolgt in vier Schritten:
+
+\begin{enumerate}
+    \item \textbf{Modellbildung:} Entitäten, Komponenten und Komponentenrelationen werden relational beschrieben und hinsichtlich ihrer Normalformeigenschaften eingeordnet.
+
+    \item \textbf{Abbildung auf \texttt{helios::ecs}:} Die theoretische Zerlegung wird auf Komponenten, Queries und Sparse Sets in \texttt{helios::ecs} bezogen.
+
+    \item \textbf{Zugriffsmodell:} ECS-Systeme werden über Lese- und Schreibmengen auf Komponentenrelationen beschrieben.
+
+    \item \textbf{Konfliktanalyse:} Für ein Referenzszenario wird geprüft, ob sich aus den Zugriffsmengen und den domänenspezifischen Handles Aussagen über konfliktarme Systemausführung ableiten lassen.
+    Ergänzend wird untersucht, ob sich für das betrachtete System eine Nähe zur Konfliktserialisierbarkeit formal beschreiben lässt.
+\end{enumerate}
+
+
+\section{Vorläufige Gliederung}
+
+\begin{enumerate}
+    \item Einleitung und Zielsetzung
+    \item Grundlagen: ECS, relationales Modell, komponentenzentrische Speicherung und Systeme
+    \item \textit{ECS Core}-Modell und Abgrenzung zu \texttt{helios::ecs}
+    \item Relationales ECS-Modell und Normalformanalyse
+    \item Abbildung auf \texttt{helios::ecs}: Komponenten und Queries
+    \item Systemzugriffe als Lese-/Schreibmengen
+    \item Domänenspezifische Handles als statische Systemgrenzen
+    \item Konfliktanalyse von ECS-Systemen
+    \item Referenzszenario: Kollisions- und Partikelsysteme
+    \item Evaluation: Ableitung von Konflikten im Referenzszenario
+    \item Diskussion
+    \item Fazit
+\end{enumerate}

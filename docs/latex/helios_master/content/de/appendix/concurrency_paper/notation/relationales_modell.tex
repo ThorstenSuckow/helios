@@ -384,14 +384,14 @@ Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 
 \bigskip
 \begin{lemma}\label{lem:K_plus_ist_verlustfrei}
-    Die Relation $K^\top = K(e, k^\top_1, k^\top_2, \ldots, k^\top_n), n \geq 2$ lässt sich verlustfrei entitätsbezogen nach $D= (K^\top_1, K^\top_2, \ldots, K^\top_m, m \geq 2)$ zerlegen.
+    Die Relation $K_J = K(e, k_1, k_2, \ldots, k_n), n \geq 2$ lässt sich verlustfrei entitätsbezogen nach $D= (K_{J_1}, K_{J_2}, \ldots, K_{J_m}, m \geq 2)$ zerlegen.
 \end{lemma}
 
 \medskip
 \begin{proof}
-    Um Lemma~\ref{lem:K_bin_ist_verlustfrei} auf m-äre Zerlegungen $\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_m}$ von $K^\top$ auszuweiten, ist zu zeigen:
+    Um Lemma~\ref{lem:K_bin_ist_verlustfrei} auf m-äre Zerlegungen $D_m = (K_{J_1}, K_{J_2}, \ldots, K_{J_m}, m \geq 2)$ von $K_J$ auszuweiten, ist zu zeigen:
     \[
-        \pi_{{K^\top}}(r) =\ \njoin (\pi_{K^{\top}_1}(r), \pi_{K^{\top}_2}(r), \ldots, \pi_{K^{\top}_m}(r))
+        \pi_{{K_J}}(r) =\ \njoin (\pi_{K_{J_1}}(r), \pi_{K_{J_2}}(r), \ldots, \pi_{K_{J_m}}(r))
     \]
 
     Hierzu wenden wir das Chase-Verfahren an~\cite{ABU79}~\cite[Algorithmus 10.2, S. 342]{EN11}.
@@ -400,46 +400,46 @@ Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
     \noindent
     Die Zerlegung der einzelnen Relationen erfolgt zunächst entitätsbezogen nach Definition~\ref{def:entitätsbezogen} , so dass
     \[
-        \forall K^{\top}_i \in D : e \in K^{\top}_i,\quad \lvert K^{\top}_i \rvert \geq 2
+        \forall K_{J_i} \in D : e \in K_{J_i},\quad \lvert K_{J_i} \rvert \geq 2
     \]
-    Damit ist sichergestellt, dass der Primärschlüssel von $K^\top$ Attribut jeder Relation ist.
+    Damit ist sichergestellt, dass der Primärschlüssel von $K_J$ Attribut jeder Relation ist.
 
     \noindent
     Sei zunächst wie in dem Verfahren angegeben das Tableau wie folgt aufgebaut:
-    Spalten entsprechend den Attributnamen von $K^\top$, in der Reihenfolge $e, k_1^{\top}, \ldots, k_n^\top$.
-    Die Zeilen sind mit den Relationsnamen $K^\top_1, K^\top_2, \ldots, K^\top_m$ der Zerlegung markiert.
+    Spalten entsprechend den Attributnamen von $K_J$, in der Reihenfolge $e, k_1, \ldots, k_n$.
+    Die Zeilen sind mit den Relationsnamen $K_{J_1}, K_{J_2}, \ldots, K_{J_m}$ der Zerlegung markiert.
     Wir erhalten dadurch folgendes Tableau, wobei $\circ$ als Platzhalter für die jeweiligen Zelleninhalte steht:\\
 
     \[
         \begin{array}{c|cccccc}
-            & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
+            & e      & k_1 & k_2 & k_3 & \dots  & k_n \\
             \hline
-            K^{\top}_1      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
-            K^{\top}_2      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
-            K^{\top}_3      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
+            K_{J_1}      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
+            K_{J_2}      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
+            K_{J_3}      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ         \\
             \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
-            K^{\top}_m      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ
+            K_{J_m}      & \circ     & \circ         & \circ         & \circ         & \dots  & \circ
         \end{array}
-    \]
-\medskip
-
-    Entsprechend der Vorschrift des Verfahrens gilt in unserem Fall, dass für jede Relation, die in das Tableau übernommen wird, die Spalte $e$ der neu hinzugefügten Zeile mit dem Symbol $a_e$ besetzt wird: $e$ ist Attribut und Schlüssel jeder Relation $K_y^\top, y \leq m$ und taucht dementsprechend in der linken Seite aller FDs auf:
-    \[
-        \forall (X \rightarrow A) \in F^\text{min}_{K^\top}: X = e \land  A \in K^{\top} \backslash \{e\}
     \]
     \medskip
 
-    Damit folgt, dass wir für jede Relation $K_y^\top(e, k^\top_1, \ldots, k^\top_x), x \leq n$ auch den Eintrag in der Zelle $(K_y^\top, k^\top_x)$\footnote{\textit{(Zeile, Spalte)}} durch das Symbol $a$ mit entsprechendem Index ersetzen können, was für Zerlegungen bei binären Relationen $K_i^\top(e, k^\top_i)$ hin zu folgendem Tableau führt:
+    Entsprechend der Vorschrift des Verfahrens gilt in unserem Fall, dass für jede Relation, die in das Tableau übernommen wird, die Spalte $e$ der neu hinzugefügten Zeile mit dem Symbol $a_e$ besetzt wird: $e$ ist Attribut und Schlüssel jeder Relation $K_{J_y}, y \leq m$ und taucht dementsprechend in der linken Seite aller FDs auf:
+    \[
+        \forall (X \rightarrow A) \in F^\text{min}_{K_J}: X = e \land  A \in K_J \backslash \{e\}
+    \]
+    \medskip
+
+    Damit folgt, dass wir für jede Relation $K_{J_y}(e, k_1, \ldots, k_x), x \leq n$ auch den Eintrag in der Zelle $(K_{J_y}, k_x)$\footnote{\textit{(Zeile, Spalte)}} durch das Symbol $a$ mit entsprechendem Index ersetzen können, was für Zerlegungen bei binären Relationen $K_{J_i}(e, k_i)$ zu folgendem Tableau führt:
 
     \[
         \begin{array}{c|cccccc}
-            & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
+            & e      & k_1 & k_2 & k_3 & \dots  & k_n \\
             \hline
-            K^{\top}_1      & a_e     & a_1         & \_         & \_         & \dots  & \_         \\
-            K^{\top}_2      & a_e     & \_         & a_2         & \_         & \dots  & \_         \\
-            K^{\top}_3      & a_e     & \_         & \_         & a_3        & \dots  & \_         \\
+            K_{J_1}      & a_e     & a_1         & \_         & \_         & \dots  & \_         \\
+            K_{J_2}      & a_e     & \_         & a_2         & \_         & \dots  & \_         \\
+            K_{J_3}      & a_e     & \_         & \_         & a_3        & \dots  & \_         \\
             \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
-            K^{\top}_m      & a_e     & \_         & \_         & \_         & \dots  & a_n
+            K_{J_m}      & a_e     & \_         & \_         & \_         & \dots  & a_n
         \end{array}
     \]
     \medskip
@@ -449,32 +449,31 @@ Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
     Damit ist das Tableau für den iterativen Teil des Verfahrens vorbereitet.\\
 
     \noindent
-    Nun wird jede funktionale Abhängigkeit $X \rightarrow Y \in F^\text{min}_{K^\top}$ iterativ betrachtet: Für alle Zeilen, die in den Spalten, die durch $X$ repräsentiert werden, einen gleichen Eintrag haben, werden die Spalten, die $Y$ repräsentieren, zeilenweise auf das gleiche Symbol gesetzt:\footnote{
-        Da mit den gegebenen $F^\text{min}_{K^\top}$ in jedem Fall so eine Spalte existiert, brauchen wir den anderen Fall nicht berücksichtigen: In diesem Fall würde die Spalte mit $b$-Symbolen gefüllt.
+    Nun wird jede funktionale Abhängigkeit $X \rightarrow Y \in F^\text{min}_{K_J}$ iterativ betrachtet: Für alle Zeilen, die in den Spalten, die durch $X$ repräsentiert werden, einen gleichen Eintrag haben, werden die Spalten, die $Y$ repräsentieren, zeilenweise auf das gleiche Symbol gesetzt:\footnote{
+        Da mit den gegebenen $F^\text{min}_{K_J}$ in jedem Fall so eine Spalte existiert, brauchen wir den anderen Fall nicht berücksichtigen: In diesem Fall würde die Spalte mit $b$-Symbolen gefüllt.
     }\\
-    Ausgehend von der minimalen funktionalen Abhängigkeitsmenge $F^\text{min}_{K^\top}$ können wir somit für jede $(e \rightarrow k^\top_x) \in F^\text{min}_{K^\top}, x \leq n$ die Spalte mit dem Index $x$ mit $a_x$-Symbolen füllen, da jedes in $K^\top$ vorkommende Attribut von $e$ funktional abhängig ist.\\
+    Ausgehend von der minimalen funktionalen Abhängigkeitsmenge $F^\text{min}_{K_J}$ können wir somit für jede $(e \rightarrow k_x) \in F^\text{min}_{K_J}, x \leq n$ die Spalte mit dem Index $x$ mit $a_x$-Symbolen füllen, da jedes in $K_J$ vorkommende Attribut von $e$ funktional abhängig ist.\\
 
     \noindent
     Nach Beendigung des Verfahrens ist das Tableau komplett mit $a$-Symbolen besetzt.
     \[
         \begin{array}{c|cccccc}
-            & e      & k^{\top}_1 & k^{\top}_2 & k^{\top}_3 & \dots  & k^{\top}_n \\
+            & e      & k_1 & k_2 & k_3 & \dots  & k_n \\
             \hline
-            K^{\top}_1      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$         \\
-            K^{\top}_2      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$         \\
-            K^{\top}_3      & $a_e$     & $a_1$         & $a_2$         & $a_3$        & \dots  & $a_n$         \\
+            K_{J_1}      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$         \\
+            K_{J_2}      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$         \\
+            K_{J_3}      & $a_e$     & $a_1$         & $a_2$         & $a_3$        & \dots  & $a_n$         \\
             \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
-            K^{\top}_n      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$
+            K_{J_n}      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$
         \end{array}
     \]
     \medskip
 
     \noindent
-    Da das Verfahren zum Nachweis der verlustfreien Zerlegung mindestens eine vollständig $a$-besetzte Zeile fordert, haben wir gezeigt, dass sich $K^\top$ verlustfrei in die Relationen $K^\top_1, K^\top_2, K^\top_3, \ldots, K^\top_m$ zerlegen lässt.
+    Da das Verfahren zum Nachweis der verlustfreien Zerlegung mindestens eine vollständig $a$-besetzte Zeile fordert, haben wir gezeigt, dass sich $K_J$ verlustfrei in die Relationen $K_{J_1}, K_{J_2}, K_{J_3}, \ldots, K_{J_m}$ zerlegen lässt.
 
 \end{proof}
 \bigskip
-
 
 \begin{definition}\label{def:redundanzfrei}
 Eine Zerlegung

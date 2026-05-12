@@ -276,48 +276,96 @@ Die nachfolgenden Abschnitte motivieren auf dieser Grundlage die Einführung der
 
 \subsection*{Nachweis der Normalformen}
 
-Wir führen im folgenden den Nachweis der 1., 2., 3., 4., und 5. sowie der Boyce-Codd-Normalform.
+Wir führen im folgenden den Nachweis der 1., 2., 3., 4., und 5. sowie der Boyce-Codd-Normalform für $K_J$.
 Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 
 
 \bigskip
 \begin{axiom}\label{ax:nur_atomar}
-    Die Wertemengen der Attribute von $K^\top$ lassen nur einzelne, untrennbare (und damit atomare) Werte zu.
+    Die Wertemengen der Attribute von $K_J$ lassen nur einzelne, untrennbare (und damit atomare) Werte zu.
 \end{axiom}
 
 \bigskip
 \begin{axiom}\label{ax:einfacher_schluessel}
-    Der einzige Schlüsselkandidat der Relation $K^\top$ ist $e$.
+    Der einzige Schlüsselkandidat der Relation $K_J$ ist $e$.
 \end{axiom}
 \bigskip
 
 \begin{definition}\label{def:entitätsbezogen}
 
-    Eine Relation $K^\top_i$, für die $e \in K^\top_i$ gilt, ist eine \textit{entitätsbezogene Relation}.\\
+    Sei
+    \[
+        K_J = \{e\} \cup \{k_j \mid j \in J\}
+    \]
+    ein Relationsschema über eine endliche Komponentenattributmenge $\{k_1, k_2, \ldots, k_n\}$.\\
 
     \noindent
-    Eine Zerlegung $D = (K^\top_1, K^\top_2, \ldots, K^\top_m)$ von $K^\top$ mit
+    Ein Teilschema $R \subseteq K_J$ heißt \textit{enitättsbezogen}, wenn
 
     \[
-        K^\top_1 \cup K^\top_2 \cup \ldots \cup K^\top_m = K^{\top}
+        e \in R
     \]
-die ausschließlich entitätsbezogene Relationen enthält, bezeichnen wir als \textit{entitätsbezogene Zerlegung}.
+    gilt.\\
+
+    \noindent
+    Eine Zerlegung
+
+    \[
+        D = (R_1, R_2, \ldots, R_m)
+    \]
+    von $K_J$ mit
+
+    \[
+        R_1 \cup R_2 \cup \ldots \cup R_m = K_J
+    \]
+    heißt \textit{entitätsbezogene Zerlegung}, wenn jedes Teilschema $R_\ell \in D$ entitätsbezogen ist, also
+    \[
+        \forall R_{\ell} \in D: e \in R_{\ell}
+    \]
+    gilt.\\
+
+    \noindent
+    Insbesondere kann jedes Teilschema $R_\ell$ als
+    \[
+        K_{J_{\ell}} = \{e\} \cup \{k_j \mid j \in J_\ell\}, \quad J_{\ell} \subseteq J
+    \]
+    geschrieben werden
 \end{definition}
 
 
 \bigskip
 \begin{lemma}\label{lem:K_bin_ist_verlustfrei}
-    Die entitätsbezogene Relation $K_{ij}^\top = K(e, k^\top_i, k^\top_j)$ lässt sich verlustfrei in entitätsbezogene Relationen $K^\top_i(e, k^\top_i), K^\top_j(e, k^\top_j)$ zerlegen.
+    Sei \(J = \{i,j\}\), \(J_i = \{i\}\) und \(J_j = \{j\}\).
+    Die entitätsbezogene Relation
+    \[
+        K_J = K_{\{i,j\}}(e, k_i, k_j)
+    \]
+    lässt sich verlustfrei in die entitätsbezogenen Relationen
+    \[
+        K_{J_i}(e, k_i),\quad K_{J_j}(e, k_j)
+    \]
+    zerlegen.
 \end{lemma}
 
 \medskip
 \begin{proof}
-    Sei $K^{\top}_i = \pi_{(e, k^{\top}_i)}(K_{ij}^\top),\ K^{\top}_j = \pi_{e, k^{\top}_j}(K_{ij}^\top)$.\\
+    Sei
+    \[
+        K_{J_i} = \pi_{(e,k_i)}(K_J),
+        \qquad
+        K_{J_j} = \pi_{(e,k_j)}(K_J).
+    \]
 
     \noindent
     Wir zeigen, dass
     \[
-        \pi_{K^{\top}_i}(r)\ \bowtie_{K^{\top}_i.e = K^{\top}_j.e}\ \pi_{K^{\top}_j}(r) = \njoin\ (\pi_{K^{\top}_i}(r), \pi_{K^{\top}_j}(r)) = \pi_{K_ij^\top}(r)
+        \pi_{K_{J_i}}(r)\
+        \bowtie_{K_{J_i}.e = K_{J_j}.e}\
+        \pi_{K_{J_j}}(r)
+        =
+        \njoin\bigl(\pi_{K_{J_i}}(r), \pi_{K_{J_j}}(r)\bigr)
+        =
+        \pi_{K_J}(r).
     \]
 
     \bigskip
@@ -325,12 +373,13 @@ die ausschließlich entitätsbezogene Relationen enthält, bezeichnen wir als \t
     Da es sich um eine binäre Zerlegung handelt, kann der Beweis anhand der funktionalen Eigenschaften erfolgen~\cite[S. 343]{EN11}:
     \[
         \begin{alignedat}{3}
-            ((K^{\top}_i \cap K^{\top}_j) &\rightarrow (K^{\top}_i - K^{\top}_j)) = (e \rightarrow k^{\top}_i\ ) \in e^{+\top}\\
-            (K^{\top}_i \cap K^{\top}_j) &\rightarrow (K^{\top}_j - K^{\top}_i)) = (e \rightarrow k^{\top}_j) \in e^{+\top}\\
+            ((K_{J_i} \cap K_{J_j}) &\rightarrow (K_{J_i} - K_{J_j}))
+            = (e \rightarrow k_i) \in F_{K_J}^+\\
+            (K_{J_i} \cap K_{J_j}) &\rightarrow (K_{J_j} - K_{J_i}))
+            = (e \rightarrow k_j) \in F_{K_J}^+
         \end{alignedat}
     \]
 \end{proof}
-
 
 
 \bigskip

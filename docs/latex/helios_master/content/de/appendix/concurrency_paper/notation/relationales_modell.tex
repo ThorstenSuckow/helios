@@ -1,5 +1,14 @@
 \section{ECS als relationales Modell}
 
+\begin{tcolorbox}[colback=red!20]
+\begin{itemize}
+    \itemsep0.5em
+    \item Abgrenzung zu $K_J = \{e\}$ in Definition~\ref{def:entitätsbezogen}.
+    \item Beweise schärfen.
+\end{itemize}
+\end{tcolorbox}
+
+
 Im folgenden Abschnitt motivieren wir die idiomatische ECS-Datenstruktur auf Grundlage des relationalen Modells.\\
 Mit Hilfe von funktionalen Abhängigkeiten weisen wir die Normalformen nach, um im Weiteren mit Normalformtheorien zusammenhängende Lösch- und Aktualisierungsanomalien formal ausschließen zu können.\\
 Ausgehend von einem breiten Relationsschema überführen wir den Entwurf in ein ECS-idiomatisches komponentenzentrisches Modell und weisen hierfür die 6. Normalform nach.
@@ -274,7 +283,7 @@ Im Weiteren verzichten wir auf eine Indizierung von $K_J$ -- für die Nachweise 
 
 Die nachfolgenden Abschnitte motivieren auf dieser Grundlage die Einführung der \textit{komponentenzentrischen Relationen} von der Form $K_i(e, k_i)$.
 
-\subsection*{Nachweis der Normalformen}
+\subsection{Nachweis der Normalformen}
 
 Wir führen im Folgenden den Nachweis der 1., 2., 3., 4., und 5. sowie der Boyce-Codd-Normalform für $K_J$.
 Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
@@ -649,7 +658,7 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 \end{proof}
 
 \noindent
-Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhängigkeiten (JD) für eine Zerlegung von ${K^\top}$ eingehen.
+Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhängigkeiten (JD) für eine Zerlegung von ${K_J}$ eingehen.
 
 \bigskip
 \begin{corollary}\label{cor:k_joinabhaengigkeiten}
@@ -700,11 +709,11 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhän
         \par\hfill~\cite[S. 494, Hervorhebung i.O.]{EN16}
     \end{displayquote}
 
-    Die Autoren merken an, dass die so formulierte Definition eher der \textit{Superkey Normal Form}-Definition entspricht (\textit{SKNF}).\footnote{
-        ``[\ldots] many textbooks [\ldots] incorrectly give the deﬁnition of SKNF as a deﬁnition of 5NF.`` (ebd.)
+    Darwen et al. merken an, dass die so formulierte Definition eher der \textit{Superkey Normal Form}-Definition entspricht (\textit{SKNF}).\footnote{
+        ``[\ldots] many textbooks [\ldots] incorrectly give the deﬁnition of SKNF as a deﬁnition of 5NF.``~\cite{Dar12}
     }, was Normann auch in~\cite{Nor98} diskutiert.\\
 
-    Darwen et {al.} zeigen in der zitierten Arbeit, dass die SKNF nicht äquivalent zu der 5NF ist -- sie ist sogar schwächer.
+    Die zitierte Arbeit zeigt, dass die SKNF nicht äquivalent zu der 5NF ist -- sie ist sogar schwächer.
     Im Kontext dieser Arbeit nehmen wir deshalb für die 5NF implizit die Definition von Fagin beziehungsweise Vossen an.
 \end{tcolorbox}
 \bigskip

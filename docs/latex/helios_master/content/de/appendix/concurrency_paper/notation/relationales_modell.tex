@@ -562,33 +562,32 @@ Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 
 \bigskip
 \begin{lemma}\label{lem:jede_K_zerlegung_ist_verlustfrei}
-    Jede entitätsbezogene Zerlegung $D$ von $K^\top$ auf Basis der funktionalen Abhängigkeiten $F_{K^\top}$ ist verlustfrei.
+    Jede entitätsbezogene Zerlegung $D$ von $K_J$ ist verlustfrei.
 \end{lemma}
 
 \medskip
 \begin{proof}
-    Mit Lemma~\ref{lem:k_abhaengigkeitserhalten} haben wir nachgewiesen, dass jede entitätsbezogene Zerlegung $D$ abhängigkeitserhaltend bezüglich $F_{K^\top}$ ist.
-    Damit ist sichergestellt, dass die für das Chase-Verfahren und den Aufbau des Tableaus benötigten funktionalen Abhängigkeiten zum Nachweis der Verlustlosigkeit nicht verloren gehen.\\
+    Mit Lemma~\ref{lem:k_abhaengigkeitserhalten} stehen uns für jede entitätsbezogene Zerlegung die funktionalen Abhängigkeiten der ursprünglichen Relation in den Projektionen auf die Zerlegungsrelationen weiterhin zur Verfügung .\\
 
     \noindent
     Damit kann unter Anwendung des in Lemma~\ref{lem:K_plus_ist_verlustfrei} beschriebenen Verfahrens ein Tableau für eine Zerlegung wie folgt beschrieben werden: Die Zeilenbeschriftungen eines jeden solchen Tableaus bestehen aus den Relationen
     \[
-        K^\top_x \in D,\quad \bigcup_{x=1}^m K^\top_x = K^\top
+        K_{J_x} \in D,\quad \bigcup_{x=1}^m K_{J_x} = K_J
     \]
     \smallskip
     Die Spaltenüberschriften bestehen aus den Attributen
     \[
-        e, k^\top_1, k^\top_2, \ldots, k^\top_n
+        e, k_1, k_2, \ldots, k_n
     \]
     \medskip
     \noindent
     Bei der Anwendung des Verfahrens (siehe Beweis zu~\ref{lem:K_plus_ist_verlustfrei}) erhält nun jede Zeile in der $e$-Spalte ein $a$-Symbol, da mit der Definition einer entitätsbezogenen Zerlegung das Attribut in jeder Relation der Zerlegung vorkommt.
-    Da jede Zeile ein $a$-Symbol in der $e$-Spalte aufweist, enthält jede Zeile $K^\top_x$ mit der funktionalen Abhängigkeit
+    Da jede Zeile ein $a$-Symbol in der $e$-Spalte aufweist, enthält jede Zeile $K_{J_x}$ mit der funktionalen Abhängigkeit
     \[
-        e \rightarrow k^{\top}_y, k^{\top}_y \in R_x
+        e \rightarrow k_y, k_y \in K_{J_x}
     \]
-    in einer Zelle $(K^\top_x, k^\top_y), k^\top_y \in K^\top_x$ ein $a$-Symbol: Da alle funktionalen Abhängigkeiten und die Komponentenattribute ebenfalls vollständig in der Zerlegung enthalten sind, besitzt jede Spalte einer entsprechenden Zeile ein solches Symbol.
-    Mit der Vorschrift, dass die linke Seite der FD in dem Verfahren Spalten zeilenweise vereinheitlicht -- in diesem Fall ausgehend von der $e$-Spalte als linke Seite einer jeden FD -- ist nach Beendigung des Verfahrens die hinreichende Bedingung erfüllt, dass zum Nachweis der verlustfreien Join-Eigenschaft mindestens eine Zeile nur aus aus $a$-Symbolen besteht.
+    in einer Zelle $(K_{J_x}, k_y), k_y \in K_{J_x}$ ein $a$-Symbol: Da alle funktionalen Abhängigkeiten und die Komponentenattribute ebenfalls vollständig in der Zerlegung enthalten sind, besitzt jede Spalte einer entsprechenden Zeile ein solches Symbol.
+    Mit der Vorschrift, dass die linke Seite der FD in dem Verfahren Spalten zeilenweise vereinheitlicht -- in diesem Fall ausgehend von der $e$-Spalte als linke Seite einer jeden FD -- ist nach Beendigung des Verfahrens die hinreichende Bedingung erfüllt, dass zum Nachweis der verlustfreien Join-Eigenschaft mindestens eine Zeile nur aus $a$-Symbolen besteht.
     Tatsächlich besteht das Tableau dann ausschließlich aus $a$-Symbolen.
 \end{proof}
 \bigskip

@@ -481,41 +481,41 @@ Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
     \[
         \njoin_{i=1}^n R_i = \pi_{R}(r)
     \]
-    wird \textit{verlustfrei-redundanzfrei} genannt, wenn es keine Relation $R_j \in D$ gibt, mit der gilt:
+    wird \textit{verlustfrei-redundanzfrei} genannt, wenn es keine Relation $R_j \in D$ gibt, mit der gilt:\footnote{
+        Siehe \cite[Definition 7]{Nor98}.
+    }
     \[
         \njoin_{i=1, i \neq j}^n R_i = \pi_{R}(r)
     \]
-    ~\cite[Definition 7]{Nor98}.
 
 \end{definition}
 
 \begin{lemma}\label{lem:verlustfrei_redundanzfrei_k}
-    Jede verlustfreie Zerlegung von $K^\top$
+    Jede verlustfreie Zerlegung von $K_J$
     \[
-        D = (K^\top_1, K^\top_2, \ldots, K^\top_m)
+        D = (K_{J_1}, K_{J_2}, \ldots, K_{J_m})
     \]
     lässt sich auf einen verlustfrei-redundanzfreien Kern $D'$ reduzieren.
 \end{lemma}
 \begin{proof}
-    Sei $D$ eine beliebige verlustfreie Zerlegung von $K^\top$, sei $D' = D$.\\
+    Sei $D$ eine beliebige verlustfreie Zerlegung von $K_J$, sei $D' = D$.\\
 
-    Falls $D'$ nicht redundanzfrei ist, existiert mindestens ein $1 \leq j \leq m$, so dass
+    Falls $D'$ nicht redundanzfrei ist, existiert mindestens ein $K_{J_q} \in D'$, so dass
 
     \[
-        \njoin_{i=1, i \neq j} K^\top_i = \pi_{K^\top}(r)
+        \njoin_{K_{J_i} \in D' \setminus \{K_{J_q}\}} \pi_{K_{J_i}}(r) = \pi_{K_J}(r)
     \]
-    Dieses $K^\top_j$ wird aus $D'$ entfernt.
-    Die Schritte werden so lange wiederholt, bis $D'$ verlustfrei-redundanzfrei ist, und damit gilt
+    Jedes solche $K_{J_q}$ wird aus $D'$ entfernt und dieser Schritt so lange wiederholt, bis $D'$ verlustfrei-redundanzfrei ist, und damit gilt
     \[
-        \njoin_{i=1, i \neq j}^n \pi_{K^\top_i}(r) \neq \pi_{K^{\top}}, \quad 1 \leq j \leq m
+        \njoin_{K_{J_i} \in D' \setminus \{K_{J_q}\}} \pi_{K_{J_i}}(r) \neq \pi_{K_J}(r), \quad K_{J_q} \in D'
     \]
-    Es ist sichergestellt, dass das Verfahren terminiert, da mit der Voraussetzung $D'$ eine verlustfreie Zerlegung von $K^\top$ ist.
+    Es ist sichergestellt, dass das Verfahren terminiert, da $D$ endlich ist und mit jedem Schritt genau eine Relation aus $D'$ entfernt wird.
     Ist die Bedingung der verlustfreien Redundanzfreiheit verletzt, kann aber auch mindestens ein redundantes Element entfernt werden, ohne dass
     \[
-        \njoin_{i=1}^n K^\top_i = \pi_{K^{\top}}(r), K^\top_i \in D'
+        \njoin_{K_{J_i} \in D'} \pi_{K_{J_i}}(r) = \pi_{K_J}(r), K_{J_i} \in D'
     \]
     verletzt wird -- somit kann die Zerlegung auch nicht leer sein.
- \end{proof}
+\end{proof}
 \bigskip
 
 

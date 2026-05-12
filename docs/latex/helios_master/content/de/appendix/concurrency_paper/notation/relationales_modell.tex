@@ -594,47 +594,53 @@ Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 
 \bigskip
 \begin{lemma}\label{lem:verlustfrei-redundanzfrei-ist-entitätsbezogen}
-    Jede verlustfrei-redundanzfreie Zerlegung von $K^\top$ ist eine entitätsbezogene Zerlegung.
+    Jede verlustfrei-redundanzfreie Zerlegung von $K_J$ ist eine entitätsbezogene Zerlegung.
 \end{lemma}
 \begin{proof}
-    Sei $D = (K^\top_1, K^\top_2, \ldots, K^\top_m)$ eine verlustfrei-redundanzfreie Zerlegung von $K^\top$.
+    Sei $D = (K_{J_1}, K_{J_2}, \ldots, K_{J_m})$ eine verlustfrei-redundanzfreie Zerlegung von $K_J$.
     Damit gilt
     \[
-        \njoin_{i=1}^m(\pi_{K^\top_i}(r)) = \pi_{K^\top}(r)
+        \njoin_{i=1}^m(\pi_{K_{J_i}}(r)) = \pi_{K_J}(r)
     \]
 
     Zu zeigen:
     \[
-        \forall K^\top_i: e \in K^\top_i
+        \forall K_{J_i}: e \in K_{J_i}
     \]
     Wir betrachten alle Relationen in $D$, die das Schlüsselattribut $e$ enthalten:
     \[
-        D_e =\{K^\top_i \mid e \in K^\top_i \}, K^{\top,e}_{i} \in D_e
+        D_e =\{K^e \mid e \in K^e \}, K^{e} \in D_e
     \]
     \begin{itemize}
         \item $D = D_e$: Es ist nichts zu zeigen.
         \item $D \neq D_e$:
         \begin{itemize}
-            \item Fall 1: Es gilt $\njoin_{i=1}^m(\pi_{K^{\top,e}_{i}}(r)) = \pi_{K^\top}(r)$.\\
-            In dem Fall können alle Relationen aus $D \setminus D_e$ entfernt werden, ohne die verlustfreie Rekonstruktion von $K^\top$ zu verletzen.
+            \item Fall 1: Es gilt $\njoin_{K^{e} \in D_e}(\pi_{K^{e}}(r)) = \pi_{K_J}(r)$.\\
+            In dem Fall können alle Relationen aus $D \setminus D_e$ entfernt werden, ohne die verlustfreie Rekonstruktion von $K_J$ zu verletzen.
             Dies widerspricht der Voraussetzung, dass $D$ verlustfrei-redundanzfrei ist.
-            \item Fall 2: Es gilt $\njoin_{i=1}^m(\pi_{K^{\top,e}_{i}}(r)) \neq \pi_{K^\top}(r)$.\\
-            Über die Zerlegung $D_e$ kann kein legaler Relationszustand von $K^\top$ hergestellt werden, womit sie nicht verlustfrei ist.
-            Da $D_e$ nicht verlustfrei ist und nach Lemma~\ref{lem:jede_K_zerlegung_ist_verlustfrei} jede entitätsbezogene Zerlegung (Definition~\ref{def:entitätsbezogen}) auch verlustfrei ist, ist die Zerlegung auch nicht entitätsbezogen.\\
-            Damit gilt
-            \[
-                \bigcup_{K^\top_j \in D_e} K^\top_j \neq K^\top
-            \]
-            was eine fehlende Attributüberdeckung der Relationen in $D_e$ impliziert.\\
+            \item Fall 2: Es gilt $\njoin_{K^{e} \in D_e}(\pi_{K^{e}}(r)) \neq \pi_{K_J}(r)$.\\
+            Wir unterscheiden zwei Fälle:
+            \begin{itemize}
+                \item[] Fall 2 a): Es gilt $\bigcup_{K^e \in D_e} K^e = K_J$.\\
+                Da jede Relation in $D_e$ das Attribut $e$ enthält, ist $D_e$ eine entitätsbezogene Zerlegung nach Definition~\ref{def:entitätsbezogen}.
+                Da jede entitätsbezogene Zerlegung aber auch verlustfrei ist nach Lemma~\ref{lem:jede_K_zerlegung_ist_verlustfrei}, ist $D_e$ verlustfrei, im Widerspruch zur Annahme von Fall 2.
+                \item[] Fall 2 b):  Es gilt $\bigcup_{K^e \in D_e} K^e \neq K_J$.\\
+                Damit wird eine fehlende Attributüberdeckung der Relationen in $D_e$ impliziert.\\
+                \noindent
+                Damit gibt es mindestens ein Komponentenattribut $k_x$, das nicht in $D_e$ vorkommt, dafür aber in einer Relation der Zerlegung $D \setminus D_e$.
+                Damit gilt
+                \[
+                    \forall K^e \in D_e: k_x \notin K^e
+                \]
+                sowie
+                \[
+                    \exists k_x \in K_{J_q}, K_{J_q} \in D \setminus D_e
+                \]
+                Bei der Anwendung des Chase-Verfahrens verbleibt damit ein $b$-Symbol bei der Attributspalte $e$ in der zugehörigen Zeile $K_{J_q}$ und verhindert damit die Vereinheitlichung der Zeile mit den übrigen Zeilen, die ein $a$-Symbol in der $e$-Spalte besitzen:
+                Dass dieses Attribut nicht in den Relationen von $D_e$ vorkommt, sondern in mindestens einer der Relationen von $D \setminus D_e$, bedeutet, dass das Chase-Verfahren in diesem Kontext keine Zeile vollständig mit $a$-Symbolen besetzen kann, solange nicht auch $e$ ein Attribut der Relationen von $D \setminus D_e$ ist, und im Chase-Verfahren ein $a$-Symbol erhält.
+                Im Widerspruch zur Annahme ist die Zerlegung $D$ also nicht verlustfrei.
+            \end{itemize}
 
-            \noindent
-            Damit gibt es mindestens ein Komponentenattribut in einer Relation der Zerlegung $D \setminus D_e$ mit
-            \[
-                \exists k^\top_x \in K^\top_j, K^\top_j \in D \setminus D_e
-            \]
-            Bei der Anwendung des Chase-Verfahrens verbleibt damit ein $b$-Symbol bei der Attributspalte $e$ in der zugehörigen Zeile $K^\top_j$ und verhindert damit die Vereinheitlichung der Zeile mit den übrigen Zeilen, die ein $a$-Symbol in der $e$-Spalte besitzen:
-            Dass dieses Attribut nicht in den Relationen von $D_e$ vorkommt, sondern in mindestens einer der Relationen von $D \semtinus D_e$, bedeutet, dass das Chase-Verfahren in diesem Kontext keine Zeile vollständig mit $a$-Symbolen besetzen kann, solange nicht auch $e$ ein Attribut der Relationen von $D \setminus D_e$ ist, und im Chase-Verfahren ein $a$-Symbol erhält.
-            Im Widerspruch zur Annahme ist die Zerlegung also nicht verlustfrei.
         \end{itemize}
     \end{itemize}
 

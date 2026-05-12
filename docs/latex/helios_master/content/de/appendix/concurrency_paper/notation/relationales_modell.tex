@@ -716,52 +716,52 @@ Nun kann der Nachweis für die Normalformen erfolgen.
 
 
 \begin{theorem}\label{f_min_norm}
-    Das Relationsschema $K^\top$ erfüllt die Bedingungen der 1., 2., 3., 4. und 5. sowie der Boyce-Codd-Normalform.
+    Das Relationsschema $K_J$ erfüllt die Bedingungen der 1., 2., 3., 4. und 5. sowie der Boyce-Codd-Normalform.
 \end{theorem}
 
 \begin{proof}
     \medskip
     {\ }
     \begin{itemize}
-        \item 1. Normalform: Erfüllt, da mit Axiom~\ref{ax:nur_atomar} alle Attribute in $K^\top$ als atomare Attribute definiert sind.
-        \item 2. Normalform: Erfüllt, da $K^\top$ das Attribut $e$ als alleinigen Schlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
-        \item 3. Normalform: Erfüllt, da $K^\top$ keine transitiven Abhängigkeiten enthält: Alle Nicht-Prime-Attribute sind funktional voll abhängig von dem einzigen Prime-Attribut $e$.
-        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $(X \rightarrow A)\ \in (F^\text{min}_{K^\top})^+$ die linke Seite der FD der Superschlüssel von $K^\top$ ist.
-        \item 4. Normalform: Zu zeigen ist, dass $X$ für jede nichttriviale mehrwertige Abhängigkeit $X \twoheadrightarrow Y \in (F^{\text{min}}_{K^\top})^+$ ein Superschlüssel von $K^\top$ ist.\\[2mm]
-        Sei hierzu $C_K^\top \coloneqq \{k^\top_1, k^\top_2, \ldots, k^\top_n \}$.\\[2mm]
-        Wir betrachten im Folgenden alle aus $F^\text{min}_{K^\top}$ induzierten mehrwertigen Abhängigkeiten der Form
+        \item 1. Normalform: Erfüllt, da mit Axiom~\ref{ax:nur_atomar} alle Attribute in $K_J$ als atomare Attribute definiert sind.
+        \item 2. Normalform: Erfüllt, da $K_J$ das Attribut $e$ als alleinigen Schlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
+        \item 3. Normalform: Erfüllt, da $K_J$ keine transitiven Abhängigkeiten enthält: Alle Nicht-Prime-Attribute sind funktional voll abhängig von dem einzigen Prime-Attribut $e$.
+        \item BCNF: Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $(X \rightarrow A)\ \in (F^\text{min}_{K_J})^+$ die linke Seite der FD der Superschlüssel von $K_J$ ist.
+        \item 4. Normalform: Zu zeigen ist, dass $X$ für jede nichttriviale mehrwertige Abhängigkeit $X \twoheadrightarrow Y$ ein Superschlüssel von $K_J$ ist.\\[2mm]
+        Sei hierzu $C_{K_J} \coloneqq \{k_1, k_2, \ldots, k_n \}$.\\[2mm]
+        Wir betrachten im Folgenden alle aus $F^\text{min}_{K_J}$ folgenden mehrwertigen Abhängigkeiten der Form
         \[
-            e \twoheadrightarrow Y,\qquad \text{mit}\ \emptyset \neq Y \subset (K^\top \setminus \{e\})
+            e \twoheadrightarrow Y,\qquad \text{mit}\ \emptyset \neq Y \subset (K_J \setminus \{e\})
         \]
         \noindent
         Mit der Voraussetzung $n \geq 2$ sind diese Abhängigkeiten nichttrivial, da
         \[
-             Y \nsubseteq \{e\}
+            Y \nsubseteq \{e\}
         \]
         und
         \[
-            \{e\} \cup Y \neq K^\top
+            \{e\} \cup Y \neq K_J
         \]
         gilt.\\
-        Jede funktionale Abhängigkeit in $F^\text{min}_{K^\top}$ ist auch eine nichttriviale mehrwertige Abhängigkeit~\cite[S. 353]{EN11}.\\
-        In jeder MVD ist der Primärschlüssel $X=e$ das einzige Prime-Attribut auf der linken Seite.
+        Jede funktionale Abhängigkeit in $F^\text{min}_{K_J}$ ist auch eine mehrwertige Abhängigkeit~\cite[S. 353]{EN11}.\\
+        In jeder betrachteten MVD ist der Primärschlüssel $X=e$ das einzige Prime-Attribut auf der linken Seite.
         Damit ist die geforderte Bedingung insgesamt erfüllt.
-        \item 5. Normalform: Zu zeigen ist, dass jede JD von $K^\top$ allein von den Schlüsselabhängigkeiten von $K^\top$ impliziert wird.\\
+        \item 5. Normalform: Zu zeigen ist, dass jede JD von $K_J$ allein von den Schlüsselabhängigkeiten von $K_J$ impliziert wird.\\
         \begin{enumerate}
-            \item Mit Lemma~\ref{lem:verlustfrei_redundanzfrei_k} haben wir gezeigt, dass jede Zerlegung von $K^\top$ einen verlustfrei-redundanzfreien Kern besitzt.
+            \item Mit Lemma~\ref{lem:verlustfrei_redundanzfrei_k} haben wir gezeigt, dass jede Zerlegung von $K_J$ einen verlustfrei-redundanzfreien Kern besitzt.
             Diesen Kern bezüglich JD bezeichnen wir im Folgenden mit $D^{JD}$.
-            Die ursprüngliche JD beinhaltet im Vergleich zu $JD^{JD}$ per Definition~\ref{def:verlustfrei_redundanzfrei} nur redundante Relationen, die keine zusätzlichen Zerlegungsinformationen tragen, weshalb es ausreicht, nur den Kern zu betrachten.
-            \item Mit Lemma~\ref{lem:verlustfrei-redundanzfrei-ist-entitätsbezogen} haben wir gezeigt, dass eine solche Zerlegung aus entitätsbezogenen Relationen $K^\top_i$ besteht.
+            Die ursprüngliche JD beinhaltet im Vergleich zu $D^{JD}$ per Definition~\ref{def:verlustfrei_redundanzfrei} nur redundante Relationen, die keine zusätzlichen Zerlegungsinformationen tragen, weshalb es ausreicht, nur den Kern zu betrachten.
+            \item Mit Lemma~\ref{lem:verlustfrei-redundanzfrei-ist-entitätsbezogen} haben wir gezeigt, dass eine solche Zerlegung aus entitätsbezogenen Relationen $K_{J_i}$ besteht.
             \item So gilt ebenfalls für $D^{JD}$:
             \[
-                \forall K^\top_i \in D^{JD}: e \in K^\top_i
+                \forall K_{J_i} \in D^{JD}: e \in K_{J_i}
             \]
         \end{enumerate}
 
-        Damit enthält enthält der verlustfrei-redundanzfreie Kern $D^{JD}$ ausschließlich Relationen, die den Primärschlüssel $e$ mit $e^+ = K^\top$ enthalten.
-        Damit folgt insgesamt, dass jede JD allein von den Schlüsselabhängigkeiten von $K^\top$ impliziert wird.\footnote{
-        Alternativ folgt die 5NF auch aus~\cite[Theorem 4.1]{DF92}, falls $K^\top$ in 3NF ist, und jeder Schlüssel ein einfacher Schlüssel ist.
-        Dass $K^\top$ diese Bedingungen erfüllt, ergibt sich aus dem Text.
+        Damit enthält der verlustfrei-redundanzfreie Kern $D^{JD}$ ausschließlich Relationen, die den Primärschlüssel $e$ mit $e^+ = K_J$ enthalten.
+        Damit folgt insgesamt, dass jede JD allein von den Schlüsselabhängigkeiten von $K_J$ impliziert wird.\footnote{
+            Alternativ folgt die 5NF auch aus~\cite[Theorem 4.1]{DF92}, falls $K_J$ in 3NF ist, und jeder Schlüssel ein einfacher Schlüssel ist.
+            Dass $K_J$ diese Bedingungen erfüllt, ergibt sich aus dem Text.
         }
 
     \end{itemize}

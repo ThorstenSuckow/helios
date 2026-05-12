@@ -1,63 +1,111 @@
 \section{ECS als relationales Modell}
 
 Im folgenden Abschnitt motivieren wir die idiomatische ECS-Datenstruktur auf Grundlage des relationalen Modells.\\
-Mit Hilfe von funktionalen Abhängigkeiten weisen wir die Normalenformen nach, um im Weiteren mit Normalformtheorien zusammenhängende Lösch- und Aktualisierungsanomalien formal ausschließen zu können.\\
-Ausgehend von einem breiten Relationsschema überführen wir den Entwurf in ein ECS-idiomatisches komponentenzentrisches Modell und weisen hierfür die 6te Normalform nach.
+Mit Hilfe von funktionalen Abhängigkeiten weisen wir die Normalformen nach, um im Weiteren mit Normalformtheorien zusammenhängende Lösch- und Aktualisierungsanomalien formal ausschließen zu können.\\
+Ausgehend von einem breiten Relationsschema überführen wir den Entwurf in ein ECS-idiomatisches komponentenzentrisches Modell und weisen hierfür die 6. Normalform nach.
 
 \subsubsection*{Hinweise zur Notation}
 Bei Begriffen und Notation folgen wir der üblichen Fachliteratur, insbesondere Elmasri und Navathe~\cite{EN11}.\\
 Mit Blick auf die Relationen zwischen Entität und Komponenten bezeichnen wir das relationale Modell des ECS im Folgenden als \textit{ECS-Modell}.
 Wo sich die Erweiterungen des Modells nicht aus dem Kontext ergeben, wird entsprechend erklärend darauf hingewiesen.\\
 Um der übrigen Notation in dieser Arbeit gerecht zu bleiben, verwenden wir auch in diesem Abschnitt für die Subskripte der Komponententypen Buchstaben.
-Wo der Zusammenhang erfordert, ersetzen wir die Buchstaben durch Ziffern, um beispielsweise deutlicher auf eine endliche Menge von Komponentenassoziationen hinzuweisen; diese setzen wir aber stets -- unabhängig von der Schreibweise -- implizit voraus.
-Der binäre Natural-Join-Operator $\njoin$ wird im Kontext von Relationszuständen $\pi_{R_n}(r)$ in der Form
+Wo der Zusammenhang erfordert, ersetzen wir die Buchstaben durch Ziffern, um beispielsweise deutlicher auf eine endliche Menge von Komponentenassoziationen hinzuweisen; diese setzen wir aber stets -- unabhängig von der Schreibweise -- implizit voraus.\\
+\medskip
+
+\noindent
+Folgenden Abkürzungen werden verwendet: \textit{FD} bezeichnet \textit{Funktionale Abhängigkeit}, \textit{MVD} bezeichnet \textit{Mehrwertige Abhängigkeit}, \textit{JD} bezeichnet
+\textit{Join Abhängigkeit}. \textit{NF} steht als Abkürzung für \textit{Normalform}.
+Die Verwendung von Plural beziehungsweise Singular ergibt sich aus dem jeweiligen Kontext.\\
+
+\noindent
+Für Relation verwenden wir im Folgenden Großbuchstaben, beispielsweise $R$.\\
+
+\noindent
+Für den Relationszustand einer Relation $R$ notieren wir $r(R)$, oder einfach $r$, falls sich aus dem Kontext ergibt, welche Relation gemeint ist.\\
+
+\noindent
+Wir notieren $\pi_{R_i}(r)$ für die Projektion des Relationszustands $r(R)$ auf die Attributmenge der Relation $R_i \subseteq R$.\\
+
+\noindent
+Der binäre Natural-Join-Operator $\njoin$ wird im Kontext von Relationszuständen $\pi_{R_i}(r)$ in der Form
 \[
-    \njoin (\pi_{R_1}(r), \ldots, \pi_{R_n}(r)),\ n \in \mathbb{N}
+    \njoin (\pi_{R_1}(r), \pi_{R_2}(r), \ldots, \pi_{R_n}(r)),\ n \in \mathbb{N}
 \]
 \noindent
-genutzt, um den durch die Join Operation
+genutzt und ersetzt damit die Schreibweise
 \[
-     \pi_{R_1}(r) \njoin \ldots \njoin \pi_{R_n}(r))
+    \pi_{R_1}(r) \njoin \pi_{R_{2}}(r) \njoin \ldots \njoin \pi_{R_n}(r)
 \]
-\noindent
-ergebenden Relationszustand $r$ zu notieren.\\
+\medskip
 
 \noindent
 Im Folgenden schließt \textit{verlustfrei} im Zusammenhang mit Joins und Zerlegung auch immer die Eigenschaft \textit{nicht-additiv} mit ein.\\
-Funktionale Abhängigkeit(en) wird im Folgendem mit FD(s) abgekürzt.\\
-Mehrwertige Abhängigkeiten werden mit MVD abgekürzt.
+
+\noindent
+Wir überladen die aus der Arbeit von Redmond et al. genutzten Bezeichner $K_i$ für das ECS-Modell.
+Hier bezeichnen wir mit $K_i$ -- in Anlehnung an den \textit{Typ} -- eine Relation mit der Attributmenge $\{e, k_i\}$.
+
+\[
+    K_i(e, k_i)
+\]
+
+\noindent
+Der Wertebereich $\text{dom}(k_i)$ entspricht dem Wertebereich der darzustellenden Komponente, beziehungsweise den der Implementierung der darunterliegenden Programmiersprache (Redmond et al.: dem \textit{Typ} $K_i$).\\
+
+\noindent
+Damit wollen wir die Typsemantik aus der zitierten Arbeit auf einen relationalen Kontext übertragen, also beispielsweise
+
+\[
+    c \coloneq \{c_i: E \rightharpoonup K_i\}_{i \in I}
+\]
+\medskip
+
+\noindent
+auf
+\[
+    c_i \mathrel{\widehat{=}} r(K_i)
+\]
+
+\noindent
+sowie $c$ auf
+\[
+    c \mathrel{\widehat{=}} \{r(K_i)\}_{i \in I}
+\]
+\medskip
+
+
 
 \subsection{Das relationale Schema}
-Ein erster Entwurf eines relationalen Schemas, dass die Beziehungen zwischen \textit{Entität} und \textit{Komponenten} ausdrückt, führt zu dem in Abbildung~\ref{fig:relation} dargestellten Modell.
-Der Entitätstyp $E$ ist dort mit zwei Komponententypen $K_i$, $K_j$ dargestellt, wobei die Beziehungen als  binäre Relationen modelliert sind -- die Darstellung entspricht damit dem \textit{entitätszentrischen} Ansatz und wird schematisch in ähnlicher Form bei Redmond et {al.} verwendet~\cite[Fig.1, 272:3]{RCCM+25}.
+Ein erster Entwurf eines relationalen Schemas, das die Beziehungen zwischen \textit{Entität} und \textit{Komponenten} ausdrückt, führt zu dem in Abbildung~\ref{fig:relation} dargestellten Modell.
+Der Entitätstyp $E$ ist dort mit Komponententypen $K_1$, $K_2, \ldots$ dargestellt, wobei die Beziehungen als binäre Relationen modelliert sind. Der Ansatz wird bei uns als \textit{entitätszentrischer Entwurf} bezeichnet und in ähnlicher Form bei Redmond et {al.} verwendet~\cite[Fig.1, 272:3]{RCCM+25}.
 
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/relation}
-    \caption{Entitätszentrischer Entwurf eines Entity-Relationship-Modells von Entität und Komponenten.
-    Relationen sind identifizierend modelliert, da ein Komponententerm $k_i$ nicht ohne eine besitzende Entität existieren kann.
-    Entsprechend sind $K_i, K_j, \ldots$ als schwache Typen modelliert, die über $E$ identifiziert werden. Die Notation folgt der Chen-Notation~\cite{Che76}. (Quelle: eigene Darstellung)}
+    \caption{Entwurf eines entitätszentrischen Entity-Relationship-Modells für Entitäten und assoziierte Komponenten.
+    Relationen sind identifizierend modelliert, da ein Komponententerm $k_m, m \in \mathbb{N}$ nicht ohne eine besitzende Entität existieren kann.
+    Entsprechend sind $K_1, K_2, \ldots$ als schwache Typen modelliert, die über $E$ identifiziert werden. Die Notation folgt der Chen-Notation~\cite{Che76}. (Quelle: eigene Darstellung)}
     \label{fig:relation}
 \end{figure}
 
 \subsection{Funktionale Abhängigkeiten im ECS-Modell}
 
-Relation und Attributmengen des ECS-Modells ergeben sich wie folgt:
+Relationen und Attributmengen des ECS-Modells ergeben sich wie folgt:
 
 \[
     \begin{alignat}{3}
         &E   &&= \{e\}\\
-        &K_i &&= \{e, k_i\}\\
-        &K_j &&= \{e, k_j\}\\
-        &K_k &&= \{e, k_k\}\\
+        &K_1 &&= \{e, k_1\}\\
+        &K_2 &&= \{e, k_2\}\\
+        &K_3 &&= \{e, k_3\}\\
         & \ldots
     \end{alignat}
 \]
 
 \noindent
 Als Primärschlüssel für $E$ identifizieren wir das Attribut $e$.
-In den Relationen $K_i, K_j, \ldots$ ist $e$ der Fremdschlüssel; zusammen mit der 1:1 Kardinalität der Relationen auch gleichzeitig der Primärschlüssel.\\
+In den Relationen $K_1, K_2, \ldots$ ist $e$ der Fremdschlüssel, und aufgrund der 1:1-Kardinalität der Relationen auch gleichzeitig ihr Primärschlüssel.\\
 
 \noindent
 Die funktionalen Abhängigkeiten der Relationen lauten:
@@ -65,54 +113,50 @@ Die funktionalen Abhängigkeiten der Relationen lauten:
 \[
     \begin{alignat}{3}
         F_E = &\{ e \rightarrow e\}\\
-        F_{K_i} = &\{ e \rightarrow k_i\}\\
-        F_{K_j} = &\{ e \rightarrow k_j\}\\
+        F_{K_1} = &\{ e \rightarrow k_1\}\\
+        F_{K_2} = &\{ e \rightarrow k_2\}\\
         \ldots
     \end{alignat}\
 \]
 \medskip
 
 \noindent
-Mit diesen Informationen können wir das Universalrelationsschema
-
+Entitäten, die eine oder mehrere garantierte Assoziationen zu Komponenten $K_1, K_2, \ldots, K_n$ besitzen, können in ein breites Relationsschema überführt werden (siehe Abbildung~\ref{fig:breiterelation_k}):
 \[
- K(e, k_i, k_j, k_k, \ldots)
+    K_J(e, k_1, k_2, \ldots, k_n),\quad J \subseteq I
 \]
-\smallskip
 
-\noindent
-ableiten, das in Abbildung~\ref{fig:universalrelation_k} dargestellt ist.\\
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/universalrelation_k}
-    \caption{Komponenten und Entität zusammengeführt in der Relation $K$. (Quelle: eigene Darstellung)}
-    \label{fig:universalrelation_k}
+    \includegraphics[width=0.6\columnwidth]{content/de/appendix/concurrency_paper/notation/img/breiterelation_k}
+    \caption{Modellierung von Komponenten und Entitäten, zusammengeführt in der Relation $K_J$. (Quelle: eigene Darstellung)}
+    \label{fig:breiterelation_k}
 \end{figure}
 
 \noindent
-Die funktionalen Abhängigkeiten $F_K$ von $K$ ergeben sich damit zu
+Die funktionalen Abhängigkeiten $F_{K_{J}}$ von $K_{J}$ ergeben sich damit zu
 
 \[
     \begin{alignat}{3}
-         F_K &= F_E \cup F_{K_i} \cup F_{K_j} \cup \ldots =
-            &\{e \rightarrow e, e \rightarrow k_i, \ e \rightarrow k_j, \ \ldots\}
+         F_{K_J} &= F_E \cup F_{K_1} \cup F_{K_2} \cup \ldots =
+            &\{e \rightarrow e, e \rightarrow k_1, \ e \rightarrow k_2, \ \ldots\}
     \end{alignat}
 \]
 \medskip
 
 \noindent
-Die Hülle von $e$ unter $F_K$ lautet:
+Die Hülle $e^+$ von $e$ unter $F_{K_J}$ lautet:
 
 \[
-    e^+ =\{e, k_i, k_j, k_k, \ldots\}
+    e^+ =\{e, k_1, k_2, \ldots, k_n\}
 \]
 
 \noindent
-Folglich ergibt sich die minimale funktionale Abhängigkeitsmenge $F^\text{min}_{K}$ zu:
+Folglich ergibt sich die minimale funktionale Abhängigkeitsmenge $F^\text{min}_{K_J}$ zu:
 \[
     \begin{alignat}{3}
-        F^\text{min}_{K} = &\{e \rightarrow {k_i},\ e \rightarrow {k_j}, \ e \rightarrow {k_k}, \ \ldots  \}
+        F^\text{min}_{K_J} = &\{e \rightarrow {k_1},\ e \rightarrow {k_2}, \ \ldots \ e \rightarrow {k_n}  \}
     \end{alignat}
 \]
 
@@ -120,69 +164,115 @@ Folglich ergibt sich die minimale funktionale Abhängigkeitsmenge $F^\text{min}_
 Daraus folgt
 \[
     \begin{alignat}{3}
-        (F^\text{min}_{K})^+ = (F_{K})^+
+        (F^\text{min}_{K_J})^+ = (F_{K_J})^+
     \end{alignat}
 \]
 
 
-\subsection*{Darstellung fehlender Komponenten im Universalrelationsschema}
+\subsection*{$K_J$ zur Entitätsdarstellung}
 
-In dem breiten Relationsschema $K$ ist es nicht möglich, ohne speziellen Wert die Abwesenheit einer Komponente für eine Entität darzustellen: So kann im Relationszustand $r$ ein Tupel
-\[
-    t \in \pi_{K}(r)
-\]
-\noindent
-nur existieren, wenn folgendes erfüllt ist:
+Redmond et al. führen den Unit-Wert $*$ vom Typ $\top$ ein.
+Damit kann im Sinne der Typsemantik formuliert werden, dass über eine Anfrage wie etwa
 
 \[
-    \forall v_i \in \{t[A_i] \mid t \in \pi_{K}(r)\}: v_i \in dom(A_i)
+    \llparenthesis \tm{anyway}_i \rrparenthesis = K_i + \top
 \]
 
 \noindent
-mit
+nicht nur der Typ der angefragten Komponenten $K_i$ ausgedrückt wird, sondern auch der Typ $\top$, falls die Komponente $K_i$ nicht für die Entität definiert ist.\footnote{$K_i$ ist in diesem Zusammenhang der Komponententyp in der dem \textit{ECS Core}-Modell zugrundeliegenden Programmiersprache, vgl. Redmond et al.: ``Each $K_i$ is a type in the sub-language, [\dots]''.}\\
+
+Im relationalen Modell ist die Attributmenge hingegen über die Schemadefinition bekannt.
+Ein Zusammenfassen aller möglichen Komponentenattribute in einer breiten Relation ist allerdings dann nicht möglich, wenn Tupel die in \textit{ECS Core} eingeführte partielle Abbildung
 \[
-    A_i \in K\backslash \{e\}, i \in I
+    c_i : E \rightharpoonup K_i
 \]
+repräsentieren sollen: Offensichtlich beinhaltet $r(K_J)$ nur solche Tupel, die Entitätsterm $e$ sowie Komponententerme $k_1, k_2, \ldots , k_n$ besitzen:
+Es gilt:
+\[
+    \forall t \in r(K_J),\forall k_i \in K_J \setminus \{e\}: t[k_i] \in \text{dom}(k_i)
+\]
+\smallskip
 
 \noindent
-Damit kann eine Entität, die eine Assoziation zu $K_\text{Position}$ hat, aber keine Assoziation zu $K_\text{Velocity}$, nicht Teil des Relationszustands $\pi_{K}(r)$ sein.\\
+Damit folgt, dass eine Entität, die eine Assoziation zu $K_\text{Position}$ hat, aber keine Assoziation zu $K_\text{Velocity}$, nicht Teil des Relationszustands $\pi_{K_J}(r)$ sein kann, sofern $k_\text{Velocity}$ Attribut der Relation $K_J$ ist.\\
+Eine Totalrelation $K_\text{Total}$, die alle möglichen Komponentenattribute enthält und $\text{live}(c)$ repräsentiert, ist damit ohne Anpassung des relationalen Modells nicht möglich.
+ Die Einführung eines \texttt{NULL}-Wertes oder die Erweiterung des Wertebereichs der Komponentenattribute um
 
+\[
+    \text{dom}(k_i)^\bot = \text{dom}(k_i) \cup \{\bot\}
+\]
 \noindent
-Anstatt einen \text{NULL}-Wert für diese Fälle einzuführen, übernehmen wir in Anlehnung an Redmond et {al.} den Unit-Wert $\unitval$ vom Typ $\top$.\footnote{
-    Damit können wir eine Brücke hin zu der Typ- als auch der Funktionssemantik des bei Redmond et {al.} verwendeten konjunktiven Anfragesystems bauen, ohne weitere Konventionen oder Voraussetzungen, die mit \text{NULL}-Werten einhergehen könnten, für das relationale Modell zu erzwingen.
+würden das ECS-Modell um eine notwendige Wertsemantik erweitern, über die die Abwesenheit einer Komponente ausgedrückt werden kann.
+ Nachteile, die sich durch die Einführung von \texttt{NULL}-Werten ergeben, werden in der Literatur ausführlich diskutiert und sollen hier nicht noch einmal aufgegriffen werden.\footnote{
+    Elmasri und Navathe in~\cite[S. 306--307]{EN11}; ``Dreiwertige Logik`` wird von Date in \cite[S. 22--29]{Dat95} diskutiert, ausführlich außerdem in \cite[S. 575--600]{Dat03}.
 }
-Damit erweitern wir die Wertebereiche auf $K_i + \top,\ K_j + \top, \ldots$, so dass für die Attribute auf eine erweiterte Wertemenge zurückgegriffen werden kann:
+
+Die Einführung eines speziellen $\bot$-Wertes, der die Erweiterung des Wertebereichs erforderlich macht\footnote{
+    Diskussionen hierzu in \cite[S. 186--221, S. 229--236]{DDM98}.
+}, würde spätestens bei Anfrage sowie Zerlegung von $K_J$ zu Schwierigkeiten führen:
+
+Würde das relationale Modell einen Spezialwert $\bot$ für jeden Komponententyp $K_i$ besitzen, müssten wir diesen zusätzlich in den Auswertungen von Anfragen berücksichtigen.
+Komponenten-Assoziationen müssten dann auf Grundlage des $\bot$-Wertes interpretiert werden, da $\bot$ die Abwesenheit einer Komponente ausdrückt.\footnote{
+    Zusätzliche Integritätsbedingung würden in dem Fall ausschließen können, dass ein Tupel ausschließlich $\bot$-Werte für die Komponentenattribute aufweisen darf: $\forall t \in r(K_J): \exists k_i \in K_J \setminus \{e\}: t[k_i] \neq \bot$
+}
+\medskip
+Selektionen müssten so formuliert werden, um die Semantik der partiellen Abbildung
 
 \[
-\begin{alignedat}{3}
-  \text{dom}(k_i) &= K_i + \top\\
-  \text{dom}(k_j) &= K_j + \top\\
-    \ldots
-\end{alignedat}
+    E \rightharpoonup K_i
 \]
-
 \noindent
-Die um $\top$ erweiterten Komponententypen, Relationen und Attribute notieren wir im Folgenden mit einem Superscript $^\top$:\\
+ ausdrücken zu können, beispielsweise als Selektion und nachfolgende Projektion:
+ ausdrücken zu können, beispielsweise als Selektion und nachfolgende Projktion:
 
-\[
-    K^{\top}(e, \ k_i^\top, k_j^\top, \ldots)
-\]
+ \[
+     \pi_{e, k_\text{Position}, k_\text{Velocity}}(\sigma_{k_\text{Position} \neq \bot \land k_\text{Velocity} \neq \bot}(K_J))
+ \]
 
-\noindent
-Die im vorherigen Abschnitt angegebenen funktionalen Abhängigkeiten und Abhängigkeitsmengen ändern sich damit nicht, abgesehen der geringfügig abweichenden Notation, beispielsweise für $F^\text{min}_{K^\top}$:
-
-\[
-    F^\text{min}_{K^\top} = \{e \rightarrow k^\top_1, e \rightarrow k^\top_2, \ldots e \rightarrow k^\top_n \}
-\]
 
 \bigskip
-\begin{tcolorbox}[title={Zusätzliche Integritätsbedingung für $K^{\top}$}]
-Als zusätzliche Integritätsbedingung kann vereinbart werden, dass eine Entität nicht ausschließlich $\unitval$-Werte in den Komponentenattributen aufweisen darf.
-Ein Tupel der Relation $K^\top$ im Relationszustand $\pi_{K^\top}(r)$ muss mindestens einen konkreten Komponententerm aufweisen.
+ Die Semantik von \textit{ECS Core} würde damit im relationalen Modell über eine Erweiterung des Wertebereichs sowie eine inhaltliche Interpretation der Anfrageergebnisse umgesetzt, während die zitierte Arbeit die Konjunktion der Anfrage-Bedingungen als relationalen Join versteht.\\
+
+Aus den genannten Gründen verzichten wir auf eine Totalrelation mit Hilfe von \texttt{NULL}- beziehungsweise Spezialwerten, und modellieren das ECS-Modell als Familie von Relationen, die jeweils nur tatsächliche Komponentenassoziationen abbilden.
+Damit gehen wir von folgendem aus: Zu $k_1, k_2, \ldots, k_n$ im ECS-Modell können zu jedem Zeitpunkt Relationen $K_J$ mit beliebiger nichtleerer Teilmenge dieser Komponentenattribute existieren.
+
+Sei hierbei
 \[
-    \forall t \in \pi_{K^\top}(r), A_i \neq e: \exists t[A_i]: t[A_i] \neq \unitval
+    \mathcal{K}_P = P(\{k_1, k_2, \ldots, k_n\}) \setminus \{\emptyset\}
 \]
-\end{tcolorbox}
+
+\noindent
+die Potenzmenge über alle möglichen Komponentenattribute, dann ist $K_J$ eine Relation mit
+
+\[
+    K_J = \{e\} \cup R, \text{ mit } R  \in \mathcal{K}_P
+\]
+
+\noindent
+\textbf{Beispiel}:\\
+Seien $K_{J_1} = \{e, k_1, k_2\}, K_{J_2} = \{e, k_2, k_5\}$ mit $t_1 \in r(K_{J_1}), t_2 \in r(K_{J_2})$, und gelte
+
+\[
+     t_1[e] = t_2[e]
+\]
+
+\noindent
+Dann repräsentiert das Tupel
+
+\[
+   t_e \in r(K_{J_1}) \njoin r(K_{J_2})
+\]
+
+\noindent
+eine Entität, die über Komponentenassoziationen $k_1, k_2, k_5$ verfügt.\\
+
+Im Weiteren verzichten wir auf eine Indizierung von $K_J$ -- für die Nachweise der Normalformen ist nur der Aufbau einer solchen Relation von Bedeutung:
+
+\[
+    K_J = \{e\} \cup \{k_j \mid j \in J \}
+\]
+
+Die nachfolgenden Abschnitte motivieren auf dieser Grundlage die Einführung der \textit{komponentenzentrischen Relationen} von der Form $K_i(e, k_i)$.
 
 \subsection*{Nachweis der Normalformen}
 
@@ -577,7 +667,7 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhän
     }, was Normann auch in~\cite{Nor98} diskutiert.\\
 
     Darwen et {al.} zeigen in der zitierten Arbeit, dass die SKNF nicht äquivalent zu der 5NF ist -- sie ist sogar schwächer.
-    Im Kontext dieser Arbeit nehmen wir deshalb für die 5NF implizit die Definition von Fagin {bzw.} Vossen an.
+    Im Kontext dieser Arbeit nehmen wir deshalb für die 5NF implizit die Definition von Fagin beziehungsweise Vossen an.
 \end{tcolorbox}
 \bigskip
 

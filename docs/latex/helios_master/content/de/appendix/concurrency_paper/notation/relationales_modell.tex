@@ -500,19 +500,21 @@ Wie beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 \begin{proof}
     Sei $D$ eine beliebige verlustfreie Zerlegung von $K_J$, sei $D' = D$.\\
 
-    Falls $D'$ nicht redundanzfrei ist, existiert mindestens ein $K_{J_q} \in D'$, so dass
+    Falls $D'$ nicht verlustfrei-redundanzfrei ist, existiert mindestens ein $K_{J_q} \in D'$, so dass für jeden legalen Relationszustand $r$ von $K_J$ gilt:
 
     \[
         \njoin_{K_{J_i} \in D' \setminus \{K_{J_q}\}} \pi_{K_{J_i}}(r) = \pi_{K_J}(r)
     \]
-    Jedes solche $K_{J_q}$ wird aus $D'$ entfernt und dieser Schritt so lange wiederholt, bis $D'$ verlustfrei-redundanzfrei ist, und damit gilt
+    Jedes solche $K_{J_q}$ wird aus $D'$ entfernt.
+    Der Schritt wird so lange wiederholt, bis $D'$ verlustfrei-redundanzfrei ist.
+    Damit gilt für jedes $K_{J_q} \in D'$ mindestens ein legaler Relationszustand $r$ von $K_J$, so dass
     \[
-        \njoin_{K_{J_i} \in D' \setminus \{K_{J_q}\}} \pi_{K_{J_i}}(r) \neq \pi_{K_J}(r), \quad K_{J_q} \in D'
+        \njoin_{K_{J_i} \in D' \setminus \{K_{J_q}\}} \pi_{K_{J_i}}(r) \neq \pi_{K_J}(r)
     \]
     Es ist sichergestellt, dass das Verfahren terminiert, da $D$ endlich ist und mit jedem Schritt genau eine Relation aus $D'$ entfernt wird.
-    Ist die Bedingung der verlustfreien Redundanzfreiheit verletzt, kann aber auch mindestens ein redundantes Element entfernt werden, ohne dass
+    Ist die Bedingung der verlustfreien Redundanzfreiheit verletzt, kann aber auch mindestens ein redundantes Element entfernt werden, ohne dass für jeden legalen Relationszustand $r$ von $K_J$
     \[
-        \njoin_{K_{J_i} \in D'} \pi_{K_{J_i}}(r) = \pi_{K_J}(r), K_{J_i} \in D'
+        \njoin_{K_{J_i} \in D'} \pi_{K_{J_i}}(r) = \pi_{K_J}(r)
     \]
     verletzt wird -- somit kann die Zerlegung auch nicht leer sein.
 \end{proof}

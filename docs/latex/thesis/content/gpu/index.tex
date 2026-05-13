@@ -1,0 +1,142 @@
+\chapter{Typsichere GPU-nahe Render-Daten in einer OpenGL-basierten ECS-Engine: Normalisierte Komponentenrelationen, domänenspezifische Handles und heuristische Instanzierung}\label{ch:vorschlag3}
+
+\section{Forschungsfrage}
+
+\begin{quote}
+    Wie kann ein normalisiertes, komponentenzentrisches ECS-Datenmodell eine typsichere, ECS-domänenbezogene Beschreibung GPU-naher Render-Daten in einer OpenGL-basierten Engine motivieren, und welche Resource-Dependencies sowie Batching-Entscheidungen für instanziertes Rendering lassen sich daraus systematisch ableiten?
+\end{quote}
+
+\section{Methodik}
+
+Die Arbeit untersucht, wie ein normalisiertes, komponentenzentrisches ECS-Datenmodell als Grundlage einer typsicheren Beschreibung GPU-naher Render-Daten in \texttt{helios} dienen kann.
+Ausgangspunkt ist eine formale Herleitung der komponentenzentrischen Zerlegung über die Normalformtheorie des relationalen Modells.
+Auf dieser Grundlage wird untersucht, wie die in der ECS-Schicht verwendeten domänenspezifischen Handles auf die Rendering-Schicht übertragen werden können, so dass relevante Render-Daten, GPU-Buffer und einfache Pass-Abhängigkeiten typseitig beschrieben werden können.\\
+
+Im theoretischen Teil wird zunächst eine entitätszentrische Relation
+
+\[
+    K(e, k_1, k_2, \ldots, k_n)
+\]
+
+\noindent
+eingeführt und die komponentenzentrische Zerlegung
+
+\[
+    K_1(e, k_1),\quad K_2(e, k_2),\quad \ldots,\quad K_n(e, k_n)
+\]
+
+\noindent
+über die Normalformeigenschaften von \(K\) motiviert.\\
+
+Aufbauend auf der normalisierten Zerlegung werden GPU-nahe Datenzugriffe über typisierte Lese- und Schreibsignaturen beschrieben.
+Eine Pass-Deklaration kann beispielsweise die Form
+
+\begin{verbatim}
+auto ParticleUpdatePass = GpuPass<
+    Read<
+        PositionBuffer<ParticleHandle>,
+        VelocityBuffer<ParticleHandle>
+    >,
+    Write<
+        PositionBuffer<ParticleHandle>
+    >
+>{};
+\end{verbatim}
+
+\noindent
+annehmen.
+Die Parametrisierung mit \texttt{ParticleHandle} bindet den Zugriff an eine bestimmte ECS-Domäne.
+Damit ist bereits zur Übersetzungszeit die Zugriffssignatur des Passes bekannt.
+Die konkrete Zuordnung auf GPU-Ressourcen, etwa auf OpenGL-Buffer-Objekte, erfolgt anschließend über die Resource-Registry beziehungsweise die Rendering-Schicht der Engine.
+Der Zugriff bezieht sich damit auf GPU-seitige Buffer innerhalb der durch \texttt{ParticleHandle} beschriebenen Domäne.\\
+
+Aus den so deklarierten \texttt{Read}- und \texttt{Write}-Mengen wird ein Pass-Graph mit gerichteten Resource-Dependencies aufgebaut, der die Grundlage für die weitere Analyse bildet.
+Das Typsystem soll hierbei die zulässigen Zugriffssignaturen beschreiben.
+Die konkrete Pass-Struktur eines Frames soll  aus den aktiven Pässen und Ressourcen der Engine abgeleitet werden.\\
+
+Die \texttt{Read}- und \texttt{Write}-Hüllen tragen die Zugriffssemantik der Pass-Deklaration.
+Wie die zugehörigen Ressourcen physisch repräsentiert werden -- etwa durch In-place-Updates, nicht überlappende Bufferbereiche oder Double-Buffer-Strategien mit unterschiedlichen physischen Buffern für Lese- und Schreibzugriff -- ist Gegenstand der Untersuchung.\\
+
+Als zentraler Anwendungsfall der typsicheren Beschreibung GPU-naher Render-Daten wird instanziertes Rendering untersucht.
+Renderbare Entitäten lassen sich anhand ihrer Ressourcen-Handles gruppieren:
+Entitäten mit gleichem \texttt{MeshHandle}, gleichem \texttt{ShaderHandle} sowie kompatiblen Material-, Textur- und Render-State-Informationen sind Kandidaten für eine gemeinsame Instancing-Ausführung.
+Die Batch-Bildung wird über einen Schlüssel der Form
+
+\[
+    key(B) =
+    (\texttt{MeshHandle},\ \texttt{ShaderHandle},\ \texttt{MaterialHandle},\ \texttt{RenderState})
+\]
+
+\noindent
+und einen Schwellwert \(\theta\) gesteuert.
+Für eine Gruppe \(B\) wird instanziertes Rendering verwendet, wenn
+
+\[
+    |B| \geq \theta
+\]
+
+\noindent
+gilt.
+Der Schwellwert \(\theta\) wird dabei als heuristischer Parameter verstanden, dessen Einfluss auf Laufzeitverhalten, Draw-Call-Anzahl und Buffer-Aktualisierungen empirisch untersucht wird.\\
+
+Die Untersuchung erfolgt in vier Schritten:
+
+\begin{enumerate}
+    \item \textbf{Normalformanalyse des ECS-Datenmodells:} Entitäten und Komponenten werden relational beschrieben, und die Normalformeigenschaften der komponentenzentrischen Zerlegung werden hergeleitet.
+    Diese Herleitung dient der formalen Motivation der nachfolgenden Datenhaltung auf CPU- und GPU-Seite.
+
+    \item \textbf{Anbindung an CPU- und GPU-nahe Datenhaltung:} Die normalisierten Komponentenrelationen werden auf die in \texttt{helios} verwendeten Sparse Sets sowie auf GPU-nahe Buffer-Strukturen bezogen.
+    Dabei wird untersucht, welche strukturellen Eigenschaften der relationalen Sicht sich auf die GPU-seitige Repräsentation übertragen lassen.
+
+    \item \textbf{Typsichere Beschreibung GPU-naher Zugriffe:} GPU-nahe Render- und Buffer-Zugriffe werden über typisierte Lese-/Schreibsignaturen mit ECS-Domänenbezug deklariert.
+    Aus den deklarierten Signaturen werden die im Referenzszenario relevanten Resource-Dependencies abgeleitet.
+
+    \item \textbf{Ableitung der Instancing-Heuristik und Evaluation:} Aus den Ressourcen-Handles wird der Batch-Schlüssel gewonnen, und die Wirkung des Schwellwerts \(\theta\) auf das Laufzeitverhalten wird systematisch untersucht.
+    Für ein Referenzszenario wird die Implementierung gegen eine konventionelle, ohne typsichere Pass-Signaturen organisierte Pipeline-Variante verglichen.
+\end{enumerate}
+
+Für den empirischen Vergleich werden folgende Bewertungskriterien herangezogen:
+
+\begin{enumerate}
+    \item Frametime und CPU-Zeit pro Frame,
+    \item Anzahl der Draw-Calls mit und ohne instanziertes Rendering,
+    \item Anzahl der tatsächlichen VAO-, Mesh-/Index-Buffer- und Instance-Buffer-Wechsel pro Frame,
+    \item Anzahl und Datenvolumen der Instance-Buffer-Updates pro Frame,
+    \item Skalierungsverhalten bei wachsender Objekt- beziehungsweise Partikelanzahl,
+    \item Einfluss des Schwellwerts \(\theta\) auf Frametime und Draw-Call-Reduktion,
+    \item Anzahl der aus den typisierten Lese-/Schreibsignaturen ableitbaren einfachen Pass-Abhängigkeiten.
+\end{enumerate}
+
+Die praktische Umsetzung erfolgt auf Grundlage des bestehenden OpenGL-Backends von \texttt{helios}; eine Übertragung auf Vulkan, Metal oder Direct3D ist nicht Gegenstand der Arbeit.
+
+\section{Referenzszenario und Abgrenzung}
+
+Das Referenzszenario dieser Arbeit legt den Fokus auf ein Partikelsystem mit hoher Objektanzahl sowie eine Szene mit mehreren statischen und dynamischen Objekten, die unterschiedliche Material-, Shader- und Mesh-Konfigurationen aufweisen.
+Diese Konfiguration soll sicherstellen, dass sowohl klar instanzierbare Objektgruppen -- etwa Partikel mit gleicher Mesh- und Shader-Konfiguration -- als auch heterogene Objektmengen bereitstehen, an denen sich der Einfluss des Schwellwerts \(\theta\) beobachten lässt.\\
+
+Für das Partikelsystem wird geprüft, inwieweit GPU-seitige Buffer als domänengebundene Repräsentation ausgewählter ECS-Komponentenrelationen dienen können.
+Die CPU verwaltet in diesem Fall nur den initialen Partikelzustand, die zugehörigen GPU-Ressourcen, deren Rollen innerhalb der Pass-Ausführung sowie globale Parameter.
+Dadurch kann untersucht werden, welche Daten in der CPU-seitigen ECS-Struktur verbleiben und welche Daten als GPU-geführte Buffer-Repräsentation modelliert werden können.\\
+
+Für die Objektverarbeitung wird untersucht, inwieweit sich aus den \textit{Sparse-Set}-basierten Komponentenrelationen und Ressourcen-Handles Instancing-Gruppen ableiten lassen.
+Insbesondere wird betrachtet, ab welcher Gruppengröße instanziertes Rendering gegenüber einzelnen Draw-Calls Vorteile bietet und wie stark Material-, Shader- und Render-State-Vielfalt die Wirksamkeit der Heuristik beeinflussen.\\
+
+
+Die Arbeit beschränkt sich auf die Frage, wie normalisierte ECS-Komponentenrelationen, domänenspezifische Handles und typsichere Zugriffssignaturen zur Ableitung GPU-naher Buffer-Strukturen und Instancing-Entscheidungen genutzt werden können.
+
+\section{Vorläufige Gliederung}
+
+\begin{enumerate}
+    \item Einleitung und Zielsetzung
+    \item Grundlagen: ECS, relationales Modell, OpenGL-Pipeline und instanziertes Rendering
+    \item Normalformanalyse des ECS-Datenmodells und Motivation der komponentenzentrischen Zerlegung
+    \item Komponentenrelationen als Grundlage CPU- und GPU-naher Datenhaltung
+    \item Typsichere Beschreibung GPU-naher Zugriffe mit domänenspezifischen Handles
+    \item Einfache Resource-Dependencies aus typisierten Signaturen
+    \item Ableitung der Instancing-Heuristik aus Ressourcen-Handles
+    \item Implementierung in \texttt{helios}
+    \item Referenzszenario: GPU-gestützte Partikel- und Objektverarbeitung
+    \item Evaluation: Draw-Calls, Buffer-Wechsel, CPU-Zeit und Frametime
+    \item Diskussion
+    \item Zusammenfassung und Fazit
+\end{enumerate}

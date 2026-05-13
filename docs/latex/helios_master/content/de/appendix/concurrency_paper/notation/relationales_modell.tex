@@ -27,10 +27,13 @@ Folgenden Abkürzungen werden verwendet: \textit{FD} bezeichnet \textit{Funktion
 Die Verwendung von Plural beziehungsweise Singular ergibt sich aus dem jeweiligen Kontext.\\
 
 \noindent
-Für Relation verwenden wir im Folgenden Großbuchstaben, beispielsweise $R$.\\
+Ein Relationsschema $R$ setzt sich aus dem Relationsnamen $R$ und einer Attributliste $(A_1, A_2, \ldots, A_n)$ zusammen.
+Beispiel: $K(k_1, k_2, \ldots, k_n)$ ist das Relationsschema $K$ mit den Attributen $k_1, k_2, \ldots k_n$.\\
+Wir verwenden den Begriff \txtit{Relation} zusammen mit dem Relationsnamen, wenn wir uns auf ein bestimmtes Relationsschema beziehen.
+Beispiel: Die Relation $K$ besteht aus der Attributmenge $\{k_1, k_2, \ldots, k_n\}$.
 
 \noindent
-Für den Relationszustand einer Relation $R$ notieren wir $r(R)$, oder einfach $r$, falls sich aus dem Kontext ergibt, welche Relation gemeint ist.\\
+Für den Relationszustand eines Relationschemas $R$ notieren wir $r(R)$, oder einfach $r$, falls sich aus dem Kontext ergibt, welche Relation gemeint ist.\\
 
 \noindent
 Wir notieren $\pi_{R_i}(r)$ für die Projektion des Relationszustands $r(R)$ auf die Attributmenge der Relation $R_i \subseteq R$.\\
@@ -309,7 +312,7 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
     ein Relationsschema über eine endliche Komponentenattributmenge $\{k_1, k_2, \ldots, k_n\}$.\\
 
     \noindent
-    Ein Teilschema $R \subseteq K_J$ heißt \textit{enitättsbezogen}, wenn
+    Ein Teilschema $R \subseteq K_J$ heißt \textit{entitätsbezogen}, wenn
 
     \[
         e \in R
@@ -473,7 +476,7 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
             K_{J_2}      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$         \\
             K_{J_3}      & $a_e$     & $a_1$         & $a_2$         & $a_3$        & \dots  & $a_n$         \\
             \vdots          & \vdots & \vdots     & \vdots     & \vdots     & \ddots & \vdots     \\
-            K_{J_n}      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$
+            K_{J_m}      & $a_e$     & $a_1$         & $a_2$         & $a_3$         & \dots  & $a_n$
         \end{array}
     \]
     \medskip
@@ -643,7 +646,7 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
                 \]
                 sowie
                 \[
-                    \exists k_x \in K_{J_q}, K_{J_q} \in D \setminus D_e
+                    \exists K_{J_q} \in D \setminus D_e: k_x \in K_{J_q}
                 \]
                 Bei der Anwendung des Chase-Verfahrens verbleibt damit ein $b$-Symbol bei der Attributspalte $e$ in der zugehörigen Zeile $K_{J_q}$ und verhindert damit die Vereinheitlichung der Zeile mit den übrigen Zeilen, die ein $a$-Symbol in der $e$-Spalte besitzen:
                 Dass dieses Attribut nicht in den Relationen von $D_e$ vorkommt, sondern in mindestens einer der Relationen von $D \setminus D_e$, bedeutet, dass das Chase-Verfahren in diesem Kontext keine Zeile vollständig mit $a$-Symbolen besetzen kann, solange nicht auch $e$ ein Attribut der Relationen von $D \setminus D_e$ ist, und im Chase-Verfahren ein $a$-Symbol erhält.

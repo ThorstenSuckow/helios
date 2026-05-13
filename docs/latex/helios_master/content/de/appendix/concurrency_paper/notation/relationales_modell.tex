@@ -22,7 +22,8 @@ Die Verwendung von Plural beziehungsweise Singular ergibt sich aus dem jeweilige
 Ein Relationsschema $R$ setzt sich aus dem Relationsnamen $R$ und einer Attributliste $(A_1, A_2, \ldots, A_n)$ zusammen.
 Beispiel: $K(k_1, k_2, \ldots, k_n)$ ist das Relationsschema $K$ mit den Attributen $k_1, k_2, \ldots k_n$.\\
 Wir verwenden den Begriff \textit{Relation} zusammen mit dem Relationsnamen, wenn wir uns auf ein bestimmtes Relationsschema beziehen.
-Beispiel: Die Relation $K$ besteht aus der Attributmenge $\{k_1, k_2, \ldots, k_n\}$.
+Beispiel: Die Relation $K$ besteht aus der Attributmenge $\{k_1, k_2, \ldots, k_n\}$.\\
+Wir übernehmen Mengennotation, wenn wir uns auf die Attributliste einer Relation beziehen: $R = \{A_1, A_2\}$ bedeutet damit, dass die Relation $R$ aus den Attributen $A_1, A_2$ besteht.
 
 \noindent
 Für den Relationszustand eines Relationschemas $R$ notieren wir $r(R)$, oder einfach $r$, falls sich aus dem Kontext ergibt, welche Relation gemeint ist.\\
@@ -47,8 +48,8 @@ Im Folgenden schließt \textit{verlustfrei} im Zusammenhang mit Joins und Zerleg
 
 \noindent
 Wir folgen einer Notationskonvention, die das ECS-Modell von \textit{ECS Core} visuell trennt.
-Indem wir eine unterschiedliche Kalligraphie für die gleichen Symbole in unterschiedlichen konzeptuellen Kontexten nutzen, hoffen wir, kognitiv teure Operationen beim Leser durch Indizierungen und ähnlichem zu vermeiden, und den Konzeptübergreifenden semantischen Inhalt der Symbole (Typsemantik bei Redmond et al., relationales Modell bei uns) treu zu bleiben.
-So wird beispielsweise der bei Redmond et al. verwendete Entitätstyp $\mathcal{E}$ bei uns im relationalen Modell zu einem $E$, der Komponententyp $\mathcal{K}_i$ bei uns zu einem $K_i$ als Relationsnamen, der mit einem bestimmten Komponententyp konnotiert ist.
+Indem wir eine unterschiedliche Kalligraphie für die gleichen Symbole in unterschiedlichen konzeptuellen Kontexten nutzen, hoffen wir, kognitiv teure Operationen beim Leser durch Indizierungen und ähnlichem zu vermeiden, und den konzeptübergreifenden semantischen Inhalt der Symbole (Typsemantik bei Redmond et al., relationales Modell bei uns) treu zu bleiben.
+So wird beispielsweise der bei Redmond et al. verwendete Entitätstyp $\mathcal{E}$ bei uns im relationalen Modell zu einem $E$, der Komponententyp $\mathcal{K}_i$ zu einem $K_i$ als Relationsnamen, der mit einem bestimmten Komponententyp konnotiert ist.
 
 Damit überladen wir die aus der Arbeit von Redmond et al. genutzten Bezeichner $\mathcal{K}_i$ für das ECS-Modell.
 Hier bezeichnen wir mit $K_i$ -- in Anlehnung an den \textit{Typ} -- eine Relation mit der Attributmenge $\{e, k_i\}$.
@@ -58,13 +59,19 @@ Hier bezeichnen wir mit $K_i$ -- in Anlehnung an den \textit{Typ} -- eine Relati
 \]
 
 Die bei Redmond et al. verwendete Menge $\mathcal{I}$, die einen Wertebereich von Komponentenbezeichnern darstellt, übertragen wir in das relationalen Modell als eine Menge $I$, deren Elemente zur Unterscheidung von Komponenten und Komponentenattributen dienen und ganzzahlig sind: $k_1, k_2, \ldots, k_n$ usw.
-Sofern ein fachlicher Zusammenhang ein Anwendungsbeispiel unterstützt, wechseln wir von einem abstrakten numerischen Typ kurzfristig auf einen alphanumerischen, wie $k_\text{Position}, k_\text{Velocity}$ usw.
+Sofern ein fachlicher Zusammenhang ein Anwendungsbeispiel unterstützt, wechseln wir von einem abstrakten numerischen Typ kurzfristig auf einen alphanumerischen, wie $k_\text{Position}, k_\text{Velocity}$ usw.\\
+
 
 \noindent
-Der Wertebereich $\text{dom}(k_i)$ entspricht dem Wertebereich der darzustellenden Komponente, beziehungsweise den der Implementierung der darunterliegenden Programmiersprache (Redmond et al.: dem \textit{Typ} $K_i$).\\
+Der Wertebereich $\text{dom}(k_i)$ entspricht dem Wertebereich der darzustellenden Komponente, übertragen auf unser Speicherkonzept.
+Bei Redmond et al. entspricht dies dem Typen in der Implementierung der darunterliegenden Programmiersprache, $\mathcal{K}_i$.\\
+Ein Komponentenattribut $k_i$ stellt im relationalen Modell ein Attribut zur Repräsentation von $\mathcal{K}_i$ dar.
+Eine Relation mit einem Komponentenattribut $k_i$ speichert einen Tupelwert vom Typ $\text{dom}(k_i)$; ersatzweise sagen wir auch \textit{Komponententerm} statt Wert bzw. Tupelwert.
 
 \noindent
-Damit wollen wir die Typsemantik aus der zitierten Arbeit auf einen relationalen Kontext übertragen, also beispielsweise
+Damit wollen wir die Typsemantik aus der zitierten Arbeit auf einen relationalen Kontext übertragen\footnote{
+Wir verwenden hierzu den $\widehat{=}$-Operator, um diese Entsprechung zum Ausdruck zu bringen.
+}, also beispielsweise
 
 \[
     c \coloneqq \{c_i: \mathcal{E} \rightharpoonup \mathcal{K}_i\}_{i \in \mathcal{I}}
@@ -82,13 +89,14 @@ sowie $c$ auf
 \[
     c \mathrel{\widehat{=}} \{r(K_i)\}_{i \in I}
 \]
+
 \medskip
 
 
 
 \subsection{Das relationale Schema}
 Ein erster Entwurf eines relationalen Schemas, das die Beziehungen zwischen \textit{Entität} und \textit{Komponenten} ausdrückt, führt zu dem in Abbildung~\ref{fig:relation} dargestellten Modell.
-Der Entitätstyp $E$ ist dort mit Komponententypen $K_1$, $K_2, \ldots$ dargestellt, wobei die Beziehungen als binäre Relationen modelliert sind. Der Ansatz wird bei uns als \textit{entitätszentrischer Entwurf} bezeichnet und in ähnlicher Form bei Redmond et {al.} verwendet~\cite[Fig.1, 272:3]{RCCM+25}.
+Der Entitätstyp $E$ ist dort mit Komponententypen $K_1$, $K_2, \ldots$ dargestellt, wobei die Beziehungen als binäre Relationen modelliert sind. Der Ansatz wird bei uns als \textit{entitätszentrischer Entwurf} bezeichnet und in ähnlicher Form bei Redmond et al. verwendet~\cite[Fig.1, 272:3]{RCCM+25}.
 
 
 \begin{figure}[!htbp]
@@ -117,7 +125,7 @@ Relationen und Attributmengen des ECS-Modells ergeben sich wie folgt:
 \noindent
 Als Primärschlüssel für $E$ identifizieren wir das Attribut $e$.
 In den Relationen $K_1, K_2, \ldots$ ist $e$ der Fremdschlüssel und zugleich Primärschlüssel, da eine Entität pro Komponententyp höchstens eine Ausprägung besitzt.\footnote{
-In Abbidung~\ref{fig:relation} wird dies durch die 1:1 Kardinalitäten kenntlich gemacht.
+In Abbildung~\ref{fig:relation} wird dies durch die 1:1 Kardinalitäten kenntlich gemacht.
 }\\
 
 \noindent
@@ -136,7 +144,7 @@ Die funktionalen Abhängigkeiten der Relationen lauten:
 \noindent
 Entitäten, die garantierte Assoziationen zu allen Komponenten $K_1, K_2, \ldots, K_n$ besitzen, können in ein breites Relationsschema überführt werden (siehe Abbildung~\ref{fig:breiterelation_k}):
 \[
-    K(e, k_1, k_2, \ldots, k_n),\quad J \subseteq I
+    K(e, k_1, k_2, \ldots, k_n)
 \]
 
 
@@ -192,7 +200,7 @@ Damit kann im Sinne der Typsemantik formuliert werden, dass über eine Anfrage w
 \]
 
 \noindent
-nicht nur der Typ der angefragten Komponenten $\mathcal{K}_i$ ausgedrückt wird, sondern auch der Typ $\top$, falls die Komponente $\mathcal{K}_i$ nicht für die Entität definiert ist.\footnote{$\mathcal{K}_i$ ist in diesem Zusammenhang der Komponententyp in der dem \textit{ECS Core}-Modell zugrundeliegenden Programmiersprache, vgl. Redmond et al.: ``Each $K_i$ is a type in the sub-language, [\dots]''.}\\
+nicht nur der Typ der angefragten Komponenten $\mathcal{K}_i$ ausgedrückt wird, sondern auch der Typ $\top$, falls die Komponente $\mathcal{K}_i$ nicht für die Entität definiert ist.\footnote{$\mathcal{K}_i$ ist in diesem Zusammenhang der Komponententyp in der dem \textit{ECS Core}-Modell zugrundeliegenden Programmiersprache, vgl. Redmond et al.: ``Each $K_i$ is a type in the sub-language, [\dots]'' (Originalnotation; entspricht hier $\mathcal{K}_i$)}\\
 
 Im relationalen Modell ist die Attributmenge hingegen über die Schemadefinition bekannt.
 Ein Zusammenfassen aller möglichen Komponentenattribute in einer breiten Relation ist allerdings dann nicht möglich, wenn Tupel die in \textit{ECS Core} eingeführte partielle Abbildung
@@ -268,9 +276,14 @@ eine Relation der $K$-Relationenfamilie
 \end{definition}
 \bigskip
 
+Im Folgenden meinen wir mit einer Relation $K$ immer eine beliebige Relation $F \in \mathcal{F}^K$.
+Wo eine explizite Abgrenzung notwendig ist, weisen wir entsprechend darauf hin.
+Der einzige Schlüsselkandidat jeder Relation $K \in \mathcal{F}^K$ ist $e$.
+
+
 \noindent
 \textbf{Beispiel}:\\
-Seien $K_{1} = \{e, k_1, k_2\} \in \mathcal{F}^K, R_{2} = \{e, k_2, k_5\} \in \mathcal{F}^K$ mit $t_1 \in r(R_{1}), t_2 \in r(R_{2})$, und gelte
+Seien $R_{A} = \{e, k_1, k_2\} \in \mathcal{F}^K, R_{B} = \{e, k_2, k_5\} \in \mathcal{F}^K$ mit $t_1 \in r(R_{A}), t_2 \in r(R_{B})$, und gelte
 
 \[
      t_1[e] = t_2[e],\ t_1[k_2] = t_2[k_2]
@@ -280,7 +293,7 @@ Seien $K_{1} = \{e, k_1, k_2\} \in \mathcal{F}^K, R_{2} = \{e, k_2, k_5\} \in \m
 Dann repräsentiert das Tupel
 
 \[
-   t_e \in r(R_{1}) \njoin r(R_{2})
+   t_e \in r(R_{A}) \njoin r(R_{B})
 \]
 
 \noindent
@@ -306,19 +319,13 @@ Damit beenden wir die Einführung und gehen über zu dem Nachweis der Normalform
 \subsection{Nachweis der Normalformen}
 
 Wir führen im Folgenden den Nachweis der 1., 2., 3., 4., und 5. sowie der Boyce-Codd-Normalform für $K$.
-Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
-
+Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.
 
 \bigskip
-\begin{axiom}\label{ax:nur_atomar}
+\begin{modelassumption}\label{mass:nur_atomar}
     Die Wertemengen der Attribute von $K$ lassen nur einzelne, untrennbare (und damit atomare) Werte zu.
-\end{axiom}
+\end{modelassumption}
 
-\bigskip
-\begin{axiom}\label{ax:einfacher_schluessel}
-    Der einzige Schlüsselkandidat der Relation $K$ ist $e$.
-\end{axiom}
-\bigskip
 
 \begin{definition}\label{def:entitätsbezogen}
 
@@ -338,7 +345,7 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
     \[
         D = (R_1, R_2, \ldots, R_m)
     \]
-    von $K$ mit
+    von $K$
 
     \[
         R_1 \cup R_2 \cup \ldots \cup R_m = K
@@ -352,71 +359,42 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 \bigskip
 
 
+
+
+
 \bigskip
-\begin{lemma}\label{lem:K_bin_ist_verlustfrei}
-    Die entitätsbezogene Relation
+\begin{lemma}\label{lem:k_zerlegung_ist_verlustfrei}
+    Sei $K = K(e, k_1, k_2, \ldots, k_n), n \geq 1$. Jede entitätsbezogene Zerlegung
     \[
-        K(e, k_i, k_j), \ i \neq j
+        D = (R_{1}, R_{2}, \ldots, R_{m})
     \]
-    lässt sich verlustfrei in die entitätsbezogenen Relationen
-    \[
-        R_{i}(e, k_i),\quad R_{j}(e, k_j)
-    \]
-    zerlegen.
+    von $K$ ist verlustfrei.
 \end{lemma}
 
 \medskip
 \begin{proof}
-    Sei
-    \[
-        R_{i} = \pi_{(e,k_i)}(K),
-        \qquad
-        R_{j} = \pi_{(e,k_j)}(K).
-    \]
-
-    \noindent
-    Wir zeigen, dass
-    \[
-        \pi_{R_{i}}(r)\
-        \bowtie_{R_{i}.e = R_{j}.e}\
-        \pi_{R_{j}}(r)
-        =
-        \njoin\bigl(\pi_{R_{i}}(r), \pi_{R_{j}}(r)\bigr)
-        =
-        \pi_{K}(r).
-    \]
-
-    \bigskip
-    \noindent
-    Da es sich um eine binäre Zerlegung handelt, kann der Beweis anhand der funktionalen Eigenschaften erfolgen~\cite[S. 343]{EN11}:
-    \[
-        \begin{alignedat}{3}
-            ((R_{i} \cap R_{j}) &\rightarrow (R_{i} - R_{j}))
-            = (\{e\} \rightarrow \{k_i\}) \in F_{K}^+\\
-            (R_{i} \cap R_{j}) &\rightarrow (R_{j} - R_{i}))
-            = (\{e\} \rightarrow \{k_j\}) \in F_{K}^+
-        \end{alignedat}
-    \]
-\end{proof}
-
-
-\bigskip
-\begin{lemma}\label{lem:K_plus_ist_verlustfrei}
-    Die Relation $K = K(e, k_1, k_2, \ldots, k_n), n > 2$ lässt sich verlustfrei entitätsbezogen nach $D= (R_{1}, R_{2}, \ldots, R_{m}), m \geq 2$ zerlegen.
-\end{lemma}
-
-\medskip
-\begin{proof}
-    Um Lemma~\ref{lem:K_bin_ist_verlustfrei} auf m-äre Zerlegungen $D_m = (R_{1}, R_{2}, \ldots, R_{m}, m \geq 2)$ von $K$ auszuweiten, ist zu zeigen:
+    Zu zeigen ist, dass für jede entitätsbezogene Zerlegung von $K$ und jeden legalen Relationszustand $r$ von $K$ gilt:
     \[
         \pi_{{K}}(r) =\ \njoin (\pi_{R_{1}}(r), \pi_{R_{2}}(r), \ldots, \pi_{R_{m}}(r))
     \]
 
-    Hierzu wenden wir das Chase-Verfahren an~\cite{ABU79}~\cite[Algorithmus 10.2, S. 342]{EN11}.
+    \noindent
+    Für $n = 1$ gilt $K(e, k_1)$.\\
+    Da $D$ eine Zerlegung von $K$ ist, muss mindestens eine Relation $R_q \in D$ das Attribut $k_1$ enthalten.\\
+    Da $D$ eine entitätsbezogene Zerlegung ist, muss $R_q$ auch $e$ enthalten.\\
+    Damit ist $R_q = K$. Jede weitere Relation $R_x$ der Zerlegung kann höchstens selber wieder von der Form $R_q$ sein, oder nur
+    $e$ enthalten, womit diese Relationen redundant für die Rekonstruktion von $K$ sind.
+    Damit gilt die Behauptung
+    \[
+         \njoin (\pi_{R_q}(r), \pi_{R_{x_1}}(r), \pi_{R_{x_2}}(r), \ldots, \pi_{R_{x_m}}(r)) = \pi_{R_q}(r) = \pi_{{K}}(r)
+    \]
+
+    \noindent
+    Für den Nachweis des Falls $n \geq 2$ wenden wir das Chase-Verfahren an~\cite{ABU79}~\cite[Algorithmus 10.2, S. 342]{EN11}.
     Für eine bessere Lesbarkeit verzichten wir in der Tableaudarstellung auf die $b$-Symbole und nutzen stattdessen Unterstriche $\_$ in entsprechenden Zellen.\\
 
     \noindent
-    Die Zerlegung der einzelnen Relationen erfolgt zunächst entitätsbezogen nach Definition~\ref{def:entitätsbezogen} , so dass
+    Die Zerlegung der einzelnen Relationen erfolgt zunächst entitätsbezogen nach Definition~\ref{def:entitätsbezogen}, so dass
     \[
         \forall R_{i} \in D : e \in R_{i}
     \]
@@ -519,7 +497,7 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 
 
 \begin{definition}\label{def:verlustfrei_redundanzfrei}
-    Eine verlustfreie Zerlegung  $D = (R_1, R_2, \ldots, R_n)$ einer Relation $R$ mit
+    Eine verlustfreie Zerlegung $D$ von $R$ mit den Zerlegungsrelationen $\{R_1, R_2, \ldots, R_n\}$ mit
     \[
         \njoin_{i=1}^n \pi_{R_i}(r) = \pi_{R}(r)
     \]
@@ -547,92 +525,23 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
     \[
         \njoin_{R_{i} \in D' \setminus \{R_{q}\}} \pi_{R_{i}}(r) = \pi_{K}(r)
     \]
-    Jedes solche $R_{q}$ wird aus $D'$ entfernt.
+    $R_{q}$ wird aus $D'$ entfernt.\\
     Der Schritt wird so lange wiederholt, bis $D'$ verlustfrei-redundanzfrei ist.
     Damit gilt für jedes $R_{q} \in D'$ mindestens ein legaler Relationszustand $r$ von $K$, so dass
     \[
         \njoin_{R_{i} \in D' \setminus \{R_{q}\}} \pi_{R_{i}}(r) \neq \pi_{K}(r)
     \]
-    Es ist sichergestellt, dass das Verfahren terminiert, da $D$ endlich ist und mit jedem Schritt genau eine Relation aus $D'$ entfernt wird.
-    Ist die Bedingung der verlustfreien Redundanzfreiheit verletzt, kann aber auch mindestens ein redundantes Element entfernt werden, ohne dass für jeden legalen Relationszustand $r$ von $K$
+    Es ist sichergestellt, dass das Verfahren terminiert, da $D$ endlich ist und mit jedem Schritt genau eine Relation aus $D'$ entfernt wird.\\
+
+    Da $D'$ während des Verfahrens verlustfrei bleibt, kann $D'$ am Ende nicht leer sein, ohne
     \[
         \njoin_{R_{i} \in D'} \pi_{R_{i}}(r) = \pi_{K}(r)
     \]
-    verletzt wird -- somit kann die Zerlegung auch nicht leer sein.
+    für jeden legalen Relationszustand $r$ von $K$ zu verletzen.
+
 \end{proof}
 \bigskip
 
-
-\begin{lemma}\label{lem:k_abhaengigkeitserhalten}
-    Jede entitätsbezogene Zerlegung $D$ von $K$ ist abhängigkeitserhaltend.
-\end{lemma}
-\begin{proof}
-    Zu zeigen ist, dass die Vereinigung der Projektionen von $F_{K}$ auf jede $R_{i} \in D$ äquivalent zu $F_{K}$ ist:
-    \[
-        (\pi_{R_{1}}(F_{K}) \cup \pi_{R_{2}}(F_{K})  \cup \ldots \cup \pi_{R_{m}}(F_{K}))^+ = (F_{K})^+
-    \]
-    \smallskip
-
-    \noindent
-    Für jede funktionale Abhängigkeitsmenge $F_{R_{i}}$ einer Relation $R_{i} \in D, i \leq m$, gilt:
-
-    \[
-        F_{R_{i}} = \{e \rightarrow k_x \mid k_x \in R_{i} \setminus \{e\} \}
-    \]
-    \medskip
-    \noindent
-    Daraus können wir unmittelbar
-    \[
-        (\pi_{R_{i}}(F_{K}))^+ = (F_{R_{i}})^+
-    \]
-    \noindent
-    ableiten~\cite[S. 339--340]{EN11}.\\
-
-    \noindent
-    Wegen
-    \[
-        \bigcup_{i=1}^{m} R_{i} = K
-    \]
-    sind alle Komponentenattribute aus $K$ entlang den Zerlegungsrelationen verteilt, womit keine funktionale Abhängigkeit mit einer Zerlegung $D$ von $K$ verlorengeht.
-    Damit gilt insgesamt
-
-    \[
-        \left(\bigcup_{i=1}^m F_{R_{i}}\right)^+ = (F_{K})^+
-    \]
-\end{proof}
-\bigskip
-
-\bigskip
-\begin{lemma}\label{lem:jede_K_zerlegung_ist_verlustfrei}
-    Jede entitätsbezogene Zerlegung $D$ von $K$ ist verlustfrei.
-\end{lemma}
-
-\medskip
-\begin{proof}
-    Mit Lemma~\ref{lem:k_abhaengigkeitserhalten} stehen uns für jede entitätsbezogene Zerlegung die funktionalen Abhängigkeiten der ursprünglichen Relation in den Projektionen auf die Zerlegungsrelationen weiterhin zur Verfügung .\\
-
-    \noindent
-    Damit kann unter Anwendung des in Lemma~\ref{lem:K_plus_ist_verlustfrei} beschriebenen Verfahrens ein Tableau für eine Zerlegung wie folgt beschrieben werden: Die Zeilenbeschriftungen eines jeden solchen Tableaus bestehen aus den Relationen
-    \[
-        R_{x} \in D,\quad \bigcup_{x=1}^m R_{x} = K
-    \]
-    \smallskip
-    Die Spaltenüberschriften bestehen aus den Attributen
-    \[
-        e, k_1, k_2, \ldots, k_n
-    \]
-    \medskip
-    \noindent
-    Bei der Anwendung des Verfahrens (siehe Beweis zu~\ref{lem:K_plus_ist_verlustfrei}) erhält nun jede Zeile in der $e$-Spalte ein $a$-Symbol, da mit der Definition einer entitätsbezogenen Zerlegung das Attribut in jeder Relation der Zerlegung vorkommt.
-    Da jede Zeile ein $a$-Symbol in der $e$-Spalte aufweist, enthält jede Zeile $R_{x}$ mit der funktionalen Abhängigkeit
-    \[
-        e \rightarrow k_y, k_y \in R_{x}
-    \]
-    in einer Zelle $(R_{x}, k_y), k_y \in R_{x}$ ein $a$-Symbol: Da alle funktionalen Abhängigkeiten und die Komponentenattribute ebenfalls vollständig in der Zerlegung enthalten sind, besitzt jede Spalte einer entsprechenden Zeile ein solches Symbol.
-    Mit der Vorschrift, dass die linke Seite der FD in dem Verfahren Spalten zeilenweise vereinheitlicht -- in diesem Fall ausgehend von der $e$-Spalte als linke Seite einer jeden FD -- ist nach Beendigung des Verfahrens die hinreichende Bedingung erfüllt, dass zum Nachweis der verlustfreien Join-Eigenschaft mindestens eine Zeile nur aus $a$-Symbolen besteht.
-    Tatsächlich besteht das Tableau dann ausschließlich aus $a$-Symbolen.
-\end{proof}
-\bigskip
 
 \bigskip
 \begin{lemma}\label{lem:verlustfrei-redundanzfrei-ist-entitätsbezogen}
@@ -665,7 +574,7 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
             \begin{itemize}
                 \item[] Fall 2 a): Es gilt $\bigcup_{R \in D_e} R = K$.\\
                 Da jede Relation in $D_e$ das Attribut $e$ enthält, ist $D_e$ eine entitätsbezogene Zerlegung nach Definition~\ref{def:entitätsbezogen}.
-                Da jede entitätsbezogene Zerlegung aber auch verlustfrei ist nach Lemma~\ref{lem:jede_K_zerlegung_ist_verlustfrei}, ist $D_e$ verlustfrei, im Widerspruch zur Annahme von Fall 2.
+                Da jede entitätsbezogene Zerlegung aber auch verlustfrei ist nach Lemma~\ref{lem:k_zerlegung_ist_verlustfrei}, ist $D_e$ verlustfrei, im Widerspruch zur Annahme von Fall 2.
                 \item[] Fall 2 b):  Es gilt $\bigcup_{R \in D_e} R \neq K$.\\
                 Damit wird eine fehlende Attributüberdeckung der Relationen in $D_e$ impliziert.\\
                 \noindent
@@ -691,16 +600,14 @@ Wir beginnen zunächst mit einigen Hilfssätzen, die den Nachweis erleichtern.\\
 \end{proof}
 
 \noindent
-Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhängigkeiten (JD) für eine Zerlegung von ${K}$ eingehen.
+Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die Join-Abhängigkeiten (JD) für eine Zerlegung von ${K}$ eingehen.
 
 \bigskip
 \begin{corollary}\label{cor:k_joinabhaengigkeiten}
-    Jede verlustfrei-redundanzfreie Zerlegung von $K$ induziert eine JOIN-Abhängigkeit entitätsbezogener Relationen
+    Jede verlustfrei-redundanzfreie Zerlegung von $K$ induziert eine Join-Abhängigkeit entitätsbezogener Relationen
     \[
         \text{JD}(R_{1}, R_{2}, \ldots, R_{m}),\quad \text{mit } R_{1} \cup R_{2} \cup \ldots \cup R_{m} = K
     \]
-    \noindent
-    bezüglich $K$.
 \end{corollary}
 \begin{proof}
     Zu zeigen ist, dass
@@ -708,7 +615,7 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhän
         \njoin\ (\pi_{R_{1}}(r), \pi_{R_{2}}(r), \ldots, \pi_{R_{m}}(r)) = \pi_{K}(r)
     \]
     \noindent
-    für jeden legalen Zustand $r$ von $K$ gilt, und dass jede Relation der Zerlegung entitätsbezogen ist.\\
+    für jeden legalen Relationszustand $r$ von $K$ gilt, und dass jede Relation der Zerlegung entitätsbezogen ist.\\
 
     \noindent
     Da die Zerlegung nach Voraussetzung verlustfrei ist, induziert sie eine Join-Abhängigkeit.\\
@@ -724,7 +631,7 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhän
         \par\hfill\cite[Definition 8.12, S. 273, Hervorhebung i.O.]{Vos08}
     \end{displayquote}
 
-    Diese Definition findet sich ebenfalls in der Arbeit von Darwen et {al.}~\cite[Definition 2.3]{Dar12}.
+    Diese Definition findet sich ebenfalls in der Arbeit von Darwen et al.~\cite[Definition 2.3]{Dar12}.
     Dort gehen die Autoren auch auf inkorrekte Definitionen der 5NF ein, wie die folgende von einem der Mitautoren:
 
     \begin{displayquote}
@@ -742,7 +649,7 @@ Aufbauend auf den vorangehenden Hilfssätzen können wir nun auf die JOIN-Abhän
         \par\hfill~\cite[S. 494, Hervorhebung i.O.]{EN16}
     \end{displayquote}
 
-    Darwen et al. merken an, dass die so formulierte Definition eher der \textit{Superkey Normal Form}-Definition entspricht (\textit{SKNF}).\footnote{
+    Darwen et al.\ merken an, dass die so formulierte Definition eher der \textit{Superkey Normal Form}-Definition entspricht (\textit{SKNF}).\footnote{
         ``[\ldots] many textbooks [\ldots] incorrectly give the deﬁnition of SKNF as a deﬁnition of 5NF.``~\cite{Dar12}
     }, was Normann auch in~\cite{Nor98} diskutiert.\\
 
@@ -760,14 +667,14 @@ Nun kann der Nachweis für die Normalformen erfolgen.
 
 
 \begin{theorem}\label{f_min_norm}
-    Das Relationsschema $K$ erfüllt bezüglich der im ECS-Modell angenommenen funktionalen Abhängigkeiten $F_K$ die Bedingungen der 1., 2., 3., 4. und 5. sowie der Boyce-Codd-Normalform.
+    Ein Relationsschema $K$ erfüllt bezüglich der im ECS-Modell angenommenen funktionalen Abhängigkeiten $F_K$ die Bedingungen der 1., 2., 3., 4. und 5. sowie der Boyce-Codd-Normalform.
 \end{theorem}
 
 \begin{proof}
     \medskip
     {\ }
     \begin{description}
-        \item[1. Normalform:] Erfüllt, da mit Axiom~\ref{ax:nur_atomar} alle Attribute in $K$ als atomare Attribute definiert sind.
+        \item[1. Normalform:] Erfüllt, da mit der Modellannahme~\ref{mass:nur_atomar} alle Attribute in $K$ nur atomare Tupelwerte speichern.
         \item[2. Normalform:] Erfüllt, da $K$ das Attribut $e$ als alleinigen Schlüssel enthält und alle Attribute voll funktional von $e$ abhängig sind.
         \item[3. Normalform:] Erfüllt, da $K$ keine transitiven Abhängigkeiten enthält: Alle Nicht-Prime-Attribute sind funktional voll abhängig von dem einzigen Prime-Attribut $e$.
         \item[BCNF:] Es sind zwei Fälle zu zeigen:
@@ -775,7 +682,7 @@ Nun kann der Nachweis für die Normalformen erfolgen.
             \item[\textit{Fall 1:}] Es ist $K(e)$.\\
             In diesem Fall existiert nur die triviale FD $e \rightarrow e$, womit die Relation automatisch in BCNF ist.
             \item[\textit{Fall 2:}] Es ist $K(e, k_1, k_2, \ldots, k_n),\ n \geq 1$.\\
-            Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $(X \rightarrow A)\ \in (F^\text{min}_{K})^+$ die linke Seite der FD der Superschlüssel von $K$ ist.
+            Erfüllt, da für jede nicht-triviale funktionale Abhängigkeit $(X \rightarrow A)\ \in (F^\text{min}_{K})^+$ die linke Seite der FD der einzige Schlüssel von $K$ ist.
         \end{description}
         \item[4. Normalform:] Zu zeigen ist, dass $X$ für jede nichttriviale mehrwertige Abhängigkeit $X \twoheadrightarrow Y$ ein Superschlüssel von $K$ ist.
         Es sind zwei Fälle zu zeigen:
@@ -805,8 +712,8 @@ Nun kann der Nachweis für die Normalformen erfolgen.
         \item[5. Normalform:] Zu zeigen ist, dass jede JD von $K$ allein von den Schlüsselabhängigkeiten von $K$ impliziert wird.
         \begin{enumerate}
             \item Mit Lemma~\ref{lem:verlustfrei_redundanzfrei_k} haben wir gezeigt, dass jede Zerlegung von $K$ einen verlustfrei-redundanzfreien Kern besitzt.
-            Diesen Kern bezüglich JD bezeichnen wir im Folgenden mit $D^{JD}$.
-            Die ursprüngliche JD beinhaltet im Vergleich zu $D^{JD}$ per Definition~\ref{def:verlustfrei_redundanzfrei} im Fall $JD \neq D^{JD}$ nur redundante Relationen, die keine zusätzlichen Zerlegungsinformationen tragen, weshalb es ausreicht, nur den Kern $D^{JD}$ zu betrachten.
+            Diesen Kern bezeichnen wir im Folgenden mit $D^{JD}$.
+            Die ursprüngliche zu JD gehörende Zerlegung $D$ beinhaltet im Fall $D \neq D^{JD}$ nur redundante Relationen, die keine zusätzlichen Zerlegungsinformationen tragen, weshalb es ausreicht, nur $D^{JD}$ zu betrachten (siehe Definition~\ref{def:verlustfrei_redundanzfrei}).
             \item Mit Lemma~\ref{lem:verlustfrei-redundanzfrei-ist-entitätsbezogen} haben wir gezeigt, dass eine solche Zerlegung aus entitätsbezogenen Relationen $R_{i}$ besteht.
             \item So gilt ebenfalls für $D^{JD}$:
             \[

@@ -1,4 +1,4 @@
-\chapter{Einleitung}
+\addchap{Einleitung}
 
 Die Unterstützung von Nebenläufigkeit und Parallelisierung in Game-Engines ermöglicht es, unterschiedliche Gameplay- sowie ressourcenverwaltende Systeme verteilt auszuführen, die Anzahl gleichzeitiger Berechnungen zu erhöhen und damit insgesamt zu einer Leistungssteigerung beizutragen.\\
 
@@ -7,7 +7,8 @@ Auch der Softwarearchitektur kommt eine tragende Rolle zu, denn erst sie legt an
 
 Ein wesentlicher Treiber hochperformanter Game-Engines ist dabei nicht nur die parallele Ausführung von Operationen. Auch Lese- und Schreibdurchsatz sind relevant, noch bevor die Frage beantwortet werden muss, ob ein geteilter Speicherbereich für den Schreibzugriff synchronisiert oder gesperrt werden muss.\\
 
-Hier hat sich in den vergangenen Jahren das ECS-Paradigma mit seinem datenorientierten Ansatz hervorgetan. ECS-Architekturen begünstigen komponentenzentrische und häufig SoA-nahe Speicherlayouts, wodurch Game-Engines und Echtzeitsysteme auf Grundlage moderner CPU- und Cache-Architekturen von dicht gespeicherten, typgleichen und kontextuell zusammengehörigen Daten profitieren können.
+Hier hat sich in den vergangenen Jahren das ECS-Paradigma mit seinem datenorientierten Ansatz hervorgetan. Für ECS-Architekturen sind komponentenzentrische und SoA-nahe Speicherlayouts idiomatisch.
+Damit profitieren Game-Engines und Echtzeitsysteme auf Grundlage moderner CPU- und Cache-Architekturen von dicht gespeicherten, typgleichen und kontextuell zusammengehörigen Daten.
 
 \subsection*{Theoretischer Bezugspunkt}
 
@@ -19,11 +20,11 @@ In allen vorgestellten Forschungsfragen soll diese Arbeit als theoretischer Bezu
 Insbesondere die im Modell beschriebenen Anfrage- und Scheduling-Systeme bilden dabei eine Grundlage für die Beantwortung der Forschungsfragen.\\
 
 Darüber hinaus bezieht sich ein Teil der Arbeit auf das relationale Modell und dessen Normalformtheorie.
-Fragestellungen zu Ausführungsreihenfolgen, Konflikten und Serialisierbarkeit wurden zudem im Bereich der Datenbanktheorie bereits umfassend untersucht und liefern ein wertvolles theoretisches Fundament für die Betrachtung konfliktarmen Schedulings.
+Fragestellungen zu Ausführungsreihenfolgen, Konflikten und Serialisierbarkeit wurden im Bereich der Datenbanktheorie bereits umfassend untersucht und liefern ein wertvolles theoretisches Fundament für die Betrachtung konfliktarmen Schedulings.
 
 \subsection*{Implementierung für die Empirik}
 
-In diesem Zusammenhang soll die \texttt{ecs}-Schicht von \texttt{helios} betrachtet werden.
+In der Arbeit soll die \texttt{ecs}-Schicht von \texttt{helios} betrachtet werden:
 \texttt{helios} ist eine ECS-basierte C++-Game-Engine, die auf der im Rahmen des Projektstudiums an der Hochschule Trier im Fernstudiengang Informatik erarbeiteten Umsetzung eines Spiels aufsetzt und weiterentwickelt werden soll~\cite{Suc26}.
 Für die empirische Untersuchung soll die \texttt{ecs}-Schicht um domänenspezifische Handles erweitert und entlang dieser Handles strukturiert werden.\\
 
@@ -45,12 +46,47 @@ Für die empirische Untersuchung soll die \texttt{ecs}-Schicht um domänenspezif
 Domänenspezifische Handles werden dabei als statische Domänen- und Partitionsinformation betrachtet.
 Sie beschreiben, in welchem Laufzeitbereich Zugriffe stattfinden, ohne für sich allein bereits die konkreten Lese- und Schreibzugriffe eines Systems vollständig festzulegen.\\
 
-Ziel ist es, diese statischen Typinformationen im Zusammenhang mit einem relational beschriebenen ECS-Datenmodell zu betrachten und zu untersuchen, inwieweit sie zur Beantwortung von Fragestellungen zu Datenanomalien, Systemgrenzen und Scheduling-Strategien beitragen können.
+Ziel ist es, diese statischen Typinformationen im Zusammenhang mit einem relational beschriebenen ECS-Datenmodell zu betrachten und zu untersuchen, inwieweit sie zur Beantwortung von Fragestellungen zu Datenanomalien, Systemgrenzen und Scheduling-Strategien beitragen können.\\
+
+Für die Lese-/Schreibmengen soll unterstützend hierzu eine Deklaration wie beispielsweise
+
+\begin{verbatim}
+auto InertiaSystem = System<
+    Read<VelocityComponent<GameObjectHandle>>,
+    Write<PositionComponent<GameObjectHandle>>
+>{};
+\end{verbatim}
+
+\noindent
+eingeführt werden.
+Hierbei beschreibt die Typ-Parametrisierung den lesenden/schreibenden Zugriff und ihre Bindung an die jeweilige Domäne.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=1.0\columnwidth]{content/img/domains}
+    \caption{Domänenspezifische Handles und eine mögliche Einteilung in Systempartitionen. (Quelle: eigene Darstellung)}
+    \label{fig:relation}
+\end{figure}
+
 
 \subsection*{Referenzszenario}
 
-Alle vorgestellten Forschungsfragen sollen anhand eines Referenzszenarios untersucht werden, das aus Kollisionssystemen und Partikelsystemen mit hoher Objektanzahl besteht.\\
+Alle vorgestellten Forschungsfragen sollen anhand eines Referenzszenarios untersucht werden.
+Geplant ist, das Referenzsystem auf Grundlage eines Kollisionssystems und Partikelsystems zu erstellen.\\
 
-Die gewählten Systeme eignen sich für die empirische Betrachtung, da insbesondere Kollisionssysteme determinismuskritisch sind und klare Lese- und Schreibzugriffe auf Komponenten besitzen.
-Partikelsysteme weisen ebenfalls eine hohe Anzahl gleichartiger Komponentenoperationen auf, sind aber weniger gameplay-kritisch und häufig stärker parallelisierbar.
+Die gewählten Systeme eignen sich für die empirische Betrachtung durch die hohe Objektanzahl.
+Dazu sind die Kollisionssysteme determinismuskritisch und erfordern klare Lese- und Schreibzugriffe auf Komponenten.
+Partikelsysteme weisen ebenfalls eine hohe Anzahl von Komponentenoperationen auf, sind aber weniger gameplay-kritisch und stärker parallelisierbar.
 Dadurch kann sich das Szenario für einen Vergleich hinsichtlich Partitionierung, Systemkopplung, Scheduling-Konflikten und Skalierungsverhalten eignen.
+
+\subsection*{Gliederung der Vorschläge}
+Die nachfolgenden Vorschläge sind nach ihrem jeweiligen Theorieanteil geordnet:
+Die erste Fragestellung~\ref{ch:vorschlag1} besitzt den höchsten Theorieanteil, während der zuletzt vorgestellte Vorschlag den stärksten Praxisbezug aufweist.\\
+
+Vorschlag~\ref{ch:vorschlag1} und Vorschlag~\ref{ch:vorschlag2} besitzen dieselbe thematische Grundlage.
+Während Vorschlag~\ref{ch:vorschlag1} stärker theoretisch ausgerichtet ist, legt Vorschlag~\ref{ch:vorschlag2} den Schwerpunkt auf die praktische Ausarbeitung und Implementierung.\\
+
+Vorschlag~\ref{ch:vorschlag3} befasst sich vor allem mit der Rendering-Pipeline.
+Das Thema Nebenläufigkeit wird hier höchstens am Rand berührt und ist nicht Kern der Untersuchung.\\
+
+Alle Vorschläge orientieren sich an dem für die Master-Thesis vorgesehenen Umfang von 20 ECTS.

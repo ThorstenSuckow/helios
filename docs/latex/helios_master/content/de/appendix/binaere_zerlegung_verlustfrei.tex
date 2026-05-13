@@ -1,0 +1,44 @@
+\chapter{Binäre Zerlegung von $K$ ist verlustfrei}
+
+\bigskip
+\begin{lemma}\label{lem:K_bin_ist_verlustfrei}
+    Die entitätsbezogene Relation
+    \[
+        K(e, k_i, k_j), \ i \neq j
+    \]
+    lässt sich verlustfrei in die entitätsbezogenen Relationen
+    \[
+        R_{i}(e, k_i),\quad R_{j}(e, k_j)
+    \]
+    zerlegen.
+\end{lemma}
+
+\medskip
+\begin{proof}
+    Sei
+    \[
+        R_{i} = \pi_{(e,k_i)}(K),
+        \qquad
+        R_{j} = \pi_{(e,k_j)}(K).
+    \]
+
+    \noindent
+    Wir zeigen, dass
+    \[
+        \njoin\bigl(\pi_{R_{i}}(r), \pi_{R_{j}}(r)\bigr)
+        =
+        \pi_{K}(r).
+    \]
+
+    \bigskip
+    \noindent
+    Da es sich um eine binäre Zerlegung handelt, kann der Beweis anhand der funktionalen Eigenschaften erfolgen~\cite[S. 343]{EN11}:
+    \[
+        \begin{alignedat}{3}
+            ((R_{i} \cap R_{j}) &\rightarrow (R_{i} - R_{j}))
+            = (\{e\} \rightarrow \{k_i\}) \in F_{K}^+\\
+            ((R_{i} \cap R_{j}) &\rightarrow (R_{j} - R_{i}))
+            = (\{e\} \rightarrow \{k_j\}) \in F_{K}^+
+        \end{alignedat}
+    \]
+\end{proof}

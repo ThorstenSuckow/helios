@@ -13,10 +13,12 @@ import helios.rendering.mesh.types;
 import helios.rendering.material.types;
 import helios.rendering.shader.types;
 import helios.rendering.viewport.types;
+import helios.rendering.framebuffer.types;
 import helios.math.types;
 
 using namespace helios::ecs::types;
 using namespace helios::rendering::viewport::types;
+using namespace helios::rendering::framebuffer::types;
 using namespace helios::rendering::mesh::types;
 using namespace helios::rendering::material::types;
 using namespace helios::rendering::shader::types;
@@ -29,30 +31,33 @@ export namespace helios::scene::types {
      *
      * @tparam THandle Scene-member handle type (for example game-object handle).
      */
-    template<typename THandle>
+    template<typename TMemberHandle>
     struct SceneMemberRenderContext {
         /**
          * @brief Handle of the scene member origin entity.
          */
-        const THandle entityHandle;
+        TMemberHandle memberHandle;
 
         /** @brief Target viewport for rendering. */
-        const ViewportHandle viewportHandle;
+        FramebufferHandle framebufferHandle;
+
+        /** @brief Target viewport for rendering. */
+        ViewportHandle viewportHandle;
 
         /** @brief Owning scene handle. */
-        const SceneHandle sceneHandle;
+        SceneHandle sceneHandle;
 
         /** @brief Mesh resource handle to render. */
-        const MeshHandle meshHandle;
+        MeshHandle meshHandle;
 
         /** @brief Material resource handle to apply. */
-        const MaterialHandle materialHandle;
+        MaterialHandle materialHandle;
 
         /** @brief Shader resource handle used for draw submission. */
-        const ShaderHandle shaderHandle;
+        ShaderHandle shaderHandle;
 
         /** @brief World transform used for rendering the scene member. */
-        const helios::math::mat4f worldTransform;
+        helios::math::mat4f worldTransform;
     };
 
 }

@@ -21,12 +21,12 @@ import helios.physics.collision.types.CollisionResponse;
 import helios.runtime.world.GameWorld;
 import helios.physics.motion.components.Move2DComponent;
 import helios.physics.motion.components.SteeringComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
-import helios.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.components.ComposeTransformComponent;
+import helios.spatial.components.TranslationStateComponent;
 import helios.physics.motion.components.DirectionComponent;
 import helios.gameplay.bounds.components.LevelBoundsBehaviorComponent;
 import helios.physics.collision.components.AabbColliderComponent;
-import helios.spatial.transform.components.RotationStateComponent;
+import helios.spatial.components.RotationStateComponent;
 import helios.rendering.model.components.ModelAabbComponent;
 import helios.scene.SceneNode;
 import helios.scene.components.SceneNodeComponent;
@@ -81,7 +81,7 @@ export namespace helios::gameplay::bounds::systems {
 
     public:
         using Entity_type = THandle::Entity_type;
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         using CommandBuffer_type = TCommandBuffer;
 
         /**
@@ -103,7 +103,7 @@ export namespace helios::gameplay::bounds::systems {
                 helios::rendering::model::components::ModelAabbComponent<THandle>,
                 helios::scene::components::SceneNodeComponent<THandle>,
                 helios::physics::motion::components::DirectionComponent<THandle>,
-                helios::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::spatial::components::TranslationStateComponent<THandle>,
                 helios::physics::collision::components::AabbColliderComponent<THandle>,
                 helios::gameplay::bounds::components::LevelBoundsBehaviorComponent<THandle>,
                 helios::ecs::components::Active<THandle>

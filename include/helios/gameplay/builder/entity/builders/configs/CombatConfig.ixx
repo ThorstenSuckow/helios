@@ -6,7 +6,7 @@ module;
 export module helios.gameplay.builder.entity.builders.configs.CombatConfig;
 
 
-import helios.spatial.transform.components;
+import helios.spatial.components;
 
 import helios.gameplay.damage.components;
 

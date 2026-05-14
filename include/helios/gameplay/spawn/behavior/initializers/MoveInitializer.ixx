@@ -15,9 +15,9 @@ import helios.gameplay.spawn.types.SpawnContext;
 import helios.physics.motion.components.Move2DComponent;
 import helios.physics.motion.components.DirectionComponent;
 
-import helios.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.components.TranslationStateComponent;
 
-import helios.spatial.transform.components.RotationStateComponent;
+import helios.spatial.components.RotationStateComponent;
 import helios.physics.motion.components.SteeringComponent;
 
 import helios.math;
@@ -197,7 +197,7 @@ export namespace helios::gameplay::spawn::behavior::initializers {
             if (directionType == DirectionType::Axis) {
                 assert(direction.isNormalized() && "axis initializer requires valid direction vector");
             } else if (directionType == DirectionType::Point) {
-                auto* tsc = entity.template get<helios::spatial::transform::components::TranslationStateComponent<Handle_type>>();
+                auto* tsc = entity.template get<helios::spatial::components::TranslationStateComponent<Handle_type>>();
 
                 direction = (target - (tsc->translation() * -1.0f)).normalize();
                 assert(direction.isNormalized() && "point initializer requires valid direction vector");

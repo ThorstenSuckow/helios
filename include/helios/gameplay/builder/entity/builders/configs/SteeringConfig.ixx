@@ -37,8 +37,8 @@ export namespace helios::gameplay::builder::entity::builders::configs {
         explicit SteeringConfig(Entity entity) : entity_(entity) {
             entity_.template add<helios::physics::motion::components::SteeringComponent<Handle_type>>();
 
-            entity_.template getOrAdd<helios::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
-            entity_.template getOrAdd<helios::spatial::transform::components::RotationStateComponent<Handle_type>>();
+            entity_.template getOrAdd<helios::spatial::components::ComposeTransformComponent<Handle_type>>();
+            entity_.template getOrAdd<helios::spatial::components::RotationStateComponent<Handle_type>>();
             entity_.template getOrAdd<helios::physics::motion::components::DirectionComponent<Handle_type>>();
         }
 

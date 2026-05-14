@@ -17,8 +17,8 @@ import helios.core;
 
 import helios.rendering.viewport;
 
-import helios.spatial.transform.components.TranslationStateComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.components.TranslationStateComponent;
+import helios.spatial.components.ComposeTransformComponent;
 
 export namespace helios::gameplay::builder::entity::builders::configs {
 
@@ -44,8 +44,8 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @param entity Target Entity to configure.
          */
         explicit UiTransformConfig(Entity entity) : entity_(entity) {
-            entity_.template getOrAdd<helios::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
-            entity_.template getOrAdd<helios::spatial::transform::components::TranslationStateComponent<Handle_type>>();
+            entity_.template getOrAdd<helios::spatial::components::ComposeTransformComponent<Handle_type>>();
+            entity_.template getOrAdd<helios::spatial::components::TranslationStateComponent<Handle_type>>();
             entity_.template add<helios::ui::transform::components::UiTransformComponent<Handle_type>>();
         }
 

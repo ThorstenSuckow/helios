@@ -6,11 +6,15 @@ module;
 
 export module helios.platform.window.commands.WindowResizeCommand;
 
+
+import helios.rendering.framebuffer.types.FramebufferSize;
+
 import helios.platform.window.types.WindowHandle;
 import helios.platform.window.types.WindowSize;
 import helios.platform.window.concepts.IsWindowHandle;
 
 using namespace helios::platform::window::types;
+using namespace helios::rendering::framebuffer::types;
 using namespace helios::platform::window::concepts;
 export namespace helios::platform::window::commands {
 
@@ -27,7 +31,10 @@ export namespace helios::platform::window::commands {
         THandle windowHandle;
 
         /** @brief New window size in pixels. */
-        WindowSize size;
+        WindowSize windowSize;
+
+        /** @brief the underlying framebuffer size */
+        FramebufferSize framebufferSize;
 
     };
 

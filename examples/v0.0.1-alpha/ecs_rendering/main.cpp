@@ -12,8 +12,8 @@ int main() {
     // ========================================
     // Constants
     // ========================================
-    constexpr unsigned int SCREEN_WIDTH  = 1980;
-    constexpr unsigned int SCREEN_HEIGHT = 1080;
+    constexpr unsigned int SCREEN_WIDTH  = 1280;
+    constexpr unsigned int SCREEN_HEIGHT = 720;
 
     constexpr float FOVY               = radians(90.0f);
     constexpr float ASPECT_RATIO_NUMER = 16.0f;
@@ -43,8 +43,6 @@ int main() {
     auto& gameLoop = *gameLoopPtr;
 
 
-
-
     // Renderbackend
     auto renderBackend = OpenGLBackend(
         gameWorld.renderResourceWorld(),
@@ -52,19 +50,20 @@ int main() {
     );
 
     // register additional managers
+    gameWorld.registerManager<helios::rendering::RenderManager<OpenGLBackend, GameObjectHandle>>(renderBackend);
+
     gameWorld.registerManager<GLFWPlatformManager<WindowHandle,  /*InputHandle, */ StateCommandBuffer, PlatformCommandBuffer>>(
         gameWorld.platformWorld(), gameWorld.resourceRegistry().commandBufferRegistry()
     );
+
     gameWorld.registerManager<OpenGLShaderCompileManager<ShaderHandle>>(gameWorld.renderResourceWorld());
-    //gameWorld.registerManager<WarmupManager<OpenGLShaderSourcePool>>(shaderSourcePool);
 
 
     // ========================================
     // Window Setup
     // ========================================
-    auto mainWindow = gameWorld.add<WindowHandle>(WindowId("mainWindow"));
-    mainWindow.setActive(true);
-    mainWindow.add<WindowCreateRequestComponent<WindowHandle>>(WindowConfig{
+    auto MainWindow = gameWorld.add<WindowHandle>(WindowId("MainWindow"));
+    MainWindow.add<WindowCreateRequestComponent<WindowHandle>>(WindowConfig{
         "helios - ECS Rendering Demo",
         {SCREEN_WIDTH, SCREEN_HEIGHT},
         ASPECT_RATIO_NUMER,
@@ -75,70 +74,65 @@ int main() {
     // ========================================
     // Scene and Viewport Setup
     // ========================================
-    //auto win = dynamic_cast<GLFWWindow*>(app->current());
 
-    //auto  MainSceneHandle = sceneHandleRegistry.getOrCreate("mainScene");
-    //scenePool.add(Scene, "MainScene");
+    auto WindowFramebuffer = gameWorld.add<FramebufferHandle>(FramebufferId{"WindowFramebuffer"});
+    WindowFramebuffer.add<OpenGLFramebufferIdComponent<FramebufferHandle>>(0);
+    WindowFramebuffer.add<Size2DComponent<FramebufferHandle>>();
+    WindowFramebuffer.add<ClearComponent<FramebufferHandle>>(ClearFlags::Color);
+    WindowFramebuffer.add<ColorComponent<FramebufferHandle>>(0.5f);
+    auto MainViewport = gameWorld.add<ViewportHandle>(ViewportId{"MainViewport"});
 
-    /*auto [WindowFrameBufferHandle, MainViewportHandle] = gameWorld.bind(
-        Framebuffer(), FramebufferId("WindowFramebuffer"),
-        Viewport(0.0f, 0.0f, 1.0f, 1.0f), ViewportId("MainViewport")
-    );
+    auto MainScene = gameWorld.add<SceneHandle>(SceneId("MainScene"));
 
+    MainWindow.add<FramebufferBindingComponent<WindowHandle>>(WindowFramebuffer);
 
-    renderTargets.resolve(MainViewportHandle)
-                  ->setClearFlags(std::to_underlying(ClearFlags::Color))
-                   .setClearColor(vec4f(0.051f, 0.051f, 0.153f, 1.0f));
-*/
+    // Framebuffer : Viewport (1:N)
+    MainViewport.add<FramebufferBindingComponent<ViewportHandle>>(WindowFramebuffer);
+    MainViewport.add<BoundsComponent<ViewportHandle>>(helios::math::vec4f{.5f, .5f, .5f, .5f});
+
+    // Viewport : Scene (N:1)
+    MainViewport.add<SceneBindingComponent<ViewportHandle>>(MainScene);
+
+    auto player = gameWorld.add<GameObjectHandle>();
+    player.add<SceneMemberComponent<GameObjectHandle>>(MainScene);
+
+    auto MainCamera = gameWorld.add<GameObjectHandle>();
+    MainCamera.add<PerspectiveCameraComponent<GameObjectHandle>>();
+    MainCamera.add<LookAtComponent<GameObjectHandle>>();
+    MainCamera.add<ProjectionMatrixComponent<GameObjectHandle>>();
+    MainCamera.add<ViewMatrixComponent<GameObjectHandle>>();
+    MainCamera.add<DirectionComponent<GameObjectHandle>>();
+    MainCamera.add<SceneMemberComponent<GameObjectHandle>>(MainScene);
+    // later on: rebuildHandleMultiMapFromSceneMembership(). SSoT w/ components, but systems get the
+    // multimaps for faster access / querying?
+    // or the view gets extended internally that it can fall back to a multimap, e.g. filter<> instead of view<>
+    // or some other adequate semantic name
+
+    MainViewport.add<CameraBindingComponent<ViewportHandle>>(MainCamera);
 
 
     // ========================================
     // Rendering Management setup
     // ========================================
 
-    // shader
-    auto cubeShader = gameWorld.add<ShaderHandle>(ShaderId("CubeShader"));
-    cubeShader.add<ShaderSourceComponent<ShaderHandle>>(
-    "./resources/cube.vert", "./resources/cube.frag"
-    );
-
-    auto cubeMesh = gameWorld.add<MeshHandle>(MeshId("CubeMesh"));
+    // shader, mesh, material for cube
+    auto CubeShader = gameWorld.add<ShaderHandle>(ShaderId("CubeShader"));
+    CubeShader.add<ShaderSourceComponent<ShaderHandle>>("./resources/cube.vert", "./resources/cube.frag");
+    auto CubeMesh = gameWorld.add<MeshHandle>(MeshId("CubeMesh"));
+    auto CubeMaterial = gameWorld.add<MaterialHandle>(MaterialId("CubeMaterial"));
 
 
-
-
-   /* auto uniformLocationMap = OpenGLUniformLocationMap();
-    uniformLocationMap.set(UniformSemantics::ModelMatrix, 1);
-    cubeShader.setUniformLocationMap(uniformLocationMap);
-    auto CubeShaderHandle = renderResources.add(std::move(cubeShader), ShaderId("CubeShader"));
-
-    // mesh
-    auto cubeMesh       = Cube{};
-    auto CubeMeshHandle = renderResources.add(MeshData{*cubeMesh.vertices, *cubeMesh.indices}, MeshId("CubeMesh"));
-    
-    // material
-    auto CubeMaterialHandle = renderResources.add(MaterialProperties{helios::util::Colors::Purple, 0.0f}, MaterialId("CubeMaterial"));
-*/
     // ========================================
     // Entity Setup
     // ========================================
-    /*auto camera = gameWorld.addGameObject();
-    auto pcc = camera.add<PerspectiveCameraComponent>();
-    pcc.setPerspective(FOVY, ASPECT_RATIO_NUMER / ASPECT_RATIO_DENOM, 0.1f, 1000.0f);
-    auto tsc = camera.add<TranslationStateComponent>();
-    tsc.setTranslation(vec3f(0.0f, 0.0f, -100.0f));
-    auto lac = camera.add<LookAtComponent>();
-    lac.lookAt(vec3f(0.0f, 0.0f, 0.0f), vec3f(0.0f, 1.0f, 0.0f));
-
-    // camera is viewing the main scene
-    camera.add<SceneMemberComponent>(MainSceneHandle);
-
     // cube
-    auto cube = gameWorld.addGameObject();
-    cube.add<SceneMemberComponent>(MainSceneHandle);
-    cube.add<DimensionComponent>(2.0f, 2.0f, 2.0f);
-    cube.add<RenderPrototypeComponent>(CubeMeshHandle, CubeShaderHandle, CubeMaterialHandle);
-    */
+    auto cube = gameWorld.add<GameObjectHandle>();
+    cube.add<SceneMemberComponent<GameObjectHandle>>(MainScene);
+    cube.add<LocalPositionStateComponent<GameObjectHandle>>();
+    cube.add<LocalToWorldBoundsComponent<GameObjectHandle>>();
+    cube.add<LocalToWorldMatrixComponent<GameObjectHandle>>();
+    cube.add<RenderPrototypeComponent<GameObjectHandle>>(CubeShader, CubeMaterial, CubeMesh);
+
 
     // ==============================================
     // Map Scenes to Viewports, Cameras with Viewports.
@@ -185,7 +179,11 @@ int main() {
                 .addSystem<ScaleSystem<GameObjectHandle>>();
 
             gameLoop.phase(PhaseType::Main)
-                .addPass(GameState::Live);
+                .addPass(GameState::Live)
+                //.addSystem<PerspectiveProjectionUpdateSystem<GameObjectHandle>>()
+                //.addSystem<CameraLookAtSystem<GameObjectHandle>>()
+                //.addSystem<ViewMatrixUpdateSystem<GameObjectHandle>>()
+                ;
 
             gameLoop.phase(PhaseType::Post)
                  .addPass(GameState::Live)
@@ -195,12 +193,23 @@ int main() {
 
                 // this will produce render commands after scenes have been culled according to
                 // their active viewports
-                //.addSystem<SceneMemberRenderExtractionSystem<NoCullingStrategy>>()
-                .addCommitPoint(CommitPoint::FlushCommands)
+                .addSystem<
+                    SceneRenderExtractionSystem<
+                        ViewportHandle,
+                        GameObjectHandle,
+                        NoCullingStrategy<GameObjectHandle>,
+                        RenderCommandBuffer
+                    >
+                >(NoCullingStrategy<GameObjectHandle>()).addCommitPoint(CommitPoint::FlushCommands)
 
                  // Clear, bufferswapping
                 .addPass<GameState>(GameState::Live)
                 .addSystem<TransformClearSystem<GameObjectHandle>>()
+                // WindowSizeUpdateSystem is not used right now:
+                // it was mainly used for framebufefr resizing, which is now handled
+                // directly in the GLFWPlatformManager
+                //.addSystem<WindowSizeUpdateSystem<WindowHandle>>()
+                //.addSystem<WindowSizeDirtyClearSystem<WindowHandle>>()
                 .addSystem<SwapBuffersSystem<WindowHandle, PlatformCommandBuffer>>()
                 .addSystem<GLFWWindowCloseSystem<WindowHandle, PlatformCommandBuffer>>()
                 .addSystem<WindowBasedShutdownSystem<WindowHandle, PlatformCommandBuffer>>()

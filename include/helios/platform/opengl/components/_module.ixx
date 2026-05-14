@@ -5,3 +5,4 @@
 export module helios.platform.opengl.components;
 
 export import helios.platform.opengl.components.OpenGLShaderComponent;
+export import helios.platform.opengl.components.OpenGLFramebufferIdComponent;

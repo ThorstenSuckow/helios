@@ -9,7 +9,7 @@ module;
 export module helios.scene.concepts.IsFrustumCullerLike;
 
 import helios.ecs.types.EntityHandle;
-import helios.scene.types.PerspectiveCameraContext;
+import helios.scene.types.CullingContext;
 
 using namespace helios::ecs::types;
 using namespace helios::scene::types;
@@ -24,10 +24,10 @@ export namespace helios::scene::concepts {
      * @tparam T Candidate culling strategy type.
      * @tparam TStrongId type for the EntityHandle's StrongId.
      */
-    template <typename T, typename THandle>
-    concept IsFrustumCullerLike = requires(T& t, const THandle entityHandle, const PerspectiveCameraContext& cameraContext)
+    template <typename T, typename TMemberHandle>
+    concept IsFrustumCullerLike = requires(T& t, const TMemberHandle entityHandle, const CullingContext<TMemberHandle>& cullingContext)
     {
-        {t.cull(cameraContext, entityHandle)}-> std::same_as<void>;
+        {t.shouldRender(cullingContext)}-> std::same_as<bool>;
 
     };
 

@@ -50,7 +50,7 @@ export namespace helios::ui::binding::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Constructs the system with a reference to the TimerManager.
          *

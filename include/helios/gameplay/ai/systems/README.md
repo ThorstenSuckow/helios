@@ -47,7 +47,7 @@ gameLoop.addSystem<ChaseSystem>(Phase::Main, gameWorld);
 |--------|---------|
 | `helios.gameplay.ai.components` | ChaseComponent data |
 | `helios.physics.motion` | SteeringComponent |
-| `helios.spatial.transform` | TranslationStateComponent |
+| `helios.spatial` | TranslationStateComponent |
 
 ---
 

@@ -22,7 +22,7 @@ import helios.platform.environment.PlatformEntityManager;
 import helios.platform.environment.types;
 
 import helios.platform.concepts;
-import helios.rendering.concepts;
+import helios.rendering.common.concepts;
 
 import helios.rendering.shader.ShaderEntityManager;
 import helios.rendering.material.MaterialEntityManager;
@@ -32,9 +32,12 @@ import helios.runtime.world.concepts.IsGameObjectHandle;
 import helios.runtime.world.types.GameObjectHandle;
 
 import helios.platform.window.concepts;
-import helios.rendering.concepts.IsRenderResourceHandle;
+import helios.rendering.common.concepts.IsRenderResourceHandle;
 
-import helios.rendering.concepts;
+import helios.rendering.common.concepts;
+
+import helios.scene.SceneEntityManager;
+import helios.scene.concepts;
 
 import helios.rendering.viewport.ViewportEntityManager;
 import helios.rendering.framebuffer.FramebufferEntityManager;
@@ -53,20 +56,24 @@ using namespace helios::runtime::world::concepts;
 using namespace helios::rendering::shader;
 using namespace helios::rendering::material;
 using namespace helios::rendering::mesh;
-using namespace helios::rendering::concepts;
+using namespace helios::rendering::common::concepts;
 using namespace helios::rendering::framebuffer;
 using namespace helios::rendering::viewport;
-
+using namespace helios::scene;
+using namespace helios::scene::concepts;
 
 template<typename T>
 inline constexpr bool typed_false = false;
+
+template<typename T>
+concept IsGameplaySystemHandle = IsGameObjectHandle<T> || helios::scene::concepts::IsSceneHandle<T>;
 
 export namespace helios::runtime::world {
 
     /**
      * @brief Typed world containing game-object entity managers.
      */
-    using GameObjectWorld = TypedHandleWorld<GameObjectEntityManager>;
+    using GameObjectWorld = TypedHandleWorld<GameObjectEntityManager, SceneEntityManager>;
 
     /**
      * @brief Typed world containing render-resource entity managers.
@@ -124,7 +131,7 @@ export namespace helios::runtime::world {
         template<typename THandle>
         [[nodiscard]] auto clone(THandle source) noexcept {
 
-            if constexpr(IsGameObjectHandle<THandle>) {
+            if constexpr(IsGameplaySystemHandle<THandle>) {
                 return gameObjectWorld_.cloneEntity<THandle>(source);
             } else if constexpr(IsAnyPlatformHandle<THandle>){
                 return platformWorld_.cloneEntity<THandle>(source);
@@ -140,7 +147,7 @@ export namespace helios::runtime::world {
 
         template<typename THandle>
         [[nodiscard]] auto find(THandle handle) noexcept {
-            if constexpr(IsGameObjectHandle<THandle>) {
+            if constexpr(IsGameplaySystemHandle<THandle>) {
                 return gameObjectWorld_.findEntity<THandle>(handle);
             } else if constexpr(IsAnyPlatformHandle<THandle>) {
                 return platformWorld_.findEntity<THandle>(handle);
@@ -155,7 +162,7 @@ export namespace helios::runtime::world {
 
         template<typename THandle>
         [[nodiscard]] auto add(typename THandle::StrongId_type strongId = typename THandle::StrongId_type{}) {
-            if constexpr(IsGameObjectHandle<THandle>) {
+            if constexpr(IsGameplaySystemHandle<THandle>) {
                 return gameObjectWorld_.addEntity<THandle>(strongId);
             } else if constexpr(IsAnyPlatformHandle<THandle>) {
                 return platformWorld_.addEntity<THandle>(strongId);
@@ -171,7 +178,7 @@ export namespace helios::runtime::world {
 
          template<typename THandle, typename... TComponents>
          [[nodiscard]] auto view() {
-            if constexpr(IsGameObjectHandle<THandle>) {
+            if constexpr(IsGameplaySystemHandle<THandle>) {
                 return gameObjectWorld_.template view<THandle, TComponents...>();
             } else if constexpr(IsAnyPlatformHandle<THandle>) {
                 return platformWorld_.template view<THandle, TComponents...>();
@@ -187,7 +194,7 @@ export namespace helios::runtime::world {
 
          template<typename THandle>
          [[nodiscard]] auto destroy(const THandle handle) {
-            if constexpr(IsGameObjectHandle<THandle>) {
+            if constexpr(IsGameplaySystemHandle<THandle>) {
                 return gameObjectWorld_.destroy<THandle>(handle);
             } else if constexpr(IsAnyPlatformHandle<THandle>) {
                 return platformWorld_.destroy<THandle>(handle);

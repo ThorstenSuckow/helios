@@ -31,6 +31,7 @@ using namespace helios::rendering::viewport;
 using namespace helios::rendering::viewport::types;
 using namespace helios::rendering::framebuffer;
 using namespace helios::rendering::framebuffer::types;
+using namespace helios::rendering::framebuffer::components;
 using namespace helios::rendering::asset::shape::basic;
 
 // Input
@@ -43,6 +44,9 @@ using namespace helios::math;
 using namespace helios::scene;
 using namespace helios::scene::types;
 using namespace helios::core::units;
+using namespace helios::core;
+using namespace helios::core::container;
+using namespace helios::core::components;
 using namespace helios::util::io;
 using namespace helios::util::time;
 
@@ -87,6 +91,7 @@ using namespace helios::platform::glfw;
 using namespace helios::platform::glfw::components;
 using namespace helios::platform::glfw::systems;
 using namespace helios::platform::opengl;
+using namespace helios::platform::opengl::components;
 
 // Mechanics: scoring, timing, combat
 using namespace helios::gameplay::scoring;
@@ -120,15 +125,16 @@ using namespace helios::physics::motion::systems;
 using namespace helios::physics::motion::components;
 
 // Modules: spatial, scene, rendering, UI, AI
-using namespace helios::spatial::transform::systems;
-using namespace helios::spatial::transform::components;
+using namespace helios::spatial::systems;
+using namespace helios::spatial::components;
 using namespace helios::scene::systems;
 using namespace helios::scene::components;
 using namespace helios::scene;
 using namespace helios::rendering::viewport::systems;
 using namespace helios::rendering;
-using namespace helios::rendering::components;
-using namespace helios::rendering::commands;
+using namespace helios::rendering::common::components;
+using namespace helios::rendering::common::types;
+using namespace helios::rendering::common::commands;
 using namespace helios::ui;
 using namespace helios::ui::widgets::systems;
 using namespace helios::ui::widgets::commands;

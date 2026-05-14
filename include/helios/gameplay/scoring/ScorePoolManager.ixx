@@ -61,7 +61,7 @@ export namespace helios::gameplay::scoring {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::world::tags::ManagerRole;
 
         /**
          * @brief Creates and registers a new score pool.

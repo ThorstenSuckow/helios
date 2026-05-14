@@ -1,4 +1,9 @@
 
+/**
+ * @file DimensionComponent.ixx
+ * @brief Stores physical dimensions together with a measurement unit.
+ */
+
 module;
 
 export module helios.spatial.components.DimensionComponent;

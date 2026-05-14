@@ -13,8 +13,8 @@ export module helios.ui.transform.systems.UiTransformSystem;
 
 
 import helios.ui.transform.components.UiTransformComponent;
-import helios.spatial.transform.components.TranslationStateComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.components.TranslationStateComponent;
+import helios.spatial.components.ComposeTransformComponent;
 import helios.ui.layout.Anchor;
 
 import helios.runtime.world.UpdateContext;
@@ -113,7 +113,7 @@ export namespace helios::ui::transform::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
 
 
         /**
@@ -135,8 +135,8 @@ export namespace helios::ui::transform::systems {
             for (auto [entity, tc, tsc, ctc, mbc, snc, active] : updateContext.view<
                 THandle,
                 helios::ui::transform::components::UiTransformComponent<THandle>,
-                helios::spatial::transform::components::TranslationStateComponent<THandle>,
-                helios::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::spatial::components::TranslationStateComponent<THandle>,
+                helios::spatial::components::ComposeTransformComponent<THandle>,
                 helios::rendering::model::components::ModelAabbComponent<THandle>,
                 helios::scene::components::SceneNodeComponent<THandle>,
                 helios::ecs::components::Active<THandle>
@@ -196,7 +196,7 @@ export namespace helios::ui::transform::systems {
                         // we rely on the parent entity so we do not have to wait for the SceneGraph sync
                         if (auto parentGo = updateContext.find(hc->parent().value())) {
                             auto* pmaabbcc = parentGo->template get<rendering::model::components::ModelAabbComponent<Handle>>();
-                            auto* pctc = parentGo->template get<spatial::transform::components::ComposeTransformComponent<Handle>>();
+                            auto* pctc = parentGo->template get<spatial::components::ComposeTransformComponent<Handle>>();
 
                             auto size = pmaabbcc->aabb().size() * pctc->localScaling();
 

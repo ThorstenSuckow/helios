@@ -17,7 +17,7 @@ import helios.math;
 
 import helios.runtime.world.GameWorld;
 import helios.physics.motion.components.Move2DComponent;
-import helios.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.components.TranslationStateComponent;
 import helios.physics.motion.components.DirectionComponent;
 
 import helios.runtime.world.UpdateContext;
@@ -117,7 +117,7 @@ export namespace helios::physics::motion::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Updates movement for all applicable entities.
          *
@@ -132,7 +132,7 @@ export namespace helios::physics::motion::systems {
                 THandle,
                 helios::physics::motion::components::Move2DComponent<THandle>,
                 helios::physics::motion::components::DirectionComponent<THandle>,
-                helios::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::spatial::components::TranslationStateComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 

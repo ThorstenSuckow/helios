@@ -9,7 +9,7 @@ export module helios.runtime.messaging.command.NullCommandBuffer;
 import helios.runtime.messaging.command.tags.CommandBufferRole;
 import helios.runtime.world.UpdateContext;
 
-using namespace helios::runtime::tags;
+using namespace helios::runtime::world::tags;
 using namespace helios::runtime::world;
 export namespace helios::runtime::messaging::command {
 

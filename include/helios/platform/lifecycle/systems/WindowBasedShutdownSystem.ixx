@@ -28,7 +28,7 @@ import helios.platform.environment.concepts;
 import helios.state.Bindings;
 import helios.gameplay.gamestate.types;
 
-using namespace helios::runtime::tags;
+using namespace helios::runtime::world::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::runtime::messaging::command::concepts;

@@ -11,7 +11,7 @@ import helios.ecs.ComponentReflector;
 
 import helios.rendering.model.registry;
 
-import helios.rendering.components;
+import helios.rendering.common.components;
 
 export namespace helios::rendering {
 
@@ -24,9 +24,10 @@ export namespace helios::rendering {
 
         using R = helios::ecs::ComponentReflector<TEntityManager>;
 
-        R::template registerType<components::RenderableComponent<typename TEntityManager::Handle_type>>();
-        R::template registerType<components::RenderPrototypeComponent<typename TEntityManager::Handle_type>>();
-        R::template registerType<components::MaterialOverrideComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<common::components::RenderableComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<common::components::RenderPrototypeComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<common::components::MaterialOverrideComponent<typename TEntityManager::Handle_type>>();
+        R::template registerType<common::components::ClearComponent<typename TEntityManager::Handle_type>>();
     }
 
 }

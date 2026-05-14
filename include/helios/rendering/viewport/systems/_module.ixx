@@ -5,3 +5,4 @@
 export module helios.rendering.viewport.systems;
 
 export import helios.rendering.viewport.systems.StateToViewportPolicyUpdateSystem;
+export import helios.rendering.viewport.systems.SceneRenderExtractionSystem;

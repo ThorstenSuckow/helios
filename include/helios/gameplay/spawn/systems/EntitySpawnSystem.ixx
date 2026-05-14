@@ -43,7 +43,7 @@ export namespace helios::gameplay::spawn::systems {
     public:
 
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         using CommandBuffer_type = TCommandBuffer;
 
         explicit EntitySpawnSystem(helios::gameplay::spawn::SpawnManager<THandle, TWorld>& spawnManager, TWorld& tworld) noexcept

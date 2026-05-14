@@ -5,4 +5,4 @@
 export module helios.scene.concepts;
 
 export import helios.scene.concepts.IsFrustumCullerLike;
-
+export import helios.scene.concepts.IsSceneHandle;

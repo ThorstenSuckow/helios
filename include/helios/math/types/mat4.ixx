@@ -34,7 +34,7 @@ export namespace helios::math {
      *
      * @tparam T the numeric type of the matrix components.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     struct mat4 {
     private:
         /**
@@ -508,7 +508,7 @@ export namespace helios::math {
      *
      * @return A const pointer to the element at [0, 0].
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     const T* value_ptr(const mat4<T>& m) noexcept {
         return &m(0, 0);
     }
@@ -525,7 +525,7 @@ export namespace helios::math {
      *
      * @return A pointer to the element at [0, 0].
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     T* value_ptr(mat4<T>& m) noexcept {
         return &m(0, 0);
     }

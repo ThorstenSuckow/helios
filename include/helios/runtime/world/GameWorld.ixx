@@ -520,8 +520,10 @@ export namespace helios::runtime::world {
          * @return Domain-specific entity facade for the created entity.
          */
         template<typename THandle>
-        [[nodiscard]] auto add(const typename THandle::StrongId_type strongId = typename THandle::StrongId_type{}) noexcept {
-            return engineWorld_.template add<THandle>(strongId);
+        [[nodiscard]] auto add(const typename THandle::StrongId_type strongId = typename THandle::StrongId_type{}, const bool isActive = true) noexcept {
+            auto entity = engineWorld_.template add<THandle>(strongId);
+            entity.setActive(isActive);
+            return entity;
         }
 
         /**

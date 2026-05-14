@@ -38,9 +38,9 @@ export namespace helios::gameplay::builder::entity::builders::configs {
 
             entity_.template add<helios::physics::motion::components::Move2DComponent<Handle_type>>();
 
-            entity_.template getOrAdd<helios::spatial::transform::components::ComposeTransformComponent<Handle_type>>();
+            entity_.template getOrAdd<helios::spatial::components::ComposeTransformComponent<Handle_type>>();
             entity_.template getOrAdd<helios::physics::motion::components::DirectionComponent<Handle_type>>();
-            entity_.template getOrAdd<helios::spatial::transform::components::TranslationStateComponent<Handle_type>>();
+            entity_.template getOrAdd<helios::spatial::components::TranslationStateComponent<Handle_type>>();
 
         }
 

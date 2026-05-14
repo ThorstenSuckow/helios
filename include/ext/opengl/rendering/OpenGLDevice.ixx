@@ -20,7 +20,7 @@ import helios.rendering.RenderQueue;
 import helios.rendering.LegacyRenderPass;
 import helios.rendering.mesh.types.PrimitiveType;
 import helios.rendering.mesh.types.MeshConfig;
-import helios.rendering.ClearFlags;
+import helios.rendering.common.types.ClearFlags;
 import helios.rendering.framebuffer.Framebuffer;
 import helios.rendering.viewport.Viewport;
 
@@ -171,9 +171,9 @@ export namespace helios::ext::opengl::rendering {
             glClearColor(col[0], col[1], col[2], col[3]);
 
             const int clearFlags = viewport.clearFlags();
-            glClear(((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Color)) ? GL_COLOR_BUFFER_BIT : 0) |
-                    ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Depth)) ? GL_DEPTH_BUFFER_BIT : 0) |
-                    ((clearFlags & std::to_underlying(helios::rendering::ClearFlags::Stencil)) ? GL_STENCIL_BUFFER_BIT
+            glClear(((clearFlags & std::to_underlying(helios::rendering::common::types::ClearFlags::Color)) ? GL_COLOR_BUFFER_BIT : 0) |
+                    ((clearFlags & std::to_underlying(helios::rendering::common::types::ClearFlags::Depth)) ? GL_DEPTH_BUFFER_BIT : 0) |
+                    ((clearFlags & std::to_underlying(helios::rendering::common::types::ClearFlags::Stencil)) ? GL_STENCIL_BUFFER_BIT
                                                                                                : 0));
         }
 

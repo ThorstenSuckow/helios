@@ -50,7 +50,7 @@ export namespace helios::physics::collision::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Resets collision state for all entities with CollisionStateComponent.
          *

@@ -20,9 +20,9 @@ import helios.runtime.world.GameWorld;
 import helios.runtime.world.UpdateContext;
 
 import helios.scene.components.SceneNodeComponent;
-import helios.spatial.transform.components.ScaleStateComponent;
-import helios.spatial.transform.components.TranslationStateComponent;
-import helios.spatial.transform.components.RotationStateComponent;
+import helios.spatial.components.ScaleStateComponent;
+import helios.spatial.components.TranslationStateComponent;
+import helios.spatial.components.RotationStateComponent;
 import helios.physics.collision.components.AabbColliderComponent;
 
 import helios.rendering.model.components.ModelAabbComponent;
@@ -56,7 +56,7 @@ export namespace helios::physics::collision::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
 
         /**
          * @brief Updates collider bounds for all applicable entities.
@@ -74,9 +74,9 @@ export namespace helios::physics::collision::systems {
                 THandle,
                 helios::rendering::model::components::ModelAabbComponent<THandle>,
                 helios::scene::components::SceneNodeComponent<THandle>,
-                helios::spatial::transform::components::TranslationStateComponent<THandle>,
-                helios::spatial::transform::components::ScaleStateComponent<THandle>,
-                helios::spatial::transform::components::RotationStateComponent<THandle>,
+                helios::spatial::components::TranslationStateComponent<THandle>,
+                helios::spatial::components::ScaleStateComponent<THandle>,
+                helios::spatial::components::RotationStateComponent<THandle>,
                 helios::physics::collision::components::AabbColliderComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {

@@ -30,7 +30,7 @@ export namespace helios::math {
      * @see [Gla95, pp. 548-550] Glassner, A. (1995). Graphics Gems
      * @see [DP11, pp. 304-311] Dunn, F., & Parberry, I. (2011). 3D Math Primer for Graphics and Game Development
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     struct aabb {
 
     private:

@@ -48,7 +48,7 @@ export namespace helios::gameplay::lifecycle {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::world::tags::ManagerRole;
 
         /**
          * @brief Enqueues a lifecycle command for deferred processing.

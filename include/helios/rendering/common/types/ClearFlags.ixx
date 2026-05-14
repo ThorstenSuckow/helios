@@ -4,9 +4,9 @@
  * @brief Enum class defining bitmask flags for clearing render buffers before drawing.
  */
 
-export module helios.rendering.ClearFlags;
+export module helios.rendering.common.types.ClearFlags;
 
-export namespace helios::rendering {
+export namespace helios::rendering::common::types {
 
 
     /**

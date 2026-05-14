@@ -4,12 +4,14 @@
  */
 module;
 
+#include <format>
 #include <string>
 #include <vector>
 #include <memory>
 #include <mutex>
 #include <iostream>
 #include <cstddef>
+#include <utility>
 
 export module helios.util.log.Logger;
 
@@ -22,7 +24,8 @@ export namespace helios::util::log {
      *
      * This logger supports multiple output destinations through LogSink instances.
      * By default, it writes to stdout, but sinks can be added or replaced to redirect
-     * output to ImGui widgets, files, or other destinations.
+     * output to ImGui widgets, files, or other destinations. In addition to plain
+     * string messages, the logger also supports `std::format`-based message creation.
      *
      * ```cpp
      * // Add ImGui sink while keeping console output
@@ -31,6 +34,9 @@ export namespace helios::util::log {
      * // Replace all sinks (ImGui only)
      * logger.clearSinks();
      * logger.addSink(imguiSink);
+     *
+     * // Format a message lazily at the call site
+     * logger.error("Missing resource {0} for entity {1}", resourceId, entityId);
      * ```
      */
     class Logger {
@@ -82,6 +88,19 @@ export namespace helios::util::log {
             }
         }
 
+        /**
+         * @brief Formats a message and dispatches it to all sinks.
+         *
+         * @tparam TArgs Format argument types.
+         * @param level Log level of the message.
+         * @param fmt Checked format string.
+         * @param args Format arguments.
+         */
+        template<typename... TArgs>
+        void dispatchFormatted(LogLevel level, std::format_string<TArgs...> fmt, TArgs&&... args) const {
+            dispatch(level, std::format(fmt, std::forward<TArgs>(args)...));
+        }
+
     public:
         /**
          * @brief Creates a new Logger, tagged with a specific scope.
@@ -123,7 +142,7 @@ export namespace helios::util::log {
          *
          * @return The number of sinks currently attached to this logger.
          */
-        [[nodiscard]] size_t sinkCount() const noexcept {
+        [[nodiscard]] std::size_t sinkCount() const noexcept {
             std::lock_guard<std::mutex> lock(sinkMutex_);
             return sinks_.size();
         }
@@ -138,12 +157,36 @@ export namespace helios::util::log {
         }
 
         /**
+         * @brief Writes a formatted warning message if logging is enabled.
+         *
+         * @tparam TArgs Format argument types.
+         * @param fmt Checked format string.
+         * @param args Format arguments.
+         */
+        template<typename... TArgs>
+        void warn(std::format_string<TArgs...> fmt, TArgs&&... args) const {
+            dispatchFormatted(LogLevel::Warn, fmt, std::forward<TArgs>(args)...);
+        }
+
+        /**
          * @brief Writes a debug message if logging is enabled.
          *
          * @param msg The message to write.
          */
         void debug(const std::string& msg) const noexcept {
             dispatch(LogLevel::Debug, msg);
+        }
+
+        /**
+         * @brief Writes a formatted debug message if logging is enabled.
+         *
+         * @tparam TArgs Format argument types.
+         * @param fmt Checked format string.
+         * @param args Format arguments.
+         */
+        template<typename... TArgs>
+        void debug(std::format_string<TArgs...> fmt, TArgs&&... args) const {
+            dispatchFormatted(LogLevel::Debug, fmt, std::forward<TArgs>(args)...);
         }
 
         /**
@@ -156,12 +199,36 @@ export namespace helios::util::log {
         }
 
         /**
+         * @brief Writes a formatted info message if logging is enabled.
+         *
+         * @tparam TArgs Format argument types.
+         * @param fmt Checked format string.
+         * @param args Format arguments.
+         */
+        template<typename... TArgs>
+        void info(std::format_string<TArgs...> fmt, TArgs&&... args) const {
+            dispatchFormatted(LogLevel::Info, fmt, std::forward<TArgs>(args)...);
+        }
+
+        /**
          * @brief Writes an error message if logging is enabled.
          *
          * @param msg The message to write.
          */
         void error(const std::string& msg) const noexcept {
             dispatch(LogLevel::Error, msg);
+        }
+
+        /**
+         * @brief Writes a formatted error message if logging is enabled.
+         *
+         * @tparam TArgs Format argument types.
+         * @param fmt Checked format string.
+         * @param args Format arguments.
+         */
+        template<typename... TArgs>
+        void error(std::format_string<TArgs...> fmt, TArgs&&... args) const {
+            dispatchFormatted(LogLevel::Error, fmt, std::forward<TArgs>(args)...);
         }
     };
 

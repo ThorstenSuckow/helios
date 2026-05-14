@@ -11,7 +11,7 @@ export module helios.gameplay.combat.components.ShootComponent;
 import helios.math;
 
 import helios.gameplay.combat.components.Aim2DComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.components.ComposeTransformComponent;
 
 import helios.ecs.types.ComponentTypeId;
 

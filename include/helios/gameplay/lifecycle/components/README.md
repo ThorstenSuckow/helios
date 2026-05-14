@@ -19,8 +19,8 @@ This module provides tag components for entity activation state, a marker for de
 
 Managed automatically by `GameObject::setActive()`:
 
-- `setActive(true)` → adds `Active`, removes `Inactive`, calls `onActivate()` on components
-- `setActive(false)` → adds `Inactive`, removes `Active`, calls `onDeactivate()` on components
+- `setActive(true)` → adds `Active`, calls `onActivate()` on components
+- `setActive(false)` → removes `Active`, calls `onDeactivate()` on components
 
 Systems filter on these tags via views:
 

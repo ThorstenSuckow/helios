@@ -21,7 +21,6 @@ import helios.ecs.types.EntityHandle;
 import helios.ecs.View;
 import helios.runtime.world.Session;
 
-import helios.rendering.concepts.IsRenderResourceHandle;
 
 import helios.runtime.world.EngineWorld;
 

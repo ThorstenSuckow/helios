@@ -21,7 +21,7 @@ import helios.physics.motion.components.SteeringComponent;
 
 import helios.gameplay.lifecycle.components.DeadTagComponent;
 
-import helios.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.components.TranslationStateComponent;
 
 import helios.ecs.components.Active;
 
@@ -52,7 +52,7 @@ export namespace helios::gameplay::ai::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Updates steering for all chasing entities.
          *
@@ -64,7 +64,7 @@ export namespace helios::gameplay::ai::systems {
                 THandle,
                 helios::physics::motion::components::SteeringComponent<THandle>,
                 helios::gameplay::ai::components::ChaseComponent<THandle>,
-                helios::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::spatial::components::TranslationStateComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 
@@ -76,7 +76,7 @@ export namespace helios::gameplay::ai::systems {
                     continue;
                 }
 
-                const auto* ttr = go->template get<helios::spatial::transform::components::TranslationStateComponent>();
+                const auto* ttr = go->template get<helios::spatial::components::TranslationStateComponent>();
                 if (!ttr) {
                     continue;
                 }

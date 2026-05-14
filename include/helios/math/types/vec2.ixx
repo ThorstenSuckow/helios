@@ -18,7 +18,7 @@ import helios.math.traits.FloatingPointType;
 
 export namespace helios::math {
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     struct vec3;
 
     /**
@@ -30,7 +30,7 @@ export namespace helios::math {
      *
      * @tparam T The numeric type of the vector components.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     struct vec2 {
 
     private:
@@ -40,6 +40,8 @@ export namespace helios::math {
         T v[2];
 
     public:
+
+        using Numeric_type = T;
 
         /**
          * @brief Creates a new vec2 with its values initialized to (0, 0)
@@ -166,11 +168,18 @@ export namespace helios::math {
          * @todo account for abs (values close to zero) and rel
          * (larger values), move epsilon to global constant?
          */
-        constexpr bool same(const vec2<T>& rgt, T epsilon = 0.0001) const {
+        constexpr bool same(const vec2<T>& rgt, T epsilon = 0.0001) const requires std::is_floating_point_v<T> {
+            if constexpr (std::is_integral_v<T>) {
+                return *this == rgt;
+            }
+
             return std::fabs(v[0] - rgt[0]) <= epsilon &&
                    std::fabs(v[1] - rgt[1]) <= epsilon;
         }
 
+        constexpr bool same(const vec2<T>& rgt) const requires std::is_integral_v<T> {
+            return *this == rgt;
+        }
 
 
     };
@@ -185,7 +194,7 @@ export namespace helios::math {
      * @return a new vec2<T> instance representing the result of the scalar
      * multiplication.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr vec2<T> operator*(const vec2<T>& v, const T n) noexcept {
         return vec2<T>{v[0] * n, v[1] * n};
     }
@@ -200,7 +209,7 @@ export namespace helios::math {
      *
      * @return The dot product as a value of type T.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr T dot(const vec2<T>& v1, const vec2<T>& v2) noexcept {
         return v1[0]*v2[0] + v1[1]*v2[1];
     }

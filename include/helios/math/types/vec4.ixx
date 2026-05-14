@@ -18,7 +18,7 @@ import :vec3;
 
 export namespace helios::math {
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     struct vec4;
 
     /**
@@ -30,7 +30,7 @@ export namespace helios::math {
      *
      * @tparam T The numeric type of the vector components.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     struct vec4 {
 
     private:
@@ -143,12 +143,12 @@ export namespace helios::math {
 
     };
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     inline vec3<T> vec4<T>::toVec3() const noexcept {
         return vec3<T>{v[0], v[1], v[2]};
     }
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     inline vec2<T> vec4<T>::toVec2() const noexcept {
         return vec2<T>{v[0], v[1]};
     }
@@ -161,7 +161,7 @@ export namespace helios::math {
      * @param m A reference to the `vec4<T>` vector.
      * @tparam T The numeric type of the vector components.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     const T* value_ptr(const vec4<T>& m) noexcept {
         return &m[0];
     }

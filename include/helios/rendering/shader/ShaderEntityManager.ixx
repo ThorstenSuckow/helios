@@ -24,7 +24,7 @@ export namespace helios::rendering::shader {
     /**
      * @brief Entity registry used for shader resources.
      */
-    using ShaderEntityRegistry = EntityRegistry<ShaderId, HashedLookupStrategy, true, SHADER_SIZE>;
+    using ShaderEntityRegistry = EntityRegistry<ShaderDomainTag, HashedLookupStrategy, true, SHADER_SIZE>;
 
     /**
      * @brief Entity manager used for shader handles and shader components.

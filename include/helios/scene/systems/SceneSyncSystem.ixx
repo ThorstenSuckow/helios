@@ -21,7 +21,7 @@ import helios.runtime.world.UpdateContext;
 import helios.ecs.components.Active;
 
 import helios.scene.components.SceneNodeComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.components.ComposeTransformComponent;
 
 import helios.runtime.world.tags.SystemRole;
 
@@ -49,7 +49,7 @@ export namespace helios::scene::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
 
         /**
          * @brief Reference to the scene-to-viewport mapping for scene iteration.
@@ -78,7 +78,7 @@ export namespace helios::scene::systems {
 
             for (auto [entity, tc, nc, active] : updateContext.view<
                 THandle,
-                helios::spatial::transform::components::ComposeTransformComponent<THandle>,
+                helios::spatial::components::ComposeTransformComponent<THandle>,
                 helios::scene::components::SceneNodeComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
@@ -105,7 +105,7 @@ export namespace helios::scene::systems {
             // Second pass: read back world transforms from SceneNode to ComposeTransformComponent
             for (auto [entity, tc, nc, active] : updateContext.view<
                THandle,
-               helios::spatial::transform::components::ComposeTransformComponent<THandle>,
+               helios::spatial::components::ComposeTransformComponent<THandle>,
                helios::scene::components::SceneNodeComponent<THandle>,
                helios::ecs::components::Active<THandle>
            >().whereEnabled()) {

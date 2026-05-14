@@ -12,4 +12,5 @@ export import helios.rendering.shader.systems;
 
 export import helios.rendering.shader.ShaderEntityManager;
 export import helios.rendering.shader.UniformSemantics;
+export import helios.rendering.shader.ShaderEntity;
 export import helios.rendering.shader.UniformValueMap;

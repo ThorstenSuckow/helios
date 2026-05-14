@@ -18,7 +18,7 @@ import helios.runtime.messaging.command.NullCommandBuffer;
 import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 import helios.gameplay.combat.components.ShootComponent;
 import helios.gameplay.combat.components.Aim2DComponent;
-import helios.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.components.TranslationStateComponent;
 import helios.gameplay.spawn.commands.SpawnCommand;
 import helios.gameplay.spawn.types.SpawnContext;
 import helios.gameplay.spawn.types.EmitterContext;
@@ -89,7 +89,7 @@ export namespace helios::gameplay::combat::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         using CommandBuffer_type = TCommandBuffer;
 
         /**
@@ -122,7 +122,7 @@ export namespace helios::gameplay::combat::systems {
 
             for (auto [entity, tsc, ac, sc, active] : updateContext.view<
                 THandle,
-                helios::spatial::transform::components::TranslationStateComponent<THandle>,
+                helios::spatial::components::TranslationStateComponent<THandle>,
                 helios::gameplay::combat::components::Aim2DComponent<THandle>,
                 helios::gameplay::combat::components::ShootComponent<THandle>,
                 helios::ecs::components::Active<THandle>

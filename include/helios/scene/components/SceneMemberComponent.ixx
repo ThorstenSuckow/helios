@@ -1,3 +1,7 @@
+/**
+ * @file SceneMemberComponent.ixx
+ * @brief Binding component alias for scene membership.
+ */
 module;
 
 
@@ -5,24 +9,18 @@ export module helios.scene.components.SceneMemberComponent;
 
 import helios.scene.types.SceneHandle;
 
-using namespace helios::scene::types;
+import helios.ecs.components.BindingComponent;
 
+using namespace helios::scene::types;
+using namespace helios::ecs::components;
 export namespace helios::scene::components {
 
-    template<typename THandle>
-    class SceneMemberComponent {
-
-        SceneHandle sceneHandle_{};
-
-    public:
-
-        explicit SceneMemberComponent(const SceneHandle sceneId) : sceneHandle_(sceneId) {};
-
-        [[nodiscard]] SceneHandle sceneHandle() const noexcept {
-            return sceneHandle_;
-        }
-
-
-    };
+    /**
+     * @brief Marks an owning entity as a member of a scene.
+     *
+     * @tparam TOwnerHandle Owning entity handle type.
+     */
+    template<typename TOwnerHandle>
+    using SceneMemberComponent = BindingComponent<TOwnerHandle, SceneHandle>;
 
 }

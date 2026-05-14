@@ -6,6 +6,7 @@ export module helios.rendering.framebuffer;
 
 
 export import helios.rendering.framebuffer.types;
+export import helios.rendering.framebuffer.components;
 
 export import helios.rendering.framebuffer.Framebuffer;
 export import helios.rendering.framebuffer.FramebufferEntityManager;

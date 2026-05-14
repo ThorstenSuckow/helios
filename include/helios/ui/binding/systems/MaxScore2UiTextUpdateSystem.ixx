@@ -44,7 +44,7 @@ export namespace helios::ui::binding::systems {
     public:
 
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Updates text components with current high score values.
          *

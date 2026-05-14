@@ -7,16 +7,15 @@ module;
 export module helios.runtime.world.types.GameObjectHandle;
 
 import helios.ecs.types.EntityHandle;
-import helios.runtime.world.types.GameObjectId;
+import helios.runtime.world.types.GameObjectDomainTag;
 
-using namespace helios::ecs::types;
 export namespace helios::runtime::world::types {
 
     /**
-     * @brief Entity handle specialized with `GameObjectId`.
+     * @brief Entity handle specialized with `GameObjectDomainTag`.
      *
      * @see EntityHandle
      */
-    using GameObjectHandle = helios::ecs::types::EntityHandle<GameObjectId>;
+    using GameObjectHandle = helios::ecs::types::EntityHandle<GameObjectDomainTag>;
 
 }

@@ -75,7 +75,7 @@ export namespace helios::gameplay::health {
         std::vector<DamageContext<THandle>> damageContexts_;
 
     public:
-        using EngineRoleTag = helios::runtime::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::world::tags::ManagerRole;
 
         /**
          * @brief Applies all queued damage and emits health events.

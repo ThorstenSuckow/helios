@@ -18,7 +18,7 @@ import helios.math.utils;
 
 export namespace helios::math {
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     struct vec4;
 
     /**
@@ -30,7 +30,7 @@ export namespace helios::math {
      *
      * @tparam T The numeric type of the vector components.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     struct vec3 {
 
     private:
@@ -285,7 +285,7 @@ export namespace helios::math {
      * @return a new vec3<T> instance representing the result of the scalar
      * multiplication.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr vec3<T> operator*(const vec3<T>& v, const T n) noexcept {
         return vec3<T>{v[0] * n, v[1] * n, v[2] * n};
     }
@@ -301,7 +301,7 @@ export namespace helios::math {
      *
      * @pre s != 0 (asserted in debug builds).
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr vec3<T> operator/(const vec3<T>& v, T s) noexcept {
         assert(static_cast<T>(0) != s && "s must not be 0");
         const T inv = static_cast<T>(1) / s;
@@ -318,7 +318,7 @@ export namespace helios::math {
      * @return A new vec3<T> instance representing the result of the scalar
      * multiplication.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr vec3<T> operator*(const T n, const vec3<T>& v) noexcept {
         return vec3<T>{v[0] * n, v[1] * n, v[2] * n};
     }
@@ -333,7 +333,7 @@ export namespace helios::math {
      * @return A new vec3<T> instance representing the result of the componentwise multiplication
      * of the two vectors.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr vec3<T> operator*(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3<T>{v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]};
     }
@@ -348,7 +348,7 @@ export namespace helios::math {
      *
      * @return A new vec3<T> instance representing the sum of the two vectors.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr vec3<T> operator+(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3<T>{v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]};
     }
@@ -363,7 +363,7 @@ export namespace helios::math {
      *
      * @return A new vec3<T> instance representing the cross product.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr vec3<T> cross(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3{
             v1[1]*v2[2] - v1[2]*v2[1],
@@ -381,7 +381,7 @@ export namespace helios::math {
      *
      * @return The dot product as a value of type T.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr T dot(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
     }
@@ -396,12 +396,12 @@ export namespace helios::math {
      *
      * @return A new vec3<T> instance representing the difference between v1 and v2.
      */
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     constexpr vec3<T> operator-(const vec3<T>& v1, const vec3<T>& v2) noexcept {
         return vec3{v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]};
     }
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
         inline vec3<T> vec3<T>::cross(const vec3<T>& v2) const noexcept {
         return vec3{
             v[1]*v2[2] - v[2]*v2[1],
@@ -410,28 +410,28 @@ export namespace helios::math {
         };
     }
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     inline vec4<T> vec3<T>::toVec4() const noexcept {
         return vec4<T>{v[0], v[1], v[2], static_cast<T>(0)};
     }
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     inline vec2<T> vec3<T>::toVec2() const noexcept {
         return vec2<T>{v[0], v[1]};
     }
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     inline vec4<T> vec3<T>::toVec4(T w) const noexcept {
         return vec4<T>{v[0], v[1], v[2], w};
     }
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     inline T vec3<T>::dot(const vec3<T>& v2) const noexcept {
         return v[0]*v2[0] + v[1]*v2[1] + v[2]*v2[2];
     }
 
 
-    template<helios::math::Numeric T>
+    template<helios::math::concepts::IsNumeric T>
     inline vec3<FloatingPointType<T>> vec3<T>::normalize() const noexcept {
         if (this->length() == static_cast<FloatingPointType<T>>(0)) {
             return vec3<FloatingPointType<T>>(

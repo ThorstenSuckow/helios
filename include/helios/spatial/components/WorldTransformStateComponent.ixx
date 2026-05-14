@@ -13,6 +13,11 @@ import helios.core.spatial;
 export namespace helios::spatial::components {
 
 
+    /**
+     * @brief Component that stores a world-space transform matrix.
+     *
+     * @tparam THandle Owning entity handle type.
+     */
     template<typename THandle>
     class WorldTransformStateComponent {
 
@@ -24,6 +29,11 @@ export namespace helios::spatial::components {
        
     public:
 
+        /**
+         * @brief Constructs the component from an initial world transform.
+         *
+         * @param m Initial world transform matrix.
+         */
         explicit WorldTransformStateComponent(const helios::math::mat4f& m) noexcept
         : worldTransform_(m) {}
 
@@ -54,7 +64,7 @@ export namespace helios::spatial::components {
          *
          * @return Const reference to the world transform.
          */
-        const helios::math::mat4f& worldTransform() const noexcept {
+        [[nodiscard]] const helios::math::mat4f& worldTransform() const noexcept {
             return worldTransform_;
         }
 

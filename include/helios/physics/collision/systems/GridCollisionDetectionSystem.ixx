@@ -396,7 +396,7 @@ export namespace helios::physics::collision::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
 
         /**
          * @brief Constructs a GridCollisionDetectionSystem with specified bounds and cell size.

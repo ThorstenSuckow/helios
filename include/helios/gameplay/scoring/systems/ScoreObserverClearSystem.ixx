@@ -44,7 +44,7 @@ export namespace helios::gameplay::scoring::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
 
         /**
          * @brief Clears update flags on all ScoreObserverComponents.

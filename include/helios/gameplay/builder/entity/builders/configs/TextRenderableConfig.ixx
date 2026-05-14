@@ -347,7 +347,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
                     textPrototype
             );
 
-            entity_.template add<helios::rendering::components::RenderableComponent<Handle_type>>(renderable);
+            entity_.template add<helios::rendering::common::components::RenderableComponent<Handle_type>>(renderable);
 
             auto& msc = entity_.template getOrAdd<helios::rendering::model::components::ModelAabbComponent<Handle_type>>();
             msc.setAabb(renderable->localAABB());

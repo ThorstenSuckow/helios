@@ -8,7 +8,7 @@ export module helios.rendering.model.components.ModelAabbComponent;
 
 import helios.math.types;
 
-import helios.core.spatial.Transform;
+import helios.core.spatial;
 
 export namespace helios::rendering::model::components {
 

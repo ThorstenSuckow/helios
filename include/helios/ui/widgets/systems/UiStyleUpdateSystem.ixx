@@ -38,7 +38,7 @@ export namespace helios::ui::widgets::systems {
     public:
 
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
 
         /**
          * @brief Updates AABB bounds for text components that need resizing.

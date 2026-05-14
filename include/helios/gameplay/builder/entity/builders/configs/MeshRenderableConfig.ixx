@@ -169,7 +169,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
 
             const auto renderPrototype = std::make_shared<helios::rendering::RenderPrototype>(material, mesh);
 
-            auto& rc = entity_.template add<helios::rendering::components::RenderableComponent<Handle_type>>(
+            auto& rc = entity_.template add<helios::rendering::common::components::RenderableComponent<Handle_type>>(
                 std::make_shared<helios::rendering::mesh::MeshRenderable>(renderPrototype)
             );
 

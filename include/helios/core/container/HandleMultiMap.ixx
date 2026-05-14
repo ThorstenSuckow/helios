@@ -7,6 +7,9 @@ module;
 #include <vector>
 #include <span>
 #include <cassert>
+#include <concepts>
+#include <iterator>
+#include <cstddef>
 
 export module helios.core.container.HandleMultiMap;
 
@@ -41,7 +44,113 @@ export namespace helios::core::container {
          */
         std::vector<TOneHandle> keys_;
 
+        /**
+         * @brief Dense list of all currently bound value handles.
+         *
+         * @details Used by the iterator to avoid scanning holes in `keys_`.
+         */
+        std::vector<TManyHandle> denseValues_;
+
     public:
+
+        /**
+         * @brief Represents one valid binding of the one-to-many relation.
+         */
+        struct Binding {
+            /** @brief Handle on the "one" side. */
+            TOneHandle key;
+            /** @brief Associated handle on the "many" side. */
+            TManyHandle value;
+        };
+
+        /**
+         * @brief Forward iterator over dense bindings.
+         */
+        class ConstIterator {
+            const HandleMultiMap* map_;
+            std::size_t current_idx_;
+
+        public:
+            using iterator_category = std::forward_iterator_tag;
+            using value_type        = Binding;
+            using difference_type   = std::ptrdiff_t;
+            using pointer           = void;
+            using reference         = value_type; // By-Value Return
+
+            /**
+             * @brief Constructs an iterator at the given dense value index.
+             *
+             * @param map Owning map.
+             * @param start_idx Start index within `denseValues_`.
+             */
+            ConstIterator(const HandleMultiMap* map, std::size_t start_idx) noexcept
+                : map_(map), current_idx_(start_idx) {}
+
+            /** @brief Returns the current binding by value. */
+            [[nodiscard]] reference operator*() const noexcept {
+                assert(current_idx_ < map_->denseValues_.size());
+
+                const auto value = map_->denseValues_[current_idx_];
+                const auto valueIdx = value.entityId;
+
+                assert(valueIdx < map_->keys_.size());
+                assert(map_->keys_[valueIdx].isValid());
+
+                return Binding{
+                    map_->keys_[valueIdx],
+                    value
+                };
+            }
+
+            /** @brief Advances to the next dense binding. */
+            ConstIterator& operator++() noexcept {
+                current_idx_++;
+                return *this;
+            }
+
+            /** @brief Advances to the next dense binding and returns the previous iterator state. */
+            ConstIterator operator++(int) noexcept {
+                ConstIterator tmp = *this;
+                ++(*this);
+                return tmp;
+            }
+
+            /** @brief Checks iterator equality. */
+            [[nodiscard]] bool operator==(const ConstIterator& other) const noexcept {
+                return current_idx_ == other.current_idx_
+                    && map_ == other.map_;
+            }
+
+            /** @brief Checks iterator inequality. */
+            [[nodiscard]] bool operator!=(const ConstIterator& other) const noexcept {
+                return !(*this == other);
+            }
+        };
+
+        /** @brief Returns an iterator to the first dense binding. */
+        [[nodiscard]] ConstIterator begin() const noexcept {
+            return ConstIterator(this, 0);
+        }
+
+        /** @brief Returns the end iterator for dense binding iteration. */
+        [[nodiscard]] ConstIterator end() const noexcept {
+            return ConstIterator(this, denseValues_.size());
+        }
+
+        /**
+         * @brief Binds two entities by forwarding their handles.
+         *
+         * @tparam TOneEntity Entity type on the "one" side.
+         * @tparam TManyEntity Entity type on the "many" side.
+         * @param oneEntity Entity owning the relation.
+         * @param manyEntity Entity associated with the owner.
+         * @return `true` if the binding was inserted, otherwise `false`.
+         */
+        template<typename TOneEntity, typename TManyEntity>
+        requires std::same_as<TOneHandle, typename TOneEntity::Handle_type> && std::same_as<TManyHandle, typename TManyEntity::Handle_type>
+        bool bind(TOneEntity oneEntity, TManyEntity manyEntity) {
+            return bind(oneEntity.handle(), manyEntity.handle());
+        }
 
         /**
          * @brief Binds a value handle to a key handle.
@@ -60,7 +169,7 @@ export namespace helios::core::container {
             const auto valueIdx = value.entityId;
 
             // assert that the value was not already registered.
-            if (value.entityId < keys_.size()
+            if (valueIdx < keys_.size()
                 && keys_[valueIdx].isValid()) {
                 assert(false && "Value already exists");
                 return false;
@@ -77,6 +186,9 @@ export namespace helios::core::container {
                 keys_.resize(valueIdx + 1);
             }
             keys_[valueIdx] = key;
+
+            // dense value iteration
+            denseValues_.push_back(value);
 
             return true;
         }
@@ -116,6 +228,24 @@ export namespace helios::core::container {
             return values_[keyIdx];
         }
 
+        /** @brief Removes all bindings and clears all internal lookup structures. */
+        void clear() {
+            values_.clear();
+            keys_.clear();
+            denseValues_.clear();
+        }
+
+        /**
+         * @brief Reserves capacity for dense key/value storage.
+         *
+         * @param keyCapacity Expected number of distinct keys.
+         * @param valueCapacity Expected number of bound values.
+         */
+        void reserve(std::size_t keyCapacity, std::size_t valueCapacity) {
+            keys_.reserve(valueCapacity);
+            values_.reserve(keyCapacity);
+            denseValues_.reserve(valueCapacity);
+        }
 
     };
 

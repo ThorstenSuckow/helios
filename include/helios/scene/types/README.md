@@ -14,6 +14,7 @@ used across scene extraction, culling, and rendering integration.
 | `SceneDomainTag` | Shared domain tag for scene IDs and handles |
 | `SceneId` | Strong id for scene entities |
 | `SceneHandle` | ECS handle alias for scene entities |
+| `CullingContext<THandle>` | Culling payload containing matrices, bounds, and member handle |
 | `PerspectiveCameraContext` | Perspective projection parameters used by culling/rendering |
 | `SceneMemberRenderContext<THandle>` | Render payload for one scene member in one viewport |
 

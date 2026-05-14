@@ -15,7 +15,7 @@ import :SceneFwd;
 
 import helios.rendering.Renderable;
 import helios.util.Guid;
-import helios.core.spatial.Transform;
+import helios.core.spatial;
 import helios.math.types;
 import helios.math.transform;
 import helios.math.TransformType;

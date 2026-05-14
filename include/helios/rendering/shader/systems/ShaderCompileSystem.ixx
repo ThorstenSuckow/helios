@@ -25,7 +25,7 @@ import helios.runtime.messaging.command.concepts.IsCommandBufferLike;
 
 import helios.ecs.components;
 
-using namespace helios::runtime::tags;
+using namespace helios::runtime::world::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::rendering::shader;

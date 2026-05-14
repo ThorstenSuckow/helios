@@ -28,8 +28,8 @@ import helios.gameplay.spawn.commands.ScheduledSpawnPlanCommand;
 import helios.gameplay.spawn.commands.DespawnCommand;
 
 import helios.rendering.model.components.ModelAabbComponent;
-import helios.spatial.transform.components.ScaleStateComponent;
-import helios.spatial.transform.components.RotationStateComponent;
+import helios.spatial.components.ScaleStateComponent;
+import helios.spatial.components.RotationStateComponent;
 
 import helios.physics.collision.Bounds;
 import helios.scene.components.SceneNodeComponent;
@@ -41,7 +41,7 @@ import helios.runtime.pooling.EntityPoolManager;
 
 import helios.gameplay.spawn.types;
 
-import helios.spatial.transform.components.TranslationStateComponent;
+import helios.spatial.components.TranslationStateComponent;
 import helios.gameplay.spawn.components.SpawnedByProfileComponent;
 
 import helios.physics.collision.components.AabbColliderComponent;
@@ -135,10 +135,10 @@ export namespace helios::gameplay::spawn {
         void ensureBounds(TEntity entity, helios::math::aabbf& bounds) {
             if (bounds.min()[0] > bounds.max()[0]) {
                 const auto* mab  = entity.template get<helios::rendering::model::components::ModelAabbComponent>();
-                const auto* sca  = entity.template get<helios::spatial::transform::components::ScaleStateComponent>();
-                auto* rsc        = entity.template get<helios::spatial::transform::components::RotationStateComponent>();
+                const auto* sca  = entity.template get<helios::spatial::components::ScaleStateComponent>();
+                auto* rsc        = entity.template get<helios::spatial::components::RotationStateComponent>();
                 const auto* scn  = entity.template get<helios::scene::components::SceneNodeComponent>();
-                const auto* tsc  = entity.template get<helios::spatial::transform::components::TranslationStateComponent>();
+                const auto* tsc  = entity.template get<helios::spatial::components::TranslationStateComponent>();
 
                 assert(mab && scn && tsc && sca && rsc && "Missing Components for AABB computation");
                 bounds = helios::physics::collision::Bounds::computeWorldAabb(
@@ -196,7 +196,7 @@ export namespace helios::gameplay::spawn {
                     auto go = entityPoolManager_->acquire(entityPoolId);
                     assert(go && "Failed to acquire Entity");
 
-                    auto* tsc = go->template get<helios::spatial::transform::components::TranslationStateComponent>();
+                    auto* tsc = go->template get<helios::spatial::components::TranslationStateComponent>();
 
                     auto* sbp = go->template get<helios::gameplay::spawn::components::SpawnedByProfileComponent>();
                     assert(sbp && "unexpected missing SpawnedByProfileComponent");
@@ -273,7 +273,7 @@ export namespace helios::gameplay::spawn {
                 auto entity = entityPoolManager_->acquire(entityPoolId);
                 assert(entity && "Failed to acquire Entity");
 
-                auto* tsc = entity->template get<helios::spatial::transform::components::TranslationStateComponent<THandle>>();
+                auto* tsc = entity->template get<helios::spatial::components::TranslationStateComponent<THandle>>();
                 auto* sbp = entity->template get<helios::gameplay::spawn::components::SpawnedByProfileComponent<THandle>>();
                 assert(sbp && "unexpected missing SpawnedByProfileComponent");
 
@@ -338,7 +338,7 @@ export namespace helios::gameplay::spawn {
 
 
     public:
-        using EngineRoleTag = helios::runtime::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::world::tags::ManagerRole;
 
         /**
          * @brief Default constructor.

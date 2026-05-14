@@ -17,9 +17,9 @@ import helios.math;
 
 import helios.runtime.world.GameWorld;
 import helios.physics.motion.components.SteeringComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
+import helios.spatial.components.ComposeTransformComponent;
 import helios.physics.motion.components.DirectionComponent;
-import helios.spatial.transform.components.RotationStateComponent;
+import helios.spatial.components.RotationStateComponent;
 
 import helios.runtime.world.UpdateContext;
 
@@ -116,7 +116,7 @@ export namespace helios::physics::motion::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Updates the heading of entities.
          *
@@ -128,7 +128,7 @@ export namespace helios::physics::motion::systems {
             for (auto [entity, hc, rsc, dc, active] : updateContext.view<
                 THandle,
                 helios::physics::motion::components::SteeringComponent<THandle>,
-                helios::spatial::transform::components::RotationStateComponent<THandle>,
+                helios::spatial::components::RotationStateComponent<THandle>,
                 helios::physics::motion::components::DirectionComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {

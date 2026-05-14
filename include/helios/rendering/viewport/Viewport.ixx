@@ -15,7 +15,7 @@ export module helios.rendering.viewport.Viewport;
 import helios.rendering.viewport.ViewportSnapshot;
 import helios.rendering.framebuffer.Framebuffer;
 
-import helios.rendering.ClearFlags;
+import helios.rendering.common.types.ClearFlags;
 import helios.core.types;
 import helios.rendering.viewport.types.ViewportId;
 import helios.math.types;
@@ -56,7 +56,7 @@ export namespace helios::rendering::viewport {
          *
          * Defaults to ClearFlags::Color.
          */
-        int clearFlags_ = std::to_underlying(ClearFlags::Color);
+        int clearFlags_ = std::to_underlying(helios::rendering::common::types::ClearFlags::Color);
 
         /**
          * @brief Color used when clearing the color buffer. Defaults to "black", i.e. no color at all.

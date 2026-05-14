@@ -38,7 +38,7 @@ import helios.runtime.concepts;
 using namespace helios::runtime::world;
 using namespace helios::util::log;
 using namespace helios::util::io;
-using namespace helios::runtime::tags;
+using namespace helios::runtime::world::tags;
 using namespace helios::rendering::shader::commands;
 using namespace helios::rendering::shader::components;
 using namespace helios::rendering::shader;
@@ -108,6 +108,8 @@ export namespace helios::platform::opengl {
 
             using Handle = typename ShaderEntity::Handle_type;
 
+            logger_.info("Compiling shader...");
+
             if (shader.template get<OpenGLShaderComponent<Handle>>()) {
                 logger_.error("Shader already has a ShaderComponent");
                 assert(false && "Shader already has a ShaderComponent");
@@ -141,8 +143,8 @@ export namespace helios::platform::opengl {
 
             int success;
             char infoLog[512];
-            glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
 
+            glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
             if (!success) {
                 glGetShaderInfoLog(vertexShader, 512, nullptr, infoLog);
                 logger_.error("Vertex Shader Compilation failed.");

@@ -16,8 +16,8 @@ import helios.runtime.world.GameWorld;
 import helios.math;
 
 import helios.gameplay.effects.gfx.components.SpinComponent;
-import helios.spatial.transform.components.ComposeTransformComponent;
-import helios.spatial.transform.components.RotationStateComponent;
+import helios.spatial.components.ComposeTransformComponent;
+import helios.spatial.components.RotationStateComponent;
 
 import helios.ecs.components.Active;
 
@@ -43,7 +43,7 @@ export namespace helios::physics::motion::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
 
         /**
          * @brief Updates spin rotation for all applicable entities.
@@ -56,7 +56,7 @@ export namespace helios::physics::motion::systems {
             for (auto [entity, sc, rsc, active] : updateContext.view<
                 THandle,
                 helios::gameplay::effects::gfx::components::SpinComponent<THandle>,
-                helios::spatial::transform::components::RotationStateComponent<THandle>,
+                helios::spatial::components::RotationStateComponent<THandle>,
                 helios::ecs::components::Active<THandle>
             >().whereEnabled()) {
 

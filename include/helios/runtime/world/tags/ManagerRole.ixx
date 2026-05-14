@@ -6,7 +6,7 @@ module;
 
 export module helios.runtime.world.tags.ManagerRole;
 
-export namespace helios::runtime::tags {
+export namespace helios::runtime::world::tags {
 
     /**
      * @brief Compile-time tag identifying a class as a Manager.

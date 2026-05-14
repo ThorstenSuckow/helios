@@ -13,7 +13,7 @@ export module helios.physics.motion.components.SteeringComponent;
 
 import helios.scene.SceneNode;
 import helios.util.Guid;
-import helios.core.spatial.Transform;
+import helios.core.spatial;
 import helios.math;
 import helios.core.units.Unit;
 

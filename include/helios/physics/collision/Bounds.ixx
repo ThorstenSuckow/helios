@@ -10,9 +10,9 @@ export module helios.physics.collision.Bounds;
 import helios.math;
 
 import helios.scene.components.SceneNodeComponent;
-import helios.spatial.transform.components.ScaleStateComponent;
-import helios.spatial.transform.components.TranslationStateComponent;
-import helios.spatial.transform.components.RotationStateComponent;
+import helios.spatial.components.ScaleStateComponent;
+import helios.spatial.components.TranslationStateComponent;
+import helios.spatial.components.RotationStateComponent;
 
 import helios.rendering.model.components.ModelAabbComponent;
 
@@ -38,9 +38,9 @@ export namespace helios::physics::collision::Bounds {
     inline helios::math::aabbf computeWorldAabb(
         const helios::rendering::model::components::ModelAabbComponent<THandle>& mab,
         const helios::scene::components::SceneNodeComponent<THandle>& sc,
-        const helios::spatial::transform::components::TranslationStateComponent<THandle>& tsc,
-        const helios::spatial::transform::components::ScaleStateComponent<THandle>& sca,
-        helios::spatial::transform::components::RotationStateComponent<THandle>& rsc
+        const helios::spatial::components::TranslationStateComponent<THandle>& tsc,
+        const helios::spatial::components::ScaleStateComponent<THandle>& sca,
+        helios::spatial::components::RotationStateComponent<THandle>& rsc
     ) noexcept  {
 
         const helios::math::mat4f& parentTransform = sc.sceneNode()->parent()->worldTransform();

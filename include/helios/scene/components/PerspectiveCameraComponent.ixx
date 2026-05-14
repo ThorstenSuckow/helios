@@ -1,3 +1,7 @@
+/**
+ * @file PerspectiveCameraComponent.ixx
+ * @brief Stores perspective projection parameters for a camera entity.
+ */
 module;
 
 #include <cassert>
@@ -10,6 +14,11 @@ import helios.math;
 using namespace helios::math;
 export namespace helios::scene::components {
 
+    /**
+     * @brief Component that stores perspective camera projection parameters.
+     *
+     * @tparam THandle Owning entity handle type.
+     */
     template<typename THandle>
     class PerspectiveCameraComponent {
 

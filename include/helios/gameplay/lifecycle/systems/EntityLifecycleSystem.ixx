@@ -63,7 +63,7 @@ export namespace helios::gameplay::lifecycle::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         using CommandBuffer_type = TCommandBuffer;
 
         /**

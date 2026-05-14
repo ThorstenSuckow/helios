@@ -181,7 +181,7 @@ export namespace helios::runtime::pooling {
         }
         
     public:
-        using EngineRoleTag = helios::runtime::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::world::tags::ManagerRole;
 
 
         explicit EntityPoolManager(helios::runtime::world::EngineWorld& engineWorld) : engineWorld_(&engineWorld) {}

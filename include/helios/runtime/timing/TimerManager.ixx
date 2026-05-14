@@ -82,7 +82,7 @@ export namespace helios::runtime::timing {
         }
 
     public:
-        using EngineRoleTag = helios::runtime::tags::ManagerRole;
+        using EngineRoleTag = helios::runtime::world::tags::ManagerRole;
 
         /**
          * @brief Registers a new game timer.

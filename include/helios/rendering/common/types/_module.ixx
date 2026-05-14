@@ -1,6 +1,6 @@
 /**
  * @file _module.ixx
- * @brief Aggregate module for `helios::rendering::concepts`.
+ * @brief Aggregate module for `helios::rendering::common::types`.
  */
 export module helios.rendering.common.types;
 

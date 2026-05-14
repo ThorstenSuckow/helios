@@ -2,6 +2,13 @@
 
 Shared rendering value types used across common render flow APIs.
 
+## Overview
+
+`helios::rendering::common::types` defines small value types shared between
+render extraction, render pass setup, and backend execution code.
+
+## Types
+
 | Type | Description |
 |------|-------------|
 | `ClearFlags` | Bitmask enum for color, depth, and stencil clear operations |

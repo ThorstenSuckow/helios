@@ -1,3 +1,7 @@
+/**
+ * @file _module.ixx
+ * @brief Aggregate module for `helios::rendering::common`.
+ */
 export module helios.rendering.common;
 
 export import helios.rendering.common.commands;

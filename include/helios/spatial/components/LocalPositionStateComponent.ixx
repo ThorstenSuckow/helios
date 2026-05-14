@@ -1,3 +1,7 @@
+/**
+ * @file LocalPositionStateComponent.ixx
+ * @brief Alias for local-space position state.
+ */
 module;
 
 export module helios.spatial.components.LocalPositionStateComponent;

@@ -1,6 +1,10 @@
+/**
+ * @file LocalToWorldBoundsComponent.ixx
+ * @brief Alias for computed world-space bounds.
+ */
 module;
 
-export module helios.spatial.components.ComputedLocalToWorldBoundsComponent;
+export module helios.spatial.components.LocalToWorldBoundsComponent;
 
 import helios.core.components.AABBComponent;
 
@@ -10,7 +14,7 @@ export namespace helios::spatial::components {
     /**
      * @brief Domain tag for computed world-space bounds.
      */
-    struct ComputedLocalToWorldBoundsComponentTag {};
+    struct LocalToWorldBoundsComponentTag {};
 
     /**
      * @brief AABB component storing bounds transformed from local to world space.
@@ -18,6 +22,6 @@ export namespace helios::spatial::components {
      * @tparam THandle Owning entity handle type.
      */
     template<typename THandle>
-    using ComputedLocalToWorldBoundsComponent = AABBComponent<ComputedLocalToWorldBoundsComponentTag, THandle, float>;
+    using LocalToWorldBoundsComponent = AABBComponent<LocalToWorldBoundsComponentTag, THandle, float>;
 
 }

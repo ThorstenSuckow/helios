@@ -1,6 +1,10 @@
+/**
+ * @file LocalToWorldMatrixComponent.ixx
+ * @brief Alias for computed local-to-world matrices.
+ */
 module;
 
-export module helios.spatial.components.ComputedLocalToWorldMatrixComponent;
+export module helios.spatial.components.LocalToWorldMatrixComponent;
 
 import helios.core.components.Mat4Component;
 
@@ -10,7 +14,7 @@ export namespace helios::spatial::components {
     /**
      * @brief Domain tag for computed local-to-world matrices.
      */
-    struct ComputedLocalToWorldMatrixTag {};
+    struct LocalToWorldMatrixTag {};
 
     /**
      * @brief Matrix component storing computed local-to-world transforms.
@@ -18,6 +22,6 @@ export namespace helios::spatial::components {
      * @tparam THandle Owning entity handle type.
      */
     template<typename THandle>
-    using ComputedLocalToWorldMatrixComponent = Mat4Component<ComputedLocalToWorldMatrixTag, THandle, float>;
+    using LocalToWorldMatrixComponent = Mat4Component<LocalToWorldMatrixTag, THandle, float>;
 
 }

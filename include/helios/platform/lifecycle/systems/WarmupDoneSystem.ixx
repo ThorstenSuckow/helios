@@ -31,7 +31,7 @@ using namespace helios::rendering::shader::concepts;
 using namespace helios::runtime::messaging::command::concepts;
 using namespace helios::ecs::components;
 using namespace helios::rendering::shader::components;
-using namespace helios::runtime::tags;
+using namespace helios::runtime::world::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::messaging::command;
 using namespace helios::state::types;

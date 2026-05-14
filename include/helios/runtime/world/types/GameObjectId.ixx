@@ -7,18 +7,14 @@ module;
 export module helios.runtime.world.types.GameObjectId;
 
 import helios.core.types.StrongId;
+import helios.runtime.world.types.GameObjectDomainTag;
 
 using namespace helios::core::types;
 export namespace helios::runtime::world::types {
 
     /**
-     * @brief Tag type used to scope `GameObjectId`.
-     */
-    struct GameObjectTag{};
-
-    /**
      * @brief Strong id used for game-object handle identity.
      */
-    using GameObjectId = StrongId<GameObjectTag>;
+    using GameObjectId = StrongId<GameObjectDomainTag>;
 
 }

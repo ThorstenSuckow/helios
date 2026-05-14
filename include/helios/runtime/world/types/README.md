@@ -6,6 +6,7 @@ Type aliases and type-id utilities for the runtime-world domain.
 
 | Type | Purpose |
 |------|---------|
+| `GameObjectDomainTag` | Shared domain tag for game-object IDs and handles |
 | `GameObjectId` | Strong id used by runtime game-object handles |
 | `GameObjectHandle` | Typed entity handle for runtime game objects |
 | `ResourceTypeId` | Type index id for resource-registry entries |

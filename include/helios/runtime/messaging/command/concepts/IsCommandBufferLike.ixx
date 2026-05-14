@@ -16,7 +16,7 @@ import helios.runtime.world.UpdateContext;
 import helios.runtime.messaging.command.tags.CommandBufferRole;
 
 
-using namespace helios::runtime::tags;
+using namespace helios::runtime::world::tags;
 using namespace helios::runtime::world;
 using namespace helios::runtime::concepts;
 export namespace helios::runtime::messaging::command::concepts {

@@ -38,6 +38,9 @@ Used as backend for multiple registries, for example:
 `HandleMultiMap<TOneHandle, TManyHandle>` stores a dense one-to-many relation
 (`TOneHandle -> span<TManyHandle>`) plus reverse lookup (`TManyHandle -> TOneHandle`).
 
+Iteration yields `Binding { key, value }` pairs over the currently bound values
+without scanning sparse holes in the reverse lookup array.
+
 Typical use case:
 
 - map one render target handle to many child handles,

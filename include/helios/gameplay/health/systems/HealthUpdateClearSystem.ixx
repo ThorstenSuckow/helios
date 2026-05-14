@@ -35,7 +35,7 @@ export namespace helios::gameplay::health::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Iterates all active HealthComponents and resets their dirty state.
          *

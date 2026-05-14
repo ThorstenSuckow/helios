@@ -7,7 +7,7 @@ module;
 #include <cassert>
 #include <memory>
 
-export module helios.rendering.components.RenderableComponent;
+export module helios.rendering.common.components.RenderableComponent;
 
 
 import helios.runtime.world.GameObject;
@@ -17,7 +17,7 @@ import helios.math.types;
 
 import helios.rendering.model.components.ModelAabbComponent;
 
-export namespace helios::rendering::components {
+export namespace helios::rendering::common::components {
 
     /**
      * @brief Component that holds a shared pointer to a Renderable resource.

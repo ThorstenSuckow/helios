@@ -55,7 +55,7 @@ export namespace helios::gameplay::scoring::systems {
 
     public:
 
-        using EngineRoleTag = helios::runtime::tags::SystemRole;
+        using EngineRoleTag = helios::runtime::world::tags::SystemRole;
         /**
          * @brief Constructs the system with a reference to the ScorePoolManager.
          *

@@ -52,7 +52,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
          * @brief Validates that a RenderableComponent exists.
          */
         void ensureRenderableComponent() {
-            const auto* renderableComponent = entity_.template get<helios::rendering::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = entity_.template get<helios::rendering::common::components::RenderableComponent<Handle_type>>();
             assert(renderableComponent && "Unexpected nullptr for RenderableComponent.");
         }
 
@@ -92,7 +92,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
             ensureSceneNode(false);
             ensureRenderableComponent();
 
-            const auto* renderableComponent = entity_.template get<helios::rendering::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = entity_.template get<helios::rendering::common::components::RenderableComponent<Handle_type>>();
 
             auto renderable = renderableComponent->shareRenderable();
 
@@ -124,7 +124,7 @@ export namespace helios::gameplay::builder::entity::builders::configs {
             parent.template getOrAdd<helios::ecs::components::HierarchyComponent<Handle_type>>().addChild(entity_.handle());
             entity_.template getOrAdd<helios::ecs::components::HierarchyComponent<Handle_type>>().setParent(parent.handle());
 
-            const auto* renderableComponent = entity_.template get<helios::rendering::components::RenderableComponent<Handle_type>>();
+            const auto* renderableComponent = entity_.template get<helios::rendering::common::components::RenderableComponent<Handle_type>>();
 
             auto renderable = renderableComponent->shareRenderable();
 

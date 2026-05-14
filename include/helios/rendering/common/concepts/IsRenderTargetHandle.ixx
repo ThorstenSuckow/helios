@@ -6,14 +6,14 @@ module;
 
 #include <concepts>
 
-export module helios.rendering.concepts.IsRenderTargetHandle;
+export module helios.rendering.common.concepts.IsRenderTargetHandle;
 
 import helios.rendering.viewport.types.ViewportHandle;
 import helios.rendering.framebuffer.types.FramebufferHandle;
 
 using namespace helios::rendering::viewport::types;
 using namespace helios::rendering::framebuffer::types;
-export namespace helios::rendering::concepts {
+export namespace helios::rendering::common::concepts {
 
     /**
      * @brief Constrains types to known render target handles.

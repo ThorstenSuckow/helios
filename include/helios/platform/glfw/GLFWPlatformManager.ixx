@@ -21,6 +21,9 @@ import helios.ecs.types.EntityHandle;
 import helios.core.types;
 import helios.state.Bindings;
 
+import helios.spatial.components;
+
+import helios.rendering.framebuffer;
 
 import helios.runtime.messaging.command.concepts.IsPlatformCommandBuffer;
 import helios.runtime.messaging.command.CommandHandlerRegistry;
@@ -50,7 +53,10 @@ import helios.runtime.concepts;
 import helios.runtime.messaging.command;
 import helios.platform.window.concepts.IsWindowHandle;
 
-using namespace helios::runtime::tags;
+using namespace helios::rendering::framebuffer::types;
+using namespace helios::rendering::framebuffer::components;
+using namespace helios::spatial::components;
+using namespace helios::runtime::world::tags;
 using namespace helios::platform::environment::commands;
 using namespace helios::platform::lifecycle::commands;
 using namespace helios::platform::environment::types;
@@ -83,6 +89,8 @@ export namespace helios::platform::glfw {
      * @tparam THandle Window/entity handle type.
      * @tparam TStateCommandBuffer Command buffer used for follow-up state commands.
      * @tparam TPlatformCommandBuffer Command buffer used by GLFW callbacks for platform commands.
+     *
+     * @todo remove opengl coupling
      */
     template<typename THandle, typename TStateCommandBuffer = NullCommandBuffer, typename TPlatformCommandBuffer = NullCommandBuffer>
     requires IsWindowHandle<THandle>
@@ -165,8 +173,8 @@ export namespace helios::platform::glfw {
             auto& cfg = cmd.windowConfig;
 
             auto* nativeHandle = glfwCreateWindow(
-                cfg.size.width,
-                cfg.size.height,
+                cfg.size[0],
+                cfg.size[1],
                 cfg.title.c_str(),
                 nullptr,
                 nullptr
@@ -188,10 +196,12 @@ export namespace helios::platform::glfw {
             assert(!window->template has<WindowComponent<THandle>>() && "Expected entity to not have WindowComponent");
             window->template add<WindowComponent<THandle>>(
                 std::move(cfg.title),
-                WindowSize{cfg.size.width, cfg.size.height},
                 cfg.aspectRatioNumer,
                 cfg.aspectRatioDenom
             );
+            window->template add<
+                Size2DComponent<THandle>
+            >(WindowSize(cfg.size));
             window->template add<GLFWWindowHandleComponent<THandle>>(nativeHandle);
 
             removeCurrentContext(updateContext);
@@ -207,6 +217,21 @@ export namespace helios::platform::glfw {
             ));
 
             installResizeListener(cmd.windowHandle);
+
+
+            int framebufferWidth = 0;
+            int framebufferHeight = 0;
+            int windowWidth = 0;
+            int windowHeight = 0;
+
+            glfwGetFramebufferSize(nativeHandle, &framebufferWidth, &framebufferHeight);
+            glfwGetWindowSize(nativeHandle, &windowWidth, &windowHeight);
+
+            commandBufferRegistry_->template item<TPlatformCommandBuffer>()
+                                  ->template add<WindowResizeCommand<THandle>>(
+                                    cmd.windowHandle,
+                                    WindowSize(windowWidth, windowHeight),
+                                    FramebufferSize(framebufferWidth, framebufferHeight));
 
             return true;
         }
@@ -293,9 +318,15 @@ export namespace helios::platform::glfw {
                 const auto* ptr = static_cast<GLFWWindowUserPointer<THandle, TPlatformCommandBuffer>*>(glfwGetWindowUserPointer(nativeHandle));
 
                 if (ptr && ptr->platformCommandBuffer) {
+
+                    int windowWidth = 0;
+                    int windowHeight = 0;
+
+                    glfwGetWindowSize(nativeHandle, &windowWidth, &windowHeight);
                     ptr->platformCommandBuffer->template add<WindowResizeCommand<THandle>>(
                         ptr->windowHandle,
-                        WindowSize(width, height)
+                        WindowSize(windowWidth, windowHeight),
+                        FramebufferSize(width, height)
                     );
                 }
             });
@@ -358,6 +389,11 @@ export namespace helios::platform::glfw {
         /**
          * @brief Applies queued resize commands to window components.
          *
+         * @detail Applies queued resize commands to window components.
+         * This will also affect the underlying framebuffers, for as long
+         * as the specific windows are bound to a framebuffer.
+         *
+         *
          * @param updateContext Frame-local update context.
          */
         void resizeWindows(UpdateContext& updateContext) noexcept {
@@ -366,17 +402,24 @@ export namespace helios::platform::glfw {
                 return;
             }
 
-            for (const auto& [windowHandle, windowSize]: pendingResizeCommands_) {
+            for (const auto& [windowHandle, windowSize, framebufferSize]: pendingResizeCommands_) {
 
                 if (!windowHandle.isValid()) {
                     continue;
                 }
 
-                auto entity = updateContext.find(windowHandle);
+                if (auto entity = updateContext.find(windowHandle)) {
 
-                if (entity) {
-                    if (auto* wc = entity->template get<WindowComponent<THandle>>()) {
-                        wc->size = windowSize;
+                    if (auto* wsc = entity->template get<Size2DComponent<THandle>>()) {
+                        wsc->setValue(windowSize);
+                    }
+                    if (auto* fbc =  entity->template get<FramebufferBindingComponent<THandle>>()) {
+                        auto framebufferHandle = fbc->targetHandle();
+                        auto framebuffer = updateContext.find<FramebufferHandle>(framebufferHandle);
+                        auto fsc = framebuffer->template get<Size2DComponent<FramebufferHandle>>();
+
+                        logger_.info("Setting framebuffer size to {0},{1}", framebufferSize[0], framebufferSize[1]);
+                        fsc->setValue(framebufferSize);
                     }
                 }
 

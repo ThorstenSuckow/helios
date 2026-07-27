@@ -1,3 +1,13 @@
+> [!WARNING]
+> **Archived:** This repository is no longer under active development. Modules have been split into dedicated repositories for better maintainability and modularity. Please refer to the links below for ongoing development and contributions:
+> - [helios-ecs](https://github.com/thorstensuckow/helios-ecs)
+> - [helios-engine](https://github.com/thorstensuckow/helios-engine)
+> - [helios-examples](https://github.com/thorstensuckow/helios-examples)
+> - [helios-physics](https://github.com/thorstensuckow/helios-physics)
+> - [helios-glfw](https://github.com/thorstensuckow/helios-glfw)
+> - [helios-opengl](https://github.com/thorstensuckow/helios-opengl)
+> - [helios-math](https://github.com/thorstensuckow/helios-math)
+
 [![Tests](https://github.com/thorstensuckow/helios/actions/workflows/tests.yml/badge.svg)](https://github.com/thorstensuckow/helios/actions/workflows/tests.yml)
 
 # helios
